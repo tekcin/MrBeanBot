@@ -5,13 +5,13 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleExecutable</key>
-    <string>Moltbot</string>
+    <string>MrBeanBot</string>
     <key>CFBundleIdentifier</key>
-    <string>bot.molt.mac</string>
+    <string>com.tekcin.mrbeanbot.mac</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Moltbot</string>
+    <string>MrBeanBot</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
@@ -19,15 +19,15 @@
     <key>CFBundleVersion</key>
     <string>202601260</string>
     <key>CFBundleIconFile</key>
-    <string>Moltbot</string>
+    <string>MrBeanBot</string>
     <key>CFBundleURLTypes</key>
     <array>
         <dict>
             <key>CFBundleURLName</key>
-            <string>bot.molt.mac.deeplink</string>
+            <string>com.tekcin.mrbeanbot.mac.deeplink</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>moltbot</string>
+                <string>mrbeanbot</string>
             </array>
         </dict>
     </array>
@@ -36,29 +36,29 @@
     <key>LSUIElement</key>
     <true/>
 
-    <key>MoltbotBuildTimestamp</key>
+    <key>MrBeanBotBuildTimestamp</key>
     <string></string>
-    <key>MoltbotGitCommit</key>
+    <key>MrBeanBotGitCommit</key>
     <string></string>
 
     <key>NSUserNotificationUsageDescription</key>
-    <string>Moltbot needs notification permission to show alerts for agent actions.</string>
+    <string>MrBeanBot needs notification permission to show alerts for agent actions.</string>
     <key>NSScreenCaptureDescription</key>
-    <string>Moltbot captures the screen when the agent needs screenshots for context.</string>
+    <string>MrBeanBot captures the screen when the agent needs screenshots for context.</string>
     <key>NSCameraUsageDescription</key>
-    <string>Moltbot can capture photos or short video clips when requested by the agent.</string>
+    <string>MrBeanBot can capture photos or short video clips when requested by the agent.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Moltbot can share your location when requested by the agent.</string>
+	<string>MrBeanBot can share your location when requested by the agent.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Moltbot can share your location when requested by the agent.</string>
+	<string>MrBeanBot can share your location when requested by the agent.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Moltbot can share your location when requested by the agent.</string>
+	<string>MrBeanBot can share your location when requested by the agent.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Moltbot needs the mic for Voice Wake tests and agent audio capture.</string>
+	<string>MrBeanBot needs the mic for Voice Wake tests and agent audio capture.</string>
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Moltbot uses speech recognition to detect your Voice Wake trigger phrase.</string>
+    <string>MrBeanBot uses speech recognition to detect your Voice Wake trigger phrase.</string>
     <key>NSAppleEventsUsageDescription</key>
-    <string>Moltbot needs Automation (AppleScript) permission to drive Terminal and other apps for agent actions.</string>
+    <string>MrBeanBot needs Automation (AppleScript) permission to drive Terminal and other apps for agent actions.</string>
 
     <key>NSAppTransportSecurity</key>
     <dict>

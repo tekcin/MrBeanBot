@@ -1,18 +1,18 @@
 // swift-tools-version: 6.2
-// Package manifest for the Moltbot macOS companion (menu bar app + IPC library).
+// Package manifest for the MrBeanBot macOS companion (menu bar app + IPC library).
 
 import PackageDescription
 
 let package = Package(
-    name: "Moltbot",
+    name: "MrBeanBot",
     platforms: [
         .macOS(.v15),
     ],
     products: [
         .library(name: "MoltbotIPC", targets: ["MoltbotIPC"]),
         .library(name: "MoltbotDiscovery", targets: ["MoltbotDiscovery"]),
-        .executable(name: "Moltbot", targets: ["Moltbot"]),
-        .executable(name: "moltbot-mac", targets: ["MoltbotMacCLI"]),
+        .executable(name: "MrBeanBot", targets: ["MrBeanBot"]),
+        .executable(name: "mrbeanbot-mac", targets: ["MrBeanBotMacCLI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/orchetect/MenuBarExtraAccess", exact: "1.2.2"),
@@ -40,7 +40,7 @@ let package = Package(
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
-            name: "Moltbot",
+            name: "MrBeanBot",
             dependencies: [
                 "MoltbotIPC",
                 "MoltbotDiscovery",
@@ -59,14 +59,14 @@ let package = Package(
                 "Resources/Info.plist",
             ],
             resources: [
-                .copy("Resources/Moltbot.icns"),
+                .copy("Resources/MrBeanBot.icns"),
                 .copy("Resources/DeviceModels"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
-            name: "MoltbotMacCLI",
+            name: "MrBeanBotMacCLI",
             dependencies: [
                 "MoltbotDiscovery",
                 .product(name: "MoltbotKit", package: "MoltbotKit"),
@@ -80,7 +80,7 @@ let package = Package(
             name: "MoltbotIPCTests",
             dependencies: [
                 "MoltbotIPC",
-                "Moltbot",
+                "MrBeanBot",
                 "MoltbotDiscovery",
                 .product(name: "MoltbotProtocol", package: "MoltbotKit"),
                 .product(name: "SwabbleKit", package: "swabble"),

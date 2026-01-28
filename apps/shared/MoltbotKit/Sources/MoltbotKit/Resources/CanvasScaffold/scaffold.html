@@ -55,7 +55,7 @@
         backface-visibility: hidden;
         opacity: 0.45;
         pointer-events: none;
-        animation: moltbot-grid-drift 140s ease-in-out infinite alternate;
+        animation: mrbeanbot-grid-drift 140s ease-in-out infinite alternate;
       }
       :root[data-platform="android"] body::before { opacity: 0.80; }
       body::after {
@@ -73,7 +73,7 @@
         backface-visibility: hidden;
         transform: translate3d(0,0,0);
         pointer-events: none;
-        animation: moltbot-glow-drift 110s ease-in-out infinite alternate;
+        animation: mrbeanbot-glow-drift 110s ease-in-out infinite alternate;
       }
       :root[data-platform="android"] body::after { opacity: 0.85; }
       @supports (mix-blend-mode: screen) {
@@ -82,12 +82,12 @@
       @supports not (mix-blend-mode: screen) {
         body::after { opacity: 0.70; }
       }
-      @keyframes moltbot-grid-drift {
+      @keyframes mrbeanbot-grid-drift {
         0%   { transform: translate3d(-12px, 8px, 0) rotate(-7deg); opacity: 0.40; }
         50%  { transform: translate3d( 10px,-7px, 0) rotate(-6.6deg); opacity: 0.56; }
         100% { transform: translate3d(-8px,  6px, 0) rotate(-7.2deg); opacity: 0.42; }
       }
-      @keyframes moltbot-glow-drift {
+      @keyframes mrbeanbot-glow-drift {
         0%   { transform: translate3d(-18px, 12px, 0) scale(1.02); opacity: 0.40; }
         50%  { transform: translate3d( 14px,-10px, 0) scale(1.05); opacity: 0.52; }
         100% { transform: translate3d(-10px,  8px, 0) scale(1.03); opacity: 0.43; }
