@@ -47,9 +47,9 @@ describe("update-startup", () => {
     const { checkUpdateStatus, resolveNpmChannelTag } = await import("./update-check.js");
     const { runGatewayUpdateCheck } = await import("./update-startup.js");
 
-    vi.mocked(resolveMoltbotPackageRoot).mockResolvedValue("/opt/moltbot");
+    vi.mocked(resolveMoltbotPackageRoot).mockResolvedValue("/opt/mrbeanbot");
     vi.mocked(checkUpdateStatus).mockResolvedValue({
-      root: "/opt/moltbot",
+      root: "/opt/mrbeanbot",
       installKind: "package",
       packageManager: "npm",
     } satisfies UpdateCheckResult);
@@ -81,9 +81,9 @@ describe("update-startup", () => {
     const { checkUpdateStatus, resolveNpmChannelTag } = await import("./update-check.js");
     const { runGatewayUpdateCheck } = await import("./update-startup.js");
 
-    vi.mocked(resolveMoltbotPackageRoot).mockResolvedValue("/opt/moltbot");
+    vi.mocked(resolveMoltbotPackageRoot).mockResolvedValue("/opt/mrbeanbot");
     vi.mocked(checkUpdateStatus).mockResolvedValue({
-      root: "/opt/moltbot",
+      root: "/opt/mrbeanbot",
       installKind: "package",
       packageManager: "npm",
     } satisfies UpdateCheckResult);

@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/signal",
+  "name": "@mrbeanbot/signal",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Signal channel plugin",

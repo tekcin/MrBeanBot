@@ -177,7 +177,7 @@ describe("loadMoltbotPlugins", () => {
     fs.writeFileSync(
       path.join(pluginDir, "package.json"),
       JSON.stringify({
-        name: "@moltbot/memory-core",
+        name: "@mrbeanbot/memory-core",
         version: "1.2.3",
         description: "Memory plugin package",
         moltbot: { extensions: ["./index.ts"] },

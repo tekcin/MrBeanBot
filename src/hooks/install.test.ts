@@ -35,7 +35,7 @@ describe("installHooksFromArchive", () => {
     zip.file(
       "package/package.json",
       JSON.stringify({
-        name: "@moltbot/zip-hooks",
+        name: "@mrbeanbot/zip-hooks",
         version: "0.0.1",
         moltbot: { hooks: ["./hooks/zip-hook"] },
       }),
@@ -78,7 +78,7 @@ describe("installHooksFromArchive", () => {
     fs.writeFileSync(
       path.join(pkgDir, "package.json"),
       JSON.stringify({
-        name: "@moltbot/tar-hooks",
+        name: "@mrbeanbot/tar-hooks",
         version: "0.0.1",
         moltbot: { hooks: ["./hooks/tar-hook"] },
       }),

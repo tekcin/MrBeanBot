@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const CORE_PACKAGE_NAMES = new Set(["moltbot", "moltbot"]);
+const CORE_PACKAGE_NAMES = new Set(["mrbeanbot", "moltbot", "clawdbot"]);
 
 async function readPackageName(dir: string): Promise<string | null> {
   try {
@@ -39,7 +39,7 @@ function candidateDirsFromArgv1(argv1: string): string[] {
   return candidates;
 }
 
-export async function resolveMoltbotPackageRoot(opts: {
+export async function resolveMrBeanBotPackageRoot(opts: {
   cwd?: string;
   argv1?: string;
   moduleUrl?: string;
@@ -63,3 +63,6 @@ export async function resolveMoltbotPackageRoot(opts: {
 
   return null;
 }
+
+/** @deprecated Use resolveMrBeanBotPackageRoot instead. Provided for backward compatibility. */
+export const resolveMoltbotPackageRoot = resolveMrBeanBotPackageRoot;

@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/nostr",
+  "name": "@mrbeanbot/nostr",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Nostr channel plugin for NIP-04 encrypted DMs",
@@ -18,7 +18,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/nostr",
+      "npmSpec": "@mrbeanbot/nostr",
       "localPath": "extensions/nostr",
       "defaultChoice": "npm"
     }

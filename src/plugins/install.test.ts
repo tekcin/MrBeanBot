@@ -96,7 +96,7 @@ describe("installPluginFromArchive", () => {
     fs.writeFileSync(
       path.join(pkgDir, "package.json"),
       JSON.stringify({
-        name: "@moltbot/voice-call",
+        name: "@mrbeanbot/voice-call",
         version: "0.0.1",
         moltbot: { extensions: ["./dist/index.js"] },
       }),
@@ -129,7 +129,7 @@ describe("installPluginFromArchive", () => {
     fs.writeFileSync(
       path.join(pkgDir, "package.json"),
       JSON.stringify({
-        name: "@moltbot/voice-call",
+        name: "@mrbeanbot/voice-call",
         version: "0.0.1",
         moltbot: { extensions: ["./dist/index.js"] },
       }),
@@ -163,7 +163,7 @@ describe("installPluginFromArchive", () => {
     zip.file(
       "package/package.json",
       JSON.stringify({
-        name: "@moltbot/zipper",
+        name: "@mrbeanbot/zipper",
         version: "0.0.1",
         moltbot: { extensions: ["./dist/index.js"] },
       }),
@@ -192,7 +192,7 @@ describe("installPluginFromArchive", () => {
     fs.writeFileSync(
       path.join(pkgDir, "package.json"),
       JSON.stringify({
-        name: "@moltbot/voice-call",
+        name: "@mrbeanbot/voice-call",
         version: "0.0.1",
         moltbot: { extensions: ["./dist/index.js"] },
       }),
@@ -210,7 +210,7 @@ describe("installPluginFromArchive", () => {
       fs.writeFileSync(
         path.join(pkgDir, "package.json"),
         JSON.stringify({
-          name: "@moltbot/voice-call",
+          name: "@mrbeanbot/voice-call",
           version: "0.0.2",
           moltbot: { extensions: ["./dist/index.js"] },
         }),
@@ -251,7 +251,7 @@ describe("installPluginFromArchive", () => {
     fs.mkdirSync(pkgDir, { recursive: true });
     fs.writeFileSync(
       path.join(pkgDir, "package.json"),
-      JSON.stringify({ name: "@moltbot/nope", version: "0.0.1" }),
+      JSON.stringify({ name: "@mrbeanbot/nope", version: "0.0.1" }),
       "utf-8",
     );
 

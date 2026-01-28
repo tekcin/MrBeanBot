@@ -14,7 +14,7 @@ describe("resolveGatewayLaunchAgentLabel", () => {
   it("returns default label when no profile is set", () => {
     const result = resolveGatewayLaunchAgentLabel();
     expect(result).toBe(GATEWAY_LAUNCH_AGENT_LABEL);
-    expect(result).toBe("bot.molt.gateway");
+    expect(result).toBe("com.tekcin.mrbeanbot.gateway");
   });
 
   it("returns default label when profile is undefined", () => {

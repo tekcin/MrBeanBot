@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/googlechat",
+  "name": "@mrbeanbot/googlechat",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Google Chat channel plugin",
@@ -22,7 +22,7 @@
       "order": 55
     },
     "install": {
-      "npmSpec": "@moltbot/googlechat",
+      "npmSpec": "@mrbeanbot/googlechat",
       "localPath": "extensions/googlechat",
       "defaultChoice": "npm"
     }

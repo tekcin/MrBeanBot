@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/msteams",
+  "name": "@mrbeanbot/msteams",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Microsoft Teams channel plugin",
@@ -20,7 +20,7 @@
       "order": 60
     },
     "install": {
-      "npmSpec": "@moltbot/msteams",
+      "npmSpec": "@mrbeanbot/msteams",
       "localPath": "extensions/msteams",
       "defaultChoice": "npm"
     }

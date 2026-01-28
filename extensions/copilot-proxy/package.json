@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/copilot-proxy",
+  "name": "@mrbeanbot/copilot-proxy",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Copilot Proxy provider plugin",

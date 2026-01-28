@@ -7,6 +7,10 @@ export const TAB_GROUPS = [
     tabs: ["overview", "channels", "instances", "sessions", "cron"],
   },
   { label: "Agent", tabs: ["skills", "nodes"] },
+  {
+    label: "Admin Tools",
+    tabs: ["system-monitor", "services", "storage", "gateway-admin", "files", "network", "api-test", "terminal"],
+  },
   { label: "Settings", tabs: ["config", "debug", "logs"] },
 ] as const;
 
@@ -19,6 +23,14 @@ export type Tab =
   | "skills"
   | "nodes"
   | "chat"
+  | "system-monitor"
+  | "services"
+  | "storage"
+  | "gateway-admin"
+  | "files"
+  | "network"
+  | "api-test"
+  | "terminal"
   | "config"
   | "debug"
   | "logs";
@@ -32,6 +44,14 @@ const TAB_PATHS: Record<Tab, string> = {
   skills: "/skills",
   nodes: "/nodes",
   chat: "/chat",
+  "system-monitor": "/system-monitor",
+  services: "/services",
+  storage: "/storage",
+  "gateway-admin": "/gateway-admin",
+  files: "/files",
+  network: "/network",
+  "api-test": "/api-test",
+  terminal: "/terminal",
   config: "/config",
   debug: "/debug",
   logs: "/logs",
@@ -118,6 +138,22 @@ export function iconForTab(tab: Tab): IconName {
       return "zap";
     case "nodes":
       return "monitor";
+    case "system-monitor":
+      return "activity";
+    case "services":
+      return "server";
+    case "storage":
+      return "database";
+    case "gateway-admin":
+      return "shield";
+    case "files":
+      return "folder";
+    case "network":
+      return "network";
+    case "api-test":
+      return "wrench";
+    case "terminal":
+      return "terminal";
     case "config":
       return "settings";
     case "debug":
@@ -147,6 +183,22 @@ export function titleForTab(tab: Tab) {
       return "Nodes";
     case "chat":
       return "Chat";
+    case "system-monitor":
+      return "System Monitor";
+    case "services":
+      return "Service Management";
+    case "storage":
+      return "Storage Tools";
+    case "gateway-admin":
+      return "Gateway Admin";
+    case "files":
+      return "File Manager";
+    case "network":
+      return "Network Tools";
+    case "api-test":
+      return "API Tester";
+    case "terminal":
+      return "Terminal";
     case "config":
       return "Config";
     case "debug":
@@ -176,6 +228,22 @@ export function subtitleForTab(tab: Tab) {
       return "Paired devices, capabilities, and command exposure.";
     case "chat":
       return "Direct gateway chat session for quick interventions.";
+    case "system-monitor":
+      return "Monitor CPU, memory, disk usage, and active processes.";
+    case "services":
+      return "Start, stop, and restart services with log monitoring.";
+    case "storage":
+      return "Browse databases, backup/restore, and cleanup tools.";
+    case "gateway-admin":
+      return "Connection monitoring, rate limiting, and token management.";
+    case "files":
+      return "Browse, upload, download, and edit configuration files.";
+    case "network":
+      return "Port scanning, connection testing, and firewall management.";
+    case "api-test":
+      return "Test API endpoints and inspect WebSocket connections.";
+    case "terminal":
+      return "Shell access, task scheduler, and notifications.";
     case "config":
       return "Edit ~/.clawdbot/moltbot.json safely.";
     case "debug":

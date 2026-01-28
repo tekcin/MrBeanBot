@@ -412,7 +412,7 @@ describe("doctor command", () => {
   it("offers to update first for git checkouts", async () => {
     delete process.env.CLAWDBOT_UPDATE_IN_PROGRESS;
 
-    const root = "/tmp/moltbot";
+    const root = "/tmp/mrbeanbot";
     resolveMoltbotPackageRoot.mockResolvedValueOnce(root);
     runCommandWithTimeout.mockResolvedValueOnce({
       stdout: `${root}\n`,

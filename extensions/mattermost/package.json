@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/mattermost",
+  "name": "@mrbeanbot/mattermost",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Mattermost channel plugin",
@@ -17,7 +17,7 @@
       "order": 65
     },
     "install": {
-      "npmSpec": "@moltbot/mattermost",
+      "npmSpec": "@mrbeanbot/mattermost",
       "localPath": "extensions/mattermost",
       "defaultChoice": "npm"
     }

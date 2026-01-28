@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/matrix",
+  "name": "@mrbeanbot/matrix",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Matrix channel plugin",
@@ -18,7 +18,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/matrix",
+      "npmSpec": "@mrbeanbot/matrix",
       "localPath": "extensions/matrix",
       "defaultChoice": "npm"
     }

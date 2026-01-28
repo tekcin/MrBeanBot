@@ -137,6 +137,14 @@ export type AppViewState = {
   debugCallParams: string;
   debugCallResult: string | null;
   debugCallError: string | null;
+  gatewayBindMode: string;
+  gatewayBindAddress: string;
+  gatewayPort: number;
+  gatewayToken: string;
+  gatewayDashboardUrl: string;
+  gatewayAllowedIps: string[];
+  gatewayIpAllowlistEnabled: boolean;
+  gatewayNewIpInput: string;
   logsLoading: boolean;
   logsError: string | null;
   logsFile: string | null;

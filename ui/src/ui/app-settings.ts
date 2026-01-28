@@ -9,6 +9,7 @@ import { loadExecApprovals } from "./controllers/exec-approvals";
 import { loadPresence } from "./controllers/presence";
 import { loadSessions } from "./controllers/sessions";
 import { loadSkills } from "./controllers/skills";
+import { loadGatewayStatus } from "./controllers/gateway-admin";
 import { inferBasePathFromPathname, normalizeBasePath, normalizePath, pathForTab, tabFromPath, type Tab } from "./navigation";
 import { saveSettings, type UiSettings } from "./storage";
 import { resolveTheme, type ResolvedTheme, type ThemeMode } from "./theme";
@@ -176,6 +177,9 @@ export async function refreshActiveTab(host: SettingsHost) {
       host as unknown as Parameters<typeof scheduleLogsScroll>[0],
       true,
     );
+  }
+  if (host.tab === "gateway-admin") {
+    await loadGatewayStatus(host as unknown as MoltbotApp);
   }
 }
 

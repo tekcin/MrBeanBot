@@ -230,6 +230,15 @@ export class MoltbotApp extends LitElement {
   @state() debugCallResult: string | null = null;
   @state() debugCallError: string | null = null;
 
+  @state() gatewayBindMode = "loopback";
+  @state() gatewayBindAddress = "127.0.0.1";
+  @state() gatewayPort = 18789;
+  @state() gatewayToken = "";
+  @state() gatewayDashboardUrl = "";
+  @state() gatewayAllowedIps: string[] = [];
+  @state() gatewayIpAllowlistEnabled = false;
+  @state() gatewayNewIpInput = "";
+
   @state() logsLoading = false;
   @state() logsError: string | null = null;
   @state() logsFile: string | null = null;

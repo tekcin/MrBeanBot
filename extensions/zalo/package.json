@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/zalo",
+  "name": "@mrbeanbot/zalo",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Zalo channel plugin",
@@ -21,7 +21,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/zalo",
+      "npmSpec": "@mrbeanbot/zalo",
       "localPath": "extensions/zalo",
       "defaultChoice": "npm"
     }

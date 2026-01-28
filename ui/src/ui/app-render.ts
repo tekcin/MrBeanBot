@@ -42,6 +42,23 @@ import { renderNodes } from "./views/nodes";
 import { renderOverview } from "./views/overview";
 import { renderSessions } from "./views/sessions";
 import { renderExecApprovalPrompt } from "./views/exec-approval";
+import { renderSystemMonitor } from "./views/admin.system-monitor";
+import { renderServices } from "./views/admin.services";
+import { renderStorage } from "./views/admin.storage";
+import { renderGatewayAdmin } from "./views/admin.gateway";
+import { renderFiles } from "./views/admin.files";
+import { renderNetwork } from "./views/admin.network";
+import { renderApiTest } from "./views/admin.api-test";
+import { renderTerminal } from "./views/admin.terminal";
+import {
+  updateGatewayBindMode,
+  restartGateway,
+  regenerateGatewayToken,
+  copyDashboardUrl,
+  toggleIpAllowlist,
+  addAllowedIp,
+  removeAllowedIp,
+} from "./controllers/gateway-admin";
 import {
   approveDevicePairing,
   loadDevices,
@@ -574,6 +591,70 @@ export function renderApp(state: AppViewState) {
               onRefresh: () => loadLogs(state, { reset: true }),
               onExport: (lines, label) => state.exportLogs(lines, label),
               onScroll: (event) => state.handleLogsScroll(event),
+            })
+          : nothing}
+
+        ${state.tab === "system-monitor"
+          ? renderSystemMonitor({
+              connected: state.connected,
+            })
+          : nothing}
+
+        ${state.tab === "services"
+          ? renderServices({
+              connected: state.connected,
+            })
+          : nothing}
+
+        ${state.tab === "storage"
+          ? renderStorage({
+              connected: state.connected,
+            })
+          : nothing}
+
+        ${state.tab === "gateway-admin"
+          ? renderGatewayAdmin({
+              connected: state.connected,
+              bindMode: state.gatewayBindMode,
+              bindAddress: state.gatewayBindAddress,
+              port: state.gatewayPort,
+              token: state.gatewayToken,
+              dashboardUrl: state.gatewayDashboardUrl,
+              allowedIps: state.gatewayAllowedIps,
+              ipAllowlistEnabled: state.gatewayIpAllowlistEnabled,
+              newIpInput: state.gatewayNewIpInput,
+              onBindModeChange: (mode) => updateGatewayBindMode(state, mode),
+              onRestartGateway: () => restartGateway(state),
+              onRegenerateToken: () => regenerateGatewayToken(state),
+              onCopyDashboardUrl: () => copyDashboardUrl(state),
+              onToggleIpAllowlist: (enabled) => toggleIpAllowlist(state, enabled),
+              onAddIp: (ip) => addAllowedIp(state, ip),
+              onRemoveIp: (ip) => removeAllowedIp(state, ip),
+              onNewIpInputChange: (value) => (state.gatewayNewIpInput = value),
+            })
+          : nothing}
+
+        ${state.tab === "files"
+          ? renderFiles({
+              connected: state.connected,
+            })
+          : nothing}
+
+        ${state.tab === "network"
+          ? renderNetwork({
+              connected: state.connected,
+            })
+          : nothing}
+
+        ${state.tab === "api-test"
+          ? renderApiTest({
+              connected: state.connected,
+            })
+          : nothing}
+
+        ${state.tab === "terminal"
+          ? renderTerminal({
+              connected: state.connected,
             })
           : nothing}
       </main>

@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/zalouser",
+  "name": "@mrbeanbot/zalouser",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Zalo Personal Account plugin via zca-cli",
@@ -25,7 +25,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/zalouser",
+      "npmSpec": "@mrbeanbot/zalouser",
       "localPath": "extensions/zalouser",
       "defaultChoice": "npm"
     }

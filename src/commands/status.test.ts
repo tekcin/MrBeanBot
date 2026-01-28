@@ -205,7 +205,7 @@ vi.mock("../gateway/session-utils.js", () => ({
   listAgentsForGateway: mocks.listAgentsForGateway,
 }));
 vi.mock("../infra/moltbot-root.js", () => ({
-  resolveMoltbotPackageRoot: vi.fn().mockResolvedValue("/tmp/moltbot"),
+  resolveMoltbotPackageRoot: vi.fn().mockResolvedValue("/tmp/mrbeanbot"),
 }));
 vi.mock("../infra/os-summary.js", () => ({
   resolveOsSummary: () => ({
@@ -217,11 +217,11 @@ vi.mock("../infra/os-summary.js", () => ({
 }));
 vi.mock("../infra/update-check.js", () => ({
   checkUpdateStatus: vi.fn().mockResolvedValue({
-    root: "/tmp/moltbot",
+    root: "/tmp/mrbeanbot",
     installKind: "git",
     packageManager: "pnpm",
     git: {
-      root: "/tmp/moltbot",
+      root: "/tmp/mrbeanbot",
       branch: "main",
       upstream: "origin/main",
       dirty: false,
@@ -255,7 +255,7 @@ vi.mock("../daemon/service.js", () => ({
     readRuntime: async () => ({ status: "running", pid: 1234 }),
     readCommand: async () => ({
       programArguments: ["node", "dist/entry.js", "gateway"],
-      sourcePath: "/tmp/Library/LaunchAgents/bot.molt.gateway.plist",
+      sourcePath: "/tmp/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     }),
   }),
 }));
@@ -268,7 +268,7 @@ vi.mock("../daemon/node-service.js", () => ({
     readRuntime: async () => ({ status: "running", pid: 4321 }),
     readCommand: async () => ({
       programArguments: ["node", "dist/entry.js", "node-host"],
-      sourcePath: "/tmp/Library/LaunchAgents/bot.molt.node.plist",
+      sourcePath: "/tmp/Library/LaunchAgents/com.tekcin.mrbeanbot.node.plist",
     }),
   }),
 }));

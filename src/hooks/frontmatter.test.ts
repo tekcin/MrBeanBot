@@ -201,7 +201,7 @@ describe("resolveMoltbotMetadata", () => {
           events: ["command"],
           install: [
             { id: "bundled", kind: "bundled", label: "Bundled with Moltbot" },
-            { id: "npm", kind: "npm", package: "@moltbot/hook" },
+            { id: "npm", kind: "npm", package: "@mrbeanbot/hook" },
           ],
         },
       }),
@@ -211,7 +211,7 @@ describe("resolveMoltbotMetadata", () => {
     expect(result?.install).toHaveLength(2);
     expect(result?.install?.[0].kind).toBe("bundled");
     expect(result?.install?.[1].kind).toBe("npm");
-    expect(result?.install?.[1].package).toBe("@moltbot/hook");
+    expect(result?.install?.[1].package).toBe("@mrbeanbot/hook");
   });
 
   it("handles os restrictions", () => {

@@ -107,10 +107,13 @@ describe("launchd runtime parsing", () => {
 
 describe("launchctl list detection", () => {
   it("detects the resolved label in launchctl list", async () => {
-    await withLaunchctlStub({ listOutput: "123 0 bot.molt.gateway\n" }, async ({ env }) => {
-      const listed = await isLaunchAgentListed({ env });
-      expect(listed).toBe(true);
-    });
+    await withLaunchctlStub(
+      { listOutput: "123 0 com.tekcin.mrbeanbot.gateway\n" },
+      async ({ env }) => {
+        const listed = await isLaunchAgentListed({ env });
+        expect(listed).toBe(true);
+      },
+    );
   });
 
   it("returns false when the label is missing", async () => {
@@ -133,7 +136,7 @@ describe("launchd bootstrap repair", () => {
         .map((line) => JSON.parse(line) as string[]);
 
       const domain = typeof process.getuid === "function" ? `gui/${process.getuid()}` : "gui/501";
-      const label = "bot.molt.gateway";
+      const label = "com.tekcin.mrbeanbot.gateway";
       const plistPath = resolveLaunchAgentPlistPath(env);
 
       expect(calls).toContainEqual(["bootstrap", domain, plistPath]);
@@ -201,7 +204,7 @@ describe("launchd install", () => {
         .map((line) => JSON.parse(line) as string[]);
 
       const domain = typeof process.getuid === "function" ? `gui/${process.getuid()}` : "gui/501";
-      const label = "bot.molt.gateway";
+      const label = "com.tekcin.mrbeanbot.gateway";
       const plistPath = resolveLaunchAgentPlistPath(env);
       const serviceId = `${domain}/${label}`;
 
@@ -231,14 +234,14 @@ describe("resolveLaunchAgentPlistPath", () => {
   it("uses default label when CLAWDBOT_PROFILE is default", () => {
     const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "default" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
-      "/Users/test/Library/LaunchAgents/bot.molt.gateway.plist",
+      "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 
   it("uses default label when CLAWDBOT_PROFILE is unset", () => {
     const env = { HOME: "/Users/test" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
-      "/Users/test/Library/LaunchAgents/bot.molt.gateway.plist",
+      "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 
@@ -284,14 +287,14 @@ describe("resolveLaunchAgentPlistPath", () => {
   it("handles case-insensitive 'Default' profile", () => {
     const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "Default" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
-      "/Users/test/Library/LaunchAgents/bot.molt.gateway.plist",
+      "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 
   it("handles case-insensitive 'DEFAULT' profile", () => {
     const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "DEFAULT" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
-      "/Users/test/Library/LaunchAgents/bot.molt.gateway.plist",
+      "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 

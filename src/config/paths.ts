@@ -1,60 +1,70 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import type { MoltbotConfig } from "./types.js";
+import type { MrBeanBotConfig } from "./types.js";
 
 /**
- * Nix mode detection: When CLAWDBOT_NIX_MODE=1, the gateway is running under Nix.
+ * Nix mode detection: When MRBEANBOT_NIX_MODE=1, the gateway is running under Nix.
  * In this mode:
  * - No auto-install flows should be attempted
  * - Missing dependencies should produce actionable Nix-specific error messages
  * - Config is managed externally (read-only from Nix perspective)
  */
 export function resolveIsNixMode(env: NodeJS.ProcessEnv = process.env): boolean {
-  return env.CLAWDBOT_NIX_MODE === "1";
+  return (
+    env.MRBEANBOT_NIX_MODE === "1" || env.MOLTBOT_NIX_MODE === "1" || env.CLAWDBOT_NIX_MODE === "1"
+  );
 }
 
 export const isNixMode = resolveIsNixMode();
 
-const LEGACY_STATE_DIRNAME = ".clawdbot";
-const NEW_STATE_DIRNAME = ".moltbot";
-const CONFIG_FILENAME = "moltbot.json";
-const LEGACY_CONFIG_FILENAME = "clawdbot.json";
+const STATE_DIRNAME = ".mrbeanbot";
+const LEGACY_STATE_DIRNAMES = [".moltbot", ".clawdbot"];
+const CONFIG_FILENAME = "mrbeanbot.json";
+const LEGACY_CONFIG_FILENAMES = ["moltbot.json", "clawdbot.json"];
 
-function legacyStateDir(homedir: () => string = os.homedir): string {
-  return path.join(homedir(), LEGACY_STATE_DIRNAME);
+function currentStateDir(homedir: () => string = os.homedir): string {
+  return path.join(homedir(), STATE_DIRNAME);
 }
 
-function newStateDir(homedir: () => string = os.homedir): string {
-  return path.join(homedir(), NEW_STATE_DIRNAME);
+function legacyStateDir(homedir: () => string = os.homedir, index: number = 0): string {
+  return path.join(homedir(), LEGACY_STATE_DIRNAMES[index]);
 }
 
 export function resolveLegacyStateDir(homedir: () => string = os.homedir): string {
-  return legacyStateDir(homedir);
+  return legacyStateDir(homedir, 1); // .clawdbot
 }
 
 export function resolveNewStateDir(homedir: () => string = os.homedir): string {
-  return newStateDir(homedir);
+  return legacyStateDir(homedir, 0); // .moltbot
 }
 
 /**
  * State directory for mutable data (sessions, logs, caches).
- * Can be overridden via MOLTBOT_STATE_DIR (preferred) or CLAWDBOT_STATE_DIR (legacy).
- * Default: ~/.clawdbot (legacy default for compatibility)
- * If ~/.moltbot exists and ~/.clawdbot does not, prefer ~/.moltbot.
+ * Can be overridden via MRBEANBOT_STATE_DIR (preferred), MOLTBOT_STATE_DIR, or CLAWDBOT_STATE_DIR (legacy).
+ * Default: ~/.mrbeanbot (new default)
+ * Falls back to existing legacy directories for backward compatibility.
  */
 export function resolveStateDir(
   env: NodeJS.ProcessEnv = process.env,
   homedir: () => string = os.homedir,
 ): string {
-  const override = env.MOLTBOT_STATE_DIR?.trim() || env.CLAWDBOT_STATE_DIR?.trim();
+  const override =
+    env.MRBEANBOT_STATE_DIR?.trim() ||
+    env.MOLTBOT_STATE_DIR?.trim() ||
+    env.CLAWDBOT_STATE_DIR?.trim();
   if (override) return resolveUserPath(override);
-  const legacyDir = legacyStateDir(homedir);
-  const newDir = newStateDir(homedir);
-  const hasLegacy = fs.existsSync(legacyDir);
-  const hasNew = fs.existsSync(newDir);
-  if (!hasLegacy && hasNew) return newDir;
-  return legacyDir;
+
+  const currentDir = currentStateDir(homedir);
+  const moltbotDir = legacyStateDir(homedir, 0);
+  const clawdbotDir = legacyStateDir(homedir, 1);
+
+  // Check if any legacy directory exists
+  if (fs.existsSync(currentDir)) return currentDir;
+  if (fs.existsSync(moltbotDir)) return moltbotDir;
+  if (fs.existsSync(clawdbotDir)) return clawdbotDir;
+
+  return currentDir;
 }
 
 function resolveUserPath(input: string): string {
@@ -71,14 +81,17 @@ export const STATE_DIR = resolveStateDir();
 
 /**
  * Config file path (JSON5).
- * Can be overridden via MOLTBOT_CONFIG_PATH (preferred) or CLAWDBOT_CONFIG_PATH (legacy).
- * Default: ~/.clawdbot/moltbot.json (or $*_STATE_DIR/moltbot.json)
+ * Can be overridden via MRBEANBOT_CONFIG_PATH (preferred), MOLTBOT_CONFIG_PATH, or CLAWDBOT_CONFIG_PATH (legacy).
+ * Default: ~/.mrbeanbot/mrbeanbot.json (or $*_STATE_DIR/mrbeanbot.json)
  */
 export function resolveCanonicalConfigPath(
   env: NodeJS.ProcessEnv = process.env,
   stateDir: string = resolveStateDir(env, os.homedir),
 ): string {
-  const override = env.MOLTBOT_CONFIG_PATH?.trim() || env.CLAWDBOT_CONFIG_PATH?.trim();
+  const override =
+    env.MRBEANBOT_CONFIG_PATH?.trim() ||
+    env.MOLTBOT_CONFIG_PATH?.trim() ||
+    env.CLAWDBOT_CONFIG_PATH?.trim();
   if (override) return resolveUserPath(override);
   return path.join(stateDir, CONFIG_FILENAME);
 }
@@ -111,11 +124,14 @@ export function resolveConfigPath(
   stateDir: string = resolveStateDir(env, os.homedir),
   homedir: () => string = os.homedir,
 ): string {
-  const override = env.MOLTBOT_CONFIG_PATH?.trim() || env.CLAWDBOT_CONFIG_PATH?.trim();
+  const override =
+    env.MRBEANBOT_CONFIG_PATH?.trim() ||
+    env.MOLTBOT_CONFIG_PATH?.trim() ||
+    env.CLAWDBOT_CONFIG_PATH?.trim();
   if (override) return resolveUserPath(override);
   const candidates = [
     path.join(stateDir, CONFIG_FILENAME),
-    path.join(stateDir, LEGACY_CONFIG_FILENAME),
+    ...LEGACY_CONFIG_FILENAMES.map((fname) => path.join(stateDir, fname)),
   ];
   const existing = candidates.find((candidate) => {
     try {
@@ -136,31 +152,58 @@ export const CONFIG_PATH = resolveConfigPathCandidate();
 
 /**
  * Resolve default config path candidates across new + legacy locations.
- * Order: explicit config path → state-dir-derived paths → new default → legacy default.
+ * Order: explicit config path → state-dir-derived paths → new default → legacy defaults.
  */
 export function resolveDefaultConfigCandidates(
   env: NodeJS.ProcessEnv = process.env,
   homedir: () => string = os.homedir,
 ): string[] {
-  const explicit = env.MOLTBOT_CONFIG_PATH?.trim() || env.CLAWDBOT_CONFIG_PATH?.trim();
+  const explicit =
+    env.MRBEANBOT_CONFIG_PATH?.trim() ||
+    env.MOLTBOT_CONFIG_PATH?.trim() ||
+    env.CLAWDBOT_CONFIG_PATH?.trim();
   if (explicit) return [resolveUserPath(explicit)];
 
   const candidates: string[] = [];
+
+  const mrbeanStateDir = env.MRBEANBOT_STATE_DIR?.trim();
+  if (mrbeanStateDir) {
+    candidates.push(path.join(resolveUserPath(mrbeanStateDir), CONFIG_FILENAME));
+    for (const legacyName of LEGACY_CONFIG_FILENAMES) {
+      candidates.push(path.join(resolveUserPath(mrbeanStateDir), legacyName));
+    }
+  }
+
   const moltbotStateDir = env.MOLTBOT_STATE_DIR?.trim();
   if (moltbotStateDir) {
     candidates.push(path.join(resolveUserPath(moltbotStateDir), CONFIG_FILENAME));
-    candidates.push(path.join(resolveUserPath(moltbotStateDir), LEGACY_CONFIG_FILENAME));
+    for (const legacyName of LEGACY_CONFIG_FILENAMES) {
+      candidates.push(path.join(resolveUserPath(moltbotStateDir), legacyName));
+    }
   }
+
   const legacyStateDirOverride = env.CLAWDBOT_STATE_DIR?.trim();
   if (legacyStateDirOverride) {
     candidates.push(path.join(resolveUserPath(legacyStateDirOverride), CONFIG_FILENAME));
-    candidates.push(path.join(resolveUserPath(legacyStateDirOverride), LEGACY_CONFIG_FILENAME));
+    for (const legacyName of LEGACY_CONFIG_FILENAMES) {
+      candidates.push(path.join(resolveUserPath(legacyStateDirOverride), legacyName));
+    }
   }
 
-  candidates.push(path.join(newStateDir(homedir), CONFIG_FILENAME));
-  candidates.push(path.join(newStateDir(homedir), LEGACY_CONFIG_FILENAME));
-  candidates.push(path.join(legacyStateDir(homedir), CONFIG_FILENAME));
-  candidates.push(path.join(legacyStateDir(homedir), LEGACY_CONFIG_FILENAME));
+  // Add default directory candidates
+  candidates.push(path.join(currentStateDir(homedir), CONFIG_FILENAME));
+  for (const legacyName of LEGACY_CONFIG_FILENAMES) {
+    candidates.push(path.join(currentStateDir(homedir), legacyName));
+  }
+
+  for (let i = 0; i < LEGACY_STATE_DIRNAMES.length; i++) {
+    const legacyDir = legacyStateDir(homedir, i);
+    candidates.push(path.join(legacyDir, CONFIG_FILENAME));
+    for (const legacyName of LEGACY_CONFIG_FILENAMES) {
+      candidates.push(path.join(legacyDir, legacyName));
+    }
+  }
+
   return candidates;
 }
 
@@ -168,12 +211,12 @@ export const DEFAULT_GATEWAY_PORT = 18789;
 
 /**
  * Gateway lock directory (ephemeral).
- * Default: os.tmpdir()/moltbot-<uid> (uid suffix when available).
+ * Default: os.tmpdir()/mrbeanbot-<uid> (uid suffix when available).
  */
 export function resolveGatewayLockDir(tmpdir: () => string = os.tmpdir): string {
   const base = tmpdir();
   const uid = typeof process.getuid === "function" ? process.getuid() : undefined;
-  const suffix = uid != null ? `moltbot-${uid}` : "moltbot";
+  const suffix = uid != null ? `mrbeanbot-${uid}` : "mrbeanbot";
   return path.join(base, suffix);
 }
 
@@ -183,15 +226,18 @@ const OAUTH_FILENAME = "oauth.json";
  * OAuth credentials storage directory.
  *
  * Precedence:
- * - `CLAWDBOT_OAUTH_DIR` (explicit override)
+ * - `MRBEANBOT_OAUTH_DIR`, `MOLTBOT_OAUTH_DIR`, or `CLAWDBOT_OAUTH_DIR` (explicit override)
  * - `$*_STATE_DIR/credentials` (canonical server/default)
- * - `~/.clawdbot/credentials` (legacy default)
+ * - `~/.mrbeanbot/credentials` (default)
  */
 export function resolveOAuthDir(
   env: NodeJS.ProcessEnv = process.env,
   stateDir: string = resolveStateDir(env, os.homedir),
 ): string {
-  const override = env.CLAWDBOT_OAUTH_DIR?.trim();
+  const override =
+    env.MRBEANBOT_OAUTH_DIR?.trim() ||
+    env.MOLTBOT_OAUTH_DIR?.trim() ||
+    env.CLAWDBOT_OAUTH_DIR?.trim();
   if (override) return resolveUserPath(override);
   return path.join(stateDir, "credentials");
 }
@@ -204,10 +250,13 @@ export function resolveOAuthPath(
 }
 
 export function resolveGatewayPort(
-  cfg?: MoltbotConfig,
+  cfg?: MrBeanBotConfig,
   env: NodeJS.ProcessEnv = process.env,
 ): number {
-  const envRaw = env.CLAWDBOT_GATEWAY_PORT?.trim();
+  const envRaw =
+    env.MRBEANBOT_GATEWAY_PORT?.trim() ||
+    env.MOLTBOT_GATEWAY_PORT?.trim() ||
+    env.CLAWDBOT_GATEWAY_PORT?.trim();
   if (envRaw) {
     const parsed = Number.parseInt(envRaw, 10);
     if (Number.isFinite(parsed) && parsed > 0) return parsed;

@@ -14,7 +14,7 @@ vi.mock("./models-config.js", () => ({
 }));
 
 vi.mock("./agent-paths.js", () => ({
-  resolveMoltbotAgentDir: () => "/tmp/moltbot",
+  resolveMoltbotAgentDir: () => "/tmp/mrbeanbot",
 }));
 
 describe("loadModelCatalog", () => {

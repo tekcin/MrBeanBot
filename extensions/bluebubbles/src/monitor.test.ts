@@ -178,7 +178,7 @@ function createMockRuntime(): PluginRuntime {
       })) as unknown as PluginRuntime["logging"]["getChildLogger"],
     },
     state: {
-      resolveStateDir: vi.fn(() => "/tmp/moltbot") as unknown as PluginRuntime["state"]["resolveStateDir"],
+      resolveStateDir: vi.fn(() => "/tmp/mrbeanbot") as unknown as PluginRuntime["state"]["resolveStateDir"],
     },
   };
 }

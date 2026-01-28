@@ -145,7 +145,7 @@ describe("daemon-cli coverage", () => {
         CLAWDBOT_CONFIG_PATH: "/tmp/moltbot-daemon-state/moltbot.json",
         CLAWDBOT_GATEWAY_PORT: "19001",
       },
-      sourcePath: "/tmp/bot.molt.gateway.plist",
+      sourcePath: "/tmp/com.tekcin.mrbeanbot.gateway.plist",
     });
 
     const { registerDaemonCli } = await import("./daemon-cli.js");

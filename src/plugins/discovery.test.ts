@@ -111,7 +111,7 @@ describe("discoverMoltbotPlugins", () => {
     fs.writeFileSync(
       path.join(globalExt, "package.json"),
       JSON.stringify({
-        name: "@moltbot/voice-call",
+        name: "@mrbeanbot/voice-call",
         moltbot: { extensions: ["./src/index.ts"] },
       }),
       "utf-8",
@@ -139,7 +139,7 @@ describe("discoverMoltbotPlugins", () => {
     fs.writeFileSync(
       path.join(packDir, "package.json"),
       JSON.stringify({
-        name: "@moltbot/demo-plugin-dir",
+        name: "@mrbeanbot/demo-plugin-dir",
         moltbot: { extensions: ["./index.js"] },
       }),
       "utf-8",

@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/memory-core",
+  "name": "@mrbeanbot/memory-core",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot core memory search plugin",

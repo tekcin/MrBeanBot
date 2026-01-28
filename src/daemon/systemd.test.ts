@@ -24,14 +24,14 @@ describe("resolveSystemdUserUnitPath", () => {
   it("uses default service name when CLAWDBOT_PROFILE is default", () => {
     const env = { HOME: "/home/test", CLAWDBOT_PROFILE: "default" };
     expect(resolveSystemdUserUnitPath(env)).toBe(
-      "/home/test/.config/systemd/user/moltbot-gateway.service",
+      "/home/test/.config/systemd/user/mrbeanbot-gateway.service",
     );
   });
 
   it("uses default service name when CLAWDBOT_PROFILE is unset", () => {
     const env = { HOME: "/home/test" };
     expect(resolveSystemdUserUnitPath(env)).toBe(
-      "/home/test/.config/systemd/user/moltbot-gateway.service",
+      "/home/test/.config/systemd/user/mrbeanbot-gateway.service",
     );
   });
 
@@ -76,14 +76,14 @@ describe("resolveSystemdUserUnitPath", () => {
   it("handles case-insensitive 'Default' profile", () => {
     const env = { HOME: "/home/test", CLAWDBOT_PROFILE: "Default" };
     expect(resolveSystemdUserUnitPath(env)).toBe(
-      "/home/test/.config/systemd/user/moltbot-gateway.service",
+      "/home/test/.config/systemd/user/mrbeanbot-gateway.service",
     );
   });
 
   it("handles case-insensitive 'DEFAULT' profile", () => {
     const env = { HOME: "/home/test", CLAWDBOT_PROFILE: "DEFAULT" };
     expect(resolveSystemdUserUnitPath(env)).toBe(
-      "/home/test/.config/systemd/user/moltbot-gateway.service",
+      "/home/test/.config/systemd/user/mrbeanbot-gateway.service",
     );
   });
 

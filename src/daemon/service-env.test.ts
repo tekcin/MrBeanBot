@@ -228,9 +228,9 @@ describe("buildServiceEnvironment", () => {
     expect(env.CLAWDBOT_SERVICE_MARKER).toBe("moltbot");
     expect(env.CLAWDBOT_SERVICE_KIND).toBe("gateway");
     expect(typeof env.CLAWDBOT_SERVICE_VERSION).toBe("string");
-    expect(env.CLAWDBOT_SYSTEMD_UNIT).toBe("moltbot-gateway.service");
+    expect(env.CLAWDBOT_SYSTEMD_UNIT).toBe("mrbeanbot-gateway.service");
     if (process.platform === "darwin") {
-      expect(env.CLAWDBOT_LAUNCHD_LABEL).toBe("bot.molt.gateway");
+      expect(env.CLAWDBOT_LAUNCHD_LABEL).toBe("com.tekcin.mrbeanbot.gateway");
     }
   });
 

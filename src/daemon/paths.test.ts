@@ -21,8 +21,8 @@ describe("resolveGatewayStateDir", () => {
   });
 
   it("uses CLAWDBOT_STATE_DIR when provided", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_STATE_DIR: "/var/lib/moltbot" };
-    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/var/lib/moltbot"));
+    const env = { HOME: "/Users/test", CLAWDBOT_STATE_DIR: "/var/lib/mrbeanbot" };
+    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/var/lib/mrbeanbot"));
   });
 
   it("expands ~ in CLAWDBOT_STATE_DIR", () => {

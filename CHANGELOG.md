@@ -1,9 +1,23 @@
 # Changelog
 
-Docs: https://docs.molt.bot
+Docs: https://github.com/tekcin/MrBeanBot
+
+## 2026.1.27
+Status: unreleased.
+
+### Changes
+- **MAJOR REBRAND**: Rebrand project from Moltbot to MrBeanBot by Michael Thornton (tekcin@yahoo.com)
+  - CLI renamed from `moltbot` to `mrbeanbot` (backward compatibility maintained for `moltbot` and `clawdbot`)
+  - NPM package renamed to `mrbeanbot` with `@mrbeanbot/*` scoped extensions
+  - Environment variables: MRBEANBOT_* (with fallback support for MOLTBOT_* and CLAWDBOT_*)
+  - Configuration paths: ~/.mrbeanbot/ (with fallback to ~/.moltbot/ and ~/.clawdbot/)
+  - Service names: mrbeanbot-gateway, mrbeanbot-node (legacy service detection maintained)
+  - Updated branding throughout UI, documentation, and source code
+  - Removed external molt.bot and clawdhub.com references
+  - Author: Michael Thornton, GitHub: github.com/tekcin/MrBeanBot
 
 ## 2026.1.26
-Status: unreleased.
+Status: released.
 
 ### Changes
 - Rebrand: rename the npm package/CLI to `moltbot`, add a `moltbot` compatibility shim, and move extensions to the `@moltbot/*` scope.

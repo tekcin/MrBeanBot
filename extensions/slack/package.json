@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/slack",
+  "name": "@mrbeanbot/slack",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot Slack channel plugin",

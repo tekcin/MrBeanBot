@@ -199,7 +199,7 @@ describe("trigger handling", () => {
         makeCfg(home),
       );
       const text = Array.isArray(res) ? res[0]?.text : res?.text;
-      expect(text).toContain("Moltbot");
+      expect(text).toContain("MrBeanBot");
       expect(runEmbeddedPiAgent).not.toHaveBeenCalled();
     });
   });

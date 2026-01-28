@@ -6,7 +6,7 @@ describe("parseSystemdExecStart", () => {
   it("splits on whitespace outside quotes", () => {
     const execStart = "/usr/bin/moltbot gateway start --foo bar";
     expect(parseSystemdExecStart(execStart)).toEqual([
-      "/usr/bin/moltbot",
+      "/usr/bin/mrbeanbot",
       "gateway",
       "start",
       "--foo",
@@ -17,7 +17,7 @@ describe("parseSystemdExecStart", () => {
   it("preserves quoted arguments", () => {
     const execStart = '/usr/bin/moltbot gateway start --name "My Bot"';
     expect(parseSystemdExecStart(execStart)).toEqual([
-      "/usr/bin/moltbot",
+      "/usr/bin/mrbeanbot",
       "gateway",
       "start",
       "--name",
@@ -26,13 +26,13 @@ describe("parseSystemdExecStart", () => {
   });
 
   it("parses path arguments", () => {
-    const execStart = "/usr/bin/moltbot gateway start --path /tmp/moltbot";
+    const execStart = "/usr/bin/moltbot gateway start --path /tmp/mrbeanbot";
     expect(parseSystemdExecStart(execStart)).toEqual([
-      "/usr/bin/moltbot",
+      "/usr/bin/mrbeanbot",
       "gateway",
       "start",
       "--path",
-      "/tmp/moltbot",
+      "/tmp/mrbeanbot",
     ]);
   });
 });

@@ -1,6 +1,6 @@
 import { formatTerminalLink } from "../utils.js";
 
-export const DOCS_ROOT = "https://docs.molt.bot";
+export const DOCS_ROOT = "https://github.com/tekcin/MrBeanBot";
 
 export function formatDocsLink(
   path: string,

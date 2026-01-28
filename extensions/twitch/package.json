@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/twitch",
+  "name": "@mrbeanbot/twitch",
   "version": "2026.1.26",
   "description": "Moltbot Twitch channel plugin",
   "type": "module",

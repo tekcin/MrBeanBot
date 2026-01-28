@@ -1,5 +1,5 @@
 {
-  "name": "@moltbot/llm-task",
+  "name": "@mrbeanbot/llm-task",
   "version": "2026.1.26",
   "type": "module",
   "description": "Moltbot JSON-only LLM task plugin",
