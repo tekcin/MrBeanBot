@@ -23,6 +23,11 @@ RUN apt-get update \
 COPY scripts/sandbox-browser-entrypoint.sh /usr/local/bin/MrBeanBot-sandbox-browser
 RUN chmod +x /usr/local/bin/MrBeanBot-sandbox-browser
 
+RUN groupadd --gid 1000 node \
+  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+
+USER node
+
 EXPOSE 9222 5900 6080
 
 CMD ["MrBeanBot-sandbox-browser"]

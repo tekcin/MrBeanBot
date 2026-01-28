@@ -15,7 +15,14 @@ import { createGatewayPluginRequestHandler } from "./server/plugins-http.js";
 import type { GatewayWsClient } from "./server/ws-types.js";
 import { createGatewayBroadcaster } from "./server-broadcast.js";
 import { type ChatRunEntry, createChatRunState } from "./server-chat.js";
-import { MAX_PAYLOAD_BYTES } from "./server-constants.js";
+import { RateLimiter } from "./rate-limiter.js";
+import {
+  AUTH_FAILURE_RATE_LIMIT,
+  AUTH_FAILURE_RATE_WINDOW_MS,
+  MAX_PAYLOAD_BYTES,
+  WS_HANDSHAKE_RATE_LIMIT,
+  WS_HANDSHAKE_RATE_WINDOW_MS,
+} from "./server-constants.js";
 import { attachGatewayUpgradeHandler, createGatewayHttpServer } from "./server-http.js";
 import type { DedupeEntry } from "./server-shared.js";
 import type { PluginRegistry } from "../plugins/registry.js";
@@ -69,6 +76,7 @@ export async function createGatewayRuntimeState(params: {
     sessionKey?: string,
   ) => ChatRunEntry | undefined;
   chatAbortControllers: Map<string, ChatAbortControllerEntry>;
+  authFailureRateLimiter: RateLimiter;
 }> {
   let canvasHost: CanvasHostHandler | null = null;
   if (params.canvasHostEnabled) {
@@ -119,6 +127,7 @@ export async function createGatewayRuntimeState(params: {
       handlePluginRequest,
       resolvedAuth: params.resolvedAuth,
       tlsOptions: params.gatewayTls?.enabled ? params.gatewayTls.tlsOptions : undefined,
+      allowedOrigins: params.cfg.gateway?.cors?.allowedOrigins,
     });
     try {
       await listenGatewayHttpServer({
@@ -144,8 +153,24 @@ export async function createGatewayRuntimeState(params: {
     noServer: true,
     maxPayload: MAX_PAYLOAD_BYTES,
   });
+  const allowedOrigins = params.cfg.gateway?.cors?.allowedOrigins;
+  const handshakeRateLimiter = new RateLimiter({
+    maxPerWindow: WS_HANDSHAKE_RATE_LIMIT,
+    windowMs: WS_HANDSHAKE_RATE_WINDOW_MS,
+  });
+  const authFailureRateLimiter = new RateLimiter({
+    maxPerWindow: AUTH_FAILURE_RATE_LIMIT,
+    windowMs: AUTH_FAILURE_RATE_WINDOW_MS,
+  });
   for (const server of httpServers) {
-    attachGatewayUpgradeHandler({ httpServer: server, wss, canvasHost });
+    attachGatewayUpgradeHandler({
+      httpServer: server,
+      wss,
+      canvasHost,
+      allowedOrigins,
+      handshakeRateLimiter,
+      logWsControl: params.log,
+    });
   }
 
   const clients = new Set<GatewayWsClient>();
@@ -176,5 +201,6 @@ export async function createGatewayRuntimeState(params: {
     addChatRun,
     removeChatRun,
     chatAbortControllers,
+    authFailureRateLimiter,
   };
 }

@@ -40,6 +40,7 @@ import {
   validateRequestFrame,
 } from "../../protocol/index.js";
 import { GATEWAY_CLIENT_IDS } from "../../protocol/client-info.js";
+import type { RateLimiter } from "../../rate-limiter.js";
 import { MAX_BUFFERED_BYTES, MAX_PAYLOAD_BYTES, TICK_INTERVAL_MS } from "../../server-constants.js";
 import type { GatewayRequestContext, GatewayRequestHandlers } from "../../server-methods/types.js";
 import { handleGatewayRequest } from "../../server-methods.js";
@@ -157,6 +158,7 @@ export function attachGatewayWsMessageHandler(params: {
   logGateway: SubsystemLogger;
   logHealth: SubsystemLogger;
   logWsControl: SubsystemLogger;
+  authFailureRateLimiter?: RateLimiter;
 }) {
   const {
     socket,
@@ -187,6 +189,7 @@ export function attachGatewayWsMessageHandler(params: {
     logGateway,
     logHealth,
     logWsControl,
+    authFailureRateLimiter,
   } = params;
 
   const configSnapshot = loadConfig();
@@ -564,6 +567,31 @@ export function attachGatewayWsMessageHandler(params: {
           }
         }
 
+        // Check auth failure rate limit before attempting auth.
+        const rateLimitKey = clientIp || remoteAddr || "";
+        if (
+          authFailureRateLimiter &&
+          rateLimitKey &&
+          !authFailureRateLimiter.isAllowed(rateLimitKey)
+        ) {
+          setHandshakeState("failed");
+          setCloseCause("rate-limited", { reason: "auth-failure-rate-limit" });
+          logWsControl.warn(
+            `rate limited conn=${connId} remote=${remoteAddr ?? "?"} client=${clientLabel}: too many failed auth attempts`,
+          );
+          send({
+            type: "res",
+            id: frame.id,
+            ok: false,
+            error: errorShape(
+              ErrorCodes.INVALID_REQUEST,
+              "too many failed auth attempts, try again later",
+            ),
+          });
+          close(1008, "rate limited");
+          return;
+        }
+
         const authResult = await authorizeGatewayConnect({
           auth: resolvedAuth,
           connectAuth: connectParams.auth,
@@ -586,6 +614,10 @@ export function attachGatewayWsMessageHandler(params: {
           }
         }
         if (!authOk) {
+          // Record failed auth attempt for rate limiting.
+          if (authFailureRateLimiter && rateLimitKey) {
+            authFailureRateLimiter.record(rateLimitKey);
+          }
           setHandshakeState("failed");
           logWsControl.warn(
             `unauthorized conn=${connId} remote=${remoteAddr ?? "?"} client=${clientLabel} ${connectParams.client.mode} v${connectParams.client.version} reason=${authResult.reason ?? "unknown"}`,

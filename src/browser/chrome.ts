@@ -197,6 +197,12 @@ export async function launchClawdChrome(
       args.push("--disable-gpu");
     }
     if (resolved.noSandbox) {
+      log.warn(
+        "browser.noSandbox is enabled: Chrome is running without OS-level sandboxing. " +
+          "This reduces isolation between browser content and the host system. " +
+          "Only use this in trusted environments (e.g. containerized sandboxes). " +
+          "Set browser.noSandbox to false to re-enable the sandbox.",
+      );
       args.push("--no-sandbox");
       args.push("--disable-setuid-sandbox");
     }

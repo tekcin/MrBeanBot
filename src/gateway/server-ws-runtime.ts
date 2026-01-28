@@ -1,6 +1,7 @@
 import type { WebSocketServer } from "ws";
 import type { createSubsystemLogger } from "../logging/subsystem.js";
 import type { ResolvedGatewayAuth } from "./auth.js";
+import type { RateLimiter } from "./rate-limiter.js";
 import { attachGatewayWsConnectionHandler } from "./server/ws-connection.js";
 import type { GatewayWsClient } from "./server/ws-types.js";
 import type { GatewayRequestContext, GatewayRequestHandlers } from "./server-methods/types.js";
@@ -28,6 +29,7 @@ export function attachGatewayWsHandlers(params: {
     },
   ) => void;
   context: GatewayRequestContext;
+  authFailureRateLimiter?: RateLimiter;
 }) {
   attachGatewayWsConnectionHandler({
     wss: params.wss,
@@ -45,5 +47,6 @@ export function attachGatewayWsHandlers(params: {
     extraHandlers: params.extraHandlers,
     broadcast: params.broadcast,
     buildRequestContext: () => params.context,
+    authFailureRateLimiter: params.authFailureRateLimiter,
   });
 }

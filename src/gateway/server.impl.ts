@@ -285,6 +285,7 @@ export async function startGatewayServer(
     addChatRun,
     removeChatRun,
     chatAbortControllers,
+    authFailureRateLimiter,
   } = await createGatewayRuntimeState({
     cfg: cfgAtStart,
     bindHost,
@@ -473,6 +474,7 @@ export async function startGatewayServer(
       wizardRunner,
       broadcastVoiceWakeChanged,
     },
+    authFailureRateLimiter,
   });
   logGatewayStartup({
     cfg: cfgAtStart,

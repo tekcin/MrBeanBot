@@ -205,6 +205,16 @@ export type GatewayNodesConfig = {
   denyCommands?: string[];
 };
 
+export type GatewayCorsConfig = {
+  /**
+   * Allowed origins for WebSocket and HTTP CORS requests.
+   * Loopback origins are always allowed regardless of this setting.
+   * Use ["*"] to allow all origins (not recommended for non-loopback bindings).
+   * Default: loopback-only (no explicit allowedOrigins needed).
+   */
+  allowedOrigins?: string[];
+};
+
 export type GatewayConfig = {
   /** Single multiplexed port for Gateway WS + HTTP (default: 18789). */
   port?: number;
@@ -239,4 +249,6 @@ export type GatewayConfig = {
    * `x-real-ip`) to determine the client IP for local pairing and HTTP checks.
    */
   trustedProxies?: string[];
+  /** CORS and origin validation settings. */
+  cors?: GatewayCorsConfig;
 };

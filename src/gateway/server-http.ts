@@ -29,6 +29,8 @@ import {
 import { applyHookMappings } from "./hooks-mapping.js";
 import { handleOpenAiHttpRequest } from "./openai-http.js";
 import { handleOpenResponsesHttpRequest } from "./openresponses-http.js";
+import { isOriginAllowed } from "./origin-validation.js";
+import type { RateLimiter } from "./rate-limiter.js";
 import { handleToolsInvokeHttpRequest } from "./tools-invoke-http.js";
 
 type SubsystemLogger = ReturnType<typeof createSubsystemLogger>;
@@ -211,6 +213,7 @@ export function createGatewayHttpServer(opts: {
   handlePluginRequest?: HooksRequestHandler;
   resolvedAuth: import("./auth.js").ResolvedGatewayAuth;
   tlsOptions?: TlsOptions;
+  allowedOrigins?: string[];
 }): HttpServer {
   const {
     canvasHost,
@@ -222,6 +225,7 @@ export function createGatewayHttpServer(opts: {
     handleHooksRequest,
     handlePluginRequest,
     resolvedAuth,
+    allowedOrigins,
   } = opts;
   const httpServer: HttpServer = opts.tlsOptions
     ? createHttpsServer(opts.tlsOptions, (req, res) => {
@@ -234,6 +238,25 @@ export function createGatewayHttpServer(opts: {
   async function handleRequest(req: IncomingMessage, res: ServerResponse) {
     // Don't interfere with WebSocket upgrades; ws handles the 'upgrade' event.
     if (String(req.headers.upgrade ?? "").toLowerCase() === "websocket") return;
+
+    // CORS headers: set on every response so browsers get consistent signals.
+    const requestOrigin = Array.isArray(req.headers.origin)
+      ? req.headers.origin[0]
+      : req.headers.origin;
+    if (requestOrigin && isOriginAllowed(requestOrigin, allowedOrigins)) {
+      res.setHeader("Access-Control-Allow-Origin", requestOrigin);
+      res.setHeader("Vary", "Origin");
+    }
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-MrBeanBot-Token");
+    res.setHeader("Access-Control-Max-Age", "86400");
+
+    // Handle CORS preflight.
+    if (req.method === "OPTIONS") {
+      res.statusCode = 204;
+      res.end();
+      return;
+    }
 
     try {
       const configSnapshot = loadConfig();
@@ -305,10 +328,35 @@ export function attachGatewayUpgradeHandler(opts: {
   httpServer: HttpServer;
   wss: WebSocketServer;
   canvasHost: CanvasHostHandler | null;
+  allowedOrigins?: string[];
+  handshakeRateLimiter?: RateLimiter;
+  logWsControl?: { warn: (msg: string) => void };
 }) {
-  const { httpServer, wss, canvasHost } = opts;
+  const { httpServer, wss, canvasHost, allowedOrigins, handshakeRateLimiter, logWsControl } = opts;
   httpServer.on("upgrade", (req, socket, head) => {
     if (canvasHost?.handleUpgrade(req, socket, head)) return;
+
+    const remoteIp = req.socket?.remoteAddress ?? "unknown";
+
+    // Rate limit WebSocket handshake attempts per IP.
+    if (handshakeRateLimiter && !handshakeRateLimiter.check(remoteIp)) {
+      logWsControl?.warn(`WebSocket upgrade rejected: rate limit exceeded (ip=${remoteIp})`);
+      socket.write("HTTP/1.1 429 Too Many Requests\r\n\r\n");
+      socket.destroy();
+      return;
+    }
+
+    // Origin validation: reject WebSocket upgrades from disallowed origins.
+    const origin = Array.isArray(req.headers.origin) ? req.headers.origin[0] : req.headers.origin;
+    if (!isOriginAllowed(origin, allowedOrigins)) {
+      logWsControl?.warn(
+        `WebSocket upgrade rejected: origin not allowed (origin=${origin ?? "n/a"})`,
+      );
+      socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
+      socket.destroy();
+      return;
+    }
+
     wss.handleUpgrade(req, socket, head, (ws) => {
       wss.emit("connection", ws, req);
     });

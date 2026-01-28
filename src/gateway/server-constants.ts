@@ -28,3 +28,13 @@ export const TICK_INTERVAL_MS = 30_000;
 export const HEALTH_REFRESH_INTERVAL_MS = 60_000;
 export const DEDUPE_TTL_MS = 5 * 60_000;
 export const DEDUPE_MAX = 1000;
+
+/** Maximum WebSocket handshake attempts per IP per window. */
+export const WS_HANDSHAKE_RATE_LIMIT = 20;
+/** Window duration for handshake rate limiting (ms). */
+export const WS_HANDSHAKE_RATE_WINDOW_MS = 60_000;
+
+/** Maximum failed auth attempts per IP per window before throttling. */
+export const AUTH_FAILURE_RATE_LIMIT = 10;
+/** Window duration for auth failure rate limiting (ms). */
+export const AUTH_FAILURE_RATE_WINDOW_MS = 60_000;

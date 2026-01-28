@@ -8,6 +8,7 @@ import { isWebchatClient } from "../../utils/message-channel.js";
 
 import type { ResolvedGatewayAuth } from "../auth.js";
 import { isLoopbackAddress } from "../net.js";
+import type { RateLimiter } from "../rate-limiter.js";
 import { getHandshakeTimeoutMs } from "../server-constants.js";
 import type { GatewayRequestContext, GatewayRequestHandlers } from "../server-methods/types.js";
 import { formatError } from "../server-utils.js";
@@ -41,6 +42,7 @@ export function attachGatewayWsConnectionHandler(params: {
     },
   ) => void;
   buildRequestContext: () => GatewayRequestContext;
+  authFailureRateLimiter?: RateLimiter;
 }) {
   const {
     wss,
@@ -257,6 +259,7 @@ export function attachGatewayWsConnectionHandler(params: {
       logGateway,
       logHealth,
       logWsControl,
+      authFailureRateLimiter: params.authFailureRateLimiter,
     });
   });
 }
