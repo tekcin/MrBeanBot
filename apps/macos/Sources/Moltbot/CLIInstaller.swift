@@ -13,7 +13,7 @@ enum CLIInstaller {
         fileManager: FileManager) -> String?
     {
         for basePath in searchPaths {
-            let candidate = URL(fileURLWithPath: basePath).appendingPathComponent("MrBeanBot").path
+            let candidate = URL(fileURLWithPath: basePath).appendingPathComponent("mrbeanbot").path
             var isDirectory: ObjCBool = false
 
             guard fileManager.fileExists(atPath: candidate, isDirectory: &isDirectory),
@@ -62,7 +62,7 @@ enum CLIInstaller {
 
     private static func installPrefix() -> String {
         FileManager().homeDirectoryForCurrentUser
-            .appendingPathComponent(".MrBeanBot")
+            .appendingPathComponent(".mrbeanbot")
             .path
     }
 

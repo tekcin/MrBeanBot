@@ -306,7 +306,7 @@ export function discoverMrBeanBotPlugins(params: {
   }
   if (workspaceDir) {
     const workspaceRoot = resolveUserPath(workspaceDir);
-    const workspaceExt = path.join(workspaceRoot, ".MrBeanBot", "extensions");
+    const workspaceExt = path.join(workspaceRoot, ".mrbeanbot", "extensions");
     discoverInDirectory({
       dir: workspaceExt,
       origin: "workspace",

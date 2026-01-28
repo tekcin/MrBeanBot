@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { resolveMrBeanBotPackageRoot } from "../infra/MrBeanBot-root.js";
+import { resolveMrBeanBotPackageRoot } from "../infra/moltbot-root.js";
 
 export async function resolveMrBeanBotDocsPath(params: {
   workspaceDir?: string;

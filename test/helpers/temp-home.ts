@@ -50,7 +50,7 @@ function restoreExtraEnv(snapshot: Record<string, string | undefined>) {
 function setTempHome(base: string) {
   process.env.HOME = base;
   process.env.USERPROFILE = base;
-  process.env.MRBEANBOT_STATE_DIR = path.join(base, ".MrBeanBot");
+  process.env.MRBEANBOT_STATE_DIR = path.join(base, ".mrbeanbot");
 
   if (process.platform !== "win32") return;
   const match = base.match(/^([A-Za-z]:)(.*)$/);
@@ -74,7 +74,7 @@ export async function withTempHome<T>(
   const envSnapshot = snapshotExtraEnv(envKeys);
 
   setTempHome(base);
-  await fs.mkdir(path.join(base, ".MrBeanBot", "agents", "main", "sessions"), { recursive: true });
+  await fs.mkdir(path.join(base, ".mrbeanbot", "agents", "main", "sessions"), { recursive: true });
   if (opts.env) {
     for (const [key, raw] of Object.entries(opts.env)) {
       const value = typeof raw === "function" ? raw(base) : raw;

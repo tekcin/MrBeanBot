@@ -33,5 +33,5 @@ export function resolveGatewayStateDir(env: Record<string, string | undefined>):
   }
   const home = resolveHomeDir(env);
   const suffix = resolveGatewayProfileSuffix(env.MRBEANBOT_PROFILE);
-  return path.join(home, `.MrBeanBot${suffix}`);
+  return path.join(home, `.mrbeanbot${suffix}`);
 }

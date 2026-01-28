@@ -111,7 +111,7 @@ export async function uninstallCommand(runtime: RuntimeEnv, opts: UninstallOptio
           label: "Gateway service",
           hint: "launchd / systemd / schtasks",
         },
-        { value: "state", label: "State + config", hint: "~/.MrBeanBot" },
+        { value: "state", label: "State + config", hint: "~/.mrbeanbot" },
         { value: "workspace", label: "Workspace", hint: "agent files" },
         {
           value: "app",

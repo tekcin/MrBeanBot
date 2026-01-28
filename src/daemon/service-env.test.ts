@@ -225,7 +225,7 @@ describe("buildServiceEnvironment", () => {
     }
     expect(env.MRBEANBOT_GATEWAY_PORT).toBe("18789");
     expect(env.MRBEANBOT_GATEWAY_TOKEN).toBe("secret");
-    expect(env.MRBEANBOT_SERVICE_MARKER).toBe("MrBeanBot");
+    expect(env.MRBEANBOT_SERVICE_MARKER).toBe("mrbeanbot");
     expect(env.MRBEANBOT_SERVICE_KIND).toBe("gateway");
     expect(typeof env.MRBEANBOT_SERVICE_VERSION).toBe("string");
     expect(env.MRBEANBOT_SYSTEMD_UNIT).toBe("mrbeanbot-gateway.service");
@@ -239,9 +239,9 @@ describe("buildServiceEnvironment", () => {
       env: { HOME: "/home/user", MRBEANBOT_PROFILE: "work" },
       port: 18789,
     });
-    expect(env.MRBEANBOT_SYSTEMD_UNIT).toBe("MrBeanBot-gateway-work.service");
+    expect(env.MRBEANBOT_SYSTEMD_UNIT).toBe("mrbeanbot-gateway-work.service");
     if (process.platform === "darwin") {
-      expect(env.MRBEANBOT_LAUNCHD_LABEL).toBe("bot.molt.work");
+      expect(env.MRBEANBOT_LAUNCHD_LABEL).toBe("com.tekcin.mrbeanbot.work");
     }
   });
 });

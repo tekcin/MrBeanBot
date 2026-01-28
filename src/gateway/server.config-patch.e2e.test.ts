@@ -190,7 +190,7 @@ describe("gateway config.patch", () => {
     );
     expect(patchRes.ok).toBe(true);
 
-    const sentinelPath = path.join(os.homedir(), ".MrBeanBot", "restart-sentinel.json");
+    const sentinelPath = path.join(os.homedir(), ".mrbeanbot", "restart-sentinel.json");
     await new Promise((resolve) => setTimeout(resolve, 100));
 
     try {

@@ -193,7 +193,7 @@ const testConfigRoot = {
 
 export const setTestConfigRoot = (root: string) => {
   testConfigRoot.value = root;
-  process.env.MRBEANBOT_CONFIG_PATH = path.join(root, "MrBeanBot.json");
+  process.env.MRBEANBOT_CONFIG_PATH = path.join(root, "mrbeanbot.json");
 };
 
 export const testTailnetIPv4 = hoisted.testTailnetIPv4;
@@ -271,7 +271,7 @@ vi.mock("../config/sessions.js", async () => {
 
 vi.mock("../config/config.js", async () => {
   const actual = await vi.importActual<typeof import("../config/config.js")>("../config/config.js");
-  const resolveConfigPath = () => path.join(testConfigRoot.value, "MrBeanBot.json");
+  const resolveConfigPath = () => path.join(testConfigRoot.value, "mrbeanbot.json");
   const hashConfigRaw = (raw: string | null) =>
     crypto
       .createHash("sha256")

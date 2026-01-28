@@ -39,7 +39,7 @@ describe("withWhatsAppPrefix", () => {
 
 describe("ensureDir", () => {
   it("creates nested directory", async () => {
-    const tmp = await fs.promises.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-test-"));
+    const tmp = await fs.promises.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-test-"));
     const target = path.join(tmp, "nested", "dir");
     await ensureDir(target);
     expect(fs.existsSync(target)).toBe(true);
@@ -91,7 +91,7 @@ describe("jidToE164", () => {
   });
 
   it("maps @lid from authDir mapping files", () => {
-    const authDir = fs.mkdtempSync(path.join(os.tmpdir(), "MrBeanBot-auth-"));
+    const authDir = fs.mkdtempSync(path.join(os.tmpdir(), "mrbeanbot-auth-"));
     const mappingPath = path.join(authDir, "lid-mapping-456_reverse.json");
     fs.writeFileSync(mappingPath, JSON.stringify("5559876"));
     expect(jidToE164("456@lid", { authDir })).toBe("+5559876");
@@ -99,7 +99,7 @@ describe("jidToE164", () => {
   });
 
   it("maps @hosted.lid from authDir mapping files", () => {
-    const authDir = fs.mkdtempSync(path.join(os.tmpdir(), "MrBeanBot-auth-"));
+    const authDir = fs.mkdtempSync(path.join(os.tmpdir(), "mrbeanbot-auth-"));
     const mappingPath = path.join(authDir, "lid-mapping-789_reverse.json");
     fs.writeFileSync(mappingPath, JSON.stringify(4440001));
     expect(jidToE164("789@hosted.lid", { authDir })).toBe("+4440001");
@@ -111,8 +111,8 @@ describe("jidToE164", () => {
   });
 
   it("falls back through lidMappingDirs in order", () => {
-    const first = fs.mkdtempSync(path.join(os.tmpdir(), "MrBeanBot-lid-a-"));
-    const second = fs.mkdtempSync(path.join(os.tmpdir(), "MrBeanBot-lid-b-"));
+    const first = fs.mkdtempSync(path.join(os.tmpdir(), "mrbeanbot-lid-a-"));
+    const second = fs.mkdtempSync(path.join(os.tmpdir(), "mrbeanbot-lid-b-"));
     const mappingPath = path.join(second, "lid-mapping-321_reverse.json");
     fs.writeFileSync(mappingPath, JSON.stringify("123321"));
     expect(jidToE164("321@lid", { lidMappingDirs: [first, second] })).toBe("+123321");
@@ -122,13 +122,45 @@ describe("jidToE164", () => {
 });
 
 describe("resolveConfigDir", () => {
-  it("prefers ~/.MrBeanBot when legacy dir is missing", async () => {
-    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-config-dir-"));
+  it("prefers ~/.mrbeanbot when legacy dir is missing", async () => {
+    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-config-dir-"));
     try {
-      const newDir = path.join(root, ".MrBeanBot");
+      const newDir = path.join(root, ".mrbeanbot");
       await fs.promises.mkdir(newDir, { recursive: true });
       const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
       expect(resolved).toBe(newDir);
+    } finally {
+      await fs.promises.rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("defaults to ~/.mrbeanbot on fresh install when no dirs exist", async () => {
+    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-config-dir-"));
+    try {
+      const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
+      expect(resolved).toBe(path.join(root, ".mrbeanbot"));
+    } finally {
+      await fs.promises.rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("falls back to ~/.moltbot when only legacy moltbot dir exists", async () => {
+    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-config-dir-"));
+    try {
+      await fs.promises.mkdir(path.join(root, ".moltbot"), { recursive: true });
+      const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
+      expect(resolved).toBe(path.join(root, ".moltbot"));
+    } finally {
+      await fs.promises.rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("falls back to ~/.clawdbot when only legacy clawdbot dir exists", async () => {
+    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-config-dir-"));
+    try {
+      await fs.promises.mkdir(path.join(root, ".clawdbot"), { recursive: true });
+      const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
+      expect(resolved).toBe(path.join(root, ".clawdbot"));
     } finally {
       await fs.promises.rm(root, { recursive: true, force: true });
     }

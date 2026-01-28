@@ -47,7 +47,7 @@ export function resolveSessionTranscriptCandidates(
   if (agentId) {
     candidates.push(resolveSessionTranscriptPath(sessionId, agentId));
   }
-  candidates.push(path.join(os.homedir(), ".MrBeanBot", "sessions", `${sessionId}.jsonl`));
+  candidates.push(path.join(os.homedir(), ".mrbeanbot", "sessions", `${sessionId}.jsonl`));
   return candidates;
 }
 

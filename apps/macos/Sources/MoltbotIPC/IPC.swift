@@ -73,7 +73,7 @@ public enum CanvasShowStatus: String, Codable, Sendable {
 }
 
 public struct CanvasShowResult: Codable, Sendable {
-    /// Session directory on disk (e.g. `~/Library/Application Support/MrBeanBot/canvas/<session>/`).
+    /// Session directory on disk (e.g. `~/Library/Application Support/mrbeanbot/canvas/<session>/`).
     public var directory: String
     /// Target as provided by the caller (may be nil/empty).
     public var target: String?
@@ -410,5 +410,5 @@ extension Request: Codable {
 // Shared transport settings
 public let controlSocketPath = FileManager()
     .homeDirectoryForCurrentUser
-    .appendingPathComponent("Library/Application Support/MrBeanBot/control.sock")
+    .appendingPathComponent("Library/Application Support/mrbeanbot/control.sock")
     .path

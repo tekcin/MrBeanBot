@@ -17,7 +17,7 @@ const discoverAuthStorage = vi.fn().mockReturnValue({});
 const discoverModels = vi.fn();
 
 vi.mock("../config/config.js", () => ({
-  CONFIG_PATH: "/tmp/MrBeanBot.json",
+  CONFIG_PATH: "/tmp/mrbeanbot.json",
   STATE_DIR: "/tmp/MrBeanBot-state",
   loadConfig,
 }));

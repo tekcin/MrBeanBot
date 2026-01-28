@@ -2,7 +2,7 @@ import Foundation
 
 enum GatewayLaunchAgentManager {
     private static let logger = Logger(subsystem: "bot.molt", category: "gateway.launchd")
-    private static let disableLaunchAgentMarker = ".MrBeanBot/disable-launchagent"
+    private static let disableLaunchAgentMarker = ".mrbeanbot/disable-launchagent"
 
     private static var disableLaunchAgentMarkerURL: URL {
         FileManager().homeDirectoryForCurrentUser

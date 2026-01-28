@@ -35,19 +35,23 @@ describe("Nix integration (U3, U5, U9)", () => {
   });
 
   describe("U5: CONFIG_PATH and STATE_DIR env var overrides", () => {
-    it("STATE_DIR defaults to ~/.MrBeanBot when env not set", async () => {
+    it("STATE_DIR defaults to ~/.mrbeanbot when env not set", async () => {
       await withEnvOverride(
-        { MRBEANBOT_STATE_DIR: undefined, MRBEANBOT_STATE_DIR: undefined },
+        {
+          MRBEANBOT_STATE_DIR: undefined,
+          MOLTBOT_STATE_DIR: undefined,
+          CLAWDBOT_STATE_DIR: undefined,
+        },
         async () => {
           const { STATE_DIR } = await import("./config.js");
-          expect(STATE_DIR).toMatch(/\.MrBeanBot$/);
+          expect(STATE_DIR).toMatch(/\.mrbeanbot$/);
         },
       );
     });
 
     it("STATE_DIR respects MRBEANBOT_STATE_DIR override", async () => {
       await withEnvOverride(
-        { MRBEANBOT_STATE_DIR: undefined, MRBEANBOT_STATE_DIR: "/custom/state/dir" },
+        { MOLTBOT_STATE_DIR: undefined, MRBEANBOT_STATE_DIR: "/custom/state/dir" },
         async () => {
           const { STATE_DIR } = await import("./config.js");
           expect(STATE_DIR).toBe(path.resolve("/custom/state/dir"));
@@ -57,7 +61,7 @@ describe("Nix integration (U3, U5, U9)", () => {
 
     it("STATE_DIR prefers MRBEANBOT_STATE_DIR over legacy override", async () => {
       await withEnvOverride(
-        { MRBEANBOT_STATE_DIR: "/custom/new", MRBEANBOT_STATE_DIR: "/custom/legacy" },
+        { MRBEANBOT_STATE_DIR: "/custom/new", MOLTBOT_STATE_DIR: "/custom/legacy" },
         async () => {
           const { STATE_DIR } = await import("./config.js");
           expect(STATE_DIR).toBe(path.resolve("/custom/new"));
@@ -65,17 +69,19 @@ describe("Nix integration (U3, U5, U9)", () => {
       );
     });
 
-    it("CONFIG_PATH defaults to ~/.MrBeanBot/MrBeanBot.json when env not set", async () => {
+    it("CONFIG_PATH defaults to ~/.mrbeanbot/mrbeanbot.json when env not set", async () => {
       await withEnvOverride(
         {
           MRBEANBOT_CONFIG_PATH: undefined,
           MRBEANBOT_STATE_DIR: undefined,
-          MRBEANBOT_CONFIG_PATH: undefined,
-          MRBEANBOT_STATE_DIR: undefined,
+          MOLTBOT_CONFIG_PATH: undefined,
+          MOLTBOT_STATE_DIR: undefined,
+          CLAWDBOT_CONFIG_PATH: undefined,
+          CLAWDBOT_STATE_DIR: undefined,
         },
         async () => {
           const { CONFIG_PATH } = await import("./config.js");
-          expect(CONFIG_PATH).toMatch(/\.MrBeanBot[\\/]MrBeanBot\.json$/);
+          expect(CONFIG_PATH).toMatch(/\.mrbeanbot[\\/]mrbeanbot\.json$/);
         },
       );
     });
@@ -83,12 +89,12 @@ describe("Nix integration (U3, U5, U9)", () => {
     it("CONFIG_PATH respects MRBEANBOT_CONFIG_PATH override", async () => {
       await withEnvOverride(
         {
-          MRBEANBOT_CONFIG_PATH: undefined,
-          MRBEANBOT_CONFIG_PATH: "/nix/store/abc/MrBeanBot.json",
+          MOLTBOT_CONFIG_PATH: undefined,
+          MRBEANBOT_CONFIG_PATH: "/nix/store/abc/mrbeanbot.json",
         },
         async () => {
           const { CONFIG_PATH } = await import("./config.js");
-          expect(CONFIG_PATH).toBe(path.resolve("/nix/store/abc/MrBeanBot.json"));
+          expect(CONFIG_PATH).toBe(path.resolve("/nix/store/abc/mrbeanbot.json"));
         },
       );
     });
@@ -96,12 +102,12 @@ describe("Nix integration (U3, U5, U9)", () => {
     it("CONFIG_PATH prefers MRBEANBOT_CONFIG_PATH over legacy override", async () => {
       await withEnvOverride(
         {
-          MRBEANBOT_CONFIG_PATH: "/nix/store/new/MrBeanBot.json",
-          MRBEANBOT_CONFIG_PATH: "/nix/store/legacy/MrBeanBot.json",
+          MRBEANBOT_CONFIG_PATH: "/nix/store/new/mrbeanbot.json",
+          MOLTBOT_CONFIG_PATH: "/nix/store/legacy/mrbeanbot.json",
         },
         async () => {
           const { CONFIG_PATH } = await import("./config.js");
-          expect(CONFIG_PATH).toBe(path.resolve("/nix/store/new/MrBeanBot.json"));
+          expect(CONFIG_PATH).toBe(path.resolve("/nix/store/new/mrbeanbot.json"));
         },
       );
     });
@@ -109,10 +115,10 @@ describe("Nix integration (U3, U5, U9)", () => {
     it("CONFIG_PATH expands ~ in MRBEANBOT_CONFIG_PATH override", async () => {
       await withTempHome(async (home) => {
         await withEnvOverride(
-          { MRBEANBOT_CONFIG_PATH: undefined, MRBEANBOT_CONFIG_PATH: "~/.MrBeanBot/custom.json" },
+          { MOLTBOT_CONFIG_PATH: undefined, MRBEANBOT_CONFIG_PATH: "~/.mrbeanbot/custom.json" },
           async () => {
             const { CONFIG_PATH } = await import("./config.js");
-            expect(CONFIG_PATH).toBe(path.join(home, ".MrBeanBot", "custom.json"));
+            expect(CONFIG_PATH).toBe(path.join(home, ".mrbeanbot", "custom.json"));
           },
         );
       });
@@ -123,12 +129,12 @@ describe("Nix integration (U3, U5, U9)", () => {
         {
           MRBEANBOT_CONFIG_PATH: undefined,
           MRBEANBOT_STATE_DIR: undefined,
-          MRBEANBOT_CONFIG_PATH: undefined,
-          MRBEANBOT_STATE_DIR: "/custom/state",
+          MOLTBOT_CONFIG_PATH: undefined,
+          MOLTBOT_STATE_DIR: "/custom/state",
         },
         async () => {
           const { CONFIG_PATH } = await import("./config.js");
-          expect(CONFIG_PATH).toBe(path.join(path.resolve("/custom/state"), "MrBeanBot.json"));
+          expect(CONFIG_PATH).toBe(path.join(path.resolve("/custom/state"), "mrbeanbot.json"));
         },
       );
     });
@@ -137,7 +143,7 @@ describe("Nix integration (U3, U5, U9)", () => {
   describe("U5b: tilde expansion for config paths", () => {
     it("expands ~ in common path-ish config fields", async () => {
       await withTempHome(async (home) => {
-        const configDir = path.join(home, ".MrBeanBot");
+        const configDir = path.join(home, ".mrbeanbot");
         await fs.mkdir(configDir, { recursive: true });
         const pluginDir = path.join(home, "plugins", "demo-plugin");
         await fs.mkdir(pluginDir, { recursive: true });
@@ -147,7 +153,7 @@ describe("Nix integration (U3, U5, U9)", () => {
           "utf-8",
         );
         await fs.writeFile(
-          path.join(pluginDir, "MrBeanBot.plugin.json"),
+          path.join(pluginDir, "mrbeanbot.plugin.json"),
           JSON.stringify(
             {
               id: "demo-plugin",
@@ -159,7 +165,7 @@ describe("Nix integration (U3, U5, U9)", () => {
           "utf-8",
         );
         await fs.writeFile(
-          path.join(configDir, "MrBeanBot.json"),
+          path.join(configDir, "mrbeanbot.json"),
           JSON.stringify(
             {
               plugins: {
@@ -173,7 +179,7 @@ describe("Nix integration (U3, U5, U9)", () => {
                   {
                     id: "main",
                     workspace: "~/ws-agent",
-                    agentDir: "~/.MrBeanBot/agents/main",
+                    agentDir: "~/.mrbeanbot/agents/main",
                     sandbox: { workspaceRoot: "~/sandbox-root" },
                   },
                 ],
@@ -182,7 +188,7 @@ describe("Nix integration (U3, U5, U9)", () => {
                 whatsapp: {
                   accounts: {
                     personal: {
-                      authDir: "~/.MrBeanBot/credentials/wa-personal",
+                      authDir: "~/.mrbeanbot/credentials/wa-personal",
                     },
                   },
                 },
@@ -202,11 +208,11 @@ describe("Nix integration (U3, U5, U9)", () => {
         expect(cfg.agents?.defaults?.workspace).toBe(path.join(home, "ws-default"));
         expect(cfg.agents?.list?.[0]?.workspace).toBe(path.join(home, "ws-agent"));
         expect(cfg.agents?.list?.[0]?.agentDir).toBe(
-          path.join(home, ".MrBeanBot", "agents", "main"),
+          path.join(home, ".mrbeanbot", "agents", "main"),
         );
         expect(cfg.agents?.list?.[0]?.sandbox?.workspaceRoot).toBe(path.join(home, "sandbox-root"));
         expect(cfg.channels?.whatsapp?.accounts?.personal?.authDir).toBe(
-          path.join(home, ".MrBeanBot", "credentials", "wa-personal"),
+          path.join(home, ".mrbeanbot", "credentials", "wa-personal"),
         );
       });
     });
@@ -238,10 +244,10 @@ describe("Nix integration (U3, U5, U9)", () => {
   describe("U9: telegram.tokenFile schema validation", () => {
     it("accepts config with only botToken", async () => {
       await withTempHome(async (home) => {
-        const configDir = path.join(home, ".MrBeanBot");
+        const configDir = path.join(home, ".mrbeanbot");
         await fs.mkdir(configDir, { recursive: true });
         await fs.writeFile(
-          path.join(configDir, "MrBeanBot.json"),
+          path.join(configDir, "mrbeanbot.json"),
           JSON.stringify({
             channels: { telegram: { botToken: "123:ABC" } },
           }),
@@ -258,10 +264,10 @@ describe("Nix integration (U3, U5, U9)", () => {
 
     it("accepts config with only tokenFile", async () => {
       await withTempHome(async (home) => {
-        const configDir = path.join(home, ".MrBeanBot");
+        const configDir = path.join(home, ".mrbeanbot");
         await fs.mkdir(configDir, { recursive: true });
         await fs.writeFile(
-          path.join(configDir, "MrBeanBot.json"),
+          path.join(configDir, "mrbeanbot.json"),
           JSON.stringify({
             channels: { telegram: { tokenFile: "/run/agenix/telegram-token" } },
           }),
@@ -278,10 +284,10 @@ describe("Nix integration (U3, U5, U9)", () => {
 
     it("accepts config with both botToken and tokenFile", async () => {
       await withTempHome(async (home) => {
-        const configDir = path.join(home, ".MrBeanBot");
+        const configDir = path.join(home, ".mrbeanbot");
         await fs.mkdir(configDir, { recursive: true });
         await fs.writeFile(
-          path.join(configDir, "MrBeanBot.json"),
+          path.join(configDir, "mrbeanbot.json"),
           JSON.stringify({
             channels: {
               telegram: {

@@ -40,21 +40,21 @@ describe("resolveTaskScriptPath", () => {
   it("uses default path when MRBEANBOT_PROFILE is default", () => {
     const env = { USERPROFILE: "C:\\Users\\test", MRBEANBOT_PROFILE: "default" };
     expect(resolveTaskScriptPath(env)).toBe(
-      path.join("C:\\Users\\test", ".MrBeanBot", "gateway.cmd"),
+      path.join("C:\\Users\\test", ".mrbeanbot", "gateway.cmd"),
     );
   });
 
   it("uses default path when MRBEANBOT_PROFILE is unset", () => {
     const env = { USERPROFILE: "C:\\Users\\test" };
     expect(resolveTaskScriptPath(env)).toBe(
-      path.join("C:\\Users\\test", ".MrBeanBot", "gateway.cmd"),
+      path.join("C:\\Users\\test", ".mrbeanbot", "gateway.cmd"),
     );
   });
 
   it("uses profile-specific path when MRBEANBOT_PROFILE is set to a custom value", () => {
     const env = { USERPROFILE: "C:\\Users\\test", MRBEANBOT_PROFILE: "jbphoenix" };
     expect(resolveTaskScriptPath(env)).toBe(
-      path.join("C:\\Users\\test", ".MrBeanBot-jbphoenix", "gateway.cmd"),
+      path.join("C:\\Users\\test", ".mrbeanbot-jbphoenix", "gateway.cmd"),
     );
   });
 
@@ -70,27 +70,27 @@ describe("resolveTaskScriptPath", () => {
   it("handles case-insensitive 'Default' profile", () => {
     const env = { USERPROFILE: "C:\\Users\\test", MRBEANBOT_PROFILE: "Default" };
     expect(resolveTaskScriptPath(env)).toBe(
-      path.join("C:\\Users\\test", ".MrBeanBot", "gateway.cmd"),
+      path.join("C:\\Users\\test", ".mrbeanbot", "gateway.cmd"),
     );
   });
 
   it("handles case-insensitive 'DEFAULT' profile", () => {
     const env = { USERPROFILE: "C:\\Users\\test", MRBEANBOT_PROFILE: "DEFAULT" };
     expect(resolveTaskScriptPath(env)).toBe(
-      path.join("C:\\Users\\test", ".MrBeanBot", "gateway.cmd"),
+      path.join("C:\\Users\\test", ".mrbeanbot", "gateway.cmd"),
     );
   });
 
   it("trims whitespace from MRBEANBOT_PROFILE", () => {
     const env = { USERPROFILE: "C:\\Users\\test", MRBEANBOT_PROFILE: "  myprofile  " };
     expect(resolveTaskScriptPath(env)).toBe(
-      path.join("C:\\Users\\test", ".MrBeanBot-myprofile", "gateway.cmd"),
+      path.join("C:\\Users\\test", ".mrbeanbot-myprofile", "gateway.cmd"),
     );
   });
 
   it("falls back to HOME when USERPROFILE is not set", () => {
     const env = { HOME: "/home/test", MRBEANBOT_PROFILE: "default" };
-    expect(resolveTaskScriptPath(env)).toBe(path.join("/home/test", ".MrBeanBot", "gateway.cmd"));
+    expect(resolveTaskScriptPath(env)).toBe(path.join("/home/test", ".mrbeanbot", "gateway.cmd"));
   });
 });
 
@@ -98,7 +98,7 @@ describe("readScheduledTaskCommand", () => {
   it("parses basic command script", async () => {
     const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-schtasks-test-"));
     try {
-      const scriptPath = path.join(tmpDir, ".MrBeanBot", "gateway.cmd");
+      const scriptPath = path.join(tmpDir, ".mrbeanbot", "gateway.cmd");
       await fs.mkdir(path.dirname(scriptPath), { recursive: true });
       await fs.writeFile(
         scriptPath,
@@ -119,7 +119,7 @@ describe("readScheduledTaskCommand", () => {
   it("parses script with working directory", async () => {
     const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-schtasks-test-"));
     try {
-      const scriptPath = path.join(tmpDir, ".MrBeanBot", "gateway.cmd");
+      const scriptPath = path.join(tmpDir, ".mrbeanbot", "gateway.cmd");
       await fs.mkdir(path.dirname(scriptPath), { recursive: true });
       await fs.writeFile(
         scriptPath,
@@ -141,7 +141,7 @@ describe("readScheduledTaskCommand", () => {
   it("parses script with environment variables", async () => {
     const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-schtasks-test-"));
     try {
-      const scriptPath = path.join(tmpDir, ".MrBeanBot", "gateway.cmd");
+      const scriptPath = path.join(tmpDir, ".mrbeanbot", "gateway.cmd");
       await fs.mkdir(path.dirname(scriptPath), { recursive: true });
       await fs.writeFile(
         scriptPath,
@@ -166,7 +166,7 @@ describe("readScheduledTaskCommand", () => {
   it("parses script with quoted arguments containing spaces", async () => {
     const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-schtasks-test-"));
     try {
-      const scriptPath = path.join(tmpDir, ".MrBeanBot", "gateway.cmd");
+      const scriptPath = path.join(tmpDir, ".mrbeanbot", "gateway.cmd");
       await fs.mkdir(path.dirname(scriptPath), { recursive: true });
       // Use forward slashes which work in Windows cmd and avoid escape parsing issues
       await fs.writeFile(
@@ -199,7 +199,7 @@ describe("readScheduledTaskCommand", () => {
   it("returns null when script has no command", async () => {
     const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-schtasks-test-"));
     try {
-      const scriptPath = path.join(tmpDir, ".MrBeanBot", "gateway.cmd");
+      const scriptPath = path.join(tmpDir, ".mrbeanbot", "gateway.cmd");
       await fs.mkdir(path.dirname(scriptPath), { recursive: true });
       await fs.writeFile(
         scriptPath,
@@ -218,7 +218,7 @@ describe("readScheduledTaskCommand", () => {
   it("parses full script with all components", async () => {
     const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-schtasks-test-"));
     try {
-      const scriptPath = path.join(tmpDir, ".MrBeanBot", "gateway.cmd");
+      const scriptPath = path.join(tmpDir, ".mrbeanbot", "gateway.cmd");
       await fs.mkdir(path.dirname(scriptPath), { recursive: true });
       await fs.writeFile(
         scriptPath,

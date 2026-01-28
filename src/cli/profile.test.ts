@@ -55,10 +55,10 @@ describe("applyCliProfileEnv", () => {
       env,
       homedir: () => "/home/peter",
     });
-    const expectedStateDir = path.join("/home/peter", ".MrBeanBot-dev");
+    const expectedStateDir = path.join("/home/peter", ".mrbeanbot-dev");
     expect(env.MRBEANBOT_PROFILE).toBe("dev");
     expect(env.MRBEANBOT_STATE_DIR).toBe(expectedStateDir);
-    expect(env.MRBEANBOT_CONFIG_PATH).toBe(path.join(expectedStateDir, "MrBeanBot.json"));
+    expect(env.MRBEANBOT_CONFIG_PATH).toBe(path.join(expectedStateDir, "mrbeanbot.json"));
     expect(env.MRBEANBOT_GATEWAY_PORT).toBe("19001");
   });
 
@@ -74,66 +74,66 @@ describe("applyCliProfileEnv", () => {
     });
     expect(env.MRBEANBOT_STATE_DIR).toBe("/custom");
     expect(env.MRBEANBOT_GATEWAY_PORT).toBe("19099");
-    expect(env.MRBEANBOT_CONFIG_PATH).toBe(path.join("/custom", "MrBeanBot.json"));
+    expect(env.MRBEANBOT_CONFIG_PATH).toBe(path.join("/custom", "mrbeanbot.json"));
   });
 });
 
 describe("formatCliCommand", () => {
   it("returns command unchanged when no profile is set", () => {
-    expect(formatCliCommand("MrBeanBot doctor --fix", {})).toBe("MrBeanBot doctor --fix");
+    expect(formatCliCommand("MrBeanBot doctor --fix", {})).toBe("mrbeanbot doctor --fix");
   });
 
   it("returns command unchanged when profile is default", () => {
     expect(formatCliCommand("MrBeanBot doctor --fix", { MRBEANBOT_PROFILE: "default" })).toBe(
-      "MrBeanBot doctor --fix",
+      "mrbeanbot doctor --fix",
     );
   });
 
   it("returns command unchanged when profile is Default (case-insensitive)", () => {
     expect(formatCliCommand("MrBeanBot doctor --fix", { MRBEANBOT_PROFILE: "Default" })).toBe(
-      "MrBeanBot doctor --fix",
+      "mrbeanbot doctor --fix",
     );
   });
 
   it("returns command unchanged when profile is invalid", () => {
     expect(formatCliCommand("MrBeanBot doctor --fix", { MRBEANBOT_PROFILE: "bad profile" })).toBe(
-      "MrBeanBot doctor --fix",
+      "mrbeanbot doctor --fix",
     );
   });
 
   it("returns command unchanged when --profile is already present", () => {
     expect(
       formatCliCommand("MrBeanBot --profile work doctor --fix", { MRBEANBOT_PROFILE: "work" }),
-    ).toBe("MrBeanBot --profile work doctor --fix");
+    ).toBe("mrbeanbot --profile work doctor --fix");
   });
 
   it("returns command unchanged when --dev is already present", () => {
     expect(formatCliCommand("MrBeanBot --dev doctor", { MRBEANBOT_PROFILE: "dev" })).toBe(
-      "MrBeanBot --dev doctor",
+      "mrbeanbot --dev doctor",
     );
   });
 
   it("inserts --profile flag when profile is set", () => {
     expect(formatCliCommand("MrBeanBot doctor --fix", { MRBEANBOT_PROFILE: "work" })).toBe(
-      "MrBeanBot --profile work doctor --fix",
+      "mrbeanbot --profile work doctor --fix",
     );
   });
 
   it("trims whitespace from profile", () => {
     expect(formatCliCommand("MrBeanBot doctor --fix", { MRBEANBOT_PROFILE: "  jbclawd  " })).toBe(
-      "MrBeanBot --profile jbclawd doctor --fix",
+      "mrbeanbot --profile jbclawd doctor --fix",
     );
   });
 
   it("handles command with no args after MrBeanBot", () => {
     expect(formatCliCommand("MrBeanBot", { MRBEANBOT_PROFILE: "test" })).toBe(
-      "MrBeanBot --profile test",
+      "mrbeanbot --profile test",
     );
   });
 
   it("handles pnpm wrapper", () => {
     expect(formatCliCommand("pnpm MrBeanBot doctor", { MRBEANBOT_PROFILE: "work" })).toBe(
-      "pnpm MrBeanBot --profile work doctor",
+      "pnpm mrbeanbot --profile work doctor",
     );
   });
 });

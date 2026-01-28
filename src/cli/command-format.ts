@@ -2,7 +2,7 @@ import { normalizeProfileName } from "./profile-utils.js";
 import { replaceCliName, resolveCliName } from "./cli-name.js";
 
 const CLI_PREFIX_RE =
-  /^(?:pnpm|npm|bunx|npx)\s+(?:MrBeanBot|MrBeanBot)\b|^(?:MrBeanBot|MrBeanBot)\b/;
+  /^(?:pnpm|npm|bunx|npx)\s+(?:mrbeanbot|MrBeanBot|MrBeanBot)\b|^(?:mrbeanbot|MrBeanBot|MrBeanBot)\b/;
 const PROFILE_FLAG_RE = /(?:^|\s)--profile(?:\s|=|$)/;
 const DEV_FLAG_RE = /(?:^|\s)--dev(?:\s|$)/;
 

@@ -248,7 +248,7 @@ describe("resolveLaunchAgentPlistPath", () => {
   it("uses profile-specific label when MRBEANBOT_PROFILE is set to a custom value", () => {
     const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "jbphoenix" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
-      "/Users/test/Library/LaunchAgents/bot.molt.jbphoenix.plist",
+      "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.jbphoenix.plist",
     );
   });
 
@@ -280,7 +280,7 @@ describe("resolveLaunchAgentPlistPath", () => {
       MRBEANBOT_LAUNCHD_LABEL: "   ",
     };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
-      "/Users/test/Library/LaunchAgents/bot.molt.myprofile.plist",
+      "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.myprofile.plist",
     );
   });
 
@@ -301,7 +301,7 @@ describe("resolveLaunchAgentPlistPath", () => {
   it("trims whitespace from MRBEANBOT_PROFILE", () => {
     const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "  myprofile  " };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
-      "/Users/test/Library/LaunchAgents/bot.molt.myprofile.plist",
+      "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.myprofile.plist",
     );
   });
 });

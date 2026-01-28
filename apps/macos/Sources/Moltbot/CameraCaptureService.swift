@@ -168,7 +168,7 @@ actor CameraCaptureService {
         await Self.warmUpCaptureSession()
 
         let tmpMovURL = FileManager().temporaryDirectory
-            .appendingPathComponent("MrBeanBot-camera-\(UUID().uuidString).mov")
+            .appendingPathComponent("mrbeanbot-camera-\(UUID().uuidString).mov")
         defer { try? FileManager().removeItem(at: tmpMovURL) }
 
         let outputURL: URL = {
@@ -176,7 +176,7 @@ actor CameraCaptureService {
                 return URL(fileURLWithPath: outPath)
             }
             return FileManager().temporaryDirectory
-                .appendingPathComponent("MrBeanBot-camera-\(UUID().uuidString).mp4")
+                .appendingPathComponent("mrbeanbot-camera-\(UUID().uuidString).mp4")
         }()
 
         // Ensure we don't fail exporting due to an existing file.

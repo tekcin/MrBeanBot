@@ -1,4 +1,4 @@
-import { resolveMrBeanBotPackageRoot } from "../../infra/MrBeanBot-root.js";
+import { resolveMrBeanBotPackageRoot } from "../../infra/moltbot-root.js";
 import { scheduleGatewaySigusr1Restart } from "../../infra/restart.js";
 import {
   formatDoctorNonInteractiveHint,

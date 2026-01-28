@@ -274,7 +274,7 @@ struct DebugSettings: View {
                         Toggle("Write rolling diagnostics log (JSONL)", isOn: self.$diagnosticsFileLogEnabled)
                             .toggleStyle(.checkbox)
                             .help(
-                                "Writes a rotating, local-only log under ~/Library/Logs/MrBeanBot/. " +
+                                "Writes a rotating, local-only log under ~/Library/Logs/mrbeanbot/. " +
                                     "Enable only while actively debugging.")
 
                         HStack(spacing: 8) {
@@ -423,7 +423,7 @@ struct DebugSettings: View {
                                     .font(.footnote)
                                     .foregroundStyle(.secondary)
                             } else {
-                                Text("Used by the CLI session loader; stored in ~/.MrBeanBot/MrBeanBot.json.")
+                                Text("Used by the CLI session loader; stored in ~/.mrbeanbot/mrbeanbot.json.")
                                     .font(.footnote)
                                     .foregroundStyle(.secondary)
                             }
@@ -831,8 +831,8 @@ struct DebugSettings: View {
 
     private func configURL() -> URL {
         FileManager().homeDirectoryForCurrentUser
-            .appendingPathComponent(".MrBeanBot")
-            .appendingPathComponent("MrBeanBot.json")
+            .appendingPathComponent(".mrbeanbot")
+            .appendingPathComponent("mrbeanbot.json")
     }
 }
 

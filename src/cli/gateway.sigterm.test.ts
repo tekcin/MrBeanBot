@@ -77,7 +77,7 @@ describe("gateway SIGTERM", () => {
   });
 
   it("exits 0 on SIGTERM", { timeout: 180_000 }, async () => {
-    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "MrBeanBot-gateway-test-"));
+    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "mrbeanbot-gateway-test-"));
     const out: string[] = [];
     const err: string[] = [];
 

@@ -11,10 +11,10 @@ import {
 
 const ROOT_DIR = path.parse(process.cwd()).root;
 const CONFIG_DIR = path.join(ROOT_DIR, "config");
-const ETC_MRBEANBOT_DIR = path.join(ROOT_DIR, "etc", "MrBeanBot");
+const ETC_MRBEANBOT_DIR = path.join(ROOT_DIR, "etc", "mrbeanbot");
 const SHARED_DIR = path.join(ROOT_DIR, "shared");
 
-const DEFAULT_BASE_PATH = path.join(CONFIG_DIR, "MrBeanBot.json");
+const DEFAULT_BASE_PATH = path.join(CONFIG_DIR, "mrbeanbot.json");
 
 function configPath(...parts: string[]) {
   return path.join(CONFIG_DIR, ...parts);
@@ -283,7 +283,7 @@ describe("resolveConfigIncludes", () => {
   it("resolves parent directory references", () => {
     const files = { [sharedPath("common.json")]: { shared: true } };
     const obj = { $include: "../../shared/common.json" };
-    expect(resolve(obj, files, configPath("sub", "MrBeanBot.json"))).toEqual({
+    expect(resolve(obj, files, configPath("sub", "mrbeanbot.json"))).toEqual({
       shared: true,
     });
   });

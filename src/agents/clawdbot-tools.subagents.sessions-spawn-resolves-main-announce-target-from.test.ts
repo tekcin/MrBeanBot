@@ -23,7 +23,7 @@ vi.mock("../config/config.js", async (importOriginal) => {
 
 import { emitAgentEvent } from "../infra/agent-events.js";
 import "./test-helpers/fast-core-tools.js";
-import { createMrBeanBotTools } from "./MrBeanBot-tools.js";
+import { createMrBeanBotTools } from "./moltbot-tools.js";
 import { resetSubagentRegistryForTests } from "./subagent-registry.js";
 
 describe("MrBeanBot-tools: subagents", () => {

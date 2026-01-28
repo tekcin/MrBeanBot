@@ -49,7 +49,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("sets Transcript and replaces Body when audio transcription succeeds", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const audioPath = path.join(dir, "note.ogg");
     await fs.writeFile(audioPath, "hello");
 
@@ -92,7 +92,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("keeps caption for command parsing when audio has user text", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const audioPath = path.join(dir, "note.ogg");
     await fs.writeFile(audioPath, "hello");
 
@@ -174,7 +174,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("skips audio transcription when attachment exceeds maxBytes", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const audioPath = path.join(dir, "large.wav");
     await fs.writeFile(audioPath, "0123456789");
 
@@ -209,7 +209,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("falls back to CLI model when provider fails", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const audioPath = path.join(dir, "note.ogg");
     await fs.writeFile(audioPath, "hello");
 
@@ -262,7 +262,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("uses CLI image understanding and preserves caption for commands", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const imagePath = path.join(dir, "photo.jpg");
     await fs.writeFile(imagePath, "image-bytes");
 
@@ -309,7 +309,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("uses shared media models list when capability config is missing", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const imagePath = path.join(dir, "shared.jpg");
     await fs.writeFile(imagePath, "image-bytes");
 
@@ -350,7 +350,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("uses active model when enabled and models are missing", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const audioPath = path.join(dir, "fallback.ogg");
     await fs.writeFile(audioPath, "hello");
 
@@ -387,7 +387,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("handles multiple audio attachments when attachment mode is all", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const audioPathA = path.join(dir, "note-a.ogg");
     const audioPathB = path.join(dir, "note-b.ogg");
     await fs.writeFile(audioPathA, "hello");
@@ -430,7 +430,7 @@ describe("applyMediaUnderstanding", () => {
 
   it("orders mixed media outputs as image, audio, video", async () => {
     const { applyMediaUnderstanding } = await loadApply();
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-media-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-media-"));
     const imagePath = path.join(dir, "photo.jpg");
     const audioPath = path.join(dir, "note.ogg");
     const videoPath = path.join(dir, "clip.mp4");

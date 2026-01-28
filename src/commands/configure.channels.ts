@@ -24,7 +24,7 @@ export async function removeChannelConfigWizard(
     if (configured.length === 0) {
       note(
         [
-          "No channel config found in MrBeanBot.json.",
+          "No channel config found in mrbeanbot.json.",
           `Tip: \`${formatCliCommand("MrBeanBot channels status")}\` shows what is configured and enabled.`,
         ].join("\n"),
         "Remove channel",

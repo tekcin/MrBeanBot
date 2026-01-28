@@ -7,17 +7,17 @@ import { resolveGatewayStateDir } from "./paths.js";
 describe("resolveGatewayStateDir", () => {
   it("uses the default state dir when no overrides are set", () => {
     const env = { HOME: "/Users/test" };
-    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".MrBeanBot"));
+    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".mrbeanbot"));
   });
 
   it("appends the profile suffix when set", () => {
     const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "rescue" };
-    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".MrBeanBot-rescue"));
+    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".mrbeanbot-rescue"));
   });
 
   it("treats default profiles as the base state dir", () => {
     const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "Default" };
-    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".MrBeanBot"));
+    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".mrbeanbot"));
   });
 
   it("uses MRBEANBOT_STATE_DIR when provided", () => {

@@ -153,7 +153,7 @@ extension ConfigSettings {
             .font(.title3.weight(.semibold))
         Text(self.isNixMode
             ? "This tab is read-only in Nix mode. Edit config via Nix and rebuild."
-            : "Edit ~/.MrBeanBot/MrBeanBot.json using the schema-driven form.")
+            : "Edit ~/.mrbeanbot/mrbeanbot.json using the schema-driven form.")
             .font(.callout)
             .foregroundStyle(.secondary)
     }

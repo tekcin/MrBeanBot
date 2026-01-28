@@ -235,7 +235,7 @@ enum MrBeanBotOAuthStore {
         }
 
         return FileManager().homeDirectoryForCurrentUser
-            .appendingPathComponent(".MrBeanBot", isDirectory: true)
+            .appendingPathComponent(".mrbeanbot", isDirectory: true)
             .appendingPathComponent("credentials", isDirectory: true)
     }
 

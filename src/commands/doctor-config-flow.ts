@@ -121,7 +121,11 @@ function noteOpencodeProviderOverrides(cfg: MrBeanBotConfig) {
 }
 
 function hasExplicitConfigPath(env: NodeJS.ProcessEnv): boolean {
-  return Boolean(env.MRBEANBOT_CONFIG_PATH?.trim() || env.MRBEANBOT_CONFIG_PATH?.trim());
+  return Boolean(
+    env.MRBEANBOT_CONFIG_PATH?.trim() ||
+    env.MOLTBOT_CONFIG_PATH?.trim() ||
+    env.CLAWDBOT_CONFIG_PATH?.trim(),
+  );
 }
 
 function moveLegacyConfigFile(legacyPath: string, canonicalPath: string) {
@@ -155,8 +159,8 @@ export async function loadAndMaybeMigrateDoctorConfig(params: {
   let snapshot = await readConfigFileSnapshot();
   if (!hasExplicitConfigPath(process.env) && snapshot.exists) {
     const basename = path.basename(snapshot.path);
-    if (basename === "MrBeanBot.json") {
-      const canonicalPath = path.join(path.dirname(snapshot.path), "MrBeanBot.json");
+    if (basename !== "mrbeanbot.json") {
+      const canonicalPath = path.join(path.dirname(snapshot.path), "mrbeanbot.json");
       if (!fs.existsSync(canonicalPath)) {
         moveLegacyConfigFile(snapshot.path, canonicalPath);
         note(`- Config: ${snapshot.path} → ${canonicalPath}`, "Doctor changes");

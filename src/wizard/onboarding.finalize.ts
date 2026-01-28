@@ -305,7 +305,7 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
     await prompter.note(
       [
         "Gateway token: shared auth for the Gateway + Control UI.",
-        "Stored in: ~/.MrBeanBot/MrBeanBot.json (gateway.auth.token) or MRBEANBOT_GATEWAY_TOKEN.",
+        "Stored in: ~/.mrbeanbot/mrbeanbot.json (gateway.auth.token) or MRBEANBOT_GATEWAY_TOKEN.",
         "Web UI stores a copy in this browser's localStorage (MrBeanBot.control.settings.v1).",
         `Get the tokenized link anytime: ${formatCliCommand("MrBeanBot dashboard --no-open")}`,
       ].join("\n"),

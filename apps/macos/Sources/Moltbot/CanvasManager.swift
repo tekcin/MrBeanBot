@@ -26,7 +26,7 @@ final class CanvasManager {
 
     private nonisolated static let canvasRoot: URL = {
         let base = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        return base.appendingPathComponent("MrBeanBot/canvas", isDirectory: true)
+        return base.appendingPathComponent("mrbeanbot/canvas", isDirectory: true)
     }()
 
     func show(sessionKey: String, path: String? = nil, placement: CanvasPlacement? = nil) throws -> String {

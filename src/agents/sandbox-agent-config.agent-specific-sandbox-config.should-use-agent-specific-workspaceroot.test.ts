@@ -68,7 +68,7 @@ describe("Agent-specific sandbox config", () => {
           sandbox: {
             mode: "all",
             scope: "agent",
-            workspaceRoot: "~/.MrBeanBot/sandboxes", // Global default
+            workspaceRoot: "~/.mrbeanbot/sandboxes", // Global default
           },
         },
         list: [

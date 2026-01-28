@@ -136,7 +136,7 @@ export function registerDnsCli(program: Command) {
         }).trimEnd(),
       );
       defaultRuntime.log("");
-      defaultRuntime.log(theme.heading("Recommended ~/.MrBeanBot/MrBeanBot.json:"));
+      defaultRuntime.log(theme.heading("Recommended ~/.mrbeanbot/mrbeanbot.json:"));
       defaultRuntime.log(
         JSON.stringify(
           {
@@ -235,7 +235,7 @@ export function registerDnsCli(program: Command) {
         defaultRuntime.log("");
         defaultRuntime.log(
           theme.muted(
-            "Note: enable discovery.wideArea.enabled in ~/.MrBeanBot/MrBeanBot.json on the gateway and restart the gateway so it writes the DNS-SD zone.",
+            "Note: enable discovery.wideArea.enabled in ~/.mrbeanbot/mrbeanbot.json on the gateway and restart the gateway so it writes the DNS-SD zone.",
           ),
         );
       }

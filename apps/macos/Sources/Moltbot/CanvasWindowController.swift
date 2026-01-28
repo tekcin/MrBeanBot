@@ -336,7 +336,7 @@ final class CanvasWindowController: NSWindowController, WKNavigationDelegate, NS
             path = outPath
         } else {
             let ts = Int(Date().timeIntervalSince1970)
-            path = "/tmp/MrBeanBot-canvas-\(CanvasWindowController.sanitizeSessionKey(self.sessionKey))-\(ts).png"
+            path = "/tmp/mrbeanbot-canvas-\(CanvasWindowController.sanitizeSessionKey(self.sessionKey))-\(ts).png"
         }
 
         try png.write(to: URL(fileURLWithPath: path), options: [.atomic])

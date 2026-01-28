@@ -247,13 +247,13 @@ enum GatewayEnvironment {
         let bun = CommandResolver.findExecutable(named: "bun")
         let (label, cmd): (String, [String]) =
             if let npm {
-                ("npm", [npm, "install", "-g", "MrBeanBot@\(target)"])
+                ("npm", [npm, "install", "-g", "mrbeanbot@\(target)"])
             } else if let pnpm {
-                ("pnpm", [pnpm, "add", "-g", "MrBeanBot@\(target)"])
+                ("pnpm", [pnpm, "add", "-g", "mrbeanbot@\(target)"])
             } else if let bun {
-                ("bun", [bun, "add", "-g", "MrBeanBot@\(target)"])
+                ("bun", [bun, "add", "-g", "mrbeanbot@\(target)"])
             } else {
-                ("npm", ["npm", "install", "-g", "MrBeanBot@\(target)"])
+                ("npm", ["npm", "install", "-g", "mrbeanbot@\(target)"])
             }
 
         statusHandler("Installing MrBeanBot@\(target) via \(label)…")

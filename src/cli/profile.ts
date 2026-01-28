@@ -82,7 +82,7 @@ export function parseCliProfileArgs(argv: string[]): CliProfileParseResult {
 
 function resolveProfileStateDir(profile: string, homedir: () => string): string {
   const suffix = profile.toLowerCase() === "default" ? "" : `-${profile}`;
-  return path.join(homedir(), `.MrBeanBot${suffix}`);
+  return path.join(homedir(), `.mrbeanbot${suffix}`);
 }
 
 export function applyCliProfileEnv(params: {
@@ -102,7 +102,7 @@ export function applyCliProfileEnv(params: {
   if (!env.MRBEANBOT_STATE_DIR?.trim()) env.MRBEANBOT_STATE_DIR = stateDir;
 
   if (!env.MRBEANBOT_CONFIG_PATH?.trim()) {
-    env.MRBEANBOT_CONFIG_PATH = path.join(stateDir, "MrBeanBot.json");
+    env.MRBEANBOT_CONFIG_PATH = path.join(stateDir, "mrbeanbot.json");
   }
 
   if (profile === "dev" && !env.MRBEANBOT_GATEWAY_PORT?.trim()) {

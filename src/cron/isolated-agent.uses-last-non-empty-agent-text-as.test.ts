@@ -22,11 +22,11 @@ import { runEmbeddedPiAgent } from "../agents/pi-embedded.js";
 import { runCronIsolatedAgentTurn } from "./isolated-agent.js";
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "MrBeanBot-cron-" });
+  return withTempHomeBase(fn, { prefix: "mrbeanbot-cron-" });
 }
 
 async function writeSessionStore(home: string) {
-  const dir = path.join(home, ".MrBeanBot", "sessions");
+  const dir = path.join(home, ".mrbeanbot", "sessions");
   await fs.mkdir(dir, { recursive: true });
   const storePath = path.join(dir, "sessions.json");
   await fs.writeFile(
@@ -182,7 +182,7 @@ describe("runCronIsolatedAgentTurn", () => {
 
       const cfg = makeCfg(
         home,
-        path.join(home, ".MrBeanBot", "agents", "{agentId}", "sessions", "sessions.json"),
+        path.join(home, ".mrbeanbot", "agents", "{agentId}", "sessions", "sessions.json"),
         {
           agents: {
             defaults: { workspace: path.join(home, "default-workspace") },

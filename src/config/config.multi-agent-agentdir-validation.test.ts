@@ -26,16 +26,16 @@ describe("multi-agent agentDir validation", () => {
 
   it("throws on shared agentDir during loadConfig()", async () => {
     await withTempHome(async (home) => {
-      const configDir = path.join(home, ".MrBeanBot");
+      const configDir = path.join(home, ".mrbeanbot");
       await fs.mkdir(configDir, { recursive: true });
       await fs.writeFile(
-        path.join(configDir, "MrBeanBot.json"),
+        path.join(configDir, "mrbeanbot.json"),
         JSON.stringify(
           {
             agents: {
               list: [
-                { id: "a", agentDir: "~/.MrBeanBot/agents/shared/agent" },
-                { id: "b", agentDir: "~/.MrBeanBot/agents/shared/agent" },
+                { id: "a", agentDir: "~/.mrbeanbot/agents/shared/agent" },
+                { id: "b", agentDir: "~/.mrbeanbot/agents/shared/agent" },
               ],
             },
             bindings: [{ agentId: "a", match: { channel: "telegram" } }],

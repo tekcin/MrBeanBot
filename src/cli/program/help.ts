@@ -37,11 +37,11 @@ export function configureProgramHelp(program: Command, ctx: ProgramContext) {
     .version(ctx.programVersion)
     .option(
       "--dev",
-      "Dev profile: isolate state under ~/.MrBeanBot-dev, default gateway port 19001, and shift derived ports (browser/canvas)",
+      "Dev profile: isolate state under ~/.mrbeanbot-dev, default gateway port 19001, and shift derived ports (browser/canvas)",
     )
     .option(
       "--profile <name>",
-      "Use a named profile (isolates MRBEANBOT_STATE_DIR/MRBEANBOT_CONFIG_PATH under ~/.MrBeanBot-<name>)",
+      "Use a named profile (isolates MRBEANBOT_STATE_DIR/MRBEANBOT_CONFIG_PATH under ~/.mrbeanbot-<name>)",
     );
 
   program.option("--no-color", "Disable ANSI colors", false);

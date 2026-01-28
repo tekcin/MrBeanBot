@@ -111,7 +111,7 @@ export function installTestEnv(): { cleanup: () => void; tempHome: string } {
 
   // Windows: prefer the legacy default state dir so auth/profile tests match real paths.
   if (process.platform === "win32") {
-    process.env.MRBEANBOT_STATE_DIR = path.join(tempHome, ".MrBeanBot");
+    process.env.MRBEANBOT_STATE_DIR = path.join(tempHome, ".mrbeanbot");
   }
 
   process.env.XDG_CONFIG_HOME = path.join(tempHome, ".config");

@@ -376,7 +376,7 @@ extension OnboardingView {
 
                 Text(
                     "This lets MrBeanBot use Claude immediately. Credentials are stored at " +
-                        "`~/.MrBeanBot/credentials/oauth.json` (owner-only).")
+                        "`~/.mrbeanbot/credentials/oauth.json` (owner-only).")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -651,7 +651,7 @@ extension OnboardingView {
                                     let saved = await self.saveAgentWorkspace(AgentWorkspace.displayPath(for: url))
                                     if saved {
                                         self.workspaceStatus =
-                                            "Saved to ~/.MrBeanBot/MrBeanBot.json (agents.defaults.workspace)"
+                                            "Saved to ~/.mrbeanbot/mrbeanbot.json (agents.defaults.workspace)"
                                     }
                                 }
                             }
@@ -720,7 +720,7 @@ extension OnboardingView {
                         title: "Remote gateway checklist",
                         subtitle: """
                         On your gateway host: install/update the `MrBeanBot` package and make sure credentials exist
-                        (typically `~/.MrBeanBot/credentials/oauth.json`). Then connect again if needed.
+                        (typically `~/.mrbeanbot/credentials/oauth.json`). Then connect again if needed.
                         """,
                         systemImage: "network")
                     Divider()

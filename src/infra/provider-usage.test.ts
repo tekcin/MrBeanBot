@@ -253,7 +253,7 @@ describe("provider usage loading", () => {
     await withTempHome(
       async (tempHome) => {
         const agentDir = path.join(
-          process.env.MRBEANBOT_STATE_DIR ?? path.join(tempHome, ".MrBeanBot"),
+          process.env.MRBEANBOT_STATE_DIR ?? path.join(tempHome, ".mrbeanbot"),
           "agents",
           "main",
           "agent",
@@ -328,7 +328,7 @@ describe("provider usage loading", () => {
       },
       {
         env: {
-          MRBEANBOT_STATE_DIR: (home) => path.join(home, ".MrBeanBot"),
+          MRBEANBOT_STATE_DIR: (home) => path.join(home, ".mrbeanbot"),
         },
         prefix: "MrBeanBot-provider-usage-",
       },

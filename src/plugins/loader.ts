@@ -209,8 +209,8 @@ export function loadMrBeanBotPlugins(options: PluginLoadOptions = {}): PluginReg
     ...(pluginSdkAlias
       ? {
           alias: {
-            "MrBeanBot/plugin-sdk": pluginSdkAlias,
-            "MrBeanBot/plugin-sdk": pluginSdkAlias,
+            "mrbeanbot/plugin-sdk": pluginSdkAlias,
+            "clawdbot/plugin-sdk": pluginSdkAlias,
           },
         }
       : {}),

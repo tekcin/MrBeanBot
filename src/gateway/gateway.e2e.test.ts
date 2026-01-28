@@ -56,12 +56,12 @@ describe("gateway e2e", () => {
 
       const nonceA = randomUUID();
       const nonceB = randomUUID();
-      const toolProbePath = path.join(workspaceDir, `.MrBeanBot-tool-probe.${nonceA}.txt`);
+      const toolProbePath = path.join(workspaceDir, `.mrbeanbot-tool-probe.${nonceA}.txt`);
       await fs.writeFile(toolProbePath, `nonceA=${nonceA}\nnonceB=${nonceB}\n`);
 
-      const configDir = path.join(tempHome, ".MrBeanBot");
+      const configDir = path.join(tempHome, ".mrbeanbot");
       await fs.mkdir(configDir, { recursive: true });
-      const configPath = path.join(configDir, "MrBeanBot.json");
+      const configPath = path.join(configDir, "mrbeanbot.json");
 
       const cfg = {
         agents: { defaults: { workspace: workspaceDir } },

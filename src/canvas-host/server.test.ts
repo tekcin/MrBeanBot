@@ -20,7 +20,7 @@ describe("canvas host", () => {
   });
 
   it("creates a default index.html when missing", async () => {
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-canvas-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-canvas-"));
 
     const server = await startCanvasHost({
       runtime: defaultRuntime,
@@ -44,7 +44,7 @@ describe("canvas host", () => {
   });
 
   it("skips live reload injection when disabled", async () => {
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-canvas-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-canvas-"));
     await fs.writeFile(path.join(dir, "index.html"), "<html><body>no-reload</body></html>", "utf8");
 
     const server = await startCanvasHost({
@@ -72,7 +72,7 @@ describe("canvas host", () => {
   });
 
   it("serves canvas content from the mounted base path", async () => {
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-canvas-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-canvas-"));
     await fs.writeFile(path.join(dir, "index.html"), "<html><body>v1</body></html>", "utf8");
 
     const handler = await createCanvasHostHandler({
@@ -117,7 +117,7 @@ describe("canvas host", () => {
   });
 
   it("reuses a handler without closing it twice", async () => {
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-canvas-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-canvas-"));
     await fs.writeFile(path.join(dir, "index.html"), "<html><body>v1</body></html>", "utf8");
 
     const handler = await createCanvasHostHandler({
@@ -150,7 +150,7 @@ describe("canvas host", () => {
   });
 
   it("serves HTML with injection and broadcasts reload on file changes", async () => {
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-canvas-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-canvas-"));
     const index = path.join(dir, "index.html");
     await fs.writeFile(index, "<html><body>v1</body></html>", "utf8");
 
@@ -201,7 +201,7 @@ describe("canvas host", () => {
   }, 20_000);
 
   it("serves the gateway-hosted A2UI scaffold", async () => {
-    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-canvas-"));
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-canvas-"));
 
     const server = await startCanvasHost({
       runtime: defaultRuntime,
@@ -215,7 +215,7 @@ describe("canvas host", () => {
       const res = await fetch(`http://127.0.0.1:${server.port}/__MrBeanBot__/a2ui/`);
       const html = await res.text();
       expect(res.status).toBe(200);
-      expect(html).toContain("MrBeanBot-a2ui-host");
+      expect(html).toContain("mrbeanbot-a2ui-host");
       expect(html).toContain("MrBeanBotCanvasA2UIAction");
 
       const bundleRes = await fetch(

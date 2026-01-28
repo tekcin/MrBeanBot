@@ -77,7 +77,7 @@ vi.mock("../infra/provider-usage.js", () => ({
 }));
 
 import "./test-helpers/fast-core-tools.js";
-import { createMrBeanBotTools } from "./MrBeanBot-tools.js";
+import { createMrBeanBotTools } from "./moltbot-tools.js";
 
 describe("session_status tool", () => {
   it("returns a status card for the current session", async () => {

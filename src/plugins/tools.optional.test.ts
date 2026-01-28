@@ -24,7 +24,7 @@ function writePlugin(params: { id: string; body: string }): TempPlugin {
   const file = path.join(dir, `${params.id}.js`);
   fs.writeFileSync(file, params.body, "utf-8");
   fs.writeFileSync(
-    path.join(dir, "MrBeanBot.plugin.json"),
+    path.join(dir, "mrbeanbot.plugin.json"),
     JSON.stringify(
       {
         id: params.id,

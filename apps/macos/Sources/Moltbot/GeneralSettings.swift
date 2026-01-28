@@ -659,7 +659,7 @@ extension GeneralSettings {
         let alert = NSAlert()
         alert.messageText = "Log file not found"
         alert.informativeText = """
-        Looked for MrBeanBot logs in /tmp/MrBeanBot/.
+        Looked for MrBeanBot logs in /tmp/mrbeanbot/.
         Run a health check or send a message to generate activity, then try again.
         """
         alert.alertStyle = .informational

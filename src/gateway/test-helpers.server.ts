@@ -86,7 +86,7 @@ async function setupGatewayTestHome() {
   tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-gateway-home-"));
   process.env.HOME = tempHome;
   process.env.USERPROFILE = tempHome;
-  process.env.MRBEANBOT_STATE_DIR = path.join(tempHome, ".MrBeanBot");
+  process.env.MRBEANBOT_STATE_DIR = path.join(tempHome, ".mrbeanbot");
   delete process.env.MRBEANBOT_CONFIG_PATH;
 }
 
@@ -106,7 +106,7 @@ async function resetGatewayTestState(options: { uniqueConfigRoot: boolean }) {
   applyGatewaySkipEnv();
   tempConfigRoot = options.uniqueConfigRoot
     ? await fs.mkdtemp(path.join(tempHome, "MrBeanBot-test-"))
-    : path.join(tempHome, ".MrBeanBot-test");
+    : path.join(tempHome, ".mrbeanbot-test");
   setTestConfigRoot(tempConfigRoot);
   sessionStoreSaveDelayMs.value = 0;
   testTailnetIPv4.value = undefined;

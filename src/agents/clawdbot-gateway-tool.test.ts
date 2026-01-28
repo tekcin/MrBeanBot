@@ -4,7 +4,7 @@ import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
 import "./test-helpers/fast-core-tools.js";
-import { createMrBeanBotTools } from "./MrBeanBot-tools.js";
+import { createMrBeanBotTools } from "./moltbot-tools.js";
 
 vi.mock("./tools/gateway.js", () => ({
   callGatewayTool: vi.fn(async (method: string) => {
@@ -21,7 +21,7 @@ describe("gateway tool", () => {
     const kill = vi.spyOn(process, "kill").mockImplementation(() => true);
     const previousStateDir = process.env.MRBEANBOT_STATE_DIR;
     const previousProfile = process.env.MRBEANBOT_PROFILE;
-    const stateDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-test-"));
+    const stateDir = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-test-"));
     process.env.MRBEANBOT_STATE_DIR = stateDir;
     process.env.MRBEANBOT_PROFILE = "isolated";
 
@@ -50,7 +50,7 @@ describe("gateway tool", () => {
       };
       expect(parsed.payload?.kind).toBe("restart");
       expect(parsed.payload?.doctorHint).toBe(
-        "Run: MrBeanBot --profile isolated doctor --non-interactive",
+        "Run: mrbeanbot --profile isolated doctor --non-interactive",
       );
 
       expect(kill).not.toHaveBeenCalled();

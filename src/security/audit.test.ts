@@ -126,7 +126,7 @@ describe("security audit", () => {
     const tmp = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-security-audit-win-"));
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true });
-    const configPath = path.join(stateDir, "MrBeanBot.json");
+    const configPath = path.join(stateDir, "mrbeanbot.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
 
     const user = "DESKTOP-TEST\\Tester";
@@ -163,7 +163,7 @@ describe("security audit", () => {
     const tmp = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-security-audit-win-open-"));
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true });
-    const configPath = path.join(stateDir, "MrBeanBot.json");
+    const configPath = path.join(stateDir, "mrbeanbot.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
 
     const user = "DESKTOP-TEST\\Tester";
@@ -797,8 +797,8 @@ describe("security audit", () => {
       config: cfg,
       includeFilesystem: false,
       includeChannelSecurity: false,
-      stateDir: "/Users/test/Dropbox/.MrBeanBot",
-      configPath: "/Users/test/Dropbox/.MrBeanBot/MrBeanBot.json",
+      stateDir: "/Users/test/Dropbox/.mrbeanbot",
+      configPath: "/Users/test/Dropbox/.mrbeanbot/mrbeanbot.json",
     });
 
     expect(res.findings).toEqual(
@@ -823,7 +823,7 @@ describe("security audit", () => {
       await fs.chmod(includePath, 0o644);
     }
 
-    const configPath = path.join(stateDir, "MrBeanBot.json");
+    const configPath = path.join(stateDir, "mrbeanbot.json");
     await fs.writeFile(configPath, `{ "$include": "./extra.json5" }\n`, "utf-8");
     await fs.chmod(configPath, 0o600);
 
@@ -896,7 +896,7 @@ describe("security audit", () => {
         includeFilesystem: true,
         includeChannelSecurity: false,
         stateDir,
-        configPath: path.join(stateDir, "MrBeanBot.json"),
+        configPath: path.join(stateDir, "mrbeanbot.json"),
       });
 
       expect(res.findings).toEqual(
@@ -937,7 +937,7 @@ describe("security audit", () => {
         includeFilesystem: true,
         includeChannelSecurity: false,
         stateDir,
-        configPath: path.join(stateDir, "MrBeanBot.json"),
+        configPath: path.join(stateDir, "mrbeanbot.json"),
       });
 
       expect(res.findings).toEqual(

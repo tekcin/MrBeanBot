@@ -24,8 +24,8 @@ async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
     },
     {
       env: {
-        MRBEANBOT_AGENT_DIR: (home) => path.join(home, ".MrBeanBot", "agent"),
-        PI_CODING_AGENT_DIR: (home) => path.join(home, ".MrBeanBot", "agent"),
+        MRBEANBOT_AGENT_DIR: (home) => path.join(home, ".mrbeanbot", "agent"),
+        PI_CODING_AGENT_DIR: (home) => path.join(home, ".mrbeanbot", "agent"),
       },
       prefix: "MrBeanBot-rawbody-",
     },

@@ -22,14 +22,14 @@ enum MrBeanBotPaths {
             return URL(fileURLWithPath: override, isDirectory: true)
         }
         return FileManager().homeDirectoryForCurrentUser
-            .appendingPathComponent(".MrBeanBot", isDirectory: true)
+            .appendingPathComponent(".mrbeanbot", isDirectory: true)
     }
 
     static var configURL: URL {
         if let override = MrBeanBotEnv.path(self.configPathEnv) {
             return URL(fileURLWithPath: override)
         }
-        return self.stateDirURL.appendingPathComponent("MrBeanBot.json")
+        return self.stateDirURL.appendingPathComponent("mrbeanbot.json")
     }
 
     static var workspaceURL: URL {

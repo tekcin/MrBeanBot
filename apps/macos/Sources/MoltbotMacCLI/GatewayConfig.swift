@@ -20,8 +20,8 @@ struct GatewayEndpoint {
 
 func loadGatewayConfig() -> GatewayConfig {
     let url = FileManager().homeDirectoryForCurrentUser
-        .appendingPathComponent(".MrBeanBot")
-        .appendingPathComponent("MrBeanBot.json")
+        .appendingPathComponent(".mrbeanbot")
+        .appendingPathComponent("mrbeanbot.json")
     guard let data = try? Data(contentsOf: url) else { return GatewayConfig() }
     guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
         return GatewayConfig()

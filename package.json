@@ -12,7 +12,6 @@
   },
   "bin": {
     "mrbeanbot": "./mrbeanbot.mjs",
-    "MrBeanBot": "./mrbeanbot.mjs",
     "MrBeanBot": "./mrbeanbot.mjs"
   },
   "files": [

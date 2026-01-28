@@ -89,7 +89,7 @@ describe("daemon-cli coverage", () => {
 
   beforeEach(() => {
     process.env.MRBEANBOT_STATE_DIR = "/tmp/MrBeanBot-cli-state";
-    process.env.MRBEANBOT_CONFIG_PATH = "/tmp/MrBeanBot-cli-state/MrBeanBot.json";
+    process.env.MRBEANBOT_CONFIG_PATH = "/tmp/MrBeanBot-cli-state/mrbeanbot.json";
     delete process.env.MRBEANBOT_GATEWAY_PORT;
     delete process.env.MRBEANBOT_PROFILE;
     serviceReadCommand.mockResolvedValue(null);
@@ -142,7 +142,7 @@ describe("daemon-cli coverage", () => {
       environment: {
         MRBEANBOT_PROFILE: "dev",
         MRBEANBOT_STATE_DIR: "/tmp/MrBeanBot-daemon-state",
-        MRBEANBOT_CONFIG_PATH: "/tmp/MrBeanBot-daemon-state/MrBeanBot.json",
+        MRBEANBOT_CONFIG_PATH: "/tmp/MrBeanBot-daemon-state/mrbeanbot.json",
         MRBEANBOT_GATEWAY_PORT: "19001",
       },
       sourcePath: "/tmp/com.tekcin.mrbeanbot.gateway.plist",

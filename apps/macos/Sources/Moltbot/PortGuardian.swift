@@ -25,7 +25,7 @@ actor PortGuardian {
     private let logger = Logger(subsystem: "bot.molt", category: "portguard")
     private nonisolated static let appSupportDir: URL = {
         let base = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        return base.appendingPathComponent("MrBeanBot", isDirectory: true)
+        return base.appendingPathComponent("mrbeanbot", isDirectory: true)
     }()
 
     private nonisolated static var recordPath: URL {
@@ -263,7 +263,7 @@ actor PortGuardian {
     {
         let expectedDesc: String
         let okPredicate: (Listener) -> Bool
-        let expectedCommands = ["node", "MrBeanBot", "tsx", "pnpm", "bun"]
+        let expectedCommands = ["node", "mrbeanbot", "tsx", "pnpm", "bun"]
 
         switch mode {
         case .remote:
@@ -357,10 +357,10 @@ actor PortGuardian {
             if port == GatewayEnvironment.gatewayPort() { return cmd.contains("ssh") }
             return false
         case .local:
-            // The gateway daemon may listen as `MrBeanBot` or as its runtime (`node`, `bun`, etc).
+            // The gateway daemon may listen as `mrbeanbot` or as its runtime (`node`, `bun`, etc).
             if full.contains("gateway-daemon") { return true }
-            // If args are unavailable, treat a MrBeanBot listener as expected.
-            if cmd.contains("MrBeanBot"), full == cmd { return true }
+            // If args are unavailable, treat a mrbeanbot listener as expected.
+            if cmd.contains("mrbeanbot"), full == cmd { return true }
             return false
         case .unconfigured:
             return false

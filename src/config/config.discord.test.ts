@@ -16,10 +16,10 @@ describe("config discord", () => {
 
   it("loads discord guild map + dm group settings", async () => {
     await withTempHome(async (home) => {
-      const configDir = path.join(home, ".MrBeanBot");
+      const configDir = path.join(home, ".mrbeanbot");
       await fs.mkdir(configDir, { recursive: true });
       await fs.writeFile(
-        path.join(configDir, "MrBeanBot.json"),
+        path.join(configDir, "mrbeanbot.json"),
         JSON.stringify(
           {
             channels: {

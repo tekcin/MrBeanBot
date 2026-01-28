@@ -17,7 +17,7 @@ vi.mock("../config/config.js", async (importOriginal) => {
 });
 
 import "./test-helpers/fast-core-tools.js";
-import { createMrBeanBotTools } from "./MrBeanBot-tools.js";
+import { createMrBeanBotTools } from "./moltbot-tools.js";
 
 describe("agents_list", () => {
   beforeEach(() => {

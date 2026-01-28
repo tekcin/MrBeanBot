@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { UpdateCheckResult } from "./update-check.js";
 
-vi.mock("./MrBeanBot-root.js", () => ({
+vi.mock("./moltbot-root.js", () => ({
   resolveMrBeanBotPackageRoot: vi.fn(),
 }));
 
@@ -43,7 +43,7 @@ describe("update-startup", () => {
   });
 
   it("logs update hint for npm installs when newer tag exists", async () => {
-    const { resolveMrBeanBotPackageRoot } = await import("./MrBeanBot-root.js");
+    const { resolveMrBeanBotPackageRoot } = await import("./moltbot-root.js");
     const { checkUpdateStatus, resolveNpmChannelTag } = await import("./update-check.js");
     const { runGatewayUpdateCheck } = await import("./update-startup.js");
 
@@ -77,7 +77,7 @@ describe("update-startup", () => {
   });
 
   it("uses latest when beta tag is older than release", async () => {
-    const { resolveMrBeanBotPackageRoot } = await import("./MrBeanBot-root.js");
+    const { resolveMrBeanBotPackageRoot } = await import("./moltbot-root.js");
     const { checkUpdateStatus, resolveNpmChannelTag } = await import("./update-check.js");
     const { runGatewayUpdateCheck } = await import("./update-startup.js");
 

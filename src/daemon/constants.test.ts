@@ -34,17 +34,17 @@ describe("resolveGatewayLaunchAgentLabel", () => {
 
   it("returns profile-specific label when profile is set", () => {
     const result = resolveGatewayLaunchAgentLabel("dev");
-    expect(result).toBe("bot.molt.dev");
+    expect(result).toBe("com.tekcin.mrbeanbot.dev");
   });
 
   it("returns profile-specific label for custom profile", () => {
     const result = resolveGatewayLaunchAgentLabel("work");
-    expect(result).toBe("bot.molt.work");
+    expect(result).toBe("com.tekcin.mrbeanbot.work");
   });
 
   it("trims whitespace from profile", () => {
     const result = resolveGatewayLaunchAgentLabel("  staging  ");
-    expect(result).toBe("bot.molt.staging");
+    expect(result).toBe("com.tekcin.mrbeanbot.staging");
   });
 
   it("returns default label for empty string profile", () => {
@@ -62,7 +62,7 @@ describe("resolveGatewaySystemdServiceName", () => {
   it("returns default service name when no profile is set", () => {
     const result = resolveGatewaySystemdServiceName();
     expect(result).toBe(GATEWAY_SYSTEMD_SERVICE_NAME);
-    expect(result).toBe("MrBeanBot-gateway");
+    expect(result).toBe("mrbeanbot-gateway");
   });
 
   it("returns default service name when profile is undefined", () => {
@@ -82,17 +82,17 @@ describe("resolveGatewaySystemdServiceName", () => {
 
   it("returns profile-specific service name when profile is set", () => {
     const result = resolveGatewaySystemdServiceName("dev");
-    expect(result).toBe("MrBeanBot-gateway-dev");
+    expect(result).toBe("mrbeanbot-gateway-dev");
   });
 
   it("returns profile-specific service name for custom profile", () => {
     const result = resolveGatewaySystemdServiceName("production");
-    expect(result).toBe("MrBeanBot-gateway-production");
+    expect(result).toBe("mrbeanbot-gateway-production");
   });
 
   it("trims whitespace from profile", () => {
     const result = resolveGatewaySystemdServiceName("  test  ");
-    expect(result).toBe("MrBeanBot-gateway-test");
+    expect(result).toBe("mrbeanbot-gateway-test");
   });
 
   it("returns default service name for empty string profile", () => {

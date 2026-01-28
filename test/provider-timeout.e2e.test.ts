@@ -161,9 +161,9 @@ describe("provider timeouts (e2e)", () => {
       const token = `test-${randomUUID()}`;
       process.env.MRBEANBOT_GATEWAY_TOKEN = token;
 
-      const configDir = path.join(tempHome, ".MrBeanBot");
+      const configDir = path.join(tempHome, ".mrbeanbot");
       await fs.mkdir(configDir, { recursive: true });
-      const configPath = path.join(configDir, "MrBeanBot.json");
+      const configPath = path.join(configDir, "mrbeanbot.json");
 
       const cfg = {
         agents: {

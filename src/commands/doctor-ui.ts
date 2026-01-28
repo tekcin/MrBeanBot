@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { resolveMrBeanBotPackageRoot } from "../infra/MrBeanBot-root.js";
+import { resolveMrBeanBotPackageRoot } from "../infra/moltbot-root.js";
 import { runCommandWithTimeout } from "../process/exec.js";
 import type { RuntimeEnv } from "../runtime.js";
 import { note } from "../terminal/note.js";

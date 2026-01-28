@@ -38,7 +38,7 @@ describe("resolveSystemdUserUnitPath", () => {
   it("uses profile-specific service name when MRBEANBOT_PROFILE is set to a custom value", () => {
     const env = { HOME: "/home/test", MRBEANBOT_PROFILE: "jbphoenix" };
     expect(resolveSystemdUserUnitPath(env)).toBe(
-      "/home/test/.config/systemd/user/MrBeanBot-gateway-jbphoenix.service",
+      "/home/test/.config/systemd/user/mrbeanbot-gateway-jbphoenix.service",
     );
   });
 
@@ -90,7 +90,7 @@ describe("resolveSystemdUserUnitPath", () => {
   it("trims whitespace from MRBEANBOT_PROFILE", () => {
     const env = { HOME: "/home/test", MRBEANBOT_PROFILE: "  myprofile  " };
     expect(resolveSystemdUserUnitPath(env)).toBe(
-      "/home/test/.config/systemd/user/MrBeanBot-gateway-myprofile.service",
+      "/home/test/.config/systemd/user/mrbeanbot-gateway-myprofile.service",
     );
   });
 });

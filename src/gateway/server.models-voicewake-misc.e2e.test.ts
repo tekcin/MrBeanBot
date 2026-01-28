@@ -98,7 +98,7 @@ describe("gateway server models + voicewake", () => {
     const prevHomeDrive = process.env.HOMEDRIVE;
     const prevHomePath = process.env.HOMEPATH;
     process.env.HOME = homeDir;
-    process.env.MRBEANBOT_STATE_DIR = path.join(homeDir, ".MrBeanBot");
+    process.env.MRBEANBOT_STATE_DIR = path.join(homeDir, ".mrbeanbot");
     process.env.USERPROFILE = homeDir;
     if (process.platform === "win32") {
       const parsed = path.parse(homeDir);
@@ -171,7 +171,7 @@ describe("gateway server models + voicewake", () => {
       expect(after.payload?.triggers).toEqual(["hi", "there"]);
 
       const onDisk = JSON.parse(
-        await fs.readFile(path.join(homeDir, ".MrBeanBot", "settings", "voicewake.json"), "utf8"),
+        await fs.readFile(path.join(homeDir, ".mrbeanbot", "settings", "voicewake.json"), "utf8"),
       ) as { triggers?: unknown; updatedAtMs?: unknown };
       expect(onDisk.triggers).toEqual(["hi", "there"]);
       expect(typeof onDisk.updatedAtMs).toBe("number");

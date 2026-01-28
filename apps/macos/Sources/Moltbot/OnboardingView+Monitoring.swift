@@ -115,7 +115,7 @@ extension OnboardingView {
                 return
             }
             let command = desc.command.trimmingCharacters(in: .whitespacesAndNewlines)
-            let expectedTokens = ["node", "MrBeanBot", "tsx", "pnpm", "bun"]
+            let expectedTokens = ["node", "mrbeanbot", "tsx", "pnpm", "bun"]
             let lower = command.lowercased()
             let expected = expectedTokens.contains { lower.contains($0) }
             self.localGatewayProbe = LocalGatewayProbe(

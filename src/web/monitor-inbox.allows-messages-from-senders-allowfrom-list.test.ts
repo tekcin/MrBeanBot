@@ -88,7 +88,7 @@ describe("web monitor inbox", () => {
       created: true,
     });
     resetWebInboundDedupe();
-    authDir = fsSync.mkdtempSync(path.join(os.tmpdir(), "MrBeanBot-auth-"));
+    authDir = fsSync.mkdtempSync(path.join(os.tmpdir(), "mrbeanbot-auth-"));
   });
 
   afterEach(() => {

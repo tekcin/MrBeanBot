@@ -204,7 +204,7 @@ vi.mock("../gateway/call.js", async (importOriginal) => {
 vi.mock("../gateway/session-utils.js", () => ({
   listAgentsForGateway: mocks.listAgentsForGateway,
 }));
-vi.mock("../infra/MrBeanBot-root.js", () => ({
+vi.mock("../infra/moltbot-root.js", () => ({
   resolveMrBeanBotPackageRoot: vi.fn().mockResolvedValue("/tmp/mrbeanbot"),
 }));
 vi.mock("../infra/os-summary.js", () => ({
@@ -330,8 +330,8 @@ describe("statusCommand", () => {
     expect(
       logs.some(
         (l) =>
-          l.includes("MrBeanBot status --all") ||
-          l.includes("MrBeanBot --profile isolated status --all") ||
+          l.includes("mrbeanbot status --all") ||
+          l.includes("mrbeanbot --profile isolated status --all") ||
           l.includes("MrBeanBot status --all") ||
           l.includes("MrBeanBot --profile isolated status --all"),
       ),

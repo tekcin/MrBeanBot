@@ -2,12 +2,12 @@ import Foundation
 
 enum CommandResolver {
     private static let projectRootDefaultsKey = "MrBeanBot.gatewayProjectRootPath"
-    private static let helperName = "MrBeanBot"
+    private static let helperName = "mrbeanbot"
 
     static func gatewayEntrypoint(in root: URL) -> String? {
         let distEntry = root.appendingPathComponent("dist/index.js").path
         if FileManager().isReadableFile(atPath: distEntry) { return distEntry }
-        let binEntry = root.appendingPathComponent("bin/MrBeanBot.js").path
+        let binEntry = root.appendingPathComponent("bin/mrbeanbot.js").path
         if FileManager().isReadableFile(atPath: binEntry) { return binEntry }
         return nil
     }
@@ -52,7 +52,7 @@ enum CommandResolver {
             return url
         }
         let fallback = FileManager().homeDirectoryForCurrentUser
-            .appendingPathComponent("Projects/MrBeanBot")
+            .appendingPathComponent("Projects/mrbeanbot")
         if FileManager().fileExists(atPath: fallback.path) {
             return fallback
         }
@@ -98,7 +98,7 @@ enum CommandResolver {
     }
 
     private static func MrBeanBotManagedPaths(home: URL) -> [String] {
-        let base = home.appendingPathComponent(".MrBeanBot")
+        let base = home.appendingPathComponent(".mrbeanbot")
         let bin = base.appendingPathComponent("bin")
         let nodeBin = base.appendingPathComponent("tools/node/bin")
         var paths: [String] = []
@@ -202,7 +202,7 @@ enum CommandResolver {
     }
 
     static func nodeCliPath() -> String? {
-        let candidate = self.projectRoot().appendingPathComponent("bin/MrBeanBot.js").path
+        let candidate = self.projectRoot().appendingPathComponent("bin/mrbeanbot.js").path
         return FileManager().isReadableFile(atPath: candidate) ? candidate : nil
     }
 
@@ -251,14 +251,14 @@ enum CommandResolver {
             }
             if let pnpm = self.findExecutable(named: "pnpm", searchPaths: searchPaths) {
                 // Use --silent to avoid pnpm lifecycle banners that would corrupt JSON outputs.
-                return [pnpm, "--silent", "MrBeanBot", subcommand] + extraArgs
+                return [pnpm, "--silent", "mrbeanbot", subcommand] + extraArgs
             }
             if let MrBeanBotPath = self.MrBeanBotExecutable(searchPaths: searchPaths) {
                 return [MrBeanBotPath, subcommand] + extraArgs
             }
 
             let missingEntry = """
-            MrBeanBot entrypoint missing (looked for dist/index.js or bin/MrBeanBot.js); run pnpm build.
+            MrBeanBot entrypoint missing (looked for dist/index.js or bin/mrbeanbot.js); run pnpm build.
             """
             return self.errorCommand(with: missingEntry)
 
@@ -306,7 +306,7 @@ enum CommandResolver {
 
         let projectSection = if userPRJ.isEmpty {
             """
-            DEFAULT_PRJ="$HOME/Projects/MrBeanBot"
+            DEFAULT_PRJ="$HOME/Projects/mrbeanbot"
             if [ -d "$DEFAULT_PRJ" ]; then
               PRJ="$DEFAULT_PRJ"
               cd "$PRJ" || { echo "Project root not found: $PRJ"; exit 127; }
@@ -345,9 +345,9 @@ enum CommandResolver {
         CLI="";
         \(cliSection)
         \(projectSection)
-        if command -v MrBeanBot >/dev/null 2>&1; then
-          CLI="$(command -v MrBeanBot)"
-          MrBeanBot \(quotedArgs);
+        if command -v mrbeanbot >/dev/null 2>&1; then
+          CLI="$(command -v mrbeanbot)"
+          mrbeanbot \(quotedArgs);
         elif [ -n "${PRJ:-}" ] && [ -f "$PRJ/dist/index.js" ]; then
           if command -v node >/dev/null 2>&1; then
             CLI="node $PRJ/dist/index.js"
@@ -355,16 +355,16 @@ enum CommandResolver {
           else
             echo "Node >=22 required on remote host"; exit 127;
           fi
-        elif [ -n "${PRJ:-}" ] && [ -f "$PRJ/bin/MrBeanBot.js" ]; then
+        elif [ -n "${PRJ:-}" ] && [ -f "$PRJ/bin/mrbeanbot.js" ]; then
           if command -v node >/dev/null 2>&1; then
-            CLI="node $PRJ/bin/MrBeanBot.js"
-            node "$PRJ/bin/MrBeanBot.js" \(quotedArgs);
+            CLI="node $PRJ/bin/mrbeanbot.js"
+            node "$PRJ/bin/mrbeanbot.js" \(quotedArgs);
           else
             echo "Node >=22 required on remote host"; exit 127;
           fi
         elif command -v pnpm >/dev/null 2>&1; then
-          CLI="pnpm --silent MrBeanBot"
-          pnpm --silent MrBeanBot \(quotedArgs);
+          CLI="pnpm --silent mrbeanbot"
+          pnpm --silent mrbeanbot \(quotedArgs);
         else
           echo "MrBeanBot CLI missing on remote host"; exit 127;
         fi

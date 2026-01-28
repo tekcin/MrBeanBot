@@ -96,9 +96,9 @@ const spawnGatewayInstance = async (name: string): Promise<GatewayInstance> => {
   const hookToken = `token-${name}-${randomUUID()}`;
   const gatewayToken = `gateway-${name}-${randomUUID()}`;
   const homeDir = await fs.mkdtemp(path.join(os.tmpdir(), `MrBeanBot-e2e-${name}-`));
-  const configDir = path.join(homeDir, ".MrBeanBot");
+  const configDir = path.join(homeDir, ".mrbeanbot");
   await fs.mkdir(configDir, { recursive: true });
-  const configPath = path.join(configDir, "MrBeanBot.json");
+  const configPath = path.join(configDir, "mrbeanbot.json");
   const stateDir = path.join(configDir, "state");
   const config = {
     gateway: { port, auth: { mode: "token", token: gatewayToken } },

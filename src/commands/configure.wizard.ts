@@ -79,7 +79,7 @@ async function promptChannelMode(runtime: RuntimeEnv): Promise<ChannelsWizardMod
         {
           value: "remove",
           label: "Remove channel config",
-          hint: "Delete channel tokens/settings from MrBeanBot.json",
+          hint: "Delete channel tokens/settings from mrbeanbot.json",
         },
       ],
       initialValue: "configure",

@@ -156,7 +156,7 @@ struct OnboardingView: View {
     var canAdvance: Bool { !self.isWizardBlocking }
     var devLinkCommand: String {
         let version = GatewayEnvironment.expectedGatewayVersionString() ?? "latest"
-        return "npm install -g MrBeanBot@\(version)"
+        return "npm install -g mrbeanbot@\(version)"
     }
 
     struct LocalGatewayProbe: Equatable {

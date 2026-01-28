@@ -42,7 +42,7 @@ function resetRuntime() {
 
 function mockSnapshot(token = "abc") {
   mocks.readConfigFileSnapshot.mockResolvedValue({
-    path: "/tmp/MrBeanBot.json",
+    path: "/tmp/mrbeanbot.json",
     exists: true,
     raw: "{}",
     parsed: {},

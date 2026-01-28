@@ -282,7 +282,7 @@ describeLive("gateway live (cli backend)", () => {
         },
       },
     };
-    const tempConfigPath = path.join(tempDir, "MrBeanBot.json");
+    const tempConfigPath = path.join(tempDir, "mrbeanbot.json");
     await fs.writeFile(tempConfigPath, `${JSON.stringify(nextCfg, null, 2)}\n`);
     process.env.MRBEANBOT_CONFIG_PATH = tempConfigPath;
 

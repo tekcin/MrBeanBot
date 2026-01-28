@@ -5,7 +5,7 @@ import path from "node:path";
 import type { Command } from "commander";
 
 import { readConfigFileSnapshot, writeConfigFile } from "../config/config.js";
-import { resolveMrBeanBotPackageRoot } from "../infra/MrBeanBot-root.js";
+import { resolveMrBeanBotPackageRoot } from "../infra/moltbot-root.js";
 import {
   checkUpdateStatus,
   compareSemverStrings,

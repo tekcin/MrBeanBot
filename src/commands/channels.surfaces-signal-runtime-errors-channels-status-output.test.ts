@@ -40,7 +40,7 @@ const runtime: RuntimeEnv = {
 };
 
 const _baseSnapshot = {
-  path: "/tmp/MrBeanBot.json",
+  path: "/tmp/mrbeanbot.json",
   exists: true,
   raw: "{}",
   parsed: {},

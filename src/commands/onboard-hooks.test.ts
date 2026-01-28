@@ -42,7 +42,7 @@ describe("onboard-hooks", () => {
 
   const createMockHookReport = (eligible = true): HookStatusReport => ({
     workspaceDir: "/mock/workspace",
-    managedHooksDir: "/mock/.MrBeanBot/hooks",
+    managedHooksDir: "/mock/.mrbeanbot/hooks",
     hooks: [
       {
         name: "session-memory",

@@ -4,8 +4,8 @@ import path from "node:path";
 
 import { CONFIG_DIR, ensureDir } from "../utils.js";
 
-export const WIDE_AREA_DISCOVERY_DOMAIN = "MrBeanBot.internal.";
-export const WIDE_AREA_ZONE_FILENAME = "MrBeanBot.internal.db";
+export const WIDE_AREA_DISCOVERY_DOMAIN = "mrbeanbot.internal.";
+export const WIDE_AREA_ZONE_FILENAME = "mrbeanbot.internal.db";
 
 export function getWideAreaZonePath(): string {
   return path.join(CONFIG_DIR, "dns", WIDE_AREA_ZONE_FILENAME);
@@ -51,7 +51,7 @@ function extractSerial(zoneText: string): number | null {
 }
 
 function extractContentHash(zoneText: string): string | null {
-  const match = zoneText.match(/^\s*;\s*MrBeanBot-content-hash:\s*(\S+)\s*$/m);
+  const match = zoneText.match(/^\s*;\s*mrbeanbot-content-hash:\s*(\S+)\s*$/m);
   return match?.[1] ?? null;
 }
 
@@ -119,9 +119,9 @@ function renderZone(opts: WideAreaGatewayZoneOpts & { serial: number }): string 
     records.push(`${hostLabel} IN AAAA ${opts.tailnetIPv6}`);
   }
 
-  records.push(`_MrBeanBot-gw._tcp IN PTR ${instanceLabel}._MrBeanBot-gw._tcp`);
-  records.push(`${instanceLabel}._MrBeanBot-gw._tcp IN SRV 0 0 ${opts.gatewayPort} ${hostLabel}`);
-  records.push(`${instanceLabel}._MrBeanBot-gw._tcp IN TXT ${txt.map(txtQuote).join(" ")}`);
+  records.push(`_mrbeanbot-gw._tcp IN PTR ${instanceLabel}._mrbeanbot-gw._tcp`);
+  records.push(`${instanceLabel}._mrbeanbot-gw._tcp IN SRV 0 0 ${opts.gatewayPort} ${hostLabel}`);
+  records.push(`${instanceLabel}._mrbeanbot-gw._tcp IN TXT ${txt.map(txtQuote).join(" ")}`);
 
   const contentBody = `${records.join("\n")}\n`;
   const hashBody = `${records
@@ -131,7 +131,7 @@ function renderZone(opts: WideAreaGatewayZoneOpts & { serial: number }): string 
     .join("\n")}\n`;
   const contentHash = computeContentHash(hashBody);
 
-  return `; MrBeanBot-content-hash: ${contentHash}\n${contentBody}`;
+  return `; mrbeanbot-content-hash: ${contentHash}\n${contentBody}`;
 }
 
 export function renderWideAreaGatewayZoneText(

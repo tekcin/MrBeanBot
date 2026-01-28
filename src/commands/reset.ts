@@ -75,7 +75,7 @@ export async function resetCommand(runtime: RuntimeEnv, opts: ResetOptions) {
         {
           value: "config",
           label: "Config only",
-          hint: "MrBeanBot.json",
+          hint: "mrbeanbot.json",
         },
         {
           value: "config+creds+sessions",

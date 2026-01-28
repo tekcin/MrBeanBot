@@ -25,10 +25,10 @@ describe("onboard (non-interactive): Vercel AI Gateway", () => {
     delete process.env.MRBEANBOT_GATEWAY_TOKEN;
     delete process.env.MRBEANBOT_GATEWAY_PASSWORD;
 
-    const tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-onboard-gateway-"));
+    const tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-onboard-gateway-"));
     process.env.HOME = tempHome;
     process.env.MRBEANBOT_STATE_DIR = tempHome;
-    process.env.MRBEANBOT_CONFIG_PATH = path.join(tempHome, "MrBeanBot.json");
+    process.env.MRBEANBOT_CONFIG_PATH = path.join(tempHome, "mrbeanbot.json");
     vi.resetModules();
 
     const runtime = {

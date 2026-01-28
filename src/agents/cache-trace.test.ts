@@ -21,7 +21,7 @@ describe("createCacheTrace", () => {
         diagnostics: {
           cacheTrace: {
             enabled: true,
-            filePath: "~/.MrBeanBot/logs/cache-trace.jsonl",
+            filePath: "~/.mrbeanbot/logs/cache-trace.jsonl",
           },
         },
       },
@@ -33,7 +33,7 @@ describe("createCacheTrace", () => {
     });
 
     expect(trace).not.toBeNull();
-    expect(trace?.filePath).toBe(resolveUserPath("~/.MrBeanBot/logs/cache-trace.jsonl"));
+    expect(trace?.filePath).toBe(resolveUserPath("~/.mrbeanbot/logs/cache-trace.jsonl"));
 
     trace?.recordStage("session:loaded", {
       messages: [],

@@ -11,7 +11,7 @@ vi.mock("../media/image-ops.js", () => ({
 }));
 
 import "./test-helpers/fast-core-tools.js";
-import { createMrBeanBotTools } from "./MrBeanBot-tools.js";
+import { createMrBeanBotTools } from "./moltbot-tools.js";
 
 describe("nodes camera_snap", () => {
   beforeEach(() => {

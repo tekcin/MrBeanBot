@@ -110,7 +110,7 @@ describe("onboard (non-interactive): gateway and remote auth", () => {
     delete process.env.MRBEANBOT_GATEWAY_TOKEN;
     delete process.env.MRBEANBOT_GATEWAY_PASSWORD;
 
-    tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-onboard-"));
+    tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-onboard-"));
     process.env.HOME = tempHome;
   });
 
@@ -217,7 +217,7 @@ describe("onboard (non-interactive): gateway and remote auth", () => {
     }
     const stateDir = await initStateDir("state-lan-");
     process.env.MRBEANBOT_STATE_DIR = stateDir;
-    process.env.MRBEANBOT_CONFIG_PATH = path.join(stateDir, "MrBeanBot.json");
+    process.env.MRBEANBOT_CONFIG_PATH = path.join(stateDir, "mrbeanbot.json");
 
     const port = await getFreeGatewayPort();
     const workspace = path.join(stateDir, "clawd");

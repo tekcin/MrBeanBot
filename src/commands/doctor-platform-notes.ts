@@ -16,7 +16,7 @@ function resolveHomeDir(): string {
 
 export async function noteMacLaunchAgentOverrides() {
   if (process.platform !== "darwin") return;
-  const markerPath = path.join(resolveHomeDir(), ".MrBeanBot", "disable-launchagent");
+  const markerPath = path.join(resolveHomeDir(), ".mrbeanbot", "disable-launchagent");
   const hasMarker = fs.existsSync(markerPath);
   if (!hasMarker) return;
 

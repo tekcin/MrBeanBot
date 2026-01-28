@@ -43,7 +43,7 @@ final class ScreenRecordService {
                 return URL(fileURLWithPath: outPath)
             }
             return FileManager().temporaryDirectory
-                .appendingPathComponent("MrBeanBot-screen-record-\(UUID().uuidString).mp4")
+                .appendingPathComponent("mrbeanbot-screen-record-\(UUID().uuidString).mp4")
         }()
         try? FileManager().removeItem(at: outURL)
 

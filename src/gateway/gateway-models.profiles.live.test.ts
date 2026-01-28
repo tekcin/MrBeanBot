@@ -487,7 +487,7 @@ async function runGatewayModelSuite(params: GatewayModelSuiteParams) {
   await fs.mkdir(workspaceDir, { recursive: true });
   const nonceA = randomUUID();
   const nonceB = randomUUID();
-  const toolProbePath = path.join(workspaceDir, `.MrBeanBot-live-tool-probe.${nonceA}.txt`);
+  const toolProbePath = path.join(workspaceDir, `.mrbeanbot-live-tool-probe.${nonceA}.txt`);
   await fs.writeFile(toolProbePath, `nonceA=${nonceA}\nnonceB=${nonceB}\n`);
 
   const agentDir = resolveMrBeanBotAgentDir();
@@ -501,7 +501,7 @@ async function runGatewayModelSuite(params: GatewayModelSuiteParams) {
     providerOverrides: params.providerOverrides,
   });
   const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-live-"));
-  const tempConfigPath = path.join(tempDir, "MrBeanBot.json");
+  const tempConfigPath = path.join(tempDir, "mrbeanbot.json");
   await fs.writeFile(tempConfigPath, `${JSON.stringify(nextCfg, null, 2)}\n`);
   process.env.MRBEANBOT_CONFIG_PATH = tempConfigPath;
 
@@ -1083,7 +1083,7 @@ describeLive("gateway live (dev agent, profile keys)", () => {
     await fs.mkdir(workspaceDir, { recursive: true });
     const nonceA = randomUUID();
     const nonceB = randomUUID();
-    const toolProbePath = path.join(workspaceDir, `.MrBeanBot-live-zai-fallback.${nonceA}.txt`);
+    const toolProbePath = path.join(workspaceDir, `.mrbeanbot-live-zai-fallback.${nonceA}.txt`);
     await fs.writeFile(toolProbePath, `nonceA=${nonceA}\nnonceB=${nonceB}\n`);
 
     const port = await getFreeGatewayPort();

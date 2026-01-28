@@ -119,6 +119,3 @@ export type ConfigFileSnapshot = {
   warnings: ConfigValidationIssue[];
   legacyIssues: LegacyConfigIssue[];
 };
-
-// Backward compatibility alias
-export type MrBeanBotConfig = MrBeanBotConfig;

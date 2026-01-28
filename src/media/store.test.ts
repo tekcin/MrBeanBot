@@ -27,10 +27,10 @@ describe("media store", () => {
 
   beforeAll(async () => {
     snapshotEnv();
-    home = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-test-home-"));
+    home = await fs.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-test-home-"));
     process.env.HOME = home;
     process.env.USERPROFILE = home;
-    process.env.MRBEANBOT_STATE_DIR = path.join(home, ".MrBeanBot");
+    process.env.MRBEANBOT_STATE_DIR = path.join(home, ".mrbeanbot");
     if (process.platform === "win32") {
       const match = home.match(/^([A-Za-z]:)(.*)$/);
       if (match) {
@@ -38,7 +38,7 @@ describe("media store", () => {
         process.env.HOMEPATH = match[2] || "\\";
       }
     }
-    await fs.mkdir(path.join(home, ".MrBeanBot"), { recursive: true });
+    await fs.mkdir(path.join(home, ".mrbeanbot"), { recursive: true });
     store = await import("./store.js");
   });
 
@@ -61,7 +61,7 @@ describe("media store", () => {
     await withTempStore(async (store, home) => {
       const dir = await store.ensureMediaDir();
       expect(isPathWithinBase(home, dir)).toBe(true);
-      expect(path.normalize(dir)).toContain(`${path.sep}.MrBeanBot${path.sep}media`);
+      expect(path.normalize(dir)).toContain(`${path.sep}.mrbeanbot${path.sep}media`);
       const stat = await fs.stat(dir);
       expect(stat.isDirectory()).toBe(true);
     });

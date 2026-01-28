@@ -26,7 +26,7 @@ function makePrompter(confirmValue: boolean): DoctorPrompter {
 beforeEach(() => {
   originalAgentDir = process.env.MRBEANBOT_AGENT_DIR;
   originalPiAgentDir = process.env.PI_CODING_AGENT_DIR;
-  tempAgentDir = fs.mkdtempSync(path.join(os.tmpdir(), "MrBeanBot-auth-"));
+  tempAgentDir = fs.mkdtempSync(path.join(os.tmpdir(), "mrbeanbot-auth-"));
   process.env.MRBEANBOT_AGENT_DIR = tempAgentDir;
   process.env.PI_CODING_AGENT_DIR = tempAgentDir;
 });
