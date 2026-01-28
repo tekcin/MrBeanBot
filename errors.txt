@@ -1,0 +1,6 @@
+Chat
+Direct gateway chat session for quick interventions.
+disconnected (1008): unauthorized: gateway token missing (open a tokenized dashboard URL or paste token in Control UI settings)
+|
+Disconnected from gateway.
+disconnected (1008): unauthorized: gateway token missing (open a tokenized dashboard URL or paste token in Control UI settings)

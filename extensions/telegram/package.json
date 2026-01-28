@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/telegram",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Telegram channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Telegram channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ]

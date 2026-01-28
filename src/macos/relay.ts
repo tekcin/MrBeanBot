@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import process from "node:process";
 
-declare const __CLAWDBOT_VERSION__: string | undefined;
+declare const __MRBEANBOT_VERSION__: string | undefined;
 
 const BUNDLED_VERSION =
-  (typeof __CLAWDBOT_VERSION__ === "string" && __CLAWDBOT_VERSION__) ||
-  process.env.CLAWDBOT_BUNDLED_VERSION ||
+  (typeof __MRBEANBOT_VERSION__ === "string" && __MRBEANBOT_VERSION__) ||
+  process.env.MRBEANBOT_BUNDLED_VERSION ||
   "0.0.0";
 
 function hasFlag(args: string[], flag: string): boolean {
@@ -47,8 +47,8 @@ async function main() {
   const { loadDotEnv } = await import("../infra/dotenv.js");
   loadDotEnv({ quiet: true });
 
-  const { ensureMoltbotCliOnPath } = await import("../infra/path-env.js");
-  ensureMoltbotCliOnPath();
+  const { ensureMrBeanBotCliOnPath } = await import("../infra/path-env.js");
+  ensureMrBeanBotCliOnPath();
 
   const { enableConsoleCapture } = await import("../logging.js");
   enableConsoleCapture();
@@ -64,7 +64,7 @@ async function main() {
   installUnhandledRejectionHandler();
 
   process.on("uncaughtException", (error) => {
-    console.error("[moltbot] Uncaught exception:", formatUncaughtError(error));
+    console.error("[MrBeanBot] Uncaught exception:", formatUncaughtError(error));
     process.exit(1);
   });
 
@@ -72,6 +72,9 @@ async function main() {
 }
 
 void main().catch((err) => {
-  console.error("[moltbot] Relay failed:", err instanceof Error ? (err.stack ?? err.message) : err);
+  console.error(
+    "[MrBeanBot] Relay failed:",
+    err instanceof Error ? (err.stack ?? err.message) : err,
+  );
   process.exit(1);
 });

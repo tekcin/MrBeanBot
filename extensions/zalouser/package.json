@@ -2,12 +2,12 @@
   "name": "@mrbeanbot/zalouser",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Zalo Personal Account plugin via zca-cli",
+  "description": "MrBeanBot Zalo Personal Account plugin via zca-cli",
   "dependencies": {
-    "moltbot": "workspace:*",
+    "MrBeanBot": "workspace:*",
     "@sinclair/typebox": "0.34.47"
   },
-  "moltbot": {
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],

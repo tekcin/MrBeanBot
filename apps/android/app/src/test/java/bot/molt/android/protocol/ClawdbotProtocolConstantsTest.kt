@@ -3,33 +3,33 @@ package bot.molt.android.protocol
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class MoltbotProtocolConstantsTest {
+class MrBeanBotProtocolConstantsTest {
   @Test
   fun canvasCommandsUseStableStrings() {
-    assertEquals("canvas.present", MoltbotCanvasCommand.Present.rawValue)
-    assertEquals("canvas.hide", MoltbotCanvasCommand.Hide.rawValue)
-    assertEquals("canvas.navigate", MoltbotCanvasCommand.Navigate.rawValue)
-    assertEquals("canvas.eval", MoltbotCanvasCommand.Eval.rawValue)
-    assertEquals("canvas.snapshot", MoltbotCanvasCommand.Snapshot.rawValue)
+    assertEquals("canvas.present", MrBeanBotCanvasCommand.Present.rawValue)
+    assertEquals("canvas.hide", MrBeanBotCanvasCommand.Hide.rawValue)
+    assertEquals("canvas.navigate", MrBeanBotCanvasCommand.Navigate.rawValue)
+    assertEquals("canvas.eval", MrBeanBotCanvasCommand.Eval.rawValue)
+    assertEquals("canvas.snapshot", MrBeanBotCanvasCommand.Snapshot.rawValue)
   }
 
   @Test
   fun a2uiCommandsUseStableStrings() {
-    assertEquals("canvas.a2ui.push", MoltbotCanvasA2UICommand.Push.rawValue)
-    assertEquals("canvas.a2ui.pushJSONL", MoltbotCanvasA2UICommand.PushJSONL.rawValue)
-    assertEquals("canvas.a2ui.reset", MoltbotCanvasA2UICommand.Reset.rawValue)
+    assertEquals("canvas.a2ui.push", MrBeanBotCanvasA2UICommand.Push.rawValue)
+    assertEquals("canvas.a2ui.pushJSONL", MrBeanBotCanvasA2UICommand.PushJSONL.rawValue)
+    assertEquals("canvas.a2ui.reset", MrBeanBotCanvasA2UICommand.Reset.rawValue)
   }
 
   @Test
   fun capabilitiesUseStableStrings() {
-    assertEquals("canvas", MoltbotCapability.Canvas.rawValue)
-    assertEquals("camera", MoltbotCapability.Camera.rawValue)
-    assertEquals("screen", MoltbotCapability.Screen.rawValue)
-    assertEquals("voiceWake", MoltbotCapability.VoiceWake.rawValue)
+    assertEquals("canvas", MrBeanBotCapability.Canvas.rawValue)
+    assertEquals("camera", MrBeanBotCapability.Camera.rawValue)
+    assertEquals("screen", MrBeanBotCapability.Screen.rawValue)
+    assertEquals("voiceWake", MrBeanBotCapability.VoiceWake.rawValue)
   }
 
   @Test
   fun screenCommandsUseStableStrings() {
-    assertEquals("screen.record", MoltbotScreenCommand.Record.rawValue)
+    assertEquals("screen.record", MrBeanBotScreenCommand.Record.rawValue)
   }
 }

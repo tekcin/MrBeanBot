@@ -1,6 +1,6 @@
 import Testing
 import WebKit
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite struct ScreenControllerTests {
     @Test @MainActor func canvasModeConfiguresWebViewForTouch() {

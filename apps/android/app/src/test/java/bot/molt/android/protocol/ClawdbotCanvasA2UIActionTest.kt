@@ -5,24 +5,24 @@ import kotlinx.serialization.json.jsonObject
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class MoltbotCanvasA2UIActionTest {
+class MrBeanBotCanvasA2UIActionTest {
   @Test
   fun extractActionNameAcceptsNameOrAction() {
     val nameObj = Json.parseToJsonElement("{\"name\":\"Hello\"}").jsonObject
-    assertEquals("Hello", MoltbotCanvasA2UIAction.extractActionName(nameObj))
+    assertEquals("Hello", MrBeanBotCanvasA2UIAction.extractActionName(nameObj))
 
     val actionObj = Json.parseToJsonElement("{\"action\":\"Wave\"}").jsonObject
-    assertEquals("Wave", MoltbotCanvasA2UIAction.extractActionName(actionObj))
+    assertEquals("Wave", MrBeanBotCanvasA2UIAction.extractActionName(actionObj))
 
     val fallbackObj =
       Json.parseToJsonElement("{\"name\":\"  \",\"action\":\"Fallback\"}").jsonObject
-    assertEquals("Fallback", MoltbotCanvasA2UIAction.extractActionName(fallbackObj))
+    assertEquals("Fallback", MrBeanBotCanvasA2UIAction.extractActionName(fallbackObj))
   }
 
   @Test
   fun formatAgentMessageMatchesSharedSpec() {
     val msg =
-      MoltbotCanvasA2UIAction.formatAgentMessage(
+      MrBeanBotCanvasA2UIAction.formatAgentMessage(
         actionName = "Get Weather",
         sessionKey = "main",
         surfaceId = "main",
@@ -40,9 +40,9 @@ class MoltbotCanvasA2UIActionTest {
 
   @Test
   fun jsDispatchA2uiStatusIsStable() {
-    val js = MoltbotCanvasA2UIAction.jsDispatchA2UIActionStatus(actionId = "a1", ok = true, error = null)
+    val js = MrBeanBotCanvasA2UIAction.jsDispatchA2UIActionStatus(actionId = "a1", ok = true, error = null)
     assertEquals(
-      "window.dispatchEvent(new CustomEvent('moltbot:a2ui-action-status', { detail: { id: \"a1\", ok: true, error: \"\" } }));",
+      "window.dispatchEvent(new CustomEvent('MrBeanBot:a2ui-action-status', { detail: { id: \"a1\", ok: true, error: \"\" } }));",
       js,
     )
   }

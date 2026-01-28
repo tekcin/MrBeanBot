@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/google-antigravity-auth",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Google Antigravity OAuth provider plugin",
-  "moltbot": {
+  "description": "MrBeanBot Google Antigravity OAuth provider plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ]

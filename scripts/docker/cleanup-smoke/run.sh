@@ -3,30 +3,30 @@ set -euo pipefail
 
 cd /repo
 
-export CLAWDBOT_STATE_DIR="/tmp/moltbot-test"
-export CLAWDBOT_CONFIG_PATH="${CLAWDBOT_STATE_DIR}/moltbot.json"
+export MRBEANBOT_STATE_DIR="/tmp/MrBeanBot-test"
+export MRBEANBOT_CONFIG_PATH="${MRBEANBOT_STATE_DIR}/MrBeanBot.json"
 
 echo "==> Seed state"
-mkdir -p "${CLAWDBOT_STATE_DIR}/credentials"
-mkdir -p "${CLAWDBOT_STATE_DIR}/agents/main/sessions"
-echo '{}' >"${CLAWDBOT_CONFIG_PATH}"
-echo 'creds' >"${CLAWDBOT_STATE_DIR}/credentials/marker.txt"
-echo 'session' >"${CLAWDBOT_STATE_DIR}/agents/main/sessions/sessions.json"
+mkdir -p "${MRBEANBOT_STATE_DIR}/credentials"
+mkdir -p "${MRBEANBOT_STATE_DIR}/agents/main/sessions"
+echo '{}' >"${MRBEANBOT_CONFIG_PATH}"
+echo 'creds' >"${MRBEANBOT_STATE_DIR}/credentials/marker.txt"
+echo 'session' >"${MRBEANBOT_STATE_DIR}/agents/main/sessions/sessions.json"
 
 echo "==> Reset (config+creds+sessions)"
-pnpm moltbot reset --scope config+creds+sessions --yes --non-interactive
+pnpm MrBeanBot reset --scope config+creds+sessions --yes --non-interactive
 
-test ! -f "${CLAWDBOT_CONFIG_PATH}"
-test ! -d "${CLAWDBOT_STATE_DIR}/credentials"
-test ! -d "${CLAWDBOT_STATE_DIR}/agents/main/sessions"
+test ! -f "${MRBEANBOT_CONFIG_PATH}"
+test ! -d "${MRBEANBOT_STATE_DIR}/credentials"
+test ! -d "${MRBEANBOT_STATE_DIR}/agents/main/sessions"
 
 echo "==> Recreate minimal config"
-mkdir -p "${CLAWDBOT_STATE_DIR}/credentials"
-echo '{}' >"${CLAWDBOT_CONFIG_PATH}"
+mkdir -p "${MRBEANBOT_STATE_DIR}/credentials"
+echo '{}' >"${MRBEANBOT_CONFIG_PATH}"
 
 echo "==> Uninstall (state only)"
-pnpm moltbot uninstall --state --yes --non-interactive
+pnpm MrBeanBot uninstall --state --yes --non-interactive
 
-test ! -d "${CLAWDBOT_STATE_DIR}"
+test ! -d "${MRBEANBOT_STATE_DIR}"
 
 echo "OK"

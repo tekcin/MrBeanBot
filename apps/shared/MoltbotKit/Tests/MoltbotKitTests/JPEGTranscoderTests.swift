@@ -1,4 +1,4 @@
-import MoltbotKit
+import MrBeanBotKit
 import CoreGraphics
 import ImageIO
 import Testing

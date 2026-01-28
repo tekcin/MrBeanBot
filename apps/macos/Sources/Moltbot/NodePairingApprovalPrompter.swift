@@ -1,8 +1,8 @@
 import AppKit
-import MoltbotDiscovery
-import MoltbotIPC
-import MoltbotKit
-import MoltbotProtocol
+import MrBeanBotDiscovery
+import MrBeanBotIPC
+import MrBeanBotKit
+import MrBeanBotProtocol
 import Foundation
 import Observation
 import OSLog

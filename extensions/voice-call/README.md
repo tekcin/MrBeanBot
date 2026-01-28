@@ -1,6 +1,6 @@
-# @clawdbot/voice-call
+# @MrBeanBot/voice-call
 
-Official Voice Call plugin for **Clawdbot**.
+Official Voice Call plugin for **MrBeanBot**.
 
 Providers:
 - **Twilio** (Programmable Voice + Media Streams)
@@ -13,10 +13,10 @@ Plugin system: `https://docs.molt.bot/plugin`
 
 ## Install (local dev)
 
-### Option A: install via Clawdbot (recommended)
+### Option A: install via MrBeanBot (recommended)
 
 ```bash
-clawdbot plugins install @clawdbot/voice-call
+MrBeanBot plugins install @MrBeanBot/voice-call
 ```
 
 Restart the Gateway afterwards.
@@ -24,9 +24,9 @@ Restart the Gateway afterwards.
 ### Option B: copy into your global extensions folder (dev)
 
 ```bash
-mkdir -p ~/.clawdbot/extensions
-cp -R extensions/voice-call ~/.clawdbot/extensions/voice-call
-cd ~/.clawdbot/extensions/voice-call && pnpm install
+mkdir -p ~/.MrBeanBot/extensions
+cp -R extensions/voice-call ~/.MrBeanBot/extensions/voice-call
+cd ~/.MrBeanBot/extensions/voice-call && pnpm install
 ```
 
 ## Config
@@ -100,13 +100,13 @@ Notes:
 ## CLI
 
 ```bash
-clawdbot voicecall call --to "+15555550123" --message "Hello from Clawdbot"
-clawdbot voicecall continue --call-id <id> --message "Any questions?"
-clawdbot voicecall speak --call-id <id> --message "One moment"
-clawdbot voicecall end --call-id <id>
-clawdbot voicecall status --call-id <id>
-clawdbot voicecall tail
-clawdbot voicecall expose --mode funnel
+MrBeanBot voicecall call --to "+15555550123" --message "Hello from MrBeanBot"
+MrBeanBot voicecall continue --call-id <id> --message "Any questions?"
+MrBeanBot voicecall speak --call-id <id> --message "One moment"
+MrBeanBot voicecall end --call-id <id>
+MrBeanBot voicecall status --call-id <id>
+MrBeanBot voicecall tail
+MrBeanBot voicecall expose --mode funnel
 ```
 
 ## Tool

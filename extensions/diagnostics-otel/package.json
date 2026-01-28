@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/diagnostics-otel",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot diagnostics OpenTelemetry exporter",
-  "moltbot": {
+  "description": "MrBeanBot diagnostics OpenTelemetry exporter",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ]

@@ -50,7 +50,7 @@ const runtime: RuntimeEnv = {
 };
 
 const baseSnapshot = {
-  path: "/tmp/moltbot.json",
+  path: "/tmp/MrBeanBot.json",
   exists: true,
   raw: "{}",
   parsed: {},
@@ -371,7 +371,7 @@ describe("channels command", () => {
     expect(lines.join("\n")).toMatch(/Warnings:/);
     expect(lines.join("\n")).toMatch(/Message Content Intent is disabled/i);
     expect(lines.join("\n")).toMatch(
-      /Run: (?:mrbeanbot|moltbot|clawdbot)( --profile isolated)? doctor/,
+      /Run: (?:mrbeanbot|MrBeanBot|MrBeanBot)( --profile isolated)? doctor/,
     );
   });
 
@@ -427,12 +427,12 @@ describe("channels command", () => {
             accountId: "default",
             enabled: true,
             configured: true,
-            probe: { ok: true, bot: { username: "moltbot_bot" } },
+            probe: { ok: true, bot: { username: "MrBeanBot_bot" } },
           },
         ],
       },
     });
-    expect(lines.join("\n")).toMatch(/bot:@moltbot_bot/);
+    expect(lines.join("\n")).toMatch(/bot:@MrBeanBot_bot/);
   });
 
   it("surfaces Telegram group membership audit issues in channels status output", () => {

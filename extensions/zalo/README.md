@@ -1,17 +1,17 @@
-# @clawdbot/zalo
+# @MrBeanBot/zalo
 
-Zalo channel plugin for Clawdbot (Bot API).
+Zalo channel plugin for MrBeanBot (Bot API).
 
 ## Install (local checkout)
 
 ```bash
-clawdbot plugins install ./extensions/zalo
+MrBeanBot plugins install ./extensions/zalo
 ```
 
 ## Install (npm)
 
 ```bash
-clawdbot plugins install @clawdbot/zalo
+MrBeanBot plugins install @MrBeanBot/zalo
 ```
 
 Onboarding: select Zalo and confirm the install prompt to fetch the plugin automatically.

@@ -1,6 +1,6 @@
 import AVFAudio
-import MoltbotKit
-import MoltbotProtocol
+import MrBeanBotKit
+import MrBeanBotProtocol
 import Foundation
 import Observation
 import OSLog

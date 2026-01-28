@@ -24,7 +24,7 @@ export type AcpServerOptions = {
 };
 
 export const ACP_AGENT_INFO = {
-  name: "moltbot-acp",
-  title: "Moltbot ACP Gateway",
+  name: "MrBeanBot-acp",
+  title: "MrBeanBot ACP Gateway",
   version: VERSION,
 };

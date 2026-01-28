@@ -1,15 +1,15 @@
 ---
-summary: "CLI reference for `moltbot docs` (search the live docs index)"
+summary: "CLI reference for `MrBeanBot docs` (search the live docs index)"
 read_when:
-  - You want to search the live Moltbot docs from the terminal
+  - You want to search the live MrBeanBot docs from the terminal
 ---
 
-# `moltbot docs`
+# `MrBeanBot docs`
 
 Search the live docs index.
 
 ```bash
-moltbot docs browser extension
-moltbot docs sandbox allowHostControl
+MrBeanBot docs browser extension
+MrBeanBot docs sandbox allowHostControl
 ```
 

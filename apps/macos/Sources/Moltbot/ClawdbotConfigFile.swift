@@ -1,19 +1,19 @@
-import MoltbotProtocol
+import MrBeanBotProtocol
 import Foundation
 
-enum MoltbotConfigFile {
+enum MrBeanBotConfigFile {
     private static let logger = Logger(subsystem: "bot.molt", category: "config")
 
     static func url() -> URL {
-        MoltbotPaths.configURL
+        MrBeanBotPaths.configURL
     }
 
     static func stateDirURL() -> URL {
-        MoltbotPaths.stateDirURL
+        MrBeanBotPaths.stateDirURL
     }
 
     static func defaultWorkspaceURL() -> URL {
-        MoltbotPaths.workspaceURL
+        MrBeanBotPaths.workspaceURL
     }
 
     static func loadDict() -> [String: Any] {

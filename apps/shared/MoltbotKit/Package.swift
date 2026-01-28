@@ -3,15 +3,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "MoltbotKit",
+    name: "MrBeanBotKit",
     platforms: [
         .iOS(.v18),
         .macOS(.v15),
     ],
     products: [
-        .library(name: "MoltbotProtocol", targets: ["MoltbotProtocol"]),
-        .library(name: "MoltbotKit", targets: ["MoltbotKit"]),
-        .library(name: "MoltbotChatUI", targets: ["MoltbotChatUI"]),
+        .library(name: "MrBeanBotProtocol", targets: ["MrBeanBotProtocol"]),
+        .library(name: "MrBeanBotKit", targets: ["MrBeanBotKit"]),
+        .library(name: "MrBeanBotChatUI", targets: ["MrBeanBotChatUI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/steipete/ElevenLabsKit", exact: "0.1.0"),
@@ -19,18 +19,18 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "MoltbotProtocol",
-            path: "Sources/MoltbotProtocol",
+            name: "MrBeanBotProtocol",
+            path: "Sources/MrBeanBotProtocol",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .target(
-            name: "MoltbotKit",
+            name: "MrBeanBotKit",
             dependencies: [
-                "MoltbotProtocol",
+                "MrBeanBotProtocol",
                 .product(name: "ElevenLabsKit", package: "ElevenLabsKit"),
             ],
-            path: "Sources/MoltbotKit",
+            path: "Sources/MrBeanBotKit",
             resources: [
                 .process("Resources"),
             ],
@@ -38,22 +38,22 @@ let package = Package(
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .target(
-            name: "MoltbotChatUI",
+            name: "MrBeanBotChatUI",
             dependencies: [
-                "MoltbotKit",
+                "MrBeanBotKit",
                 .product(
                     name: "Textual",
                     package: "textual",
                     condition: .when(platforms: [.macOS, .iOS])),
             ],
-            path: "Sources/MoltbotChatUI",
+            path: "Sources/MrBeanBotChatUI",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .testTarget(
-            name: "MoltbotKitTests",
-            dependencies: ["MoltbotKit", "MoltbotChatUI"],
-            path: "Tests/MoltbotKitTests",
+            name: "MrBeanBotKitTests",
+            dependencies: ["MrBeanBotKit", "MrBeanBotChatUI"],
+            path: "Tests/MrBeanBotKitTests",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
                 .enableExperimentalFeature("SwiftTesting"),

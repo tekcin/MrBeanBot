@@ -75,10 +75,10 @@ async function main() {
   }
 
   const baseDir = await fs.mkdtemp(
-    path.join(os.tmpdir(), "moltbot-zai-fallback-"),
+    path.join(os.tmpdir(), "MrBeanBot-zai-fallback-"),
   );
   const stateDir = path.join(baseDir, "state");
-  const configPath = path.join(baseDir, "moltbot.json");
+  const configPath = path.join(baseDir, "MrBeanBot.json");
   await fs.mkdir(stateDir, { recursive: true });
 
   const config = {
@@ -98,12 +98,12 @@ async function main() {
   await fs.writeFile(configPath, JSON.stringify(config, null, 2), "utf8");
 
   const sessionId =
-    process.env.CLAWDBOT_ZAI_FALLBACK_SESSION_ID ?? randomUUID();
+    process.env.MRBEANBOT_ZAI_FALLBACK_SESSION_ID ?? randomUUID();
 
   const baseEnv: NodeJS.ProcessEnv = {
     ...process.env,
-    CLAWDBOT_CONFIG_PATH: configPath,
-    CLAWDBOT_STATE_DIR: stateDir,
+    MRBEANBOT_CONFIG_PATH: configPath,
+    MRBEANBOT_STATE_DIR: stateDir,
     ZAI_API_KEY: zaiKey,
     Z_AI_API_KEY: "",
   };
@@ -127,7 +127,7 @@ async function main() {
   const run1 = await runCommand(
     "run1",
     [
-      "moltbot",
+      "MrBeanBot",
       "agent",
       "--local",
       "--session-id",
@@ -159,7 +159,7 @@ async function main() {
   const run2 = await runCommand(
     "run2",
     [
-      "moltbot",
+      "MrBeanBot",
       "agent",
       "--local",
       "--session-id",

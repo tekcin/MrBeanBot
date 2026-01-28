@@ -9,8 +9,8 @@ let package = Package(
         .macOS(.v15),
     ],
     products: [
-        .library(name: "MoltbotIPC", targets: ["MoltbotIPC"]),
-        .library(name: "MoltbotDiscovery", targets: ["MoltbotDiscovery"]),
+        .library(name: "MrBeanBotIPC", targets: ["MrBeanBotIPC"]),
+        .library(name: "MrBeanBotDiscovery", targets: ["MrBeanBotDiscovery"]),
         .executable(name: "MrBeanBot", targets: ["MrBeanBot"]),
         .executable(name: "mrbeanbot-mac", targets: ["MrBeanBotMacCLI"]),
     ],
@@ -20,33 +20,33 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-log.git", from: "1.8.0"),
         .package(url: "https://github.com/sparkle-project/Sparkle", from: "2.8.1"),
         .package(url: "https://github.com/steipete/Peekaboo.git", branch: "main"),
-        .package(path: "../shared/MoltbotKit"),
+        .package(path: "../shared/MrBeanBotKit"),
         .package(path: "../../Swabble"),
     ],
     targets: [
         .target(
-            name: "MoltbotIPC",
+            name: "MrBeanBotIPC",
             dependencies: [],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .target(
-            name: "MoltbotDiscovery",
+            name: "MrBeanBotDiscovery",
             dependencies: [
-                .product(name: "MoltbotKit", package: "MoltbotKit"),
+                .product(name: "MrBeanBotKit", package: "MrBeanBotKit"),
             ],
-            path: "Sources/MoltbotDiscovery",
+            path: "Sources/MrBeanBotDiscovery",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
             name: "MrBeanBot",
             dependencies: [
-                "MoltbotIPC",
-                "MoltbotDiscovery",
-                .product(name: "MoltbotKit", package: "MoltbotKit"),
-                .product(name: "MoltbotChatUI", package: "MoltbotKit"),
-                .product(name: "MoltbotProtocol", package: "MoltbotKit"),
+                "MrBeanBotIPC",
+                "MrBeanBotDiscovery",
+                .product(name: "MrBeanBotKit", package: "MrBeanBotKit"),
+                .product(name: "MrBeanBotChatUI", package: "MrBeanBotKit"),
+                .product(name: "MrBeanBotProtocol", package: "MrBeanBotKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
                 .product(name: "MenuBarExtraAccess", package: "MenuBarExtraAccess"),
                 .product(name: "Subprocess", package: "swift-subprocess"),
@@ -68,21 +68,21 @@ let package = Package(
         .executableTarget(
             name: "MrBeanBotMacCLI",
             dependencies: [
-                "MoltbotDiscovery",
-                .product(name: "MoltbotKit", package: "MoltbotKit"),
-                .product(name: "MoltbotProtocol", package: "MoltbotKit"),
+                "MrBeanBotDiscovery",
+                .product(name: "MrBeanBotKit", package: "MrBeanBotKit"),
+                .product(name: "MrBeanBotProtocol", package: "MrBeanBotKit"),
             ],
-            path: "Sources/MoltbotMacCLI",
+            path: "Sources/MrBeanBotMacCLI",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .testTarget(
-            name: "MoltbotIPCTests",
+            name: "MrBeanBotIPCTests",
             dependencies: [
-                "MoltbotIPC",
+                "MrBeanBotIPC",
                 "MrBeanBot",
-                "MoltbotDiscovery",
-                .product(name: "MoltbotProtocol", package: "MoltbotKit"),
+                "MrBeanBotDiscovery",
+                .product(name: "MrBeanBotProtocol", package: "MrBeanBotKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
             ],
             swiftSettings: [

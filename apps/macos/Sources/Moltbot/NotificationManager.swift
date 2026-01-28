@@ -1,4 +1,4 @@
-import MoltbotIPC
+import MrBeanBotIPC
 import Foundation
 import Security
 import UserNotifications

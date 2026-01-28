@@ -1,5 +1,5 @@
-import MoltbotKit
-import MoltbotProtocol
+import MrBeanBotKit
+import MrBeanBotProtocol
 import CoreGraphics
 import Foundation
 import OSLog

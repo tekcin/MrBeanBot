@@ -1,7 +1,7 @@
-import MoltbotKit
+import MrBeanBotKit
 import Foundation
 import Testing
-@testable import MoltbotChatUI
+@testable import MrBeanBotChatUI
 
 private struct TimeoutError: Error, CustomStringConvertible {
     let label: String
@@ -31,40 +31,40 @@ private actor TestChatTransportState {
     var abortedRunIds: [String] = []
 }
 
-private final class TestChatTransport: @unchecked Sendable, MoltbotChatTransport {
+private final class TestChatTransport: @unchecked Sendable, MrBeanBotChatTransport {
     private let state = TestChatTransportState()
-    private let historyResponses: [MoltbotChatHistoryPayload]
-    private let sessionsResponses: [MoltbotChatSessionsListResponse]
+    private let historyResponses: [MrBeanBotChatHistoryPayload]
+    private let sessionsResponses: [MrBeanBotChatSessionsListResponse]
 
-    private let stream: AsyncStream<MoltbotChatTransportEvent>
-    private let continuation: AsyncStream<MoltbotChatTransportEvent>.Continuation
+    private let stream: AsyncStream<MrBeanBotChatTransportEvent>
+    private let continuation: AsyncStream<MrBeanBotChatTransportEvent>.Continuation
 
     init(
-        historyResponses: [MoltbotChatHistoryPayload],
-        sessionsResponses: [MoltbotChatSessionsListResponse] = [])
+        historyResponses: [MrBeanBotChatHistoryPayload],
+        sessionsResponses: [MrBeanBotChatSessionsListResponse] = [])
     {
         self.historyResponses = historyResponses
         self.sessionsResponses = sessionsResponses
-        var cont: AsyncStream<MoltbotChatTransportEvent>.Continuation!
+        var cont: AsyncStream<MrBeanBotChatTransportEvent>.Continuation!
         self.stream = AsyncStream { c in
             cont = c
         }
         self.continuation = cont
     }
 
-    func events() -> AsyncStream<MoltbotChatTransportEvent> {
+    func events() -> AsyncStream<MrBeanBotChatTransportEvent> {
         self.stream
     }
 
     func setActiveSessionKey(_: String) async throws {}
 
-    func requestHistory(sessionKey: String) async throws -> MoltbotChatHistoryPayload {
+    func requestHistory(sessionKey: String) async throws -> MrBeanBotChatHistoryPayload {
         let idx = await self.state.historyCallCount
         await self.state.setHistoryCallCount(idx + 1)
         if idx < self.historyResponses.count {
             return self.historyResponses[idx]
         }
-        return self.historyResponses.last ?? MoltbotChatHistoryPayload(
+        return self.historyResponses.last ?? MrBeanBotChatHistoryPayload(
             sessionKey: sessionKey,
             sessionId: nil,
             messages: [],
@@ -76,23 +76,23 @@ private final class TestChatTransport: @unchecked Sendable, MoltbotChatTransport
         message _: String,
         thinking _: String,
         idempotencyKey: String,
-        attachments _: [MoltbotChatAttachmentPayload]) async throws -> MoltbotChatSendResponse
+        attachments _: [MrBeanBotChatAttachmentPayload]) async throws -> MrBeanBotChatSendResponse
     {
         await self.state.sentRunIdsAppend(idempotencyKey)
-        return MoltbotChatSendResponse(runId: idempotencyKey, status: "ok")
+        return MrBeanBotChatSendResponse(runId: idempotencyKey, status: "ok")
     }
 
     func abortRun(sessionKey _: String, runId: String) async throws {
         await self.state.abortedRunIdsAppend(runId)
     }
 
-    func listSessions(limit _: Int?) async throws -> MoltbotChatSessionsListResponse {
+    func listSessions(limit _: Int?) async throws -> MrBeanBotChatSessionsListResponse {
         let idx = await self.state.sessionsCallCount
         await self.state.setSessionsCallCount(idx + 1)
         if idx < self.sessionsResponses.count {
             return self.sessionsResponses[idx]
         }
-        return self.sessionsResponses.last ?? MoltbotChatSessionsListResponse(
+        return self.sessionsResponses.last ?? MrBeanBotChatSessionsListResponse(
             ts: nil,
             path: nil,
             count: 0,
@@ -104,7 +104,7 @@ private final class TestChatTransport: @unchecked Sendable, MoltbotChatTransport
         true
     }
 
-    func emit(_ evt: MoltbotChatTransportEvent) {
+    func emit(_ evt: MrBeanBotChatTransportEvent) {
         self.continuation.yield(evt)
     }
 
@@ -139,12 +139,12 @@ extension TestChatTransportState {
 @Suite struct ChatViewModelTests {
     @Test func streamsAssistantAndClearsOnFinal() async throws {
         let sessionId = "sess-main"
-        let history1 = MoltbotChatHistoryPayload(
+        let history1 = MrBeanBotChatHistoryPayload(
             sessionKey: "main",
             sessionId: sessionId,
             messages: [],
             thinkingLevel: "off")
-        let history2 = MoltbotChatHistoryPayload(
+        let history2 = MrBeanBotChatHistoryPayload(
             sessionKey: "main",
             sessionId: sessionId,
             messages: [
@@ -157,7 +157,7 @@ extension TestChatTransportState {
             thinkingLevel: "off")
 
         let transport = TestChatTransport(historyResponses: [history1, history2])
-        let vm = await MainActor.run { MoltbotChatViewModel(sessionKey: "main", transport: transport) }
+        let vm = await MainActor.run { MrBeanBotChatViewModel(sessionKey: "main", transport: transport) }
 
         await MainActor.run { vm.load() }
         try await waitUntil("bootstrap") { await MainActor.run { vm.healthOK && vm.sessionId == sessionId } }
@@ -170,7 +170,7 @@ extension TestChatTransportState {
 
         transport.emit(
             .agent(
-                MoltbotAgentEventPayload(
+                MrBeanBotAgentEventPayload(
                     runId: sessionId,
                     seq: 1,
                     stream: "assistant",
@@ -183,7 +183,7 @@ extension TestChatTransportState {
 
         transport.emit(
             .agent(
-                MoltbotAgentEventPayload(
+                MrBeanBotAgentEventPayload(
                     runId: sessionId,
                     seq: 2,
                     stream: "tool",
@@ -200,7 +200,7 @@ extension TestChatTransportState {
         let runId = try #require(await transport.lastSentRunId())
         transport.emit(
             .chat(
-                MoltbotChatEventPayload(
+                MrBeanBotChatEventPayload(
                     runId: runId,
                     sessionKey: "main",
                     state: "final",
@@ -217,20 +217,20 @@ extension TestChatTransportState {
 
     @Test func clearsStreamingOnExternalFinalEvent() async throws {
         let sessionId = "sess-main"
-        let history = MoltbotChatHistoryPayload(
+        let history = MrBeanBotChatHistoryPayload(
             sessionKey: "main",
             sessionId: sessionId,
             messages: [],
             thinkingLevel: "off")
         let transport = TestChatTransport(historyResponses: [history, history])
-        let vm = await MainActor.run { MoltbotChatViewModel(sessionKey: "main", transport: transport) }
+        let vm = await MainActor.run { MrBeanBotChatViewModel(sessionKey: "main", transport: transport) }
 
         await MainActor.run { vm.load() }
         try await waitUntil("bootstrap") { await MainActor.run { vm.healthOK && vm.sessionId == sessionId } }
 
         transport.emit(
             .agent(
-                MoltbotAgentEventPayload(
+                MrBeanBotAgentEventPayload(
                     runId: sessionId,
                     seq: 1,
                     stream: "assistant",
@@ -239,7 +239,7 @@ extension TestChatTransportState {
 
         transport.emit(
             .agent(
-                MoltbotAgentEventPayload(
+                MrBeanBotAgentEventPayload(
                     runId: sessionId,
                     seq: 2,
                     stream: "tool",
@@ -258,7 +258,7 @@ extension TestChatTransportState {
 
         transport.emit(
             .chat(
-                MoltbotChatEventPayload(
+                MrBeanBotChatEventPayload(
                     runId: "other-run",
                     sessionKey: "main",
                     state: "final",
@@ -274,18 +274,18 @@ extension TestChatTransportState {
         let recent = now - (2 * 60 * 60 * 1000)
         let recentOlder = now - (5 * 60 * 60 * 1000)
         let stale = now - (26 * 60 * 60 * 1000)
-        let history = MoltbotChatHistoryPayload(
+        let history = MrBeanBotChatHistoryPayload(
             sessionKey: "main",
             sessionId: "sess-main",
             messages: [],
             thinkingLevel: "off")
-        let sessions = MoltbotChatSessionsListResponse(
+        let sessions = MrBeanBotChatSessionsListResponse(
             ts: now,
             path: nil,
             count: 4,
             defaults: nil,
             sessions: [
-                MoltbotChatSessionEntry(
+                MrBeanBotChatSessionEntry(
                     key: "recent-1",
                     kind: nil,
                     displayName: nil,
@@ -304,7 +304,7 @@ extension TestChatTransportState {
                     totalTokens: nil,
                     model: nil,
                     contextTokens: nil),
-                MoltbotChatSessionEntry(
+                MrBeanBotChatSessionEntry(
                     key: "main",
                     kind: nil,
                     displayName: nil,
@@ -323,7 +323,7 @@ extension TestChatTransportState {
                     totalTokens: nil,
                     model: nil,
                     contextTokens: nil),
-                MoltbotChatSessionEntry(
+                MrBeanBotChatSessionEntry(
                     key: "recent-2",
                     kind: nil,
                     displayName: nil,
@@ -342,7 +342,7 @@ extension TestChatTransportState {
                     totalTokens: nil,
                     model: nil,
                     contextTokens: nil),
-                MoltbotChatSessionEntry(
+                MrBeanBotChatSessionEntry(
                     key: "old-1",
                     kind: nil,
                     displayName: nil,
@@ -366,7 +366,7 @@ extension TestChatTransportState {
         let transport = TestChatTransport(
             historyResponses: [history],
             sessionsResponses: [sessions])
-        let vm = await MainActor.run { MoltbotChatViewModel(sessionKey: "main", transport: transport) }
+        let vm = await MainActor.run { MrBeanBotChatViewModel(sessionKey: "main", transport: transport) }
         await MainActor.run { vm.load() }
         try await waitUntil("sessions loaded") { await MainActor.run { !vm.sessions.isEmpty } }
 
@@ -377,18 +377,18 @@ extension TestChatTransportState {
     @Test func sessionChoicesIncludeCurrentWhenMissing() async throws {
         let now = Date().timeIntervalSince1970 * 1000
         let recent = now - (30 * 60 * 1000)
-        let history = MoltbotChatHistoryPayload(
+        let history = MrBeanBotChatHistoryPayload(
             sessionKey: "custom",
             sessionId: "sess-custom",
             messages: [],
             thinkingLevel: "off")
-        let sessions = MoltbotChatSessionsListResponse(
+        let sessions = MrBeanBotChatSessionsListResponse(
             ts: now,
             path: nil,
             count: 1,
             defaults: nil,
             sessions: [
-                MoltbotChatSessionEntry(
+                MrBeanBotChatSessionEntry(
                     key: "main",
                     kind: nil,
                     displayName: nil,
@@ -412,7 +412,7 @@ extension TestChatTransportState {
         let transport = TestChatTransport(
             historyResponses: [history],
             sessionsResponses: [sessions])
-        let vm = await MainActor.run { MoltbotChatViewModel(sessionKey: "custom", transport: transport) }
+        let vm = await MainActor.run { MrBeanBotChatViewModel(sessionKey: "custom", transport: transport) }
         await MainActor.run { vm.load() }
         try await waitUntil("sessions loaded") { await MainActor.run { !vm.sessions.isEmpty } }
 
@@ -422,20 +422,20 @@ extension TestChatTransportState {
 
     @Test func clearsStreamingOnExternalErrorEvent() async throws {
         let sessionId = "sess-main"
-        let history = MoltbotChatHistoryPayload(
+        let history = MrBeanBotChatHistoryPayload(
             sessionKey: "main",
             sessionId: sessionId,
             messages: [],
             thinkingLevel: "off")
         let transport = TestChatTransport(historyResponses: [history, history])
-        let vm = await MainActor.run { MoltbotChatViewModel(sessionKey: "main", transport: transport) }
+        let vm = await MainActor.run { MrBeanBotChatViewModel(sessionKey: "main", transport: transport) }
 
         await MainActor.run { vm.load() }
         try await waitUntil("bootstrap") { await MainActor.run { vm.healthOK && vm.sessionId == sessionId } }
 
         transport.emit(
             .agent(
-                MoltbotAgentEventPayload(
+                MrBeanBotAgentEventPayload(
                     runId: sessionId,
                     seq: 1,
                     stream: "assistant",
@@ -448,7 +448,7 @@ extension TestChatTransportState {
 
         transport.emit(
             .chat(
-                MoltbotChatEventPayload(
+                MrBeanBotChatEventPayload(
                     runId: "other-run",
                     sessionKey: "main",
                     state: "error",
@@ -460,13 +460,13 @@ extension TestChatTransportState {
 
     @Test func abortRequestsDoNotClearPendingUntilAbortedEvent() async throws {
         let sessionId = "sess-main"
-        let history = MoltbotChatHistoryPayload(
+        let history = MrBeanBotChatHistoryPayload(
             sessionKey: "main",
             sessionId: sessionId,
             messages: [],
             thinkingLevel: "off")
         let transport = TestChatTransport(historyResponses: [history, history])
-        let vm = await MainActor.run { MoltbotChatViewModel(sessionKey: "main", transport: transport) }
+        let vm = await MainActor.run { MrBeanBotChatViewModel(sessionKey: "main", transport: transport) }
 
         await MainActor.run { vm.load() }
         try await waitUntil("bootstrap") { await MainActor.run { vm.healthOK && vm.sessionId == sessionId } }
@@ -490,7 +490,7 @@ extension TestChatTransportState {
 
         transport.emit(
             .chat(
-                MoltbotChatEventPayload(
+                MrBeanBotChatEventPayload(
                     runId: runId,
                     sessionKey: "main",
                     state: "aborted",

@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/zalo",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Zalo channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Zalo channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],
@@ -27,7 +27,7 @@
     }
   },
   "dependencies": {
-    "moltbot": "workspace:*",
+    "MrBeanBot": "workspace:*",
     "undici": "7.19.0"
   }
 }

@@ -4,7 +4,7 @@ import Foundation
 import Observation
 import SwiftUI
 
-/// Menu contents for the Moltbot menu bar extra.
+/// Menu contents for the MrBeanBot menu bar extra.
 struct MenuContent: View {
     @Bindable var state: AppState
     let updater: UpdaterProviding?
@@ -149,7 +149,7 @@ struct MenuContent: View {
             Button("Settings…") { self.open(tab: .general) }
                 .keyboardShortcut(",", modifiers: [.command])
             self.debugMenu
-            Button("About Moltbot") { self.open(tab: .about) }
+            Button("About MrBeanBot") { self.open(tab: .about) }
             if let updater, updater.isAvailable, self.updateStatus.isUpdateReady {
                 Button("Update ready, restart now?") { updater.checkForUpdates(nil) }
             }
@@ -185,11 +185,11 @@ struct MenuContent: View {
     private var connectionLabel: String {
         switch self.state.connectionMode {
         case .unconfigured:
-            "Moltbot Not Configured"
+            "MrBeanBot Not Configured"
         case .remote:
-            "Remote Moltbot Active"
+            "Remote MrBeanBot Active"
         case .local:
-            "Moltbot Active"
+            "MrBeanBot Active"
         }
     }
 
@@ -329,7 +329,7 @@ struct MenuContent: View {
         NSApp.activate(ignoringOtherApps: true)
         self.openSettings()
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .moltbotSelectSettingsTab, object: tab)
+            NotificationCenter.default.post(name: .MrBeanBotSelectSettingsTab, object: tab)
         }
     }
 

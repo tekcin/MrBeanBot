@@ -1,17 +1,17 @@
-import MoltbotKit
+import MrBeanBotKit
 import Network
 import Testing
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite struct GatewayEndpointIDTests {
     @Test func stableIDForServiceDecodesAndNormalizesName() {
         let endpoint = NWEndpoint.service(
-            name: "Moltbot\\032Gateway   \\032  Node\n",
-            type: "_moltbot-gw._tcp",
+            name: "MrBeanBot\\032Gateway   \\032  Node\n",
+            type: "_MrBeanBot-gw._tcp",
             domain: "local.",
             interface: nil)
 
-        #expect(GatewayEndpointID.stableID(endpoint) == "_moltbot-gw._tcp|local.|Moltbot Gateway Node")
+        #expect(GatewayEndpointID.stableID(endpoint) == "_MrBeanBot-gw._tcp|local.|MrBeanBot Gateway Node")
     }
 
     @Test func stableIDForNonServiceUsesEndpointDescription() {
@@ -21,8 +21,8 @@ import Testing
 
     @Test func prettyDescriptionDecodesBonjourEscapes() {
         let endpoint = NWEndpoint.service(
-            name: "Moltbot\\032Gateway",
-            type: "_moltbot-gw._tcp",
+            name: "MrBeanBot\\032Gateway",
+            type: "_MrBeanBot-gw._tcp",
             domain: "local.",
             interface: nil)
 

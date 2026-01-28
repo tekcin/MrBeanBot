@@ -1,5 +1,5 @@
-import type { ChannelOnboardingAdapter, MoltbotConfig, WizardPrompter } from "clawdbot/plugin-sdk";
-import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "clawdbot/plugin-sdk";
+import type { ChannelOnboardingAdapter, MrBeanBotConfig, WizardPrompter } from "MrBeanBot/plugin-sdk";
+import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "MrBeanBot/plugin-sdk";
 
 import {
   listMattermostAccountIds,
@@ -177,7 +177,7 @@ export const mattermostOnboardingAdapter: ChannelOnboardingAdapter = {
 
     return { cfg: next, accountId };
   },
-  disable: (cfg: MoltbotConfig) => ({
+  disable: (cfg: MrBeanBotConfig) => ({
     ...cfg,
     channels: {
       ...cfg.channels,

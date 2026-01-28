@@ -1,4 +1,4 @@
-import MoltbotKit
+import MrBeanBotKit
 import Foundation
 
 enum ChatPayloadDecoding {

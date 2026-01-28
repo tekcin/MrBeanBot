@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/googlechat",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Google Chat channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Google Chat channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],
@@ -31,9 +31,9 @@
     "google-auth-library": "^10.5.0"
   },
   "devDependencies": {
-    "moltbot": "workspace:*"
+    "MrBeanBot": "workspace:*"
   },
   "peerDependencies": {
-    "moltbot": ">=2026.1.26"
+    "MrBeanBot": ">=2026.1.26"
   }
 }

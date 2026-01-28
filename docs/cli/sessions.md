@@ -1,16 +1,16 @@
 ---
-summary: "CLI reference for `moltbot sessions` (list stored sessions + usage)"
+summary: "CLI reference for `MrBeanBot sessions` (list stored sessions + usage)"
 read_when:
   - You want to list stored sessions and see recent activity
 ---
 
-# `moltbot sessions`
+# `MrBeanBot sessions`
 
 List stored conversation sessions.
 
 ```bash
-moltbot sessions
-moltbot sessions --active 120
-moltbot sessions --json
+MrBeanBot sessions
+MrBeanBot sessions --active 120
+MrBeanBot sessions --json
 ```
 

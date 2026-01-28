@@ -1,8 +1,8 @@
-import type { MoltbotConfig } from "../../config/config.js";
+import type { MrBeanBotConfig } from "../../config/config.js";
 import type { AuthProfileStore } from "./types.js";
 
 export function resolveAuthProfileDisplayLabel(params: {
-  cfg?: MoltbotConfig;
+  cfg?: MrBeanBotConfig;
   store: AuthProfileStore;
   profileId: string;
 }): string {

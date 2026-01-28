@@ -1,12 +1,12 @@
-import type { MoltbotConfig, WizardPrompter } from "clawdbot/plugin-sdk";
-import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "clawdbot/plugin-sdk";
+import type { MrBeanBotConfig, WizardPrompter } from "MrBeanBot/plugin-sdk";
+import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "MrBeanBot/plugin-sdk";
 
 type PromptAccountIdParams = {
-  cfg: MoltbotConfig;
+  cfg: MrBeanBotConfig;
   prompter: WizardPrompter;
   label: string;
   currentId?: string;
-  listAccountIds: (cfg: MoltbotConfig) => string[];
+  listAccountIds: (cfg: MrBeanBotConfig) => string[];
   defaultAccountId: string;
 };
 

@@ -10,11 +10,11 @@ This document provides a comprehensive test plan for verifying the MrBeanBot reb
 - Node.js 22+ installed
 - pnpm installed
 - Git repository cloned: `https://github.com/tekcin/MrBeanBot`
-- No existing config at `~/.mrbeanbot/`, `~/.moltbot/`, or `~/.clawdbot/`
+- No existing config at `~/.mrbeanbot/`, `~/.MrBeanBot/`, or `~/.MrBeanBot/`
 
 ### Installation
 ```bash
-cd /home/tekcin/moltbot/moltbot
+cd /home/tekcin/MrBeanBot/MrBeanBot
 pnpm install
 pnpm build
 npm link  # Or: pnpm link --global
@@ -56,65 +56,65 @@ cat ~/.mrbeanbot/mrbeanbot.json
 - ✅ `mrbeanbot --version` shows "MrBeanBot" in output
 - ✅ All commands execute without errors
 - ✅ Config file created at `~/.mrbeanbot/mrbeanbot.json`
-- ✅ No references to "Moltbot" or "Clawdbot" in output
+- ✅ No references to "MrBeanBot" or "MrBeanBot" in output
 
 ---
 
-### 1.2 Compatibility Shim: moltbot
-**Objective**: Verify the `moltbot` command works as a compatibility alias.
+### 1.2 Compatibility Shim: MrBeanBot
+**Objective**: Verify the `MrBeanBot` command works as a compatibility alias.
 
 **Test Steps**:
 ```bash
 # Clean config
-rm -rf ~/.mrbeanbot ~/.moltbot ~/.clawdbot
+rm -rf ~/.mrbeanbot ~/.MrBeanBot ~/.MrBeanBot
 
-# Use moltbot command
-moltbot --version
+# Use MrBeanBot command
+MrBeanBot --version
 # Expected: Same output as mrbeanbot --version
 
-moltbot config set gateway.mode local
+MrBeanBot config set gateway.mode local
 # Expected: Config updated successfully
 
 # Verify config location
 ls -la ~/.mrbeanbot/
-# Expected: mrbeanbot.json exists (not moltbot.json)
+# Expected: mrbeanbot.json exists (not MrBeanBot.json)
 
 cat ~/.mrbeanbot/mrbeanbot.json | grep '"mode"'
 # Expected: "mode": "local"
 ```
 
 **Pass Criteria**:
-- ✅ `moltbot` command resolves and executes
+- ✅ `MrBeanBot` command resolves and executes
 - ✅ Config saved to `~/.mrbeanbot/mrbeanbot.json` (new location)
 - ✅ No errors or warnings about deprecated commands
 
 ---
 
-### 1.3 Compatibility Shim: clawdbot
-**Objective**: Verify the `clawdbot` command works as a compatibility alias.
+### 1.3 Compatibility Shim: MrBeanBot
+**Objective**: Verify the `MrBeanBot` command works as a compatibility alias.
 
 **Test Steps**:
 ```bash
 # Clean config
-rm -rf ~/.mrbeanbot ~/.moltbot ~/.clawdbot
+rm -rf ~/.mrbeanbot ~/.MrBeanBot ~/.MrBeanBot
 
-# Use clawdbot command
-clawdbot --version
+# Use MrBeanBot command
+MrBeanBot --version
 # Expected: Same output as mrbeanbot --version
 
-clawdbot config set gateway.bind lan
+MrBeanBot config set gateway.bind lan
 # Expected: Config updated successfully
 
 # Verify config location
 ls -la ~/.mrbeanbot/
-# Expected: mrbeanbot.json exists (not clawdbot.json)
+# Expected: mrbeanbot.json exists (not MrBeanBot.json)
 
 cat ~/.mrbeanbot/mrbeanbot.json | grep '"bind"'
 # Expected: "bind": "lan"
 ```
 
 **Pass Criteria**:
-- ✅ `clawdbot` command resolves and executes
+- ✅ `MrBeanBot` command resolves and executes
 - ✅ Config saved to `~/.mrbeanbot/mrbeanbot.json` (new location)
 - ✅ No errors or warnings about deprecated commands
 
@@ -122,15 +122,15 @@ cat ~/.mrbeanbot/mrbeanbot.json | grep '"bind"'
 
 ## 2. Configuration Migration Testing
 
-### 2.1 Legacy Config Migration: .moltbot
-**Objective**: Verify automatic migration from `~/.moltbot/` to `~/.mrbeanbot/`.
+### 2.1 Legacy Config Migration: .MrBeanBot
+**Objective**: Verify automatic migration from `~/.MrBeanBot/` to `~/.mrbeanbot/`.
 
 **Test Steps**:
 ```bash
 # Setup: Create legacy config
-rm -rf ~/.mrbeanbot ~/.moltbot ~/.clawdbot
-mkdir -p ~/.moltbot
-cat > ~/.moltbot/moltbot.json <<'EOF'
+rm -rf ~/.mrbeanbot ~/.MrBeanBot ~/.MrBeanBot
+mkdir -p ~/.MrBeanBot
+cat > ~/.MrBeanBot/MrBeanBot.json <<'EOF'
 {
   "meta": {
     "lastTouchedVersion": "2025.1.0"
@@ -164,22 +164,22 @@ cat ~/.mrbeanbot/mrbeanbot.json
 ```
 
 **Pass Criteria**:
-- ✅ Legacy config at `~/.moltbot/moltbot.json` read successfully
+- ✅ Legacy config at `~/.MrBeanBot/MrBeanBot.json` read successfully
 - ✅ Values migrated correctly
 - ✅ Write operations create new config at `~/.mrbeanbot/mrbeanbot.json`
-- ✅ Original `~/.moltbot/` remains untouched (non-destructive migration)
+- ✅ Original `~/.MrBeanBot/` remains untouched (non-destructive migration)
 
 ---
 
-### 2.2 Legacy Config Migration: .clawdbot
-**Objective**: Verify automatic migration from `~/.clawdbot/` to `~/.mrbeanbot/`.
+### 2.2 Legacy Config Migration: .MrBeanBot
+**Objective**: Verify automatic migration from `~/.MrBeanBot/` to `~/.mrbeanbot/`.
 
 **Test Steps**:
 ```bash
 # Setup: Create legacy config
-rm -rf ~/.mrbeanbot ~/.moltbot ~/.clawdbot
-mkdir -p ~/.clawdbot
-cat > ~/.clawdbot/clawdbot.json <<'EOF'
+rm -rf ~/.mrbeanbot ~/.MrBeanBot ~/.MrBeanBot
+mkdir -p ~/.MrBeanBot
+cat > ~/.MrBeanBot/MrBeanBot.json <<'EOF'
 {
   "gateway": {
     "mode": "tunnel",
@@ -204,26 +204,26 @@ cat ~/.mrbeanbot/mrbeanbot.json
 ```
 
 **Pass Criteria**:
-- ✅ Legacy config at `~/.clawdbot/clawdbot.json` read successfully
+- ✅ Legacy config at `~/.MrBeanBot/MrBeanBot.json` read successfully
 - ✅ Write operations create new config at `~/.mrbeanbot/mrbeanbot.json`
 
 ---
 
 ### 2.3 Config Priority Order
-**Objective**: Verify correct config priority: `.mrbeanbot` > `.moltbot` > `.clawdbot`.
+**Objective**: Verify correct config priority: `.mrbeanbot` > `.MrBeanBot` > `.MrBeanBot`.
 
 **Test Steps**:
 ```bash
 # Setup: Create all three configs with different values
-rm -rf ~/.mrbeanbot ~/.moltbot ~/.clawdbot
+rm -rf ~/.mrbeanbot ~/.MrBeanBot ~/.MrBeanBot
 
-mkdir -p ~/.clawdbot
-cat > ~/.clawdbot/clawdbot.json <<'EOF'
+mkdir -p ~/.MrBeanBot
+cat > ~/.MrBeanBot/MrBeanBot.json <<'EOF'
 {"gateway": {"port": 10000}}
 EOF
 
-mkdir -p ~/.moltbot
-cat > ~/.moltbot/moltbot.json <<'EOF'
+mkdir -p ~/.MrBeanBot
+cat > ~/.MrBeanBot/MrBeanBot.json <<'EOF'
 {"gateway": {"port": 20000}}
 EOF
 
@@ -240,17 +240,17 @@ mrbeanbot config get gateway.port
 rm -rf ~/.mrbeanbot
 
 mrbeanbot config get gateway.port
-# Expected: 20000 (falls back to .moltbot)
+# Expected: 20000 (falls back to .MrBeanBot)
 
-# Remove .moltbot
-rm -rf ~/.moltbot
+# Remove .MrBeanBot
+rm -rf ~/.MrBeanBot
 
 mrbeanbot config get gateway.port
-# Expected: 10000 (falls back to .clawdbot)
+# Expected: 10000 (falls back to .MrBeanBot)
 ```
 
 **Pass Criteria**:
-- ✅ Config priority: `.mrbeanbot` > `.moltbot` > `.clawdbot`
+- ✅ Config priority: `.mrbeanbot` > `.MrBeanBot` > `.MrBeanBot`
 - ✅ Fallback chain works correctly
 
 ---
@@ -258,45 +258,45 @@ mrbeanbot config get gateway.port
 ## 3. Environment Variable Testing
 
 ### 3.1 Environment Variable Priority
-**Objective**: Verify environment variable fallback: `MRBEANBOT_*` > `MOLTBOT_*` > `CLAWDBOT_*`.
+**Objective**: Verify environment variable fallback: `MRBEANBOT_*` > `MRBEANBOT_*` > `MRBEANBOT_*`.
 
 **Test Steps**:
 ```bash
 # Clean environment
 unset MRBEANBOT_CONFIG_PATH
-unset MOLTBOT_CONFIG_PATH
-unset CLAWDBOT_CONFIG_PATH
+unset MRBEANBOT_CONFIG_PATH
+unset MRBEANBOT_CONFIG_PATH
 
 # Test 1: MRBEANBOT_* takes precedence
 export MRBEANBOT_CONFIG_PATH="/tmp/test-mrbeanbot.json"
-export MOLTBOT_CONFIG_PATH="/tmp/test-moltbot.json"
-export CLAWDBOT_CONFIG_PATH="/tmp/test-clawdbot.json"
+export MRBEANBOT_CONFIG_PATH="/tmp/test-MrBeanBot.json"
+export MRBEANBOT_CONFIG_PATH="/tmp/test-MrBeanBot.json"
 
 echo '{"gateway":{"port":40000}}' > /tmp/test-mrbeanbot.json
-echo '{"gateway":{"port":50000}}' > /tmp/test-moltbot.json
-echo '{"gateway":{"port":60000}}' > /tmp/test-clawdbot.json
+echo '{"gateway":{"port":50000}}' > /tmp/test-MrBeanBot.json
+echo '{"gateway":{"port":60000}}' > /tmp/test-MrBeanBot.json
 
 mrbeanbot config get gateway.port
 # Expected: 40000 (uses MRBEANBOT_*)
 
-# Test 2: Falls back to MOLTBOT_*
+# Test 2: Falls back to MRBEANBOT_*
 unset MRBEANBOT_CONFIG_PATH
 mrbeanbot config get gateway.port
-# Expected: 50000 (uses MOLTBOT_*)
+# Expected: 50000 (uses MRBEANBOT_*)
 
-# Test 3: Falls back to CLAWDBOT_*
-unset MOLTBOT_CONFIG_PATH
+# Test 3: Falls back to MRBEANBOT_*
+unset MRBEANBOT_CONFIG_PATH
 mrbeanbot config get gateway.port
-# Expected: 60000 (uses CLAWDBOT_*)
+# Expected: 60000 (uses MRBEANBOT_*)
 
 # Cleanup
 rm -f /tmp/test-*.json
-unset MRBEANBOT_CONFIG_PATH MOLTBOT_CONFIG_PATH CLAWDBOT_CONFIG_PATH
+unset MRBEANBOT_CONFIG_PATH MRBEANBOT_CONFIG_PATH MRBEANBOT_CONFIG_PATH
 ```
 
 **Pass Criteria**:
 - ✅ Environment variable priority works correctly
-- ✅ Fallback chain: `MRBEANBOT_*` > `MOLTBOT_*` > `CLAWDBOT_*`
+- ✅ Fallback chain: `MRBEANBOT_*` > `MRBEANBOT_*` > `MRBEANBOT_*`
 
 ---
 
@@ -365,7 +365,7 @@ tail -f /tmp/mrbeanbot/mrbeanbot-$(date +%Y-%m-%d).log
 - ✅ Gateway starts successfully
 - ✅ Logs appear in `/tmp/mrbeanbot/` directory
 - ✅ Log filename prefix is `mrbeanbot-`
-- ✅ No references to "moltbot" or "clawdbot" in logs
+- ✅ No references to "MrBeanBot" or "MrBeanBot" in logs
 
 ---
 
@@ -401,7 +401,7 @@ mrbeanbot gateway uninstall
 
 **Pass Criteria** (macOS):
 - ✅ Service installed with bundle ID `com.tekcin.mrbeanbot.gateway`
-- ✅ No legacy services (`bot.molt.*`, `com.clawdbot.*`) remain
+- ✅ No legacy services (`bot.molt.*`, `com.MrBeanBot.*`) remain
 - ✅ Service starts and runs correctly
 
 ---
@@ -478,7 +478,7 @@ avahi-browse -r _mrbeanbot-gw._tcp
 
 **Test Steps**:
 ```bash
-cd /home/tekcin/moltbot/moltbot
+cd /home/tekcin/MrBeanBot/MrBeanBot
 
 # Clean build
 rm -rf dist
@@ -492,14 +492,14 @@ ls -la dist/
 # Expected: Compiled JavaScript files present
 
 # Check for branding in output
-grep -r "Moltbot" dist/ || echo "No Moltbot references found"
+grep -r "MrBeanBot" dist/ || echo "No MrBeanBot references found"
 # Expected: Minimal/no references (type compatibility only)
 ```
 
 **Pass Criteria**:
 - ✅ `pnpm build` succeeds without errors
 - ✅ Output directory `dist/` created
-- ✅ No unexpected "Moltbot" references in compiled output
+- ✅ No unexpected "MrBeanBot" references in compiled output
 
 ---
 
@@ -508,7 +508,7 @@ grep -r "Moltbot" dist/ || echo "No Moltbot references found"
 
 **Test Steps**:
 ```bash
-cd /home/tekcin/moltbot/moltbot
+cd /home/tekcin/MrBeanBot/MrBeanBot
 
 # Run full test suite
 pnpm test
@@ -541,9 +541,9 @@ for dir in extensions/*/; do
 done
 # Expected: All show "@mrbeanbot/*" scope
 
-# Verify no @moltbot references
-grep -r "@moltbot/" extensions/*/package.json || echo "None found"
-# Expected: No @moltbot references
+# Verify no @MrBeanBot references
+grep -r "@MrBeanBot/" extensions/*/package.json || echo "None found"
+# Expected: No @MrBeanBot references
 
 # Build extensions (if applicable)
 pnpm build
@@ -552,7 +552,7 @@ pnpm build
 
 **Pass Criteria**:
 - ✅ All 28 extension packages use `@mrbeanbot/*` scope
-- ✅ No `@moltbot/*` references remain
+- ✅ No `@MrBeanBot/*` references remain
 - ✅ Extensions build without errors
 
 ---
@@ -640,13 +640,13 @@ cat apps/macos/Package.swift | grep "name:"
 # Expected: "MrBeanBot"
 
 # Check Info.plist
-cat apps/macos/Sources/Moltbot/Resources/Info.plist | grep CFBundleIdentifier -A 1
+cat apps/macos/Sources/MrBeanBot/Resources/Info.plist | grep CFBundleIdentifier -A 1
 # Expected: com.tekcin.mrbeanbot.mac
 
-cat apps/macos/Sources/Moltbot/Resources/Info.plist | grep CFBundleName -A 1
+cat apps/macos/Sources/MrBeanBot/Resources/Info.plist | grep CFBundleName -A 1
 # Expected: MrBeanBot
 
-cat apps/macos/Sources/Moltbot/Resources/Info.plist | grep CFBundleURLSchemes -A 1
+cat apps/macos/Sources/MrBeanBot/Resources/Info.plist | grep CFBundleURLSchemes -A 1
 # Expected: mrbeanbot
 
 # Build (requires Xcode)
@@ -689,7 +689,7 @@ cat index.html | grep "<mrbeanbot-app>"
 # Open in browser and verify:
 # - Title bar shows "MrBeanBot Control"
 # - No lobster emoji
-# - No "Moltbot" references
+# - No "MrBeanBot" references
 ```
 
 **Pass Criteria**:
@@ -713,13 +713,13 @@ cat src/canvas-host/a2ui/index.html | grep "@keyframes"
 # Expected: mrbeanbot-grid-drift, mrbeanbot-glow-drift
 
 # Check Swift scaffold
-cat apps/shared/MoltbotKit/Sources/MoltbotKit/Resources/CanvasScaffold/scaffold.html | grep "@keyframes"
+cat apps/shared/MrBeanBotKit/Sources/MrBeanBotKit/Resources/CanvasScaffold/scaffold.html | grep "@keyframes"
 # Expected: mrbeanbot-grid-drift, mrbeanbot-glow-drift
 
 # Visual test: Open canvas in browser and verify:
 # - Animated grid background
 # - Blue/pink/cyan gradient theme
-# - No "moltbot" in CSS animations
+# - No "MrBeanBot" in CSS animations
 ```
 
 **Pass Criteria**:
@@ -740,7 +740,7 @@ cat apps/shared/MoltbotKit/Sources/MoltbotKit/Resources/CanvasScaffold/scaffold.
 cat README.md | head -20
 
 # Verify no old branding
-grep -i "moltbot" README.md | wc -l
+grep -i "MrBeanBot" README.md | wc -l
 # Expected: Minimal references (mainly in migration/compatibility sections)
 
 grep -i "🦞" README.md
@@ -804,7 +804,7 @@ cat package.json | jq '.repository.url'
 # Expected: "https://github.com/tekcin/MrBeanBot.git"
 
 cat package.json | jq '.bin'
-# Expected: Three commands: mrbeanbot, moltbot, clawdbot
+# Expected: Three commands: mrbeanbot, MrBeanBot, MrBeanBot
 ```
 
 **Pass Criteria**:
@@ -872,7 +872,7 @@ grep "DEFAULT.*PROFILE" src/browser/constants.ts
 **Test Steps**:
 ```bash
 # 1. Clean install
-rm -rf ~/.mrbeanbot ~/.moltbot ~/.clawdbot
+rm -rf ~/.mrbeanbot ~/.MrBeanBot ~/.MrBeanBot
 pnpm build
 
 # 2. Initialize config
@@ -896,8 +896,8 @@ curl http://localhost:18789/health
 kill $GATEWAY_PID
 
 # 7. Test compatibility aliases
-moltbot config get gateway.port
-clawdbot config get gateway.port
+MrBeanBot config get gateway.port
+MrBeanBot config get gateway.port
 
 # 8. Verify config location
 ls -la ~/.mrbeanbot/mrbeanbot.json
@@ -955,12 +955,12 @@ Build Version: [VERSION]
 
 1. CLI Command Testing:
    - Primary command (mrbeanbot): [ PASS / FAIL ]
-   - Compatibility shim (moltbot): [ PASS / FAIL ]
-   - Compatibility shim (clawdbot): [ PASS / FAIL ]
+   - Compatibility shim (MrBeanBot): [ PASS / FAIL ]
+   - Compatibility shim (MrBeanBot): [ PASS / FAIL ]
 
 2. Configuration Migration:
-   - .moltbot migration: [ PASS / FAIL ]
-   - .clawdbot migration: [ PASS / FAIL ]
+   - .MrBeanBot migration: [ PASS / FAIL ]
+   - .MrBeanBot migration: [ PASS / FAIL ]
    - Config priority: [ PASS / FAIL ]
 
 3. Environment Variables:
@@ -1026,8 +1026,8 @@ echo ""
 # Test 1: CLI Commands
 echo "Test 1: CLI Commands"
 mrbeanbot --version | grep -q "MrBeanBot" && echo "✅ mrbeanbot command works" || echo "❌ mrbeanbot command failed"
-moltbot --version | grep -q "MrBeanBot" && echo "✅ moltbot shim works" || echo "❌ moltbot shim failed"
-clawdbot --version | grep -q "MrBeanBot" && echo "✅ clawdbot shim works" || echo "❌ clawdbot shim failed"
+MrBeanBot --version | grep -q "MrBeanBot" && echo "✅ MrBeanBot shim works" || echo "❌ MrBeanBot shim failed"
+MrBeanBot --version | grep -q "MrBeanBot" && echo "✅ MrBeanBot shim works" || echo "❌ MrBeanBot shim failed"
 echo ""
 
 # Test 2: Config Location
@@ -1051,9 +1051,9 @@ echo ""
 
 # Test 5: No Old Branding in Output
 echo "Test 5: Branding Check"
-grep -r "Moltbot" dist/ > /tmp/branding-check.txt 2>&1 || true
-MOLTBOT_COUNT=$(wc -l < /tmp/branding-check.txt)
-[ "$MOLTBOT_COUNT" -lt 5 ] && echo "✅ Minimal old branding in build output" || echo "⚠️  Old branding found ($MOLTBOT_COUNT instances)"
+grep -r "MrBeanBot" dist/ > /tmp/branding-check.txt 2>&1 || true
+MRBEANBOT_COUNT=$(wc -l < /tmp/branding-check.txt)
+[ "$MRBEANBOT_COUNT" -lt 5 ] && echo "✅ Minimal old branding in build output" || echo "⚠️  Old branding found ($MRBEANBOT_COUNT instances)"
 echo ""
 
 echo "=== Test Suite Complete ==="
@@ -1065,7 +1065,7 @@ Save this as `test-rebranding.sh`, make it executable (`chmod +x test-rebranding
 
 ## Troubleshooting Guide
 
-### Issue: Command not found (mrbeanbot, moltbot, or clawdbot)
+### Issue: Command not found (mrbeanbot, MrBeanBot, or MrBeanBot)
 **Solution**:
 ```bash
 # Re-link package
@@ -1080,10 +1080,10 @@ npm install -g .
 **Solution**:
 ```bash
 # Verify legacy config exists and is valid JSON
-cat ~/.moltbot/moltbot.json | jq .
+cat ~/.MrBeanBot/MrBeanBot.json | jq .
 
 # Check file permissions
-ls -la ~/.moltbot/
+ls -la ~/.MrBeanBot/
 
 # Enable debug logging
 export DEBUG=mrbeanbot:*
@@ -1107,7 +1107,7 @@ mrbeanbot gateway run --port 19000
 **Solution**:
 ```bash
 # Update test fixtures
-find . -name "*.test.ts" -exec grep -l "Moltbot" {} \;
+find . -name "*.test.ts" -exec grep -l "MrBeanBot" {} \;
 
 # Run specific test with verbose output
 pnpm test -- path/to/failing.test.ts
@@ -1120,12 +1120,12 @@ pnpm test -- path/to/failing.test.ts
 Quick reference checklist:
 
 - [ ] `mrbeanbot --version` works
-- [ ] `moltbot --version` works (shim)
-- [ ] `clawdbot --version` works (shim)
+- [ ] `MrBeanBot --version` works (shim)
+- [ ] `MrBeanBot --version` works (shim)
 - [ ] Config created at `~/.mrbeanbot/mrbeanbot.json`
-- [ ] Legacy config at `~/.moltbot/` read correctly
-- [ ] Legacy config at `~/.clawdbot/` read correctly
-- [ ] Environment variable fallback: MRBEANBOT_* > MOLTBOT_* > CLAWDBOT_*
+- [ ] Legacy config at `~/.MrBeanBot/` read correctly
+- [ ] Legacy config at `~/.MrBeanBot/` read correctly
+- [ ] Environment variable fallback: MRBEANBOT_* > MRBEANBOT_* > MRBEANBOT_*
 - [ ] Gateway starts with new log directory `/tmp/mrbeanbot/`
 - [ ] Service installs with bundle ID `com.tekcin.mrbeanbot.*`
 - [ ] Bonjour advertises `_mrbeanbot-gw._tcp`

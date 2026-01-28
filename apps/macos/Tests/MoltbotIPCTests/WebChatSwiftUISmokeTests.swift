@@ -1,18 +1,18 @@
 import AppKit
-import MoltbotChatUI
+import MrBeanBotChatUI
 import Foundation
 import Testing
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite(.serialized)
 @MainActor
 struct WebChatSwiftUISmokeTests {
-    private struct TestTransport: MoltbotChatTransport, Sendable {
-        func requestHistory(sessionKey: String) async throws -> MoltbotChatHistoryPayload {
+    private struct TestTransport: MrBeanBotChatTransport, Sendable {
+        func requestHistory(sessionKey: String) async throws -> MrBeanBotChatHistoryPayload {
             let json = """
             {"sessionKey":"\(sessionKey)","sessionId":null,"messages":[],"thinkingLevel":"off"}
             """
-            return try JSONDecoder().decode(MoltbotChatHistoryPayload.self, from: Data(json.utf8))
+            return try JSONDecoder().decode(MrBeanBotChatHistoryPayload.self, from: Data(json.utf8))
         }
 
         func sendMessage(
@@ -20,17 +20,17 @@ struct WebChatSwiftUISmokeTests {
             message _: String,
             thinking _: String,
             idempotencyKey _: String,
-            attachments _: [MoltbotChatAttachmentPayload]) async throws -> MoltbotChatSendResponse
+            attachments _: [MrBeanBotChatAttachmentPayload]) async throws -> MrBeanBotChatSendResponse
         {
             let json = """
             {"runId":"\(UUID().uuidString)","status":"ok"}
             """
-            return try JSONDecoder().decode(MoltbotChatSendResponse.self, from: Data(json.utf8))
+            return try JSONDecoder().decode(MrBeanBotChatSendResponse.self, from: Data(json.utf8))
         }
 
         func requestHealth(timeoutMs _: Int) async throws -> Bool { true }
 
-        func events() -> AsyncStream<MoltbotChatTransportEvent> {
+        func events() -> AsyncStream<MrBeanBotChatTransportEvent> {
             AsyncStream { continuation in
                 continuation.finish()
             }

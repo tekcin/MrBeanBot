@@ -18,10 +18,10 @@ async function withLaunchctlStub(
   run: (context: { env: Record<string, string | undefined>; logPath: string }) => Promise<void>,
 ) {
   const originalPath = process.env.PATH;
-  const originalLogPath = process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG;
-  const originalListOutput = process.env.CLAWDBOT_TEST_LAUNCHCTL_LIST_OUTPUT;
+  const originalLogPath = process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG;
+  const originalListOutput = process.env.MRBEANBOT_TEST_LAUNCHCTL_LIST_OUTPUT;
 
-  const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "moltbot-launchctl-test-"));
+  const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-launchctl-test-"));
   try {
     const binDir = path.join(tmpDir, "bin");
     const homeDir = path.join(tmpDir, "home");
@@ -35,12 +35,12 @@ async function withLaunchctlStub(
       [
         'import fs from "node:fs";',
         "const args = process.argv.slice(2);",
-        "const logPath = process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG;",
+        "const logPath = process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG;",
         "if (logPath) {",
         '  fs.appendFileSync(logPath, JSON.stringify(args) + "\\n", "utf8");',
         "}",
         'if (args[0] === "list") {',
-        '  const output = process.env.CLAWDBOT_TEST_LAUNCHCTL_LIST_OUTPUT || "";',
+        '  const output = process.env.MRBEANBOT_TEST_LAUNCHCTL_LIST_OUTPUT || "";',
         "  process.stdout.write(output);",
         "}",
         "process.exit(0);",
@@ -61,28 +61,28 @@ async function withLaunchctlStub(
       await fs.chmod(shPath, 0o755);
     }
 
-    process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG = logPath;
-    process.env.CLAWDBOT_TEST_LAUNCHCTL_LIST_OUTPUT = options.listOutput ?? "";
+    process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG = logPath;
+    process.env.MRBEANBOT_TEST_LAUNCHCTL_LIST_OUTPUT = options.listOutput ?? "";
     process.env.PATH = `${binDir}${path.delimiter}${originalPath ?? ""}`;
 
     await run({
       env: {
         HOME: homeDir,
-        CLAWDBOT_PROFILE: "default",
+        MRBEANBOT_PROFILE: "default",
       },
       logPath,
     });
   } finally {
     process.env.PATH = originalPath;
     if (originalLogPath === undefined) {
-      delete process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG;
+      delete process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG;
     } else {
-      process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG = originalLogPath;
+      process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG = originalLogPath;
     }
     if (originalListOutput === undefined) {
-      delete process.env.CLAWDBOT_TEST_LAUNCHCTL_LIST_OUTPUT;
+      delete process.env.MRBEANBOT_TEST_LAUNCHCTL_LIST_OUTPUT;
     } else {
-      process.env.CLAWDBOT_TEST_LAUNCHCTL_LIST_OUTPUT = originalListOutput;
+      process.env.MRBEANBOT_TEST_LAUNCHCTL_LIST_OUTPUT = originalListOutput;
     }
     await fs.rm(tmpDir, { recursive: true, force: true });
   }
@@ -148,9 +148,9 @@ describe("launchd bootstrap repair", () => {
 describe("launchd install", () => {
   it("enables service before bootstrap (clears persisted disabled state)", async () => {
     const originalPath = process.env.PATH;
-    const originalLogPath = process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG;
+    const originalLogPath = process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG;
 
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "moltbot-launchctl-test-"));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-launchctl-test-"));
     try {
       const binDir = path.join(tmpDir, "bin");
       const homeDir = path.join(tmpDir, "home");
@@ -163,7 +163,7 @@ describe("launchd install", () => {
         stubJsPath,
         [
           'import fs from "node:fs";',
-          "const logPath = process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG;",
+          "const logPath = process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG;",
           "if (logPath) {",
           '  fs.appendFileSync(logPath, JSON.stringify(process.argv.slice(2)) + "\\n", "utf8");',
           "}",
@@ -185,12 +185,12 @@ describe("launchd install", () => {
         await fs.chmod(shPath, 0o755);
       }
 
-      process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG = logPath;
+      process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG = logPath;
       process.env.PATH = `${binDir}${path.delimiter}${originalPath ?? ""}`;
 
       const env: Record<string, string | undefined> = {
         HOME: homeDir,
-        CLAWDBOT_PROFILE: "default",
+        MRBEANBOT_PROFILE: "default",
       };
       await installLaunchAgent({
         env,
@@ -221,9 +221,9 @@ describe("launchd install", () => {
     } finally {
       process.env.PATH = originalPath;
       if (originalLogPath === undefined) {
-        delete process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG;
+        delete process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG;
       } else {
-        process.env.CLAWDBOT_TEST_LAUNCHCTL_LOG = originalLogPath;
+        process.env.MRBEANBOT_TEST_LAUNCHCTL_LOG = originalLogPath;
       }
       await fs.rm(tmpDir, { recursive: true, force: true });
     }
@@ -231,53 +231,53 @@ describe("launchd install", () => {
 });
 
 describe("resolveLaunchAgentPlistPath", () => {
-  it("uses default label when CLAWDBOT_PROFILE is default", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "default" };
+  it("uses default label when MRBEANBOT_PROFILE is default", () => {
+    const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "default" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 
-  it("uses default label when CLAWDBOT_PROFILE is unset", () => {
+  it("uses default label when MRBEANBOT_PROFILE is unset", () => {
     const env = { HOME: "/Users/test" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 
-  it("uses profile-specific label when CLAWDBOT_PROFILE is set to a custom value", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "jbphoenix" };
+  it("uses profile-specific label when MRBEANBOT_PROFILE is set to a custom value", () => {
+    const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "jbphoenix" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/bot.molt.jbphoenix.plist",
     );
   });
 
-  it("prefers CLAWDBOT_LAUNCHD_LABEL over CLAWDBOT_PROFILE", () => {
+  it("prefers MRBEANBOT_LAUNCHD_LABEL over MRBEANBOT_PROFILE", () => {
     const env = {
       HOME: "/Users/test",
-      CLAWDBOT_PROFILE: "jbphoenix",
-      CLAWDBOT_LAUNCHD_LABEL: "com.custom.label",
+      MRBEANBOT_PROFILE: "jbphoenix",
+      MRBEANBOT_LAUNCHD_LABEL: "com.custom.label",
     };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/com.custom.label.plist",
     );
   });
 
-  it("trims whitespace from CLAWDBOT_LAUNCHD_LABEL", () => {
+  it("trims whitespace from MRBEANBOT_LAUNCHD_LABEL", () => {
     const env = {
       HOME: "/Users/test",
-      CLAWDBOT_LAUNCHD_LABEL: "  com.custom.label  ",
+      MRBEANBOT_LAUNCHD_LABEL: "  com.custom.label  ",
     };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/com.custom.label.plist",
     );
   });
 
-  it("ignores empty CLAWDBOT_LAUNCHD_LABEL and falls back to profile", () => {
+  it("ignores empty MRBEANBOT_LAUNCHD_LABEL and falls back to profile", () => {
     const env = {
       HOME: "/Users/test",
-      CLAWDBOT_PROFILE: "myprofile",
-      CLAWDBOT_LAUNCHD_LABEL: "   ",
+      MRBEANBOT_PROFILE: "myprofile",
+      MRBEANBOT_LAUNCHD_LABEL: "   ",
     };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/bot.molt.myprofile.plist",
@@ -285,21 +285,21 @@ describe("resolveLaunchAgentPlistPath", () => {
   });
 
   it("handles case-insensitive 'Default' profile", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "Default" };
+    const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "Default" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 
   it("handles case-insensitive 'DEFAULT' profile", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "DEFAULT" };
+    const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "DEFAULT" };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/com.tekcin.mrbeanbot.gateway.plist",
     );
   });
 
-  it("trims whitespace from CLAWDBOT_PROFILE", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "  myprofile  " };
+  it("trims whitespace from MRBEANBOT_PROFILE", () => {
+    const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "  myprofile  " };
     expect(resolveLaunchAgentPlistPath(env)).toBe(
       "/Users/test/Library/LaunchAgents/bot.molt.myprofile.plist",
     );

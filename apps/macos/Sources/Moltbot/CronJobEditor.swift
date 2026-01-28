@@ -1,4 +1,4 @@
-import MoltbotProtocol
+import MrBeanBotProtocol
 import Observation
 import SwiftUI
 

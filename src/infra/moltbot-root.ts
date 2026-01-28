@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const CORE_PACKAGE_NAMES = new Set(["mrbeanbot", "moltbot", "clawdbot"]);
+const CORE_PACKAGE_NAMES = new Set(["mrbeanbot", "MrBeanBot", "MrBeanBot"]);
 
 async function readPackageName(dir: string): Promise<string | null> {
   try {
@@ -65,4 +65,4 @@ export async function resolveMrBeanBotPackageRoot(opts: {
 }
 
 /** @deprecated Use resolveMrBeanBotPackageRoot instead. Provided for backward compatibility. */
-export const resolveMoltbotPackageRoot = resolveMrBeanBotPackageRoot;
+export const resolveMrBeanBotPackageRoot = resolveMrBeanBotPackageRoot;

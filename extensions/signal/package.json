@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/signal",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Signal channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Signal channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ]

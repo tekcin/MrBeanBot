@@ -10,8 +10,8 @@ settings:
     SWIFT_VERSION: "6.0"
 
 packages:
-  MoltbotKit:
-    path: ../shared/MoltbotKit
+  MrBeanBotKit:
+    path: ../shared/MrBeanBotKit
   Swabble:
     path: ../../Swabble
 
@@ -32,11 +32,11 @@ targets:
     sources:
       - path: Sources
     dependencies:
-      - package: MoltbotKit
-      - package: MoltbotKit
-        product: MoltbotChatUI
-      - package: MoltbotKit
-        product: MoltbotProtocol
+      - package: MrBeanBotKit
+      - package: MrBeanBotKit
+        product: MrBeanBotChatUI
+      - package: MrBeanBotKit
+        product: MrBeanBotProtocol
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework

@@ -51,19 +51,19 @@ export function registerAgentCommands(program: Command, args: { agentChannelOpti
         `
 ${theme.heading("Examples:")}
 ${formatHelpExamples([
-  ['moltbot agent --to +15555550123 --message "status update"', "Start a new session."],
-  ['moltbot agent --agent ops --message "Summarize logs"', "Use a specific agent."],
+  ['MrBeanBot agent --to +15555550123 --message "status update"', "Start a new session."],
+  ['MrBeanBot agent --agent ops --message "Summarize logs"', "Use a specific agent."],
   [
-    'moltbot agent --session-id 1234 --message "Summarize inbox" --thinking medium',
+    'MrBeanBot agent --session-id 1234 --message "Summarize inbox" --thinking medium',
     "Target a session with explicit thinking level.",
   ],
   [
-    'moltbot agent --to +15555550123 --message "Trace logs" --verbose on --json',
+    'MrBeanBot agent --to +15555550123 --message "Trace logs" --verbose on --json',
     "Enable verbose logging and JSON output.",
   ],
-  ['moltbot agent --to +15555550123 --message "Summon reply" --deliver', "Deliver reply."],
+  ['MrBeanBot agent --to +15555550123 --message "Summon reply" --deliver', "Deliver reply."],
   [
-    'moltbot agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"',
+    'MrBeanBot agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"',
     "Send reply to a different channel/target.",
   ],
 ])}
@@ -155,11 +155,11 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.molt.bot/cli/agent"
         `
 ${theme.heading("Examples:")}
 ${formatHelpExamples([
-  ['moltbot agents set-identity --agent main --name "Clawd" --emoji "🦞"', "Set name + emoji."],
-  ["moltbot agents set-identity --agent main --avatar avatars/clawd.png", "Set avatar path."],
-  ["moltbot agents set-identity --workspace ~/clawd --from-identity", "Load from IDENTITY.md."],
+  ['MrBeanBot agents set-identity --agent main --name "Clawd" --emoji "🦞"', "Set name + emoji."],
+  ["MrBeanBot agents set-identity --agent main --avatar avatars/clawd.png", "Set avatar path."],
+  ["MrBeanBot agents set-identity --workspace ~/clawd --from-identity", "Load from IDENTITY.md."],
   [
-    "moltbot agents set-identity --identity-file ~/clawd/IDENTITY.md --agent main",
+    "MrBeanBot agents set-identity --identity-file ~/clawd/IDENTITY.md --agent main",
     "Use a specific IDENTITY.md.",
   ],
 ])}

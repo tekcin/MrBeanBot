@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/whatsapp",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot WhatsApp channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot WhatsApp channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ]

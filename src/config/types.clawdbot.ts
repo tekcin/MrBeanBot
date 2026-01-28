@@ -121,4 +121,4 @@ export type ConfigFileSnapshot = {
 };
 
 // Backward compatibility alias
-export type MoltbotConfig = MrBeanBotConfig;
+export type MrBeanBotConfig = MrBeanBotConfig;

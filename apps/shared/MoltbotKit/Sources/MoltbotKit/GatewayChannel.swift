@@ -1,4 +1,4 @@
-import MoltbotProtocol
+import MrBeanBotProtocol
 import Foundation
 import OSLog
 
@@ -102,7 +102,7 @@ public enum GatewayAuthSource: String, Sendable {
 }
 
 // Avoid ambiguity with the app's own AnyCodable type.
-private typealias ProtoAnyCodable = MoltbotProtocol.AnyCodable
+private typealias ProtoAnyCodable = MrBeanBotProtocol.AnyCodable
 
 private enum ConnectChallengeError: Error {
     case timeout
@@ -268,7 +268,7 @@ public actor GatewayChannelActor {
             caps: [],
             commands: [],
             permissions: [:],
-            clientId: "moltbot-macos",
+            clientId: "MrBeanBot-macos",
             clientMode: "ui",
             clientDisplayName: InstanceIdentity.displayName)
         let clientDisplayName = options.clientDisplayName ?? InstanceIdentity.displayName

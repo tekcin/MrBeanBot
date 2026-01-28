@@ -7,31 +7,31 @@ import { resolveGatewayStateDir } from "./paths.js";
 describe("resolveGatewayStateDir", () => {
   it("uses the default state dir when no overrides are set", () => {
     const env = { HOME: "/Users/test" };
-    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".clawdbot"));
+    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".MrBeanBot"));
   });
 
   it("appends the profile suffix when set", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "rescue" };
-    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".clawdbot-rescue"));
+    const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "rescue" };
+    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".MrBeanBot-rescue"));
   });
 
   it("treats default profiles as the base state dir", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_PROFILE: "Default" };
-    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".clawdbot"));
+    const env = { HOME: "/Users/test", MRBEANBOT_PROFILE: "Default" };
+    expect(resolveGatewayStateDir(env)).toBe(path.join("/Users/test", ".MrBeanBot"));
   });
 
-  it("uses CLAWDBOT_STATE_DIR when provided", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_STATE_DIR: "/var/lib/mrbeanbot" };
+  it("uses MRBEANBOT_STATE_DIR when provided", () => {
+    const env = { HOME: "/Users/test", MRBEANBOT_STATE_DIR: "/var/lib/mrbeanbot" };
     expect(resolveGatewayStateDir(env)).toBe(path.resolve("/var/lib/mrbeanbot"));
   });
 
-  it("expands ~ in CLAWDBOT_STATE_DIR", () => {
-    const env = { HOME: "/Users/test", CLAWDBOT_STATE_DIR: "~/moltbot-state" };
-    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/Users/test/moltbot-state"));
+  it("expands ~ in MRBEANBOT_STATE_DIR", () => {
+    const env = { HOME: "/Users/test", MRBEANBOT_STATE_DIR: "~/MrBeanBot-state" };
+    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/Users/test/MrBeanBot-state"));
   });
 
   it("preserves Windows absolute paths without HOME", () => {
-    const env = { CLAWDBOT_STATE_DIR: "C:\\State\\moltbot" };
-    expect(resolveGatewayStateDir(env)).toBe("C:\\State\\moltbot");
+    const env = { MRBEANBOT_STATE_DIR: "C:\\State\\MrBeanBot" };
+    expect(resolveGatewayStateDir(env)).toBe("C:\\State\\MrBeanBot");
   });
 });

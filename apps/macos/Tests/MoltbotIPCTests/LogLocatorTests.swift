@@ -1,17 +1,17 @@
 import Darwin
 import Foundation
 import Testing
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite struct LogLocatorTests {
     @Test func launchdGatewayLogPathEnsuresTmpDirExists() throws {
         let fm = FileManager()
         let baseDir = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        let logDir = baseDir.appendingPathComponent("moltbot-tests-\(UUID().uuidString)")
+        let logDir = baseDir.appendingPathComponent("MrBeanBot-tests-\(UUID().uuidString)")
 
-        setenv("CLAWDBOT_LOG_DIR", logDir.path, 1)
+        setenv("MRBEANBOT_LOG_DIR", logDir.path, 1)
         defer {
-            unsetenv("CLAWDBOT_LOG_DIR")
+            unsetenv("MRBEANBOT_LOG_DIR")
             try? fm.removeItem(at: logDir)
         }
 

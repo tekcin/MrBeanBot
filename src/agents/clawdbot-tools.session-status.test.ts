@@ -77,7 +77,7 @@ vi.mock("../infra/provider-usage.js", () => ({
 }));
 
 import "./test-helpers/fast-core-tools.js";
-import { createMoltbotTools } from "./moltbot-tools.js";
+import { createMrBeanBotTools } from "./MrBeanBot-tools.js";
 
 describe("session_status tool", () => {
   it("returns a status card for the current session", async () => {
@@ -90,7 +90,7 @@ describe("session_status tool", () => {
       },
     });
 
-    const tool = createMoltbotTools({ agentSessionKey: "main" }).find(
+    const tool = createMrBeanBotTools({ agentSessionKey: "main" }).find(
       (candidate) => candidate.name === "session_status",
     );
     expect(tool).toBeDefined();
@@ -111,7 +111,7 @@ describe("session_status tool", () => {
       main: { sessionId: "s1", updatedAt: 10 },
     });
 
-    const tool = createMoltbotTools({ agentSessionKey: "main" }).find(
+    const tool = createMrBeanBotTools({ agentSessionKey: "main" }).find(
       (candidate) => candidate.name === "session_status",
     );
     expect(tool).toBeDefined();
@@ -134,7 +134,7 @@ describe("session_status tool", () => {
       },
     });
 
-    const tool = createMoltbotTools({ agentSessionKey: "main" }).find(
+    const tool = createMrBeanBotTools({ agentSessionKey: "main" }).find(
       (candidate) => candidate.name === "session_status",
     );
     expect(tool).toBeDefined();
@@ -156,7 +156,7 @@ describe("session_status tool", () => {
       },
     });
 
-    const tool = createMoltbotTools({ agentSessionKey: "main" }).find(
+    const tool = createMrBeanBotTools({ agentSessionKey: "main" }).find(
       (candidate) => candidate.name === "session_status",
     );
     expect(tool).toBeDefined();
@@ -178,7 +178,7 @@ describe("session_status tool", () => {
       },
     });
 
-    const tool = createMoltbotTools({ agentSessionKey: "agent:main:main" }).find(
+    const tool = createMrBeanBotTools({ agentSessionKey: "agent:main:main" }).find(
       (candidate) => candidate.name === "session_status",
     );
     expect(tool).toBeDefined();
@@ -218,7 +218,7 @@ describe("session_status tool", () => {
       },
     );
 
-    const tool = createMoltbotTools({ agentSessionKey: "agent:support:main" }).find(
+    const tool = createMrBeanBotTools({ agentSessionKey: "agent:support:main" }).find(
       (candidate) => candidate.name === "session_status",
     );
     expect(tool).toBeDefined();
@@ -243,7 +243,7 @@ describe("session_status tool", () => {
       },
     });
 
-    const tool = createMoltbotTools({ agentSessionKey: "main" }).find(
+    const tool = createMrBeanBotTools({ agentSessionKey: "main" }).find(
       (candidate) => candidate.name === "session_status",
     );
     expect(tool).toBeDefined();

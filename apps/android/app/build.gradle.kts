@@ -13,7 +13,7 @@ android {
 
   sourceSets {
     getByName("main") {
-      assets.srcDir(file("../../shared/MoltbotKit/Sources/MoltbotKit/Resources"))
+      assets.srcDir(file("../../shared/MrBeanBotKit/Sources/MrBeanBotKit/Resources"))
     }
   }
 

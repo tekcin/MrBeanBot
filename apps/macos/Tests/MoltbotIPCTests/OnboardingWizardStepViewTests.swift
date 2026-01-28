@@ -1,9 +1,9 @@
-import MoltbotProtocol
+import MrBeanBotProtocol
 import SwiftUI
 import Testing
-@testable import Moltbot
+@testable import MrBeanBot
 
-private typealias ProtoAnyCodable = MoltbotProtocol.AnyCodable
+private typealias ProtoAnyCodable = MrBeanBotProtocol.AnyCodable
 
 @Suite(.serialized)
 @MainActor

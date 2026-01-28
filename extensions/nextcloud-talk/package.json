@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/nextcloud-talk",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Nextcloud Talk channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Nextcloud Talk channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],

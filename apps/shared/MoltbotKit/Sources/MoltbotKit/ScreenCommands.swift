@@ -1,10 +1,10 @@
 import Foundation
 
-public enum MoltbotScreenCommand: String, Codable, Sendable {
+public enum MrBeanBotScreenCommand: String, Codable, Sendable {
     case record = "screen.record"
 }
 
-public struct MoltbotScreenRecordParams: Codable, Sendable, Equatable {
+public struct MrBeanBotScreenRecordParams: Codable, Sendable, Equatable {
     public var screenIndex: Int?
     public var durationMs: Int?
     public var fps: Double?

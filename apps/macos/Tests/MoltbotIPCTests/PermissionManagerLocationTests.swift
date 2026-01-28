@@ -1,7 +1,7 @@
 import CoreLocation
 import Testing
 
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite("PermissionManager Location")
 struct PermissionManagerLocationTests {

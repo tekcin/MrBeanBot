@@ -1,8 +1,8 @@
-import MoltbotKit
+import MrBeanBotKit
 import Foundation
 import os
 import Testing
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite struct GatewayConnectionTests {
     private final class FakeWebSocketTask: WebSocketTasking, @unchecked Sendable {

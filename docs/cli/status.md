@@ -1,19 +1,19 @@
 ---
-summary: "CLI reference for `moltbot status` (diagnostics, probes, usage snapshots)"
+summary: "CLI reference for `MrBeanBot status` (diagnostics, probes, usage snapshots)"
 read_when:
   - You want a quick diagnosis of channel health + recent session recipients
   - You want a pasteable “all” status for debugging
 ---
 
-# `moltbot status`
+# `MrBeanBot status`
 
 Diagnostics for channels + sessions.
 
 ```bash
-moltbot status
-moltbot status --all
-moltbot status --deep
-moltbot status --usage
+MrBeanBot status
+MrBeanBot status --all
+MrBeanBot status --deep
+MrBeanBot status --usage
 ```
 
 Notes:
@@ -21,4 +21,4 @@ Notes:
 - Output includes per-agent session stores when multiple agents are configured.
 - Overview includes Gateway + node host service install/runtime status when available.
 - Overview includes update channel + git SHA (for source checkouts).
-- Update info surfaces in the Overview; if an update is available, status prints a hint to run `moltbot update` (see [Updating](/install/updating)).
+- Update info surfaces in the Overview; if an update is available, status prints a hint to run `MrBeanBot update` (see [Updating](/install/updating)).

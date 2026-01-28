@@ -1,4 +1,4 @@
-import MoltbotDiscovery
+import MrBeanBotDiscovery
 import Foundation
 
 enum GatewayDiscoveryHelpers {

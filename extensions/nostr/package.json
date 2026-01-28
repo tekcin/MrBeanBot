@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/nostr",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Nostr channel plugin for NIP-04 encrypted DMs",
-  "moltbot": {
+  "description": "MrBeanBot Nostr channel plugin for NIP-04 encrypted DMs",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],
@@ -24,7 +24,7 @@
     }
   },
   "dependencies": {
-    "moltbot": "workspace:*",
+    "MrBeanBot": "workspace:*",
     "nostr-tools": "^2.20.0",
     "zod": "^4.3.6"
   }

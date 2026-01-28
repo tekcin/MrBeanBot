@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/imessage",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot iMessage channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot iMessage channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ]

@@ -245,7 +245,7 @@ export function subtitleForTab(tab: Tab) {
     case "terminal":
       return "Shell access, task scheduler, and notifications.";
     case "config":
-      return "Edit ~/.clawdbot/moltbot.json safely.";
+      return "Edit ~/.MrBeanBot/MrBeanBot.json safely.";
     case "debug":
       return "Gateway snapshots, events, and manual RPC calls.";
     case "logs":

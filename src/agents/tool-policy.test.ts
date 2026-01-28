@@ -20,8 +20,8 @@ describe("tool-policy", () => {
     expect(resolveToolProfilePolicy("nope")).toBeUndefined();
   });
 
-  it("includes core tool groups in group:moltbot", () => {
-    const group = TOOL_GROUPS["group:moltbot"];
+  it("includes core tool groups in group:MrBeanBot", () => {
+    const group = TOOL_GROUPS["group:MrBeanBot"];
     expect(group).toContain("browser");
     expect(group).toContain("message");
     expect(group).toContain("session_status");

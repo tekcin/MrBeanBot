@@ -1,7 +1,7 @@
 import Foundation
 import Testing
-@testable import MoltbotKit
-import MoltbotProtocol
+@testable import MrBeanBotKit
+import MrBeanBotProtocol
 
 struct GatewayNodeSessionTests {
     @Test

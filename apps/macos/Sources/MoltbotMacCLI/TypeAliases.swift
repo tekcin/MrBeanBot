@@ -1,5 +1,5 @@
-import MoltbotKit
-import MoltbotProtocol
+import MrBeanBotKit
+import MrBeanBotProtocol
 
-typealias ProtoAnyCodable = MoltbotProtocol.AnyCodable
-typealias KitAnyCodable = MoltbotKit.AnyCodable
+typealias ProtoAnyCodable = MrBeanBotProtocol.AnyCodable
+typealias KitAnyCodable = MrBeanBotKit.AnyCodable

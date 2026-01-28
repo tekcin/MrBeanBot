@@ -1,5 +1,5 @@
 import AppKit
-import MoltbotKit
+import MrBeanBotKit
 import CryptoKit
 import Darwin
 import Foundation

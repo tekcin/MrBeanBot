@@ -197,11 +197,11 @@ enum ExecApprovalsStore {
     private static let defaultAutoAllowSkills = false
 
     static func fileURL() -> URL {
-        MoltbotPaths.stateDirURL.appendingPathComponent("exec-approvals.json")
+        MrBeanBotPaths.stateDirURL.appendingPathComponent("exec-approvals.json")
     }
 
     static func socketPath() -> String {
-        MoltbotPaths.stateDirURL.appendingPathComponent("exec-approvals.sock").path
+        MrBeanBotPaths.stateDirURL.appendingPathComponent("exec-approvals.sock").path
     }
 
     static func normalizeIncoming(_ file: ExecApprovalsFile) -> ExecApprovalsFile {

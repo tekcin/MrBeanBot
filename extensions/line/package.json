@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/line",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot LINE channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot LINE channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],
@@ -24,6 +24,6 @@
     }
   },
   "devDependencies": {
-    "moltbot": "workspace:*"
+    "MrBeanBot": "workspace:*"
   }
 }

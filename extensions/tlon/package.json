@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/tlon",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Tlon/Urbit channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Tlon/Urbit channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],

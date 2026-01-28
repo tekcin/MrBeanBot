@@ -1,4 +1,4 @@
-import MoltbotProtocol
+import MrBeanBotProtocol
 
 /// Server-push messages from the gateway websocket.
 ///

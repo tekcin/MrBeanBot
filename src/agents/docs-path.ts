@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { resolveMoltbotPackageRoot } from "../infra/moltbot-root.js";
+import { resolveMrBeanBotPackageRoot } from "../infra/MrBeanBot-root.js";
 
-export async function resolveMoltbotDocsPath(params: {
+export async function resolveMrBeanBotDocsPath(params: {
   workspaceDir?: string;
   argv1?: string;
   cwd?: string;
@@ -15,7 +15,7 @@ export async function resolveMoltbotDocsPath(params: {
     if (fs.existsSync(workspaceDocs)) return workspaceDocs;
   }
 
-  const packageRoot = await resolveMoltbotPackageRoot({
+  const packageRoot = await resolveMrBeanBotPackageRoot({
     cwd: params.cwd,
     argv1: params.argv1,
     moduleUrl: params.moduleUrl,

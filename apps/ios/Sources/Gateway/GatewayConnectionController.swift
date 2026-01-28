@@ -1,4 +1,4 @@
-import MoltbotKit
+import MrBeanBotKit
 import Darwin
 import Foundation
 import Network
@@ -283,7 +283,7 @@ final class GatewayConnectionController {
             caps: self.currentCaps(),
             commands: self.currentCommands(),
             permissions: [:],
-            clientId: "moltbot-ios",
+            clientId: "MrBeanBot-ios",
             clientMode: "node",
             clientDisplayName: displayName)
     }
@@ -304,51 +304,51 @@ final class GatewayConnectionController {
     }
 
     private func currentCaps() -> [String] {
-        var caps = [MoltbotCapability.canvas.rawValue, MoltbotCapability.screen.rawValue]
+        var caps = [MrBeanBotCapability.canvas.rawValue, MrBeanBotCapability.screen.rawValue]
 
         // Default-on: if the key doesn't exist yet, treat it as enabled.
         let cameraEnabled =
             UserDefaults.standard.object(forKey: "camera.enabled") == nil
                 ? true
                 : UserDefaults.standard.bool(forKey: "camera.enabled")
-        if cameraEnabled { caps.append(MoltbotCapability.camera.rawValue) }
+        if cameraEnabled { caps.append(MrBeanBotCapability.camera.rawValue) }
 
         let voiceWakeEnabled = UserDefaults.standard.bool(forKey: VoiceWakePreferences.enabledKey)
-        if voiceWakeEnabled { caps.append(MoltbotCapability.voiceWake.rawValue) }
+        if voiceWakeEnabled { caps.append(MrBeanBotCapability.voiceWake.rawValue) }
 
         let locationModeRaw = UserDefaults.standard.string(forKey: "location.enabledMode") ?? "off"
-        let locationMode = MoltbotLocationMode(rawValue: locationModeRaw) ?? .off
-        if locationMode != .off { caps.append(MoltbotCapability.location.rawValue) }
+        let locationMode = MrBeanBotLocationMode(rawValue: locationModeRaw) ?? .off
+        if locationMode != .off { caps.append(MrBeanBotCapability.location.rawValue) }
 
         return caps
     }
 
     private func currentCommands() -> [String] {
         var commands: [String] = [
-            MoltbotCanvasCommand.present.rawValue,
-            MoltbotCanvasCommand.hide.rawValue,
-            MoltbotCanvasCommand.navigate.rawValue,
-            MoltbotCanvasCommand.evalJS.rawValue,
-            MoltbotCanvasCommand.snapshot.rawValue,
-            MoltbotCanvasA2UICommand.push.rawValue,
-            MoltbotCanvasA2UICommand.pushJSONL.rawValue,
-            MoltbotCanvasA2UICommand.reset.rawValue,
-            MoltbotScreenCommand.record.rawValue,
-            MoltbotSystemCommand.notify.rawValue,
-            MoltbotSystemCommand.which.rawValue,
-            MoltbotSystemCommand.run.rawValue,
-            MoltbotSystemCommand.execApprovalsGet.rawValue,
-            MoltbotSystemCommand.execApprovalsSet.rawValue,
+            MrBeanBotCanvasCommand.present.rawValue,
+            MrBeanBotCanvasCommand.hide.rawValue,
+            MrBeanBotCanvasCommand.navigate.rawValue,
+            MrBeanBotCanvasCommand.evalJS.rawValue,
+            MrBeanBotCanvasCommand.snapshot.rawValue,
+            MrBeanBotCanvasA2UICommand.push.rawValue,
+            MrBeanBotCanvasA2UICommand.pushJSONL.rawValue,
+            MrBeanBotCanvasA2UICommand.reset.rawValue,
+            MrBeanBotScreenCommand.record.rawValue,
+            MrBeanBotSystemCommand.notify.rawValue,
+            MrBeanBotSystemCommand.which.rawValue,
+            MrBeanBotSystemCommand.run.rawValue,
+            MrBeanBotSystemCommand.execApprovalsGet.rawValue,
+            MrBeanBotSystemCommand.execApprovalsSet.rawValue,
         ]
 
         let caps = Set(self.currentCaps())
-        if caps.contains(MoltbotCapability.camera.rawValue) {
-            commands.append(MoltbotCameraCommand.list.rawValue)
-            commands.append(MoltbotCameraCommand.snap.rawValue)
-            commands.append(MoltbotCameraCommand.clip.rawValue)
+        if caps.contains(MrBeanBotCapability.camera.rawValue) {
+            commands.append(MrBeanBotCameraCommand.list.rawValue)
+            commands.append(MrBeanBotCameraCommand.snap.rawValue)
+            commands.append(MrBeanBotCameraCommand.clip.rawValue)
         }
-        if caps.contains(MoltbotCapability.location.rawValue) {
-            commands.append(MoltbotLocationCommand.get.rawValue)
+        if caps.contains(MrBeanBotCapability.location.rawValue) {
+            commands.append(MrBeanBotLocationCommand.get.rawValue)
         }
 
         return commands

@@ -1,4 +1,4 @@
-import MoltbotProtocol
+import MrBeanBotProtocol
 import Foundation
 
 /// Structured error surfaced when the gateway responds with `{ ok: false }`.

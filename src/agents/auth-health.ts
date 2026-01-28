@@ -1,4 +1,4 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { MrBeanBotConfig } from "../config/config.js";
 import {
   type AuthProfileCredential,
   type AuthProfileStore,
@@ -76,7 +76,7 @@ function buildProfileHealth(params: {
   profileId: string;
   credential: AuthProfileCredential;
   store: AuthProfileStore;
-  cfg?: MoltbotConfig;
+  cfg?: MrBeanBotConfig;
   now: number;
   warnAfterMs: number;
 }): AuthProfileHealth {
@@ -138,7 +138,7 @@ function buildProfileHealth(params: {
 
 export function buildAuthHealthSummary(params: {
   store: AuthProfileStore;
-  cfg?: MoltbotConfig;
+  cfg?: MrBeanBotConfig;
   warnAfterMs?: number;
   providers?: string[];
 }): AuthHealthSummary {

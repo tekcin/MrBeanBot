@@ -6,7 +6,7 @@ import SwiftUI
 struct AnthropicAuthControls: View {
     let connectionMode: AppState.ConnectionMode
 
-    @State private var oauthStatus: MoltbotOAuthStore.AnthropicOAuthStatus = MoltbotOAuthStore.anthropicOAuthStatus()
+    @State private var oauthStatus: MrBeanBotOAuthStore.AnthropicOAuthStatus = MrBeanBotOAuthStore.anthropicOAuthStatus()
     @State private var pkce: AnthropicOAuth.PKCE?
     @State private var code: String = ""
     @State private var busy = false
@@ -42,10 +42,10 @@ struct AnthropicAuthControls: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Button("Reveal") {
-                    NSWorkspace.shared.activateFileViewerSelecting([MoltbotOAuthStore.oauthURL()])
+                    NSWorkspace.shared.activateFileViewerSelecting([MrBeanBotOAuthStore.oauthURL()])
                 }
                 .buttonStyle(.bordered)
-                .disabled(!FileManager().fileExists(atPath: MoltbotOAuthStore.oauthURL().path))
+                .disabled(!FileManager().fileExists(atPath: MrBeanBotOAuthStore.oauthURL().path))
 
                 Button("Refresh") {
                     self.refresh()
@@ -53,7 +53,7 @@ struct AnthropicAuthControls: View {
                 .buttonStyle(.bordered)
             }
 
-            Text(MoltbotOAuthStore.oauthURL().path)
+            Text(MrBeanBotOAuthStore.oauthURL().path)
                 .font(.caption.monospaced())
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
@@ -130,8 +130,8 @@ struct AnthropicAuthControls: View {
     }
 
     private func refresh() {
-        let imported = MoltbotOAuthStore.importLegacyAnthropicOAuthIfNeeded()
-        self.oauthStatus = MoltbotOAuthStore.anthropicOAuthStatus()
+        let imported = MrBeanBotOAuthStore.importLegacyAnthropicOAuthIfNeeded()
+        self.oauthStatus = MrBeanBotOAuthStore.anthropicOAuthStatus()
         if imported != nil {
             self.statusText = "Imported existing OAuth credentials."
         }
@@ -172,11 +172,11 @@ struct AnthropicAuthControls: View {
                 code: parsed.code,
                 state: parsed.state,
                 verifier: pkce.verifier)
-            try MoltbotOAuthStore.saveAnthropicOAuth(creds)
+            try MrBeanBotOAuthStore.saveAnthropicOAuth(creds)
             self.refresh()
             self.pkce = nil
             self.code = ""
-            self.statusText = "Connected. Moltbot can now use Claude via OAuth."
+            self.statusText = "Connected. MrBeanBot can now use Claude via OAuth."
         } catch {
             self.statusText = "OAuth failed: \(error.localizedDescription)"
         }
@@ -212,7 +212,7 @@ struct AnthropicAuthControls: View {
 extension AnthropicAuthControls {
     init(
         connectionMode: AppState.ConnectionMode,
-        oauthStatus: MoltbotOAuthStore.AnthropicOAuthStatus,
+        oauthStatus: MrBeanBotOAuthStore.AnthropicOAuthStatus,
         pkce: AnthropicOAuth.PKCE? = nil,
         code: String = "",
         busy: Bool = false,

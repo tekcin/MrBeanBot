@@ -95,8 +95,8 @@ vi.mock("@opentelemetry/semantic-conventions", () => ({
   },
 }));
 
-vi.mock("clawdbot/plugin-sdk", async () => {
-  const actual = await vi.importActual<typeof import("clawdbot/plugin-sdk")>("clawdbot/plugin-sdk");
+vi.mock("MrBeanBot/plugin-sdk", async () => {
+  const actual = await vi.importActual<typeof import("MrBeanBot/plugin-sdk")>("MrBeanBot/plugin-sdk");
   return {
     ...actual,
     registerLogTransport: registerLogTransportMock,
@@ -104,7 +104,7 @@ vi.mock("clawdbot/plugin-sdk", async () => {
 });
 
 import { createDiagnosticsOtelService } from "./service.js";
-import { emitDiagnosticEvent } from "clawdbot/plugin-sdk";
+import { emitDiagnosticEvent } from "MrBeanBot/plugin-sdk";
 
 describe("diagnostics-otel service", () => {
   beforeEach(() => {
@@ -191,20 +191,20 @@ describe("diagnostics-otel service", () => {
       attempt: 2,
     });
 
-    expect(telemetryState.counters.get("moltbot.webhook.received")?.add).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.webhook.duration_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.message.queued")?.add).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.message.processed")?.add).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.message.duration_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.queue.wait_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.session.stuck")?.add).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.session.stuck_age_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.run.attempt")?.add).toHaveBeenCalled();
+    expect(telemetryState.counters.get("MrBeanBot.webhook.received")?.add).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("MrBeanBot.webhook.duration_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.counters.get("MrBeanBot.message.queued")?.add).toHaveBeenCalled();
+    expect(telemetryState.counters.get("MrBeanBot.message.processed")?.add).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("MrBeanBot.message.duration_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("MrBeanBot.queue.wait_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.counters.get("MrBeanBot.session.stuck")?.add).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("MrBeanBot.session.stuck_age_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.counters.get("MrBeanBot.run.attempt")?.add).toHaveBeenCalled();
 
     const spanNames = telemetryState.tracer.startSpan.mock.calls.map((call) => call[0]);
-    expect(spanNames).toContain("moltbot.webhook.processed");
-    expect(spanNames).toContain("moltbot.message.processed");
-    expect(spanNames).toContain("moltbot.session.stuck");
+    expect(spanNames).toContain("MrBeanBot.webhook.processed");
+    expect(spanNames).toContain("MrBeanBot.message.processed");
+    expect(spanNames).toContain("MrBeanBot.session.stuck");
 
     expect(registerLogTransportMock).toHaveBeenCalledTimes(1);
     expect(registeredTransports).toHaveLength(1);

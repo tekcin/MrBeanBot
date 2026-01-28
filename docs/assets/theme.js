@@ -1,4 +1,4 @@
-const THEME_STORAGE_KEY = "moltbot:theme";
+const THEME_STORAGE_KEY = "MrBeanBot:theme";
 
 function safeGet(key) {
   try {

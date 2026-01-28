@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/mattermost",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Mattermost channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Mattermost channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],

@@ -1,4 +1,4 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { MrBeanBotConfig } from "../config/config.js";
 import { resolveGatewayPort } from "../config/config.js";
 import { findTailscaleBinary } from "../infra/tailscale.js";
 import type { RuntimeEnv } from "../runtime.js";
@@ -10,10 +10,10 @@ import { guardCancel, randomToken } from "./onboard-helpers.js";
 type GatewayAuthChoice = "token" | "password";
 
 export async function promptGatewayConfig(
-  cfg: MoltbotConfig,
+  cfg: MrBeanBotConfig,
   runtime: RuntimeEnv,
 ): Promise<{
-  config: MoltbotConfig;
+  config: MrBeanBotConfig;
   port: number;
   token?: string;
 }> {

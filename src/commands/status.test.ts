@@ -3,15 +3,15 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 let previousProfile: string | undefined;
 
 beforeAll(() => {
-  previousProfile = process.env.CLAWDBOT_PROFILE;
-  process.env.CLAWDBOT_PROFILE = "isolated";
+  previousProfile = process.env.MRBEANBOT_PROFILE;
+  process.env.MRBEANBOT_PROFILE = "isolated";
 });
 
 afterAll(() => {
   if (previousProfile === undefined) {
-    delete process.env.CLAWDBOT_PROFILE;
+    delete process.env.MRBEANBOT_PROFILE;
   } else {
-    process.env.CLAWDBOT_PROFILE = previousProfile;
+    process.env.MRBEANBOT_PROFILE = previousProfile;
   }
 });
 
@@ -204,8 +204,8 @@ vi.mock("../gateway/call.js", async (importOriginal) => {
 vi.mock("../gateway/session-utils.js", () => ({
   listAgentsForGateway: mocks.listAgentsForGateway,
 }));
-vi.mock("../infra/moltbot-root.js", () => ({
-  resolveMoltbotPackageRoot: vi.fn().mockResolvedValue("/tmp/mrbeanbot"),
+vi.mock("../infra/MrBeanBot-root.js", () => ({
+  resolveMrBeanBotPackageRoot: vi.fn().mockResolvedValue("/tmp/mrbeanbot"),
 }));
 vi.mock("../infra/os-summary.js", () => ({
   resolveOsSummary: () => ({
@@ -232,8 +232,8 @@ vi.mock("../infra/update-check.js", () => ({
     deps: {
       manager: "pnpm",
       status: "ok",
-      lockfilePath: "/tmp/moltbot/pnpm-lock.yaml",
-      markerPath: "/tmp/moltbot/node_modules/.modules.yaml",
+      lockfilePath: "/tmp/MrBeanBot/pnpm-lock.yaml",
+      markerPath: "/tmp/MrBeanBot/node_modules/.modules.yaml",
     },
     registry: { latestVersion: "0.0.0" },
   }),
@@ -310,7 +310,7 @@ describe("statusCommand", () => {
     (runtime.log as vi.Mock).mockClear();
     await statusCommand({}, runtime as never);
     const logs = (runtime.log as vi.Mock).mock.calls.map((c) => String(c[0]));
-    expect(logs.some((l) => l.includes("Moltbot status"))).toBe(true);
+    expect(logs.some((l) => l.includes("MrBeanBot status"))).toBe(true);
     expect(logs.some((l) => l.includes("Overview"))).toBe(true);
     expect(logs.some((l) => l.includes("Security audit"))).toBe(true);
     expect(logs.some((l) => l.includes("Summary:"))).toBe(true);
@@ -330,17 +330,17 @@ describe("statusCommand", () => {
     expect(
       logs.some(
         (l) =>
-          l.includes("moltbot status --all") ||
-          l.includes("moltbot --profile isolated status --all") ||
-          l.includes("moltbot status --all") ||
-          l.includes("moltbot --profile isolated status --all"),
+          l.includes("MrBeanBot status --all") ||
+          l.includes("MrBeanBot --profile isolated status --all") ||
+          l.includes("MrBeanBot status --all") ||
+          l.includes("MrBeanBot --profile isolated status --all"),
       ),
     ).toBe(true);
   });
 
   it("shows gateway auth when reachable", async () => {
-    const prevToken = process.env.CLAWDBOT_GATEWAY_TOKEN;
-    process.env.CLAWDBOT_GATEWAY_TOKEN = "abcd1234";
+    const prevToken = process.env.MRBEANBOT_GATEWAY_TOKEN;
+    process.env.MRBEANBOT_GATEWAY_TOKEN = "abcd1234";
     try {
       mocks.probeGateway.mockResolvedValueOnce({
         ok: true,
@@ -358,8 +358,8 @@ describe("statusCommand", () => {
       const logs = (runtime.log as vi.Mock).mock.calls.map((c) => String(c[0]));
       expect(logs.some((l) => l.includes("auth token"))).toBe(true);
     } finally {
-      if (prevToken === undefined) delete process.env.CLAWDBOT_GATEWAY_TOKEN;
-      else process.env.CLAWDBOT_GATEWAY_TOKEN = prevToken;
+      if (prevToken === undefined) delete process.env.MRBEANBOT_GATEWAY_TOKEN;
+      else process.env.MRBEANBOT_GATEWAY_TOKEN = prevToken;
     }
   });
 

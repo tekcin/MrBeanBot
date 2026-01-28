@@ -1,7 +1,7 @@
 import AppKit
-import MoltbotDiscovery
-import MoltbotIPC
-import MoltbotKit
+import MrBeanBotDiscovery
+import MrBeanBotIPC
+import MrBeanBotKit
 import Observation
 import SwiftUI
 
@@ -24,8 +24,8 @@ struct GeneralSettings: View {
             VStack(alignment: .leading, spacing: 18) {
                 VStack(alignment: .leading, spacing: 12) {
                     SettingsToggleRow(
-                        title: "Moltbot active",
-                        subtitle: "Pause to stop the Moltbot gateway; no messages will be processed.",
+                        title: "MrBeanBot active",
+                        subtitle: "Pause to stop the MrBeanBot gateway; no messages will be processed.",
                         binding: self.activeBinding)
 
                     self.connectionSection
@@ -34,12 +34,12 @@ struct GeneralSettings: View {
 
                     SettingsToggleRow(
                         title: "Launch at login",
-                        subtitle: "Automatically start Moltbot after you sign in.",
+                        subtitle: "Automatically start MrBeanBot after you sign in.",
                         binding: self.$state.launchAtLogin)
 
                     SettingsToggleRow(
                         title: "Show Dock icon",
-                        subtitle: "Keep Moltbot visible in the Dock instead of menu-bar-only mode.",
+                        subtitle: "Keep MrBeanBot visible in the Dock instead of menu-bar-only mode.",
                         binding: self.$state.showDockIcon)
 
                     SettingsToggleRow(
@@ -71,7 +71,7 @@ struct GeneralSettings: View {
                 Spacer(minLength: 12)
                 HStack {
                     Spacer()
-                    Button("Quit Moltbot") { NSApp.terminate(nil) }
+                    Button("Quit MrBeanBot") { NSApp.terminate(nil) }
                         .buttonStyle(.borderedProminent)
                 }
             }
@@ -98,7 +98,7 @@ struct GeneralSettings: View {
 
     private var connectionSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Moltbot runs")
+            Text("MrBeanBot runs")
                 .font(.title3.weight(.semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -167,12 +167,12 @@ struct GeneralSettings: View {
                                 .frame(width: 280)
                         }
                         LabeledContent("Project root") {
-                            TextField("/home/you/Projects/moltbot", text: self.$state.remoteProjectRoot)
+                            TextField("/home/you/Projects/MrBeanBot", text: self.$state.remoteProjectRoot)
                                 .textFieldStyle(.roundedBorder)
                                 .frame(width: 280)
                         }
                         LabeledContent("CLI path") {
-                            TextField("/Applications/Moltbot.app/.../moltbot", text: self.$state.remoteCliPath)
+                            TextField("/Applications/MrBeanBot.app/.../MrBeanBot", text: self.$state.remoteCliPath)
                                 .textFieldStyle(.roundedBorder)
                                 .frame(width: 280)
                         }
@@ -659,7 +659,7 @@ extension GeneralSettings {
         let alert = NSAlert()
         alert.messageText = "Log file not found"
         alert.informativeText = """
-        Looked for moltbot logs in /tmp/moltbot/.
+        Looked for MrBeanBot logs in /tmp/MrBeanBot/.
         Run a health check or send a message to generate activity, then try again.
         """
         alert.alertStyle = .informational
@@ -683,7 +683,7 @@ extension GeneralSettings {
                 host: host,
                 port: gateway.sshPort)
             self.state.remoteCliPath = gateway.cliPath ?? ""
-            MoltbotConfigFile.setRemoteGatewayUrl(host: host, port: gateway.gatewayPort)
+            MrBeanBotConfigFile.setRemoteGatewayUrl(host: host, port: gateway.gatewayPort)
         }
     }
 }
@@ -711,8 +711,8 @@ extension GeneralSettings {
         state.remoteTarget = "user@host:2222"
         state.remoteUrl = "wss://gateway.example.ts.net"
         state.remoteIdentity = "/tmp/id_ed25519"
-        state.remoteProjectRoot = "/tmp/moltbot"
-        state.remoteCliPath = "/tmp/moltbot"
+        state.remoteProjectRoot = "/tmp/MrBeanBot"
+        state.remoteCliPath = "/tmp/MrBeanBot"
 
         let view = GeneralSettings(state: state)
         view.gatewayStatus = GatewayEnvironmentStatus(

@@ -1,4 +1,4 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { MrBeanBotConfig } from "../config/config.js";
 import type { SessionChatType, SessionEntry } from "../config/sessions.js";
 import { normalizeChatType } from "../channels/chat-type.js";
 
@@ -33,7 +33,7 @@ function deriveChatTypeFromKey(key?: string): SessionChatType | undefined {
 }
 
 export function resolveSendPolicy(params: {
-  cfg: MoltbotConfig;
+  cfg: MrBeanBotConfig;
   entry?: SessionEntry;
   sessionKey?: string;
   channel?: string;

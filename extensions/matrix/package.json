@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/matrix",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Matrix channel plugin",
-  "moltbot": {
+  "description": "MrBeanBot Matrix channel plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ],
@@ -31,6 +31,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "moltbot": "workspace:*"
+    "MrBeanBot": "workspace:*"
   }
 }

@@ -6,7 +6,7 @@ import {
   MarkdownConfigSchema,
   ToolPolicySchema,
   requireOpenAllowFrom,
-} from "clawdbot/plugin-sdk";
+} from "MrBeanBot/plugin-sdk";
 import { z } from "zod";
 
 export const NextcloudTalkRoomSchema = z

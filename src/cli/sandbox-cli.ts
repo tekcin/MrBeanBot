@@ -15,30 +15,33 @@ type CommandOptions = Record<string, unknown>;
 
 const SANDBOX_EXAMPLES = {
   main: [
-    ["moltbot sandbox list", "List all sandbox containers."],
-    ["moltbot sandbox list --browser", "List only browser containers."],
-    ["moltbot sandbox recreate --all", "Recreate all containers."],
-    ["moltbot sandbox recreate --session main", "Recreate a specific session."],
-    ["moltbot sandbox recreate --agent mybot", "Recreate agent containers."],
-    ["moltbot sandbox explain", "Explain effective sandbox config."],
+    ["MrBeanBot sandbox list", "List all sandbox containers."],
+    ["MrBeanBot sandbox list --browser", "List only browser containers."],
+    ["MrBeanBot sandbox recreate --all", "Recreate all containers."],
+    ["MrBeanBot sandbox recreate --session main", "Recreate a specific session."],
+    ["MrBeanBot sandbox recreate --agent mybot", "Recreate agent containers."],
+    ["MrBeanBot sandbox explain", "Explain effective sandbox config."],
   ],
   list: [
-    ["moltbot sandbox list", "List all sandbox containers."],
-    ["moltbot sandbox list --browser", "List only browser containers."],
-    ["moltbot sandbox list --json", "JSON output."],
+    ["MrBeanBot sandbox list", "List all sandbox containers."],
+    ["MrBeanBot sandbox list --browser", "List only browser containers."],
+    ["MrBeanBot sandbox list --json", "JSON output."],
   ],
   recreate: [
-    ["moltbot sandbox recreate --all", "Recreate all containers."],
-    ["moltbot sandbox recreate --session main", "Recreate a specific session."],
-    ["moltbot sandbox recreate --agent mybot", "Recreate a specific agent (includes sub-agents)."],
-    ["moltbot sandbox recreate --browser --all", "Recreate only browser containers."],
-    ["moltbot sandbox recreate --all --force", "Skip confirmation."],
+    ["MrBeanBot sandbox recreate --all", "Recreate all containers."],
+    ["MrBeanBot sandbox recreate --session main", "Recreate a specific session."],
+    [
+      "MrBeanBot sandbox recreate --agent mybot",
+      "Recreate a specific agent (includes sub-agents).",
+    ],
+    ["MrBeanBot sandbox recreate --browser --all", "Recreate only browser containers."],
+    ["MrBeanBot sandbox recreate --all --force", "Skip confirmation."],
   ],
   explain: [
-    ["moltbot sandbox explain", "Show effective sandbox config."],
-    ["moltbot sandbox explain --session agent:main:main", "Explain a specific session."],
-    ["moltbot sandbox explain --agent work", "Explain an agent sandbox."],
-    ["moltbot sandbox explain --json", "JSON output."],
+    ["MrBeanBot sandbox explain", "Show effective sandbox config."],
+    ["MrBeanBot sandbox explain --session agent:main:main", "Explain a specific session."],
+    ["MrBeanBot sandbox explain --agent work", "Explain an agent sandbox."],
+    ["MrBeanBot sandbox explain --json", "JSON output."],
   ],
 } as const;
 

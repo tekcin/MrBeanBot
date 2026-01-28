@@ -1,5 +1,5 @@
 import XCTest
-@testable import MoltbotKit
+@testable import MrBeanBotKit
 
 final class TalkDirectiveTests: XCTestCase {
     func testParsesDirectiveAndStripsLine() {

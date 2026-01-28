@@ -2,8 +2,8 @@
   "name": "@mrbeanbot/google-gemini-cli-auth",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Gemini CLI OAuth provider plugin",
-  "moltbot": {
+  "description": "MrBeanBot Gemini CLI OAuth provider plugin",
+  "MrBeanBot": {
     "extensions": [
       "./index.ts"
     ]

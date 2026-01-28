@@ -9,7 +9,7 @@ import { afterEach, describe, expect, it } from "vitest";
 const tempDirs: string[] = [];
 
 function makeTempDir() {
-  const dir = path.join(os.tmpdir(), `moltbot-hook-install-${randomUUID()}`);
+  const dir = path.join(os.tmpdir(), `MrBeanBot-hook-install-${randomUUID()}`);
   fs.mkdirSync(dir, { recursive: true });
   tempDirs.push(dir);
   return dir;
@@ -37,7 +37,7 @@ describe("installHooksFromArchive", () => {
       JSON.stringify({
         name: "@mrbeanbot/zip-hooks",
         version: "0.0.1",
-        moltbot: { hooks: ["./hooks/zip-hook"] },
+        MrBeanBot: { hooks: ["./hooks/zip-hook"] },
       }),
     );
     zip.file(
@@ -46,7 +46,7 @@ describe("installHooksFromArchive", () => {
         "---",
         "name: zip-hook",
         "description: Zip hook",
-        'metadata: {"moltbot":{"events":["command:new"]}}',
+        'metadata: {"MrBeanBot":{"events":["command:new"]}}',
         "---",
         "",
         "# Zip Hook",
@@ -80,7 +80,7 @@ describe("installHooksFromArchive", () => {
       JSON.stringify({
         name: "@mrbeanbot/tar-hooks",
         version: "0.0.1",
-        moltbot: { hooks: ["./hooks/tar-hook"] },
+        MrBeanBot: { hooks: ["./hooks/tar-hook"] },
       }),
       "utf-8",
     );
@@ -90,7 +90,7 @@ describe("installHooksFromArchive", () => {
         "---",
         "name: tar-hook",
         "description: Tar hook",
-        'metadata: {"moltbot":{"events":["command:new"]}}',
+        'metadata: {"MrBeanBot":{"events":["command:new"]}}',
         "---",
         "",
         "# Tar Hook",
@@ -128,7 +128,7 @@ describe("installHooksFromPath", () => {
         "---",
         "name: my-hook",
         "description: My hook",
-        'metadata: {"moltbot":{"events":["command:new"]}}',
+        'metadata: {"MrBeanBot":{"events":["command:new"]}}',
         "---",
         "",
         "# My Hook",

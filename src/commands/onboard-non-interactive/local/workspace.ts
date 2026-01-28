@@ -1,10 +1,10 @@
-import type { MoltbotConfig } from "../../../config/config.js";
+import type { MrBeanBotConfig } from "../../../config/config.js";
 import { resolveUserPath } from "../../../utils.js";
 import type { OnboardOptions } from "../../onboard-types.js";
 
 export function resolveNonInteractiveWorkspaceDir(params: {
   opts: OnboardOptions;
-  baseConfig: MoltbotConfig;
+  baseConfig: MrBeanBotConfig;
   defaultWorkspaceDir: string;
 }) {
   const raw = (

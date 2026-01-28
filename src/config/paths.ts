@@ -12,16 +12,18 @@ import type { MrBeanBotConfig } from "./types.js";
  */
 export function resolveIsNixMode(env: NodeJS.ProcessEnv = process.env): boolean {
   return (
-    env.MRBEANBOT_NIX_MODE === "1" || env.MOLTBOT_NIX_MODE === "1" || env.CLAWDBOT_NIX_MODE === "1"
+    env.MRBEANBOT_NIX_MODE === "1" ||
+    env.MRBEANBOT_NIX_MODE === "1" ||
+    env.MRBEANBOT_NIX_MODE === "1"
   );
 }
 
 export const isNixMode = resolveIsNixMode();
 
 const STATE_DIRNAME = ".mrbeanbot";
-const LEGACY_STATE_DIRNAMES = [".moltbot", ".clawdbot"];
+const LEGACY_STATE_DIRNAMES = [".MrBeanBot", ".MrBeanBot"];
 const CONFIG_FILENAME = "mrbeanbot.json";
-const LEGACY_CONFIG_FILENAMES = ["moltbot.json", "clawdbot.json"];
+const LEGACY_CONFIG_FILENAMES = ["MrBeanBot.json", "MrBeanBot.json"];
 
 function currentStateDir(homedir: () => string = os.homedir): string {
   return path.join(homedir(), STATE_DIRNAME);
@@ -32,16 +34,16 @@ function legacyStateDir(homedir: () => string = os.homedir, index: number = 0): 
 }
 
 export function resolveLegacyStateDir(homedir: () => string = os.homedir): string {
-  return legacyStateDir(homedir, 1); // .clawdbot
+  return legacyStateDir(homedir, 1); // .MrBeanBot
 }
 
 export function resolveNewStateDir(homedir: () => string = os.homedir): string {
-  return legacyStateDir(homedir, 0); // .moltbot
+  return legacyStateDir(homedir, 0); // .MrBeanBot
 }
 
 /**
  * State directory for mutable data (sessions, logs, caches).
- * Can be overridden via MRBEANBOT_STATE_DIR (preferred), MOLTBOT_STATE_DIR, or CLAWDBOT_STATE_DIR (legacy).
+ * Can be overridden via MRBEANBOT_STATE_DIR (preferred), MRBEANBOT_STATE_DIR, or MRBEANBOT_STATE_DIR (legacy).
  * Default: ~/.mrbeanbot (new default)
  * Falls back to existing legacy directories for backward compatibility.
  */
@@ -51,18 +53,18 @@ export function resolveStateDir(
 ): string {
   const override =
     env.MRBEANBOT_STATE_DIR?.trim() ||
-    env.MOLTBOT_STATE_DIR?.trim() ||
-    env.CLAWDBOT_STATE_DIR?.trim();
+    env.MRBEANBOT_STATE_DIR?.trim() ||
+    env.MRBEANBOT_STATE_DIR?.trim();
   if (override) return resolveUserPath(override);
 
   const currentDir = currentStateDir(homedir);
-  const moltbotDir = legacyStateDir(homedir, 0);
-  const clawdbotDir = legacyStateDir(homedir, 1);
+  const MrBeanBotDir = legacyStateDir(homedir, 0);
+  const MrBeanBotDir = legacyStateDir(homedir, 1);
 
   // Check if any legacy directory exists
   if (fs.existsSync(currentDir)) return currentDir;
-  if (fs.existsSync(moltbotDir)) return moltbotDir;
-  if (fs.existsSync(clawdbotDir)) return clawdbotDir;
+  if (fs.existsSync(MrBeanBotDir)) return MrBeanBotDir;
+  if (fs.existsSync(MrBeanBotDir)) return MrBeanBotDir;
 
   return currentDir;
 }
@@ -81,7 +83,7 @@ export const STATE_DIR = resolveStateDir();
 
 /**
  * Config file path (JSON5).
- * Can be overridden via MRBEANBOT_CONFIG_PATH (preferred), MOLTBOT_CONFIG_PATH, or CLAWDBOT_CONFIG_PATH (legacy).
+ * Can be overridden via MRBEANBOT_CONFIG_PATH (preferred), MRBEANBOT_CONFIG_PATH, or MRBEANBOT_CONFIG_PATH (legacy).
  * Default: ~/.mrbeanbot/mrbeanbot.json (or $*_STATE_DIR/mrbeanbot.json)
  */
 export function resolveCanonicalConfigPath(
@@ -90,8 +92,8 @@ export function resolveCanonicalConfigPath(
 ): string {
   const override =
     env.MRBEANBOT_CONFIG_PATH?.trim() ||
-    env.MOLTBOT_CONFIG_PATH?.trim() ||
-    env.CLAWDBOT_CONFIG_PATH?.trim();
+    env.MRBEANBOT_CONFIG_PATH?.trim() ||
+    env.MRBEANBOT_CONFIG_PATH?.trim();
   if (override) return resolveUserPath(override);
   return path.join(stateDir, CONFIG_FILENAME);
 }
@@ -126,8 +128,8 @@ export function resolveConfigPath(
 ): string {
   const override =
     env.MRBEANBOT_CONFIG_PATH?.trim() ||
-    env.MOLTBOT_CONFIG_PATH?.trim() ||
-    env.CLAWDBOT_CONFIG_PATH?.trim();
+    env.MRBEANBOT_CONFIG_PATH?.trim() ||
+    env.MRBEANBOT_CONFIG_PATH?.trim();
   if (override) return resolveUserPath(override);
   const candidates = [
     path.join(stateDir, CONFIG_FILENAME),
@@ -160,8 +162,8 @@ export function resolveDefaultConfigCandidates(
 ): string[] {
   const explicit =
     env.MRBEANBOT_CONFIG_PATH?.trim() ||
-    env.MOLTBOT_CONFIG_PATH?.trim() ||
-    env.CLAWDBOT_CONFIG_PATH?.trim();
+    env.MRBEANBOT_CONFIG_PATH?.trim() ||
+    env.MRBEANBOT_CONFIG_PATH?.trim();
   if (explicit) return [resolveUserPath(explicit)];
 
   const candidates: string[] = [];
@@ -174,15 +176,15 @@ export function resolveDefaultConfigCandidates(
     }
   }
 
-  const moltbotStateDir = env.MOLTBOT_STATE_DIR?.trim();
-  if (moltbotStateDir) {
-    candidates.push(path.join(resolveUserPath(moltbotStateDir), CONFIG_FILENAME));
+  const MrBeanBotStateDir = env.MRBEANBOT_STATE_DIR?.trim();
+  if (MrBeanBotStateDir) {
+    candidates.push(path.join(resolveUserPath(MrBeanBotStateDir), CONFIG_FILENAME));
     for (const legacyName of LEGACY_CONFIG_FILENAMES) {
-      candidates.push(path.join(resolveUserPath(moltbotStateDir), legacyName));
+      candidates.push(path.join(resolveUserPath(MrBeanBotStateDir), legacyName));
     }
   }
 
-  const legacyStateDirOverride = env.CLAWDBOT_STATE_DIR?.trim();
+  const legacyStateDirOverride = env.MRBEANBOT_STATE_DIR?.trim();
   if (legacyStateDirOverride) {
     candidates.push(path.join(resolveUserPath(legacyStateDirOverride), CONFIG_FILENAME));
     for (const legacyName of LEGACY_CONFIG_FILENAMES) {
@@ -226,7 +228,7 @@ const OAUTH_FILENAME = "oauth.json";
  * OAuth credentials storage directory.
  *
  * Precedence:
- * - `MRBEANBOT_OAUTH_DIR`, `MOLTBOT_OAUTH_DIR`, or `CLAWDBOT_OAUTH_DIR` (explicit override)
+ * - `MRBEANBOT_OAUTH_DIR`, `MRBEANBOT_OAUTH_DIR`, or `MRBEANBOT_OAUTH_DIR` (explicit override)
  * - `$*_STATE_DIR/credentials` (canonical server/default)
  * - `~/.mrbeanbot/credentials` (default)
  */
@@ -236,8 +238,8 @@ export function resolveOAuthDir(
 ): string {
   const override =
     env.MRBEANBOT_OAUTH_DIR?.trim() ||
-    env.MOLTBOT_OAUTH_DIR?.trim() ||
-    env.CLAWDBOT_OAUTH_DIR?.trim();
+    env.MRBEANBOT_OAUTH_DIR?.trim() ||
+    env.MRBEANBOT_OAUTH_DIR?.trim();
   if (override) return resolveUserPath(override);
   return path.join(stateDir, "credentials");
 }
@@ -255,8 +257,8 @@ export function resolveGatewayPort(
 ): number {
   const envRaw =
     env.MRBEANBOT_GATEWAY_PORT?.trim() ||
-    env.MOLTBOT_GATEWAY_PORT?.trim() ||
-    env.CLAWDBOT_GATEWAY_PORT?.trim();
+    env.MRBEANBOT_GATEWAY_PORT?.trim() ||
+    env.MRBEANBOT_GATEWAY_PORT?.trim();
   if (envRaw) {
     const parsed = Number.parseInt(envRaw, 10);
     if (Number.isFinite(parsed) && parsed > 0) return parsed;

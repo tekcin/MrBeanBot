@@ -1,6 +1,6 @@
 import SwiftUI
 import Testing
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite(.serialized)
 @MainActor

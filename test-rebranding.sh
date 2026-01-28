@@ -58,7 +58,7 @@ log_skip() {
 cleanup_test_env() {
     rm -rf ~/.mrbeanbot-test
     rm -f /tmp/test-mrbeanbot-*.json
-    unset MRBEANBOT_CONFIG_PATH MOLTBOT_CONFIG_PATH CLAWDBOT_CONFIG_PATH 2>/dev/null || true
+    unset MRBEANBOT_CONFIG_PATH MRBEANBOT_CONFIG_PATH MRBEANBOT_CONFIG_PATH 2>/dev/null || true
     unset MRBEANBOT_STATE_DIR MRBEANBOT_LOG_DIR 2>/dev/null || true
 }
 
@@ -90,18 +90,18 @@ else
     log_fail "mrbeanbot command not found in PATH"
 fi
 
-log_test "moltbot command exists (shim)"
-if command -v moltbot &> /dev/null; then
+log_test "MrBeanBot command exists (shim)"
+if command -v MrBeanBot &> /dev/null; then
     log_pass
 else
-    log_fail "moltbot command not found in PATH"
+    log_fail "MrBeanBot command not found in PATH"
 fi
 
-log_test "clawdbot command exists (shim)"
-if command -v clawdbot &> /dev/null; then
+log_test "MrBeanBot command exists (shim)"
+if command -v MrBeanBot &> /dev/null; then
     log_pass
 else
-    log_fail "clawdbot command not found in PATH"
+    log_fail "MrBeanBot command not found in PATH"
 fi
 
 # ============================================================================
@@ -116,15 +116,15 @@ else
     log_fail "Version output does not contain 'MrBeanBot'"
 fi
 
-log_test "moltbot --version shows MrBeanBot (shim)"
-if moltbot --version 2>&1 | grep -qi "MrBeanBot"; then
+log_test "MrBeanBot --version shows MrBeanBot (shim)"
+if MrBeanBot --version 2>&1 | grep -qi "MrBeanBot"; then
     log_pass
 else
     log_fail "Shim does not show correct branding"
 fi
 
-log_test "clawdbot --version shows MrBeanBot (shim)"
-if clawdbot --version 2>&1 | grep -qi "MrBeanBot"; then
+log_test "MrBeanBot --version shows MrBeanBot (shim)"
+if MrBeanBot --version 2>&1 | grep -qi "MrBeanBot"; then
     log_pass
 else
     log_fail "Shim does not show correct branding"
@@ -171,31 +171,31 @@ fi
 # ============================================================================
 log_section "Test 4: Legacy Config Migration"
 
-log_test "Reads legacy config from ~/.moltbot/"
+log_test "Reads legacy config from ~/.MrBeanBot/"
 cleanup_test_env
-mkdir -p ~/.moltbot
-echo '{"gateway":{"port":12345}}' > ~/.moltbot/moltbot.json
+mkdir -p ~/.MrBeanBot
+echo '{"gateway":{"port":12345}}' > ~/.MrBeanBot/MrBeanBot.json
 if mrbeanbot config get gateway.port 2>&1 | grep -q "12345"; then
     log_pass
 else
-    log_fail "Legacy .moltbot config not read"
+    log_fail "Legacy .MrBeanBot config not read"
 fi
 
-log_test "Reads legacy config from ~/.clawdbot/"
+log_test "Reads legacy config from ~/.MrBeanBot/"
 cleanup_test_env
-mkdir -p ~/.clawdbot
-echo '{"gateway":{"port":54321}}' > ~/.clawdbot/clawdbot.json
+mkdir -p ~/.MrBeanBot
+echo '{"gateway":{"port":54321}}' > ~/.MrBeanBot/MrBeanBot.json
 if mrbeanbot config get gateway.port 2>&1 | grep -q "54321"; then
     log_pass
 else
-    log_fail "Legacy .clawdbot config not read"
+    log_fail "Legacy .MrBeanBot config not read"
 fi
 
 log_test "Prefers ~/.mrbeanbot/ over legacy paths"
-mkdir -p ~/.mrbeanbot ~/.moltbot ~/.clawdbot
+mkdir -p ~/.mrbeanbot ~/.MrBeanBot ~/.MrBeanBot
 echo '{"gateway":{"port":11111}}' > ~/.mrbeanbot/mrbeanbot.json
-echo '{"gateway":{"port":22222}}' > ~/.moltbot/moltbot.json
-echo '{"gateway":{"port":33333}}' > ~/.clawdbot/clawdbot.json
+echo '{"gateway":{"port":22222}}' > ~/.MrBeanBot/MrBeanBot.json
+echo '{"gateway":{"port":33333}}' > ~/.MrBeanBot/MrBeanBot.json
 if mrbeanbot config get gateway.port 2>&1 | grep -q "11111"; then
     log_pass
 else
@@ -210,31 +210,31 @@ log_section "Test 5: Environment Variable Priority"
 log_test "MRBEANBOT_CONFIG_PATH takes precedence"
 cleanup_test_env
 export MRBEANBOT_CONFIG_PATH="/tmp/test-mrbeanbot-1.json"
-export MOLTBOT_CONFIG_PATH="/tmp/test-mrbeanbot-2.json"
-export CLAWDBOT_CONFIG_PATH="/tmp/test-mrbeanbot-3.json"
+export MRBEANBOT_CONFIG_PATH="/tmp/test-mrbeanbot-2.json"
+export MRBEANBOT_CONFIG_PATH="/tmp/test-mrbeanbot-3.json"
 echo '{"gateway":{"port":10001}}' > "$MRBEANBOT_CONFIG_PATH"
-echo '{"gateway":{"port":10002}}' > "$MOLTBOT_CONFIG_PATH"
-echo '{"gateway":{"port":10003}}' > "$CLAWDBOT_CONFIG_PATH"
+echo '{"gateway":{"port":10002}}' > "$MRBEANBOT_CONFIG_PATH"
+echo '{"gateway":{"port":10003}}' > "$MRBEANBOT_CONFIG_PATH"
 if mrbeanbot config get gateway.port 2>&1 | grep -q "10001"; then
     log_pass
 else
     log_fail "MRBEANBOT_CONFIG_PATH not prioritized"
 fi
 
-log_test "Falls back to MOLTBOT_CONFIG_PATH"
+log_test "Falls back to MRBEANBOT_CONFIG_PATH"
 unset MRBEANBOT_CONFIG_PATH
 if mrbeanbot config get gateway.port 2>&1 | grep -q "10002"; then
     log_pass
 else
-    log_fail "MOLTBOT_CONFIG_PATH fallback failed"
+    log_fail "MRBEANBOT_CONFIG_PATH fallback failed"
 fi
 
-log_test "Falls back to CLAWDBOT_CONFIG_PATH"
-unset MOLTBOT_CONFIG_PATH
+log_test "Falls back to MRBEANBOT_CONFIG_PATH"
+unset MRBEANBOT_CONFIG_PATH
 if mrbeanbot config get gateway.port 2>&1 | grep -q "10003"; then
     log_pass
 else
-    log_fail "CLAWDBOT_CONFIG_PATH fallback failed"
+    log_fail "MRBEANBOT_CONFIG_PATH fallback failed"
 fi
 
 cleanup_test_env
@@ -260,11 +260,11 @@ fi
 
 log_test "Minimal old branding in build output"
 if [[ -d dist ]]; then
-    MOLTBOT_COUNT=$(grep -r "Moltbot" dist/ 2>/dev/null | wc -l || echo "0")
-    if [[ "$MOLTBOT_COUNT" -lt 10 ]]; then
+    MRBEANBOT_COUNT=$(grep -r "MrBeanBot" dist/ 2>/dev/null | wc -l || echo "0")
+    if [[ "$MRBEANBOT_COUNT" -lt 10 ]]; then
         log_pass
     else
-        log_fail "Found $MOLTBOT_COUNT instances of 'Moltbot' in dist/"
+        log_fail "Found $MRBEANBOT_COUNT instances of 'MrBeanBot' in dist/"
     fi
 else
     log_skip "dist/ not available"
@@ -291,11 +291,11 @@ log_section "Test 8: Extension Packages"
 
 log_test "All extensions use @mrbeanbot/* scope"
 if [[ -d extensions ]]; then
-    MOLTBOT_SCOPE_COUNT=$(grep -r '"@moltbot/' extensions/*/package.json 2>/dev/null | wc -l || echo "0")
-    if [[ "$MOLTBOT_SCOPE_COUNT" -eq 0 ]]; then
+    MRBEANBOT_SCOPE_COUNT=$(grep -r '"@MrBeanBot/' extensions/*/package.json 2>/dev/null | wc -l || echo "0")
+    if [[ "$MRBEANBOT_SCOPE_COUNT" -eq 0 ]]; then
         log_pass
     else
-        log_fail "Found $MOLTBOT_SCOPE_COUNT extensions with @moltbot scope"
+        log_fail "Found $MRBEANBOT_SCOPE_COUNT extensions with @MrBeanBot scope"
     fi
 else
     log_skip "extensions/ directory not found"
@@ -444,8 +444,8 @@ else
 fi
 
 log_test "macOS bundle ID updated"
-if [[ -f apps/macos/Sources/Moltbot/Resources/Info.plist ]]; then
-    if grep -q "com.tekcin.mrbeanbot.mac" apps/macos/Sources/Moltbot/Resources/Info.plist; then
+if [[ -f apps/macos/Sources/MrBeanBot/Resources/Info.plist ]]; then
+    if grep -q "com.tekcin.mrbeanbot.mac" apps/macos/Sources/MrBeanBot/Resources/Info.plist; then
         log_pass
     else
         log_fail "macOS bundle ID not updated"

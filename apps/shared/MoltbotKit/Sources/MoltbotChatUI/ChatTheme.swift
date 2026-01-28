@@ -14,7 +14,7 @@ extension NSAppearance {
 }
 #endif
 
-enum MoltbotChatTheme {
+enum MrBeanBotChatTheme {
     #if os(macOS)
     static func resolvedAssistantBubbleColor(for appearance: NSAppearance) -> NSColor {
         // NSColor semantic colors don't reliably resolve for arbitrary NSAppearance in SwiftPM.
@@ -31,11 +31,11 @@ enum MoltbotChatTheme {
     }
 
     static let assistantBubbleDynamicNSColor = NSColor(
-        name: NSColor.Name("MoltbotChatTheme.assistantBubble"),
+        name: NSColor.Name("MrBeanBotChatTheme.assistantBubble"),
         dynamicProvider: resolvedAssistantBubbleColor(for:))
 
     static let onboardingAssistantBubbleDynamicNSColor = NSColor(
-        name: NSColor.Name("MoltbotChatTheme.onboardingAssistantBubble"),
+        name: NSColor.Name("MrBeanBotChatTheme.onboardingAssistantBubble"),
         dynamicProvider: resolvedOnboardingAssistantBubbleColor(for:))
     #endif
 
@@ -163,8 +163,8 @@ enum MoltbotChatTheme {
     }
 }
 
-enum MoltbotPlatformImageFactory {
-    static func image(_ image: MoltbotPlatformImage) -> Image {
+enum MrBeanBotPlatformImageFactory {
+    static func image(_ image: MrBeanBotPlatformImage) -> Image {
         #if os(macOS)
         Image(nsImage: image)
         #else

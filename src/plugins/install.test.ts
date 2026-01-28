@@ -9,7 +9,7 @@ import { afterEach, describe, expect, it } from "vitest";
 const tempDirs: string[] = [];
 
 function makeTempDir() {
-  const dir = path.join(os.tmpdir(), `moltbot-plugin-install-${randomUUID()}`);
+  const dir = path.join(os.tmpdir(), `MrBeanBot-plugin-install-${randomUUID()}`);
   fs.mkdirSync(dir, { recursive: true });
   tempDirs.push(dir);
   return dir;
@@ -88,7 +88,7 @@ afterEach(() => {
 });
 
 describe("installPluginFromArchive", () => {
-  it("installs into ~/.clawdbot/extensions and uses unscoped id", async () => {
+  it("installs into ~/.MrBeanBot/extensions and uses unscoped id", async () => {
     const stateDir = makeTempDir();
     const workDir = makeTempDir();
     const pkgDir = path.join(workDir, "package");
@@ -98,7 +98,7 @@ describe("installPluginFromArchive", () => {
       JSON.stringify({
         name: "@mrbeanbot/voice-call",
         version: "0.0.1",
-        moltbot: { extensions: ["./dist/index.js"] },
+        MrBeanBot: { extensions: ["./dist/index.js"] },
       }),
       "utf-8",
     );
@@ -131,7 +131,7 @@ describe("installPluginFromArchive", () => {
       JSON.stringify({
         name: "@mrbeanbot/voice-call",
         version: "0.0.1",
-        moltbot: { extensions: ["./dist/index.js"] },
+        MrBeanBot: { extensions: ["./dist/index.js"] },
       }),
       "utf-8",
     );
@@ -165,7 +165,7 @@ describe("installPluginFromArchive", () => {
       JSON.stringify({
         name: "@mrbeanbot/zipper",
         version: "0.0.1",
-        moltbot: { extensions: ["./dist/index.js"] },
+        MrBeanBot: { extensions: ["./dist/index.js"] },
       }),
     );
     zip.file("package/dist/index.js", "export {};");
@@ -194,7 +194,7 @@ describe("installPluginFromArchive", () => {
       JSON.stringify({
         name: "@mrbeanbot/voice-call",
         version: "0.0.1",
-        moltbot: { extensions: ["./dist/index.js"] },
+        MrBeanBot: { extensions: ["./dist/index.js"] },
       }),
       "utf-8",
     );
@@ -212,7 +212,7 @@ describe("installPluginFromArchive", () => {
         JSON.stringify({
           name: "@mrbeanbot/voice-call",
           version: "0.0.2",
-          moltbot: { extensions: ["./dist/index.js"] },
+          MrBeanBot: { extensions: ["./dist/index.js"] },
         }),
         "utf-8",
       );
@@ -244,7 +244,7 @@ describe("installPluginFromArchive", () => {
     expect(manifest.version).toBe("0.0.2");
   });
 
-  it("rejects packages without moltbot.extensions", async () => {
+  it("rejects packages without MrBeanBot.extensions", async () => {
     const stateDir = makeTempDir();
     const workDir = makeTempDir();
     const pkgDir = path.join(workDir, "package");
@@ -266,6 +266,6 @@ describe("installPluginFromArchive", () => {
     const result = await installPluginFromArchive({ archivePath, extensionsDir });
     expect(result.ok).toBe(false);
     if (result.ok) return;
-    expect(result.error).toContain("moltbot.extensions");
+    expect(result.error).toContain("MrBeanBot.extensions");
   });
 });

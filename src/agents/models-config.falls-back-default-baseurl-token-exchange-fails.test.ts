@@ -2,13 +2,13 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { withTempHome as withTempHomeBase } from "../../test/helpers/temp-home.js";
-import type { MoltbotConfig } from "../config/config.js";
+import type { MrBeanBotConfig } from "../config/config.js";
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "moltbot-models-" });
+  return withTempHomeBase(fn, { prefix: "MrBeanBot-models-" });
 }
 
-const _MODELS_CONFIG: MoltbotConfig = {
+const _MODELS_CONFIG: MrBeanBotConfig = {
   models: {
     providers: {
       "custom-proxy": {
@@ -56,12 +56,12 @@ describe("models-config", () => {
           resolveCopilotApiToken: vi.fn().mockRejectedValue(new Error("boom")),
         }));
 
-        const { ensureMoltbotModelsJson } = await import("./models-config.js");
-        const { resolveMoltbotAgentDir } = await import("./agent-paths.js");
+        const { ensureMrBeanBotModelsJson } = await import("./models-config.js");
+        const { resolveMrBeanBotAgentDir } = await import("./agent-paths.js");
 
-        await ensureMoltbotModelsJson({ models: { providers: {} } });
+        await ensureMrBeanBotModelsJson({ models: { providers: {} } });
 
-        const agentDir = resolveMoltbotAgentDir();
+        const agentDir = resolveMrBeanBotAgentDir();
         const raw = await fs.readFile(path.join(agentDir, "models.json"), "utf8");
         const parsed = JSON.parse(raw) as {
           providers: Record<string, { baseUrl?: string }>;
@@ -115,9 +115,9 @@ describe("models-config", () => {
           }),
         }));
 
-        const { ensureMoltbotModelsJson } = await import("./models-config.js");
+        const { ensureMrBeanBotModelsJson } = await import("./models-config.js");
 
-        await ensureMoltbotModelsJson({ models: { providers: {} } }, agentDir);
+        await ensureMrBeanBotModelsJson({ models: { providers: {} } }, agentDir);
 
         const raw = await fs.readFile(path.join(agentDir, "models.json"), "utf8");
         const parsed = JSON.parse(raw) as {

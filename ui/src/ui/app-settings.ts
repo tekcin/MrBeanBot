@@ -17,7 +17,7 @@ import { startThemeTransition, type ThemeTransitionContext } from "./theme-trans
 import { scheduleChatScroll, scheduleLogsScroll } from "./app-scroll";
 import { startLogsPolling, stopLogsPolling, startDebugPolling, stopDebugPolling } from "./app-polling";
 import { refreshChat } from "./app-chat";
-import type { MoltbotApp } from "./app";
+import type { MrBeanBotApp } from "./app";
 
 type SettingsHost = {
   settings: UiSettings;
@@ -145,15 +145,15 @@ export function setTheme(
 export async function refreshActiveTab(host: SettingsHost) {
   if (host.tab === "overview") await loadOverview(host);
   if (host.tab === "channels") await loadChannelsTab(host);
-  if (host.tab === "instances") await loadPresence(host as unknown as MoltbotApp);
-  if (host.tab === "sessions") await loadSessions(host as unknown as MoltbotApp);
+  if (host.tab === "instances") await loadPresence(host as unknown as MrBeanBotApp);
+  if (host.tab === "sessions") await loadSessions(host as unknown as MrBeanBotApp);
   if (host.tab === "cron") await loadCron(host);
-  if (host.tab === "skills") await loadSkills(host as unknown as MoltbotApp);
+  if (host.tab === "skills") await loadSkills(host as unknown as MrBeanBotApp);
   if (host.tab === "nodes") {
-    await loadNodes(host as unknown as MoltbotApp);
-    await loadDevices(host as unknown as MoltbotApp);
-    await loadConfig(host as unknown as MoltbotApp);
-    await loadExecApprovals(host as unknown as MoltbotApp);
+    await loadNodes(host as unknown as MrBeanBotApp);
+    await loadDevices(host as unknown as MrBeanBotApp);
+    await loadConfig(host as unknown as MrBeanBotApp);
+    await loadExecApprovals(host as unknown as MrBeanBotApp);
   }
   if (host.tab === "chat") {
     await refreshChat(host as unknown as Parameters<typeof refreshChat>[0]);
@@ -163,29 +163,29 @@ export async function refreshActiveTab(host: SettingsHost) {
     );
   }
   if (host.tab === "config") {
-    await loadConfigSchema(host as unknown as MoltbotApp);
-    await loadConfig(host as unknown as MoltbotApp);
+    await loadConfigSchema(host as unknown as MrBeanBotApp);
+    await loadConfig(host as unknown as MrBeanBotApp);
   }
   if (host.tab === "debug") {
-    await loadDebug(host as unknown as MoltbotApp);
+    await loadDebug(host as unknown as MrBeanBotApp);
     host.eventLog = host.eventLogBuffer;
   }
   if (host.tab === "logs") {
     host.logsAtBottom = true;
-    await loadLogs(host as unknown as MoltbotApp, { reset: true });
+    await loadLogs(host as unknown as MrBeanBotApp, { reset: true });
     scheduleLogsScroll(
       host as unknown as Parameters<typeof scheduleLogsScroll>[0],
       true,
     );
   }
   if (host.tab === "gateway-admin") {
-    await loadGatewayStatus(host as unknown as MoltbotApp);
+    await loadGatewayStatus(host as unknown as MrBeanBotApp);
   }
 }
 
 export function inferBasePath() {
   if (typeof window === "undefined") return "";
-  const configured = window.__CLAWDBOT_CONTROL_UI_BASE_PATH__;
+  const configured = window.__MRBEANBOT_CONTROL_UI_BASE_PATH__;
   if (typeof configured === "string" && configured.trim()) {
     return normalizeBasePath(configured);
   }
@@ -311,26 +311,26 @@ export function syncUrlWithSessionKey(
 
 export async function loadOverview(host: SettingsHost) {
   await Promise.all([
-    loadChannels(host as unknown as MoltbotApp, false),
-    loadPresence(host as unknown as MoltbotApp),
-    loadSessions(host as unknown as MoltbotApp),
-    loadCronStatus(host as unknown as MoltbotApp),
-    loadDebug(host as unknown as MoltbotApp),
+    loadChannels(host as unknown as MrBeanBotApp, false),
+    loadPresence(host as unknown as MrBeanBotApp),
+    loadSessions(host as unknown as MrBeanBotApp),
+    loadCronStatus(host as unknown as MrBeanBotApp),
+    loadDebug(host as unknown as MrBeanBotApp),
   ]);
 }
 
 export async function loadChannelsTab(host: SettingsHost) {
   await Promise.all([
-    loadChannels(host as unknown as MoltbotApp, true),
-    loadConfigSchema(host as unknown as MoltbotApp),
-    loadConfig(host as unknown as MoltbotApp),
+    loadChannels(host as unknown as MrBeanBotApp, true),
+    loadConfigSchema(host as unknown as MrBeanBotApp),
+    loadConfig(host as unknown as MrBeanBotApp),
   ]);
 }
 
 export async function loadCron(host: SettingsHost) {
   await Promise.all([
-    loadChannels(host as unknown as MoltbotApp, false),
-    loadCronStatus(host as unknown as MoltbotApp),
-    loadCronJobs(host as unknown as MoltbotApp),
+    loadChannels(host as unknown as MrBeanBotApp, false),
+    loadCronStatus(host as unknown as MrBeanBotApp),
+    loadCronJobs(host as unknown as MrBeanBotApp),
   ]);
 }

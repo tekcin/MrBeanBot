@@ -81,36 +81,36 @@ vi.mock("./progress.js", () => ({
 
 describe("daemon-cli coverage", () => {
   const originalEnv = {
-    CLAWDBOT_STATE_DIR: process.env.CLAWDBOT_STATE_DIR,
-    CLAWDBOT_CONFIG_PATH: process.env.CLAWDBOT_CONFIG_PATH,
-    CLAWDBOT_GATEWAY_PORT: process.env.CLAWDBOT_GATEWAY_PORT,
-    CLAWDBOT_PROFILE: process.env.CLAWDBOT_PROFILE,
+    MRBEANBOT_STATE_DIR: process.env.MRBEANBOT_STATE_DIR,
+    MRBEANBOT_CONFIG_PATH: process.env.MRBEANBOT_CONFIG_PATH,
+    MRBEANBOT_GATEWAY_PORT: process.env.MRBEANBOT_GATEWAY_PORT,
+    MRBEANBOT_PROFILE: process.env.MRBEANBOT_PROFILE,
   };
 
   beforeEach(() => {
-    process.env.CLAWDBOT_STATE_DIR = "/tmp/moltbot-cli-state";
-    process.env.CLAWDBOT_CONFIG_PATH = "/tmp/moltbot-cli-state/moltbot.json";
-    delete process.env.CLAWDBOT_GATEWAY_PORT;
-    delete process.env.CLAWDBOT_PROFILE;
+    process.env.MRBEANBOT_STATE_DIR = "/tmp/MrBeanBot-cli-state";
+    process.env.MRBEANBOT_CONFIG_PATH = "/tmp/MrBeanBot-cli-state/MrBeanBot.json";
+    delete process.env.MRBEANBOT_GATEWAY_PORT;
+    delete process.env.MRBEANBOT_PROFILE;
     serviceReadCommand.mockResolvedValue(null);
   });
 
   afterEach(() => {
-    if (originalEnv.CLAWDBOT_STATE_DIR !== undefined)
-      process.env.CLAWDBOT_STATE_DIR = originalEnv.CLAWDBOT_STATE_DIR;
-    else delete process.env.CLAWDBOT_STATE_DIR;
+    if (originalEnv.MRBEANBOT_STATE_DIR !== undefined)
+      process.env.MRBEANBOT_STATE_DIR = originalEnv.MRBEANBOT_STATE_DIR;
+    else delete process.env.MRBEANBOT_STATE_DIR;
 
-    if (originalEnv.CLAWDBOT_CONFIG_PATH !== undefined)
-      process.env.CLAWDBOT_CONFIG_PATH = originalEnv.CLAWDBOT_CONFIG_PATH;
-    else delete process.env.CLAWDBOT_CONFIG_PATH;
+    if (originalEnv.MRBEANBOT_CONFIG_PATH !== undefined)
+      process.env.MRBEANBOT_CONFIG_PATH = originalEnv.MRBEANBOT_CONFIG_PATH;
+    else delete process.env.MRBEANBOT_CONFIG_PATH;
 
-    if (originalEnv.CLAWDBOT_GATEWAY_PORT !== undefined)
-      process.env.CLAWDBOT_GATEWAY_PORT = originalEnv.CLAWDBOT_GATEWAY_PORT;
-    else delete process.env.CLAWDBOT_GATEWAY_PORT;
+    if (originalEnv.MRBEANBOT_GATEWAY_PORT !== undefined)
+      process.env.MRBEANBOT_GATEWAY_PORT = originalEnv.MRBEANBOT_GATEWAY_PORT;
+    else delete process.env.MRBEANBOT_GATEWAY_PORT;
 
-    if (originalEnv.CLAWDBOT_PROFILE !== undefined)
-      process.env.CLAWDBOT_PROFILE = originalEnv.CLAWDBOT_PROFILE;
-    else delete process.env.CLAWDBOT_PROFILE;
+    if (originalEnv.MRBEANBOT_PROFILE !== undefined)
+      process.env.MRBEANBOT_PROFILE = originalEnv.MRBEANBOT_PROFILE;
+    else delete process.env.MRBEANBOT_PROFILE;
   });
 
   it("probes gateway status by default", async () => {
@@ -140,10 +140,10 @@ describe("daemon-cli coverage", () => {
     serviceReadCommand.mockResolvedValueOnce({
       programArguments: ["/bin/node", "cli", "gateway", "--port", "19001"],
       environment: {
-        CLAWDBOT_PROFILE: "dev",
-        CLAWDBOT_STATE_DIR: "/tmp/moltbot-daemon-state",
-        CLAWDBOT_CONFIG_PATH: "/tmp/moltbot-daemon-state/moltbot.json",
-        CLAWDBOT_GATEWAY_PORT: "19001",
+        MRBEANBOT_PROFILE: "dev",
+        MRBEANBOT_STATE_DIR: "/tmp/MrBeanBot-daemon-state",
+        MRBEANBOT_CONFIG_PATH: "/tmp/MrBeanBot-daemon-state/MrBeanBot.json",
+        MRBEANBOT_GATEWAY_PORT: "19001",
       },
       sourcePath: "/tmp/com.tekcin.mrbeanbot.gateway.plist",
     });

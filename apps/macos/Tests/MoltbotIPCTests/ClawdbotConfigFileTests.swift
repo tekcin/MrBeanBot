@@ -1,18 +1,18 @@
 import Foundation
 import Testing
-@testable import Moltbot
+@testable import MrBeanBot
 
 @Suite(.serialized)
-struct MoltbotConfigFileTests {
+struct MrBeanBotConfigFileTests {
     @Test
     func configPathRespectsEnvOverride() async {
         let override = FileManager().temporaryDirectory
-            .appendingPathComponent("moltbot-config-\(UUID().uuidString)")
-            .appendingPathComponent("moltbot.json")
+            .appendingPathComponent("MrBeanBot-config-\(UUID().uuidString)")
+            .appendingPathComponent("MrBeanBot.json")
             .path
 
-        await TestIsolation.withEnvValues(["CLAWDBOT_CONFIG_PATH": override]) {
-            #expect(MoltbotConfigFile.url().path == override)
+        await TestIsolation.withEnvValues(["MRBEANBOT_CONFIG_PATH": override]) {
+            #expect(MrBeanBotConfigFile.url().path == override)
         }
     }
 
@@ -20,22 +20,22 @@ struct MoltbotConfigFileTests {
     @Test
     func remoteGatewayPortParsesAndMatchesHost() async {
         let override = FileManager().temporaryDirectory
-            .appendingPathComponent("moltbot-config-\(UUID().uuidString)")
-            .appendingPathComponent("moltbot.json")
+            .appendingPathComponent("MrBeanBot-config-\(UUID().uuidString)")
+            .appendingPathComponent("MrBeanBot.json")
             .path
 
-        await TestIsolation.withEnvValues(["CLAWDBOT_CONFIG_PATH": override]) {
-            MoltbotConfigFile.saveDict([
+        await TestIsolation.withEnvValues(["MRBEANBOT_CONFIG_PATH": override]) {
+            MrBeanBotConfigFile.saveDict([
                 "gateway": [
                     "remote": [
                         "url": "ws://gateway.ts.net:19999",
                     ],
                 ],
             ])
-            #expect(MoltbotConfigFile.remoteGatewayPort() == 19999)
-            #expect(MoltbotConfigFile.remoteGatewayPort(matchingHost: "gateway.ts.net") == 19999)
-            #expect(MoltbotConfigFile.remoteGatewayPort(matchingHost: "gateway") == 19999)
-            #expect(MoltbotConfigFile.remoteGatewayPort(matchingHost: "other.ts.net") == nil)
+            #expect(MrBeanBotConfigFile.remoteGatewayPort() == 19999)
+            #expect(MrBeanBotConfigFile.remoteGatewayPort(matchingHost: "gateway.ts.net") == 19999)
+            #expect(MrBeanBotConfigFile.remoteGatewayPort(matchingHost: "gateway") == 19999)
+            #expect(MrBeanBotConfigFile.remoteGatewayPort(matchingHost: "other.ts.net") == nil)
         }
     }
 
@@ -43,20 +43,20 @@ struct MoltbotConfigFileTests {
     @Test
     func setRemoteGatewayUrlPreservesScheme() async {
         let override = FileManager().temporaryDirectory
-            .appendingPathComponent("moltbot-config-\(UUID().uuidString)")
-            .appendingPathComponent("moltbot.json")
+            .appendingPathComponent("MrBeanBot-config-\(UUID().uuidString)")
+            .appendingPathComponent("MrBeanBot.json")
             .path
 
-        await TestIsolation.withEnvValues(["CLAWDBOT_CONFIG_PATH": override]) {
-            MoltbotConfigFile.saveDict([
+        await TestIsolation.withEnvValues(["MRBEANBOT_CONFIG_PATH": override]) {
+            MrBeanBotConfigFile.saveDict([
                 "gateway": [
                     "remote": [
                         "url": "wss://old-host:111",
                     ],
                 ],
             ])
-            MoltbotConfigFile.setRemoteGatewayUrl(host: "new-host", port: 2222)
-            let root = MoltbotConfigFile.loadDict()
+            MrBeanBotConfigFile.setRemoteGatewayUrl(host: "new-host", port: 2222)
+            let root = MrBeanBotConfigFile.loadDict()
             let url = ((root["gateway"] as? [String: Any])?["remote"] as? [String: Any])?["url"] as? String
             #expect(url == "wss://new-host:2222")
         }
@@ -65,15 +65,15 @@ struct MoltbotConfigFileTests {
     @Test
     func stateDirOverrideSetsConfigPath() async {
         let dir = FileManager().temporaryDirectory
-            .appendingPathComponent("moltbot-state-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("MrBeanBot-state-\(UUID().uuidString)", isDirectory: true)
             .path
 
         await TestIsolation.withEnvValues([
-            "CLAWDBOT_CONFIG_PATH": nil,
-            "CLAWDBOT_STATE_DIR": dir,
+            "MRBEANBOT_CONFIG_PATH": nil,
+            "MRBEANBOT_STATE_DIR": dir,
         ]) {
-            #expect(MoltbotConfigFile.stateDirURL().path == dir)
-            #expect(MoltbotConfigFile.url().path == "\(dir)/moltbot.json")
+            #expect(MrBeanBotConfigFile.stateDirURL().path == dir)
+            #expect(MrBeanBotConfigFile.url().path == "\(dir)/MrBeanBot.json")
         }
     }
 }
