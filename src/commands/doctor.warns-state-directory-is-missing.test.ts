@@ -215,7 +215,7 @@ vi.mock("../process/exec.js", () => ({
   runCommandWithTimeout,
 }));
 
-vi.mock("../infra/moltbot-root.js", () => ({
+vi.mock("../infra/mrbeanbot-root.js", () => ({
   resolveMrBeanBotPackageRoot,
 }));
 

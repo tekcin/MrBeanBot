@@ -21,7 +21,7 @@ vi.mock("../config/config.js", async (importOriginal) => {
 });
 
 import "./test-helpers/fast-core-tools.js";
-import { createMrBeanBotTools } from "./moltbot-tools.js";
+import { createMrBeanBotTools } from "./mrbeanbot-tools.js";
 
 const waitForCalls = async (getCount: () => number, count: number, timeoutMs = 2000) => {
   const start = Date.now();

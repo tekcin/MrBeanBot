@@ -80,14 +80,14 @@ function isMrBeanBotGatewayLaunchdService(label: string, contents: string): bool
   if (!lowerContents.includes("gateway")) return false;
   return (
     label.startsWith("bot.molt.") ||
-    label.startsWith("com.clawdbot.") ||
+    label.startsWith("com.mrbeanbot.") ||
     label.startsWith("com.tekcin.mrbeanbot.")
   );
 }
 
 function isMrBeanBotGatewaySystemdService(name: string, contents: string): boolean {
   if (hasGatewayServiceMarker(contents)) return true;
-  if (!name.startsWith("mrbeanbot-gateway") && !name.startsWith("clawdbot-gateway")) return false;
+  if (!name.startsWith("mrbeanbot-gateway")) return false;
   return contents.toLowerCase().includes("gateway");
 }
 

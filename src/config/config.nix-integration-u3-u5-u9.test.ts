@@ -39,8 +39,6 @@ describe("Nix integration (U3, U5, U9)", () => {
       await withEnvOverride(
         {
           MRBEANBOT_STATE_DIR: undefined,
-          MOLTBOT_STATE_DIR: undefined,
-          CLAWDBOT_STATE_DIR: undefined,
         },
         async () => {
           const { STATE_DIR } = await import("./config.js");
@@ -50,23 +48,10 @@ describe("Nix integration (U3, U5, U9)", () => {
     });
 
     it("STATE_DIR respects MRBEANBOT_STATE_DIR override", async () => {
-      await withEnvOverride(
-        { MOLTBOT_STATE_DIR: undefined, MRBEANBOT_STATE_DIR: "/custom/state/dir" },
-        async () => {
-          const { STATE_DIR } = await import("./config.js");
-          expect(STATE_DIR).toBe(path.resolve("/custom/state/dir"));
-        },
-      );
-    });
-
-    it("STATE_DIR prefers MRBEANBOT_STATE_DIR over legacy override", async () => {
-      await withEnvOverride(
-        { MRBEANBOT_STATE_DIR: "/custom/new", MOLTBOT_STATE_DIR: "/custom/legacy" },
-        async () => {
-          const { STATE_DIR } = await import("./config.js");
-          expect(STATE_DIR).toBe(path.resolve("/custom/new"));
-        },
-      );
+      await withEnvOverride({ MRBEANBOT_STATE_DIR: "/custom/state/dir" }, async () => {
+        const { STATE_DIR } = await import("./config.js");
+        expect(STATE_DIR).toBe(path.resolve("/custom/state/dir"));
+      });
     });
 
     it("CONFIG_PATH defaults to ~/.mrbeanbot/mrbeanbot.json when env not set", async () => {
@@ -74,10 +59,6 @@ describe("Nix integration (U3, U5, U9)", () => {
         {
           MRBEANBOT_CONFIG_PATH: undefined,
           MRBEANBOT_STATE_DIR: undefined,
-          MOLTBOT_CONFIG_PATH: undefined,
-          MOLTBOT_STATE_DIR: undefined,
-          CLAWDBOT_CONFIG_PATH: undefined,
-          CLAWDBOT_STATE_DIR: undefined,
         },
         async () => {
           const { CONFIG_PATH } = await import("./config.js");
@@ -89,7 +70,6 @@ describe("Nix integration (U3, U5, U9)", () => {
     it("CONFIG_PATH respects MRBEANBOT_CONFIG_PATH override", async () => {
       await withEnvOverride(
         {
-          MOLTBOT_CONFIG_PATH: undefined,
           MRBEANBOT_CONFIG_PATH: "/nix/store/abc/mrbeanbot.json",
         },
         async () => {
@@ -99,28 +79,12 @@ describe("Nix integration (U3, U5, U9)", () => {
       );
     });
 
-    it("CONFIG_PATH prefers MRBEANBOT_CONFIG_PATH over legacy override", async () => {
-      await withEnvOverride(
-        {
-          MRBEANBOT_CONFIG_PATH: "/nix/store/new/mrbeanbot.json",
-          MOLTBOT_CONFIG_PATH: "/nix/store/legacy/mrbeanbot.json",
-        },
-        async () => {
-          const { CONFIG_PATH } = await import("./config.js");
-          expect(CONFIG_PATH).toBe(path.resolve("/nix/store/new/mrbeanbot.json"));
-        },
-      );
-    });
-
     it("CONFIG_PATH expands ~ in MRBEANBOT_CONFIG_PATH override", async () => {
       await withTempHome(async (home) => {
-        await withEnvOverride(
-          { MOLTBOT_CONFIG_PATH: undefined, MRBEANBOT_CONFIG_PATH: "~/.mrbeanbot/custom.json" },
-          async () => {
-            const { CONFIG_PATH } = await import("./config.js");
-            expect(CONFIG_PATH).toBe(path.join(home, ".mrbeanbot", "custom.json"));
-          },
-        );
+        await withEnvOverride({ MRBEANBOT_CONFIG_PATH: "~/.mrbeanbot/custom.json" }, async () => {
+          const { CONFIG_PATH } = await import("./config.js");
+          expect(CONFIG_PATH).toBe(path.join(home, ".mrbeanbot", "custom.json"));
+        });
       });
     });
 
@@ -128,9 +92,7 @@ describe("Nix integration (U3, U5, U9)", () => {
       await withEnvOverride(
         {
           MRBEANBOT_CONFIG_PATH: undefined,
-          MRBEANBOT_STATE_DIR: undefined,
-          MOLTBOT_CONFIG_PATH: undefined,
-          MOLTBOT_STATE_DIR: "/custom/state",
+          MRBEANBOT_STATE_DIR: "/custom/state",
         },
         async () => {
           const { CONFIG_PATH } = await import("./config.js");

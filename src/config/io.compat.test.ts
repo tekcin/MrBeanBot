@@ -16,9 +16,9 @@ async function withTempHome(run: (home: string) => Promise<void>): Promise<void>
 
 async function writeConfig(
   home: string,
-  dirname: ".mrbeanbot" | ".clawdbot",
+  dirname: string,
   port: number,
-  filename: "mrbeanbot.json" | "clawdbot.json" = "mrbeanbot.json",
+  filename: string = "mrbeanbot.json",
 ) {
   const dir = path.join(home, dirname);
   await fs.mkdir(dir, { recursive: true });
@@ -28,75 +28,34 @@ async function writeConfig(
 }
 
 describe("config io compat (new + legacy folders)", () => {
-  it("prefers ~/.mrbeanbot/mrbeanbot.json when both configs exist", async () => {
+  it("loads config from ~/.mrbeanbot/mrbeanbot.json", async () => {
     await withTempHome(async (home) => {
-      const newConfigPath = await writeConfig(home, ".mrbeanbot", 19001);
-      await writeConfig(home, ".clawdbot", 18789);
+      const configPath = await writeConfig(home, ".mrbeanbot", 19001);
 
       const io = createConfigIO({
         env: {} as NodeJS.ProcessEnv,
         homedir: () => home,
       });
-      expect(io.configPath).toBe(newConfigPath);
+      expect(io.configPath).toBe(configPath);
       expect(io.loadConfig().gateway?.port).toBe(19001);
     });
   });
 
-  it("falls back to ~/.clawdbot/mrbeanbot.json when only legacy exists", async () => {
+  it("honors explicit config path env override", async () => {
     await withTempHome(async (home) => {
-      const legacyConfigPath = await writeConfig(home, ".clawdbot", 20001);
+      const defaultConfigPath = await writeConfig(home, ".mrbeanbot", 19002);
+      const customDir = path.join(home, "custom");
+      await fs.mkdir(customDir, { recursive: true });
+      const customConfigPath = path.join(customDir, "mrbeanbot.json");
+      await fs.writeFile(customConfigPath, JSON.stringify({ gateway: { port: 20002 } }, null, 2));
 
       const io = createConfigIO({
-        env: {} as NodeJS.ProcessEnv,
+        env: { MRBEANBOT_CONFIG_PATH: customConfigPath } as NodeJS.ProcessEnv,
         homedir: () => home,
       });
 
-      expect(io.configPath).toBe(legacyConfigPath);
-      expect(io.loadConfig().gateway?.port).toBe(20001);
-    });
-  });
-
-  it("falls back to ~/.mrbeanbot/clawdbot.json when only legacy filename exists", async () => {
-    await withTempHome(async (home) => {
-      const legacyConfigPath = await writeConfig(home, ".mrbeanbot", 20002, "clawdbot.json");
-
-      const io = createConfigIO({
-        env: {} as NodeJS.ProcessEnv,
-        homedir: () => home,
-      });
-
-      expect(io.configPath).toBe(legacyConfigPath);
-      expect(io.loadConfig().gateway?.port).toBe(20002);
-    });
-  });
-
-  it("prefers mrbeanbot.json over legacy filename in the same dir", async () => {
-    await withTempHome(async (home) => {
-      const preferred = await writeConfig(home, ".mrbeanbot", 20003, "mrbeanbot.json");
-      await writeConfig(home, ".mrbeanbot", 20004, "clawdbot.json");
-
-      const io = createConfigIO({
-        env: {} as NodeJS.ProcessEnv,
-        homedir: () => home,
-      });
-
-      expect(io.configPath).toBe(preferred);
-      expect(io.loadConfig().gateway?.port).toBe(20003);
-    });
-  });
-
-  it("honors explicit legacy config path env override", async () => {
-    await withTempHome(async (home) => {
-      const newConfigPath = await writeConfig(home, ".mrbeanbot", 19002);
-      const legacyConfigPath = await writeConfig(home, ".clawdbot", 20002);
-
-      const io = createConfigIO({
-        env: { CLAWDBOT_CONFIG_PATH: legacyConfigPath } as NodeJS.ProcessEnv,
-        homedir: () => home,
-      });
-
-      expect(io.configPath).not.toBe(newConfigPath);
-      expect(io.configPath).toBe(legacyConfigPath);
+      expect(io.configPath).not.toBe(defaultConfigPath);
+      expect(io.configPath).toBe(customConfigPath);
       expect(io.loadConfig().gateway?.port).toBe(20002);
     });
   });

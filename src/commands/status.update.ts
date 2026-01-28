@@ -1,4 +1,4 @@
-import { resolveMrBeanBotPackageRoot } from "../infra/moltbot-root.js";
+import { resolveMrBeanBotPackageRoot } from "../infra/mrbeanbot-root.js";
 import {
   checkUpdateStatus,
   compareSemverStrings,

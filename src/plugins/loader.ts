@@ -210,7 +210,6 @@ export function loadMrBeanBotPlugins(options: PluginLoadOptions = {}): PluginReg
       ? {
           alias: {
             "mrbeanbot/plugin-sdk": pluginSdkAlias,
-            "clawdbot/plugin-sdk": pluginSdkAlias,
           },
         }
       : {}),

@@ -144,23 +144,12 @@ describe("resolveConfigDir", () => {
     }
   });
 
-  it("falls back to ~/.moltbot when only legacy moltbot dir exists", async () => {
+  it("falls back to ~/.mrbeanbot when only legacy mrbeanbot dir exists", async () => {
     const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-config-dir-"));
     try {
-      await fs.promises.mkdir(path.join(root, ".moltbot"), { recursive: true });
+      await fs.promises.mkdir(path.join(root, ".mrbeanbot"), { recursive: true });
       const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
-      expect(resolved).toBe(path.join(root, ".moltbot"));
-    } finally {
-      await fs.promises.rm(root, { recursive: true, force: true });
-    }
-  });
-
-  it("falls back to ~/.clawdbot when only legacy clawdbot dir exists", async () => {
-    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "mrbeanbot-config-dir-"));
-    try {
-      await fs.promises.mkdir(path.join(root, ".clawdbot"), { recursive: true });
-      const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
-      expect(resolved).toBe(path.join(root, ".clawdbot"));
+      expect(resolved).toBe(path.join(root, ".mrbeanbot"));
     } finally {
       await fs.promises.rm(root, { recursive: true, force: true });
     }

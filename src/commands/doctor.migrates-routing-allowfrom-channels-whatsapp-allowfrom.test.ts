@@ -215,7 +215,7 @@ vi.mock("../process/exec.js", () => ({
   runCommandWithTimeout,
 }));
 
-vi.mock("../infra/moltbot-root.js", () => ({
+vi.mock("../infra/mrbeanbot-root.js", () => ({
   resolveMrBeanBotPackageRoot,
 }));
 
@@ -389,7 +389,7 @@ describe("doctor command", () => {
     findLegacyGatewayServices.mockResolvedValueOnce([
       {
         platform: "darwin",
-        label: "com.steipete.clawdbot.gateway",
+        label: "com.steipete.mrbeanbot.gateway",
         detail: "loaded",
       },
     ]);

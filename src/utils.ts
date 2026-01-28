@@ -215,18 +215,11 @@ export function resolveConfigDir(
   env: NodeJS.ProcessEnv = process.env,
   homedir: () => string = os.homedir,
 ): string {
-  const override =
-    env.MRBEANBOT_STATE_DIR?.trim() ||
-    env.MOLTBOT_STATE_DIR?.trim() ||
-    env.CLAWDBOT_STATE_DIR?.trim();
+  const override = env.MRBEANBOT_STATE_DIR?.trim();
   if (override) return resolveUserPath(override);
   const newDir = path.join(homedir(), ".mrbeanbot");
-  const moltbotDir = path.join(homedir(), ".moltbot");
-  const clawdbotDir = path.join(homedir(), ".clawdbot");
   try {
     if (fs.existsSync(newDir)) return newDir;
-    if (fs.existsSync(moltbotDir)) return moltbotDir;
-    if (fs.existsSync(clawdbotDir)) return clawdbotDir;
   } catch {
     // best-effort
   }

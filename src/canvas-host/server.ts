@@ -103,25 +103,25 @@ function defaultIndexHTML() {
       window.webkit &&
       window.webkit.messageHandlers &&
       (window.webkit.messageHandlers.MrBeanBotCanvasA2UIAction ||
-        window.webkit.messageHandlers.ClawdBotCanvasA2UIAction)
+        window.webkit.messageHandlers.MrBeanBotCanvasA2UIAction)
     );
   const hasAndroid = () =>
     !!(
       (window.MrBeanBotCanvasA2UIAction &&
         typeof window.MrBeanBotCanvasA2UIAction.postMessage === "function") ||
-      (window.ClawdBotCanvasA2UIAction &&
-        typeof window.ClawdBotCanvasA2UIAction.postMessage === "function")
+      (window.MrBeanBotCanvasA2UIAction &&
+        typeof window.MrBeanBotCanvasA2UIAction.postMessage === "function")
     );
-  const legacySend = typeof window.ClawdBotSendUserAction === "function" ? window.ClawdBotSendUserAction : undefined;
+  const legacySend = typeof window.MrBeanBotSendUserAction === "function" ? window.MrBeanBotSendUserAction : undefined;
   if (!window.MrBeanBotSendUserAction && legacySend) {
     window.MrBeanBotSendUserAction = legacySend;
   }
-  if (!window.MrBeanBotSendUserAction && typeof window.ClawdBotSendUserAction === "function") {
-    window.MrBeanBotSendUserAction = window.ClawdBotSendUserAction;
+  if (!window.MrBeanBotSendUserAction && typeof window.MrBeanBotSendUserAction === "function") {
+    window.MrBeanBotSendUserAction = window.MrBeanBotSendUserAction;
   }
   const hasHelper = () =>
     typeof window.MrBeanBotSendUserAction === "function" ||
-    typeof window.ClawdBotSendUserAction === "function";
+    typeof window.MrBeanBotSendUserAction === "function";
   statusEl.innerHTML =
     "Bridge: " +
     (hasHelper() ? "<span class='ok'>ready</span>" : "<span class='bad'>missing</span>") +
@@ -141,7 +141,7 @@ function defaultIndexHTML() {
     const sendUserAction =
       typeof window.MrBeanBotSendUserAction === "function"
         ? window.MrBeanBotSendUserAction
-        : window.ClawdBotSendUserAction;
+        : window.MrBeanBotSendUserAction;
     const ok = sendUserAction({
       name,
       surfaceId: "main",

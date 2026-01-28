@@ -16,7 +16,7 @@ import {
   type ProcessToolDefaults,
 } from "./bash-tools.js";
 import { listChannelAgentTools } from "./channel-tools.js";
-import { createMrBeanBotTools } from "./moltbot-tools.js";
+import { createMrBeanBotTools } from "./mrbeanbot-tools.js";
 import type { ModelAuthMode } from "./model-auth.js";
 import { wrapToolWithAbortSignal } from "./pi-tools.abort.js";
 import {

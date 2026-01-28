@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 
-import { createMrBeanBotTools } from "../agents/moltbot-tools.js";
+import { createMrBeanBotTools } from "../agents/mrbeanbot-tools.js";
 import {
   filterToolsByPolicy,
   resolveEffectiveToolPolicy,

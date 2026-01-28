@@ -10,13 +10,9 @@ export const NODE_WINDOWS_TASK_NAME = "MrBeanBot Node";
 export const NODE_SERVICE_MARKER = "mrbeanbot";
 export const NODE_SERVICE_KIND = "node";
 export const NODE_WINDOWS_TASK_SCRIPT_NAME = "node.cmd";
-export const LEGACY_GATEWAY_LAUNCH_AGENT_LABELS = [
-  "bot.molt.gateway",
-  "com.clawdbot.gateway",
-  "com.steipete.clawdbot.gateway",
-];
-export const LEGACY_GATEWAY_SYSTEMD_SERVICE_NAMES: string[] = ["clawdbot-gateway"];
-export const LEGACY_GATEWAY_WINDOWS_TASK_NAMES: string[] = ["ClawdBot Gateway"];
+export const LEGACY_GATEWAY_LAUNCH_AGENT_LABELS = ["bot.molt.gateway", "com.mrbeanbot.gateway"];
+export const LEGACY_GATEWAY_SYSTEMD_SERVICE_NAMES: string[] = ["mrbeanbot-gateway"];
+export const LEGACY_GATEWAY_WINDOWS_TASK_NAMES: string[] = ["MrBeanBot Gateway"];
 
 export function normalizeGatewayProfile(profile?: string): string | null {
   const trimmed = profile?.trim();
@@ -45,7 +41,7 @@ export function resolveLegacyGatewayLaunchAgentLabels(profile?: string): string[
   return [
     ...LEGACY_GATEWAY_LAUNCH_AGENT_LABELS,
     `bot.molt.${normalized}`,
-    `com.clawdbot.${normalized}`,
+    `com.mrbeanbot.${normalized}`,
   ];
 }
 

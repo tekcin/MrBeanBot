@@ -16,7 +16,7 @@ import { logConfigUpdated } from "../config/logging.js";
 import { resolveGatewayService } from "../daemon/service.js";
 import { resolveGatewayAuth } from "../gateway/auth.js";
 import { buildGatewayConnectionDetails } from "../gateway/call.js";
-import { resolveMrBeanBotPackageRoot } from "../infra/moltbot-root.js";
+import { resolveMrBeanBotPackageRoot } from "../infra/mrbeanbot-root.js";
 import type { RuntimeEnv } from "../runtime.js";
 import { defaultRuntime } from "../runtime.js";
 import { note } from "../terminal/note.js";

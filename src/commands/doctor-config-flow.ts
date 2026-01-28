@@ -121,11 +121,7 @@ function noteOpencodeProviderOverrides(cfg: MrBeanBotConfig) {
 }
 
 function hasExplicitConfigPath(env: NodeJS.ProcessEnv): boolean {
-  return Boolean(
-    env.MRBEANBOT_CONFIG_PATH?.trim() ||
-    env.MOLTBOT_CONFIG_PATH?.trim() ||
-    env.CLAWDBOT_CONFIG_PATH?.trim(),
-  );
+  return Boolean(env.MRBEANBOT_CONFIG_PATH?.trim());
 }
 
 function moveLegacyConfigFile(legacyPath: string, canonicalPath: string) {
