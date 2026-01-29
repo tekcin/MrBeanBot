@@ -153,6 +153,51 @@ Once configured, all your Ollama models are available:
 }
 ```
 
+## Setup via Ollama Launch
+
+If MrBeanBot is registered in Ollama's integration registry, you can configure it directly from Ollama:
+
+```bash
+# Launch MrBeanBot with Ollama as the backend
+ollama launch mrbeanbot
+
+# Configure MrBeanBot with discovered Ollama models
+ollama launch mrbeanbot --config
+```
+
+The `--config` flag discovers your local Ollama models and writes the provider configuration to `~/.mrbeanbot/mrbeanbot.json`.
+
+## Self-service setup
+
+If you prefer to configure Ollama from the MrBeanBot side (or Ollama hasn't merged the integration yet), use the built-in setup command:
+
+```bash
+MrBeanBot ollama setup
+```
+
+This probes your local Ollama instance, discovers available models, and writes the provider configuration to your config file.
+
+### Options
+
+| Option | Description |
+|--------|-------------|
+| `--base-url <url>` | Ollama base URL (default: `http://127.0.0.1:11434`) |
+| `--set-default` | Set the first discovered model as the default model |
+| `--yes` | Skip confirmation prompts |
+
+### Examples
+
+```bash
+# Basic setup (auto-detect models on localhost)
+MrBeanBot ollama setup
+
+# Setup with a remote Ollama instance
+MrBeanBot ollama setup --base-url http://ollama-host:11434
+
+# Setup and set the first model as default
+MrBeanBot ollama setup --set-default
+```
+
 ## Advanced
 
 ### Reasoning models

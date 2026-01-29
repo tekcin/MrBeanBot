@@ -90,13 +90,15 @@ interface OllamaTagsResponse {
   models: OllamaModel[];
 }
 
-async function discoverOllamaModels(): Promise<ModelDefinitionConfig[]> {
+export async function discoverOllamaModels(
+  baseUrl: string = OLLAMA_API_BASE_URL,
+): Promise<ModelDefinitionConfig[]> {
   // Skip Ollama discovery in test environments
   if (process.env.VITEST || process.env.NODE_ENV === "test") {
     return [];
   }
   try {
-    const response = await fetch(`${OLLAMA_API_BASE_URL}/api/tags`, {
+    const response = await fetch(`${baseUrl}/api/tags`, {
       signal: AbortSignal.timeout(5000),
     });
     if (!response.ok) {

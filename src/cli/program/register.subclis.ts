@@ -222,6 +222,14 @@ const entries: SubCliEntry[] = [
       mod.registerUpdateCli(program);
     },
   },
+  {
+    name: "ollama",
+    description: "Ollama integration",
+    register: async (program) => {
+      const mod = await import("../ollama-cli.js");
+      mod.registerOllamaCli(program);
+    },
+  },
 ];
 
 function removeCommand(program: Command, command: Command) {
