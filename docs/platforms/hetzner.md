@@ -111,11 +111,11 @@ All long-lived state must live on the host.
 
 ```bash
 mkdir -p /root/.MrBeanBot
-mkdir -p /root/clawd
+mkdir -p /root/mrbeanbot
 
 # Set ownership to the container user (uid 1000):
 chown -R 1000:1000 /root/.MrBeanBot
-chown -R 1000:1000 /root/clawd
+chown -R 1000:1000 /root/mrbeanbot
 ```
 
 ---
@@ -131,7 +131,7 @@ MRBEANBOT_GATEWAY_BIND=lan
 MRBEANBOT_GATEWAY_PORT=18789
 
 MRBEANBOT_CONFIG_DIR=/root/.MrBeanBot
-MRBEANBOT_WORKSPACE_DIR=/root/clawd
+MRBEANBOT_WORKSPACE_DIR=/root/mrbeanbot
 
 GOG_KEYRING_PASSWORD=change-me-now
 XDG_CONFIG_HOME=/home/node/.MrBeanBot

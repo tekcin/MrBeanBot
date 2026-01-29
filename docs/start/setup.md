@@ -140,5 +140,5 @@ user service (no lingering needed). See [Gateway runbook](/gateway) for the syst
 - [Gateway runbook](/gateway) (flags, supervision, ports)
 - [Gateway configuration](/gateway/configuration) (config schema + examples)
 - [Discord](/channels/discord) and [Telegram](/channels/telegram) (reply tags + replyToMode settings)
-- [MrBeanBot assistant setup](/start/clawd)
+- [MrBeanBot assistant setup](/start/assistant-setup)
 - [macOS app](/platforms/macos) (gateway lifecycle)

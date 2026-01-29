@@ -137,7 +137,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [What model do you recommend?](#what-model-do-you-recommend)
   - [How do I switch models without wiping my config?](#how-do-i-switch-models-without-wiping-my-config)
   - [Can I use self-hosted models (llama.cpp, vLLM, Ollama)?](#can-i-use-selfhosted-models-llamacpp-vllm-ollama)
-  - [What do Mr. Bean, Flawd, and Krill use for models?](#what-do-mr-bean-flawd-and-krill-use-for-models)
+  - [What do Mr. Bean and Krill use for models?](#what-do-mr-bean-and-krill-use-for-models)
   - [How do I switch models on the fly (without restarting)?](#how-do-i-switch-models-on-the-fly-without-restarting)
   - [Can I use GPT 5.2 for daily tasks and Codex 5.2 for coding](#can-i-use-gpt-52-for-daily-tasks-and-codex-52-for-coding)
   - [Why do I see “Model … is not allowed” and then no reply?](#why-do-i-see-model-is-not-allowed-and-then-no-reply)
@@ -1080,7 +1080,7 @@ mrbeanbot-skills install <skill-slug>
 mrbeanbot-skills update --all
 ```
 
-MrBeanBot Skills installs into `./skills` under your current directory (or falls back to your configured MrBeanBot workspace); MrBeanBot treats that as `<workspace>/skills` on the next session. For shared skills across agents, place them in `~/.MrBeanBot/skills/<name>/SKILL.md`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills) and [MrBeanBot Skills](/tools/clawdhub).
+MrBeanBot Skills installs into `./skills` under your current directory (or falls back to your configured MrBeanBot workspace); MrBeanBot treats that as `<workspace>/skills` on the next session. For shared skills across agents, place them in `~/.MrBeanBot/skills/<name>/SKILL.md`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills) and [MrBeanBot Skills](/tools/skills-hub).
 
 ### How do I install the Chrome extension for browser takeover
 
@@ -1906,9 +1906,9 @@ If you did overwrite config, restore from backup or re-run `MrBeanBot doctor` to
 
 Docs: [Models](/concepts/models), [Configure](/cli/configure), [Config](/cli/config), [Doctor](/gateway/doctor).
 
-### What do Mr. Bean Flawd and Krill use for models
+### What do Mr. Bean and Krill use for models
 
-- **Mr. Bean + Flawd:** Anthropic Opus (`anthropic/claude-opus-4-5`) - see [Anthropic](/providers/anthropic).
+- **Mr. Bean:** Anthropic Opus (`anthropic/claude-opus-4-5`) - see [Anthropic](/providers/anthropic).
 - **Krill:** MiniMax M2.1 (`minimax/MiniMax-M2.1`) - see [MiniMax](/providers/minimax).
 
 ### How do I switch models on the fly without restarting
@@ -2530,7 +2530,7 @@ Start the Gateway with `--verbose` to get more console detail. Then inspect the 
 
 ### My skill generated an imagePDF but nothing was sent
 
-Outbound attachments from the agent must include a `MEDIA:<path-or-url>` line (on its own line). See [MrBeanBot assistant setup](/start/clawd) and [Agent send](/tools/agent-send).
+Outbound attachments from the agent must include a `MEDIA:<path-or-url>` line (on its own line). See [MrBeanBot assistant setup](/start/assistant-setup) and [Agent send](/tools/agent-send).
 
 CLI sending:
 

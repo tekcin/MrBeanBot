@@ -49,7 +49,7 @@ tool surface those skills teach.
 
 MrBeanBot Skills is the public skills registry for MrBeanBot. Browse at
 https://mrbeanbot.com/skills. Use it to discover, install, update, and back up skills.
-Full guide: [MrBeanBot Skills](/tools/clawdhub).
+Full guide: [MrBeanBot Skills](/tools/skills-hub).
 
 Common flows:
 

@@ -355,7 +355,7 @@
     },
     {
       "source": "/clawdhub",
-      "destination": "/tools/clawdhub"
+      "destination": "/tools/skills-hub"
     },
     {
       "source": "/configuration",
@@ -1057,7 +1057,7 @@
           "tools/reactions",
           "tools/skills",
           "tools/skills-config",
-          "tools/clawdhub"
+          "tools/skills-hub"
         ]
       },
       {
