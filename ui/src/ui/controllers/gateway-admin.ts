@@ -10,56 +10,55 @@ export type GatewayStatusInfo = {
 };
 
 /**
+ * Fetch the current config snapshot (config object + hash for optimistic locking).
+ */
+async function getConfigSnapshot(state: AppViewState) {
+  const res = (await state.client.request("config.get", {})) as any;
+  const config =
+    typeof res?.config === "string" ? JSON.parse(res.config) : (res?.config ?? {});
+  const hash: string | undefined = res?.hash;
+  if (!hash) throw new Error("Config hash unavailable; reload and retry");
+  return { config, hash, raw: res?.raw as string | undefined };
+}
+
+/**
  * Load gateway status information including bind mode and network settings
  */
 export async function loadGatewayStatus(state: AppViewState): Promise<void> {
   try {
-    // Try to get gateway status - this might include bind info
-    const statusRes = (await state.client.request("status", {})) as any;
+    const { config } = await getConfigSnapshot(state);
 
-    if (statusRes) {
-      state.gatewayBindMode = statusRes.bind || "loopback";
-      state.gatewayPort = statusRes.port || 18789;
+    if (config.gateway) {
+      state.gatewayBindMode = config.gateway.bind || "loopback";
+      state.gatewayPort = config.gateway.port || 18789;
 
       // Infer bind address from mode
       if (state.gatewayBindMode === "lan") {
         state.gatewayBindAddress = "0.0.0.0";
-      } else if (state.gatewayBindMode === "loopback") {
+      } else {
         state.gatewayBindAddress = "127.0.0.1";
       }
-    }
 
-    // Try to get config to read bind settings
-    try {
-      const configRes = (await state.client.request("config.get", {})) as any;
-      if (configRes?.config) {
-        const config = typeof configRes.config === "string"
-          ? JSON.parse(configRes.config)
-          : configRes.config;
-
-        if (config.gateway) {
-          state.gatewayBindMode = config.gateway.bind || state.gatewayBindMode;
-          state.gatewayPort = config.gateway.port || state.gatewayPort;
-
-          if (config.gateway.auth?.token) {
-            state.gatewayToken = config.gateway.auth.token;
-          }
-
-          // Load IP allowlist settings
-          if (config.gateway.allowedIps) {
-            state.gatewayAllowedIps = Array.isArray(config.gateway.allowedIps)
-              ? config.gateway.allowedIps
-              : [];
-            state.gatewayIpAllowlistEnabled = state.gatewayAllowedIps.length > 0;
-          } else {
-            state.gatewayAllowedIps = [];
-            state.gatewayIpAllowlistEnabled = false;
-          }
-        }
+      if (config.gateway.auth?.token) {
+        state.gatewayToken = config.gateway.auth.token;
       }
-    } catch (err) {
-      // Config.get might not be available, that's ok
-      console.warn("Could not fetch config for gateway admin:", err);
+
+      // Load IP allowlist settings
+      if (config.gateway.allowedIps) {
+        state.gatewayAllowedIps = Array.isArray(config.gateway.allowedIps)
+          ? config.gateway.allowedIps
+          : [];
+        state.gatewayIpAllowlistEnabled = state.gatewayAllowedIps.length > 0;
+      } else {
+        state.gatewayAllowedIps = [];
+        state.gatewayIpAllowlistEnabled = false;
+      }
+    } else {
+      state.gatewayBindMode = "loopback";
+      state.gatewayPort = 18789;
+      state.gatewayBindAddress = "127.0.0.1";
+      state.gatewayAllowedIps = [];
+      state.gatewayIpAllowlistEnabled = false;
     }
 
     // Build dashboard URL
@@ -67,36 +66,38 @@ export async function loadGatewayStatus(state: AppViewState): Promise<void> {
     const port = state.gatewayPort || 18789;
     const token = state.gatewayToken || "";
     state.gatewayDashboardUrl = `http://${bindAddr}:${port}${token ? `/?token=${token}` : ""}`;
-
   } catch (err) {
     console.error("Failed to load gateway status:", err);
   }
 }
 
 /**
- * Update the gateway bind mode (loopback or lan)
+ * Update the gateway bind mode (loopback or lan).
+ * Uses config.patch which writes config AND triggers a SIGUSR1 restart.
  */
 export async function updateGatewayBindMode(
   state: AppViewState,
-  mode: "loopback" | "lan"
+  mode: "loopback" | "lan",
 ): Promise<void> {
   try {
-    // Update config via gateway RPC
-    await state.client.request("config.set", {
-      path: "gateway.bind",
-      value: mode,
+    const { hash } = await getConfigSnapshot(state);
+
+    await state.client.request("config.patch", {
+      raw: JSON.stringify({ gateway: { bind: mode } }),
+      baseHash: hash,
     });
 
     // Update local state
     state.gatewayBindMode = mode;
     state.gatewayBindAddress = mode === "lan" ? "0.0.0.0" : "127.0.0.1";
+    state.lastError = "Gateway restarting with new network mode...";
 
-    // Show success message
-    state.lastError = null;
-
-    // Optionally reload status to confirm
-    await loadGatewayStatus(state);
-
+    // Clear status message after a few seconds
+    setTimeout(() => {
+      if (state.lastError === "Gateway restarting with new network mode...") {
+        state.lastError = null;
+      }
+    }, 5000);
   } catch (err: any) {
     console.error("Failed to update bind mode:", err);
     state.lastError = `Failed to update network mode: ${err.message || "Unknown error"}`;
@@ -104,20 +105,30 @@ export async function updateGatewayBindMode(
 }
 
 /**
- * Restart the gateway to apply configuration changes
+ * Restart the gateway to apply configuration changes.
+ * Uses config.apply with the current config to trigger a SIGUSR1 restart
+ * without changing any settings.
  */
 export async function restartGateway(state: AppViewState): Promise<void> {
   try {
-    // Try gateway restart RPC
-    await state.client.request("gateway.restart", {});
+    const { hash, raw } = await getConfigSnapshot(state);
 
-    // Gateway will disconnect, which is expected
-    state.lastError = null;
+    await state.client.request("config.apply", {
+      raw: raw ?? "{}",
+      baseHash: hash,
+    });
 
+    state.lastError = "Gateway restarting... (reconnecting)";
+
+    setTimeout(() => {
+      if (state.lastError === "Gateway restarting... (reconnecting)") {
+        state.lastError = null;
+      }
+    }, 5000);
   } catch (err: any) {
     console.error("Failed to restart gateway:", err);
 
-    // If the error is about connection closing, that's expected
+    // Connection closing is expected during restart
     if (err.message && err.message.includes("gateway closed")) {
       state.lastError = "Gateway restarting... (reconnecting)";
     } else {
@@ -127,19 +138,20 @@ export async function restartGateway(state: AppViewState): Promise<void> {
 }
 
 /**
- * Regenerate the gateway authentication token
+ * Regenerate the gateway authentication token.
+ * Uses config.patch to write the new token and restart the gateway.
  */
 export async function regenerateGatewayToken(state: AppViewState): Promise<void> {
   try {
-    // Generate a new random token
     const newToken = Array.from(crypto.getRandomValues(new Uint8Array(32)))
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
 
-    // Update config via gateway RPC
-    await state.client.request("config.set", {
-      path: "gateway.auth.token",
-      value: newToken,
+    const { hash } = await getConfigSnapshot(state);
+
+    await state.client.request("config.patch", {
+      raw: JSON.stringify({ gateway: { auth: { token: newToken } } }),
+      baseHash: hash,
     });
 
     // Update local state
@@ -151,7 +163,6 @@ export async function regenerateGatewayToken(state: AppViewState): Promise<void>
     state.gatewayDashboardUrl = `http://${bindAddr}:${port}/?token=${newToken}`;
 
     state.lastError = null;
-
   } catch (err: any) {
     console.error("Failed to regenerate token:", err);
     state.lastError = `Failed to regenerate token: ${err.message || "Unknown error"}`;
@@ -210,7 +221,7 @@ function validateIp(ip: string): boolean {
  */
 export async function toggleIpAllowlist(
   state: AppViewState,
-  enabled: boolean
+  enabled: boolean,
 ): Promise<void> {
   try {
     state.gatewayIpAllowlistEnabled = enabled;
@@ -291,21 +302,20 @@ export async function removeAllowedIp(state: AppViewState, ip: string): Promise<
 }
 
 /**
- * Update the allowed IPs in the gateway config
+ * Update the allowed IPs in the gateway config.
+ * Uses config.patch to write the new allowedIps and restart the gateway.
  */
 async function updateAllowedIps(state: AppViewState, ips: string[]): Promise<void> {
   try {
-    // Update config via gateway RPC
-    await state.client.request("config.set", {
-      path: "gateway.allowedIps",
-      value: ips,
+    const { hash } = await getConfigSnapshot(state);
+
+    await state.client.request("config.patch", {
+      raw: JSON.stringify({ gateway: { allowedIps: ips } }),
+      baseHash: hash,
     });
 
     // Update local state
     state.gatewayAllowedIps = ips;
-
-    // Optionally reload status to confirm
-    await loadGatewayStatus(state);
   } catch (err: any) {
     throw new Error(`Failed to update allowed IPs: ${err.message || "Unknown error"}`);
   }
