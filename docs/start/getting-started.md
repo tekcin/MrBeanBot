@@ -180,7 +180,7 @@ If you don’t have a global install yet, run the onboarding step via `pnpm MrBe
 Gateway (from this repo):
 
 ```bash
-node MrBeanBot.mjs gateway --port 18789 --verbose
+node mrbeanbot.mjs gateway --port 18789 --verbose
 ```
 
 ## 7) Verify end-to-end

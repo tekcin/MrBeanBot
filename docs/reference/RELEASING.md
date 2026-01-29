@@ -20,7 +20,7 @@ When the operator says “release”, immediately do this preflight (no extra qu
 - [ ] Bump `package.json` version (e.g., `2026.1.27-beta.1`).
 - [ ] Run `pnpm plugins:sync` to align extension package versions + changelogs.
 - [ ] Update CLI/version strings: [`src/cli/program.ts`](https://github.com/MrBeanBot/MrBeanBot/blob/main/src/cli/program.ts) and the Baileys user agent in [`src/provider-web.ts`](https://github.com/MrBeanBot/MrBeanBot/blob/main/src/provider-web.ts).
-- [ ] Confirm package metadata (name, description, repository, keywords, license) and `bin` map points to [`MrBeanBot.mjs`](https://github.com/MrBeanBot/MrBeanBot/blob/main/MrBeanBot.mjs) for `MrBeanBot`.
+- [ ] Confirm package metadata (name, description, repository, keywords, license) and `bin` map points to [`mrbeanbot.mjs`](https://github.com/MrBeanBot/MrBeanBot/blob/main/mrbeanbot.mjs) for `MrBeanBot`.
 - [ ] If dependencies changed, run `pnpm install` so `pnpm-lock.yaml` is current.
 
 2) **Build & artifacts**

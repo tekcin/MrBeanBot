@@ -55,9 +55,9 @@ node --import tsx scripts/repro/tsx-name-repro.ts
 - Use Node + tsc watch, then run compiled output:
   ```bash
   pnpm exec tsc --watch --preserveWatchOutput
-  node --watch MrBeanBot.mjs status
+  node --watch mrbeanbot.mjs status
   ```
-- Confirmed locally: `pnpm exec tsc -p tsconfig.json` + `node MrBeanBot.mjs status` works on Node 25.
+- Confirmed locally: `pnpm exec tsc -p tsconfig.json` + `node mrbeanbot.mjs status` works on Node 25.
 - Disable esbuild keepNames in the TS loader if possible (prevents `__name` helper insertion); tsx does not currently expose this.
 - Test Node LTS (22/24) with `tsx` to see if the issue is Node 25–specific.
 

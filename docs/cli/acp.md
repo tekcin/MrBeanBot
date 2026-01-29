@@ -42,7 +42,7 @@ MrBeanBot acp client
 MrBeanBot acp client --server-args --url wss://gateway-host:18789 --token <token>
 
 # Override the server command (default: MrBeanBot)
-MrBeanBot acp client --server "node" --server-args MrBeanBot.mjs acp --url ws://127.0.0.1:19001
+MrBeanBot acp client --server "node" --server-args mrbeanbot.mjs acp --url ws://127.0.0.1:19001
 ```
 
 ## How to use this

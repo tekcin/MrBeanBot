@@ -81,8 +81,8 @@ LOGINCTL
   npm install -g --prefix /tmp/npm-prefix "/app/$pkg_tgz"
 
   npm_bin="/tmp/npm-prefix/bin/MrBeanBot"
-  npm_entry="/tmp/npm-prefix/lib/node_modules/MrBeanBot/MrBeanBot.mjs"
-  git_entry="/app/MrBeanBot.mjs"
+  npm_entry="/tmp/npm-prefix/lib/node_modules/MrBeanBot/mrbeanbot.mjs"
+  git_entry="/app/mrbeanbot.mjs"
 
   assert_entrypoint() {
     local unit_path="$1"
