@@ -66,7 +66,7 @@ public final class GatewayDiscoveryModel {
     private var pendingTXTResolvers: [String: GatewayTXTResolver] = [:]
     private var wideAreaFallbackTask: Task<Void, Never>?
     private var wideAreaFallbackGateways: [DiscoveredGateway] = []
-    private let logger = Logger(subsystem: "bot.molt", category: "gateway-discovery")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "gateway-discovery")
 
     public init(
         localDisplayName: String? = nil,
@@ -106,7 +106,7 @@ public final class GatewayDiscoveryModel {
             }
 
             self.browsers[domain] = browser
-            browser.start(queue: DispatchQueue(label: "bot.molt.macos.gateway-discovery.\(domain)"))
+            browser.start(queue: DispatchQueue(label: "com.tekcin.mrbeanbot.macos.gateway-discovery.\(domain)"))
         }
 
         self.scheduleWideAreaFallback()

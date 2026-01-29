@@ -11,7 +11,7 @@ import SwiftUI
 struct MrBeanBotApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @State private var state: AppState
-    private static let logger = Logger(subsystem: "bot.molt", category: "app")
+    private static let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "app")
     private let gatewayManager = GatewayProcessManager.shared
     private let controlChannel = ControlChannel.shared
     private let activityStore = WorkActivityStore.shared
@@ -252,7 +252,7 @@ private final class StatusItemMouseHandlerView: NSView {
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var state: AppState?
-    private let webChatAutoLogger = Logger(subsystem: "bot.molt", category: "Chat")
+    private let webChatAutoLogger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "Chat")
     let updaterController: UpdaterProviding = makeUpdaterController()
 
     func application(_: NSApplication, open urls: [URL]) {

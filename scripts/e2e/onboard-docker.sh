@@ -280,7 +280,7 @@ TRASH
       --skip-health
 
     # Assert config + workspace scaffolding.
-    workspace_dir="$HOME/clawd"
+    workspace_dir="$HOME/mrbeanbot"
     config_path="$HOME/.MrBeanBot/MrBeanBot.json"
     sessions_dir="$HOME/.MrBeanBot/agents/main/sessions"
 

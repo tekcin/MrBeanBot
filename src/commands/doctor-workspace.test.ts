@@ -7,7 +7,7 @@ import { detectLegacyWorkspaceDirs } from "./doctor-workspace.js";
 describe("detectLegacyWorkspaceDirs", () => {
   it("ignores ~/MrBeanBot when it doesn't look like a workspace (e.g. install dir)", () => {
     const home = "/home/user";
-    const workspaceDir = "/home/user/clawd";
+    const workspaceDir = "/home/user/mrbeanbot";
     const candidate = path.join(home, "MrBeanBot");
 
     const detection = detectLegacyWorkspaceDirs({
@@ -22,7 +22,7 @@ describe("detectLegacyWorkspaceDirs", () => {
 
   it("flags ~/MrBeanBot when it contains workspace markers", () => {
     const home = "/home/user";
-    const workspaceDir = "/home/user/clawd";
+    const workspaceDir = "/home/user/mrbeanbot";
     const candidate = path.join(home, "MrBeanBot");
     const agentsPath = path.join(candidate, "AGENTS.md");
 

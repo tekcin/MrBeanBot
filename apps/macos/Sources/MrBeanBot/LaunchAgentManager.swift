@@ -2,12 +2,13 @@ import Foundation
 
 enum LaunchAgentManager {
     private static let legacyLaunchdLabels = [
+        "bot.molt.mac",
         "com.steipete.MrBeanBot",
         "com.MrBeanBot.mac",
     ]
     private static var plistURL: URL {
         FileManager().homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/LaunchAgents/bot.molt.mac.plist")
+            .appendingPathComponent("Library/LaunchAgents/com.tekcin.mrbeanbot.mac.plist")
     }
 
     private static var legacyPlistURLs: [URL] {
@@ -49,7 +50,7 @@ enum LaunchAgentManager {
         <plist version="1.0">
         <dict>
           <key>Label</key>
-          <string>bot.molt.mac</string>
+          <string>com.tekcin.mrbeanbot.mac</string>
           <key>ProgramArguments</key>
           <array>
             <string>\(bundlePath)/Contents/MacOS/MrBeanBot</string>

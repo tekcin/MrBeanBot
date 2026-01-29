@@ -10,7 +10,7 @@ services:
       CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
     volumes:
       - ${MRBEANBOT_CONFIG_DIR}:/home/node/.MrBeanBot
-      - ${MRBEANBOT_WORKSPACE_DIR}:/home/node/clawd
+      - ${MRBEANBOT_WORKSPACE_DIR}:/home/node/mrbeanbot
     ports:
       - "${MRBEANBOT_GATEWAY_PORT:-18789}:18789"
       - "${MRBEANBOT_BRIDGE_PORT:-18790}:18790"
@@ -43,7 +43,7 @@ services:
       CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
     volumes:
       - ${MRBEANBOT_CONFIG_DIR}:/home/node/.MrBeanBot
-      - ${MRBEANBOT_WORKSPACE_DIR}:/home/node/clawd
+      - ${MRBEANBOT_WORKSPACE_DIR}:/home/node/mrbeanbot
     stdin_open: true
     tty: true
     init: true

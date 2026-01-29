@@ -189,7 +189,7 @@ struct ExecApprovalsResolvedDefaults {
 }
 
 enum ExecApprovalsStore {
-    private static let logger = Logger(subsystem: "bot.molt", category: "exec-approvals")
+    private static let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "exec-approvals")
     private static let defaultAgentId = "main"
     private static let defaultSecurity: ExecSecurity = .deny
     private static let defaultAsk: ExecAsk = .onMiss

@@ -221,7 +221,7 @@ struct SessionMenuPreviewView: View {
 }
 
 enum SessionMenuPreviewLoader {
-    private static let logger = Logger(subsystem: "bot.molt", category: "SessionPreview")
+    private static let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "SessionPreview")
     private static let previewTimeoutSeconds: Double = 4
     private static let cacheMaxAgeSeconds: TimeInterval = 30
     private static let previewMaxChars = 240

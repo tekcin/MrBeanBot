@@ -5,7 +5,7 @@ import OSLog
 @MainActor
 final class CLIInstallPrompter {
     static let shared = CLIInstallPrompter()
-    private let logger = Logger(subsystem: "bot.molt", category: "cli.prompt")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "cli.prompt")
     private var isPrompting = false
 
     func checkAndPromptIfNeeded(reason: String) {

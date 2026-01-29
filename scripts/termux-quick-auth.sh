@@ -22,7 +22,7 @@ case "$STATUS" in
         termux-toast "Auth expired - opening console..."
         termux-open-url "https://console.anthropic.com/settings/api-keys"
         sleep 2
-        termux-notification -t "MrBeanBot Re-Auth" -c "After getting key, run: ssh $SERVER '~/MrBeanBot/scripts/mobile-reauth.sh'" --id clawd-auth
+        termux-notification -t "MrBeanBot Re-Auth" -c "After getting key, run: ssh $SERVER '~/MrBeanBot/scripts/mobile-reauth.sh'" --id mrbeanbot-auth
         ;;
     *)
         termux-toast "Connection error"

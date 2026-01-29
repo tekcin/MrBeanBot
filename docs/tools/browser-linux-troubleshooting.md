@@ -9,7 +9,7 @@ read_when: "Browser control fails on Linux, especially with snap Chromium"
 
 MrBeanBot's browser control server fails to launch Chrome/Brave/Edge/Chromium with the error:
 ```
-{"error":"Error: Failed to start Chrome CDP on port 18800 for profile \"clawd\"."}
+{"error":"Error: Failed to start Chrome CDP on port 18800 for profile \"mrbeanbot\"."}
 ```
 
 ### Root Cause
@@ -67,7 +67,7 @@ If you must use snap Chromium, configure MrBeanBot to attach to a manually-start
 ```bash
 chromium-browser --headless --no-sandbox --disable-gpu \
   --remote-debugging-port=18800 \
-  --user-data-dir=$HOME/.MrBeanBot/browser/clawd/user-data \
+  --user-data-dir=$HOME/.MrBeanBot/browser/mrbeanbot/user-data \
   about:blank &
 ```
 
@@ -75,11 +75,11 @@ chromium-browser --headless --no-sandbox --disable-gpu \
 ```ini
 # ~/.config/systemd/user/mrbeanbot-browser.service
 [Unit]
-Description=Clawd Browser (Chrome CDP)
+Description=MrBeanBot Browser (Chrome CDP)
 After=network.target
 
 [Service]
-ExecStart=/snap/bin/chromium --headless --no-sandbox --disable-gpu --remote-debugging-port=18800 --user-data-dir=%h/.MrBeanBot/browser/clawd/user-data about:blank
+ExecStart=/snap/bin/chromium --headless --no-sandbox --disable-gpu --remote-debugging-port=18800 --user-data-dir=%h/.MrBeanBot/browser/mrbeanbot/user-data about:blank
 Restart=on-failure
 RestartSec=5
 
@@ -119,11 +119,11 @@ You’re using the `chrome` profile (extension relay). It expects the MrBeanBot
 browser extension to be attached to a live tab.
 
 Fix options:
-1. **Use the managed browser:** `MrBeanBot browser start --browser-profile clawd`
-   (or set `browser.defaultProfile: "clawd"`).
+1. **Use the managed browser:** `MrBeanBot browser start --browser-profile mrbeanbot`
+   (or set `browser.defaultProfile: "mrbeanbot"`).
 2. **Use the extension relay:** install the extension, open a tab, and click the
    MrBeanBot extension icon to attach it.
 
 Notes:
 - The `chrome` profile uses your **system default Chromium browser** when possible.
-- Local `clawd` profiles auto-assign `cdpPort`/`cdpUrl`; only set those for remote CDP.
+- Local `mrbeanbot` profiles auto-assign `cdpPort`/`cdpUrl`; only set those for remote CDP.

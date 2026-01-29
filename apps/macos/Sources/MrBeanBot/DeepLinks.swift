@@ -4,7 +4,7 @@ import Foundation
 import OSLog
 import Security
 
-private let deepLinkLogger = Logger(subsystem: "bot.molt", category: "DeepLink")
+private let deepLinkLogger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "DeepLink")
 
 @MainActor
 final class DeepLinkHandler {

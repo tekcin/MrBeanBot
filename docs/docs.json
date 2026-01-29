@@ -3,10 +3,10 @@
   "name": "MrBeanBot",
   "theme": "mint",
   "logo": {
-    "light": "/assets/pixel-lobster.svg",
-    "dark": "/assets/pixel-lobster.svg"
+    "light": "/assets/mrbeanbot-logo.svg",
+    "dark": "/assets/mrbeanbot-logo.svg"
   },
-  "favicon": "/assets/pixel-lobster.svg",
+  "favicon": "/assets/mrbeanbot-logo.svg",
   "colors": {
     "primary": "#FF5A36"
   },
@@ -351,7 +351,7 @@
     },
     {
       "source": "/clawd",
-      "destination": "/start/clawd"
+      "destination": "/start/assistant-setup"
     },
     {
       "source": "/clawdhub",
@@ -824,7 +824,7 @@
           "start/wizard",
           "start/setup",
           "start/pairing",
-          "start/clawd",
+          "start/assistant-setup",
           "start/showcase",
           "start/hubs",
           "start/onboarding",

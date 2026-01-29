@@ -6,7 +6,7 @@ import OSLog
 final class TalkAudioPlayer: NSObject, @preconcurrency AVAudioPlayerDelegate {
     static let shared = TalkAudioPlayer()
 
-    private let logger = Logger(subsystem: "bot.molt", category: "talk.tts")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "talk.tts")
     private var player: AVAudioPlayer?
     private var playback: Playback?
 

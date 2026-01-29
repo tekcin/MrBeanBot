@@ -5,7 +5,7 @@ import type { BrowserProfileConfig, MrBeanBotConfig } from "../config/config.js"
 import { loadConfig, writeConfigFile } from "../config/config.js";
 import { deriveDefaultBrowserCdpPortRange } from "../config/port-defaults.js";
 import { DEFAULT_BROWSER_DEFAULT_PROFILE_NAME } from "./constants.js";
-import { resolveClawdUserDataDir } from "./chrome.js";
+import { resolveMrBeanBotUserDataDir } from "./chrome.js";
 import { parseHttpUrl, resolveProfile } from "./config.js";
 import {
   allocateCdpPort,
@@ -153,7 +153,7 @@ export function createBrowserProfilesService(ctx: BrowserRouteContext) {
         // ignore
       }
 
-      const userDataDir = resolveClawdUserDataDir(name);
+      const userDataDir = resolveMrBeanBotUserDataDir(name);
       const profileDir = path.dirname(userDataDir);
       if (fs.existsSync(profileDir)) {
         await movePathToTrash(profileDir);

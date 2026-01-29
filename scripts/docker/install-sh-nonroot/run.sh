@@ -3,7 +3,7 @@ set -euo pipefail
 
 INSTALL_URL="${MRBEANBOT_INSTALL_URL:-https://mrbeanbot.com/install.sh}"
 DEFAULT_PACKAGE="MrBeanBot"
-if [[ -z "${MRBEANBOT_INSTALL_PACKAGE:-}" && "$INSTALL_URL" == *"clawd.bot"* ]]; then
+if [[ -z "${MRBEANBOT_INSTALL_PACKAGE:-}" && "$INSTALL_URL" == *"mrbeanbot.com"* ]]; then
   DEFAULT_PACKAGE="MrBeanBot"
 fi
 PACKAGE_NAME="${MRBEANBOT_INSTALL_PACKAGE:-$DEFAULT_PACKAGE}"

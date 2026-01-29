@@ -122,7 +122,7 @@ To prevent the bot from responding to WhatsApp @-mentions in groups (only respon
     list: [
       {
         id: "main",
-        groupChat: { mentionPatterns: ["@clawd", "reisponde"] }
+        groupChat: { mentionPatterns: ["@mrbean", "reisponde"] }
       }
     ]
   },
@@ -590,7 +590,7 @@ Group messages default to **require mention** (either metadata mention or regex 
   },
   agents: {
     list: [
-      { id: "main", groupChat: { mentionPatterns: ["@clawd", "MrBeanBot", "clawd"] } }
+      { id: "main", groupChat: { mentionPatterns: ["@mrbean", "MrBeanBot", "mrbean"] } }
     ]
   }
 }
@@ -652,7 +652,7 @@ To respond **only** to specific text triggers (ignoring native @-mentions):
         id: "main",
         groupChat: {
           // Only these text patterns will trigger responses
-          mentionPatterns: ["reisponde", "@clawd"]
+          mentionPatterns: ["reisponde", "@mrbean"]
         }
       }
     ]
@@ -1087,7 +1087,7 @@ Multi-account support lives under `channels.discord.accounts` (see the multi-acc
       },
       guilds: {
         "123456789012345678": {               // guild id (preferred) or slug
-          slug: "friends-of-clawd",
+          slug: "friends-of-mrbean",
           requireMention: false,              // per-guild default
           reactionNotifications: "own",       // off | own | all | allowlist
           users: ["987654321098765432"],      // optional per-guild user allowlist
@@ -1214,7 +1214,7 @@ Slack runs in Socket Mode and requires both a bot token and app token:
       },
       slashCommand: {
         enabled: true,
-        name: "clawd",
+        name: "mrbean",
         sessionPrefix: "slack:slash",
         ephemeral: true
       },
@@ -1560,14 +1560,14 @@ Notes:
 
 Defaults for Talk mode (macOS/iOS/Android). Voice IDs fall back to `ELEVENLABS_VOICE_ID` or `SAG_VOICE_ID` when unset.
 `apiKey` falls back to `ELEVENLABS_API_KEY` (or the gateway’s shell profile) when unset.
-`voiceAliases` lets Talk directives use friendly names (e.g. `"voice":"Clawd"`).
+`voiceAliases` lets Talk directives use friendly names (e.g. `"voice":"Mr. Bean"`).
 
 ```json5
 {
   talk: {
     voiceId: "elevenlabs_voice_id",
     voiceAliases: {
-      Clawd: "EXAVITQu4vr4xnSDxMaL",
+      "Mr. Bean": "EXAVITQu4vr4xnSDxMaL",
       Roger: "CwhRBWXzGAHq8TQ4Fs17"
     },
     modelId: "eleven_v3",
@@ -2759,7 +2759,7 @@ Example:
 
 ### `browser` (mrbeanbot-managed browser)
 
-MrBeanBot can start a **dedicated, isolated** Chrome/Brave/Edge/Chromium instance for clawd and expose a small loopback control service.
+MrBeanBot can start a **dedicated, isolated** Chrome/Brave/Edge/Chromium instance for the agent and expose a small loopback control service.
 Profiles can point at a **remote** Chromium-based browser via `profiles.<name>.cdpUrl`. Remote
 profiles are attach-only (start/stop/reset are disabled).
 
@@ -2783,7 +2783,7 @@ Defaults:
     // cdpUrl: "http://127.0.0.1:18792", // legacy single-profile override
     defaultProfile: "chrome",
     profiles: {
-      clawd: { cdpPort: 18800, color: "#FF4500" },
+      mrbeanbot: { cdpPort: 18800, color: "#FF4500" },
       work: { cdpPort: 18801, color: "#0066CC" },
       remote: { cdpUrl: "http://10.0.0.42:9222", color: "#00AA00" }
     },
@@ -3097,7 +3097,7 @@ If you need the backend to receive the prefixed path, set
 The Gateway serves a directory of HTML/CSS/JS over HTTP so iOS/Android nodes can simply `canvas.navigate` to it.
 
 Default root: `~/mrbeanbot/canvas`  
-Default port: `18793` (chosen to avoid the clawd browser CDP port `18792`)  
+Default port: `18793` (chosen to avoid the MrBeanBot browser CDP port `18792`)  
 The server listens on the **gateway bind host** (LAN or Tailnet) so nodes can reach it.
 
 The server:

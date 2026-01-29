@@ -5,7 +5,7 @@ import Observation
 final class TalkModeController {
     static let shared = TalkModeController()
 
-    private let logger = Logger(subsystem: "bot.molt", category: "talk.controller")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "talk.controller")
 
     private(set) var phase: TalkModePhase = .idle
     private(set) var isPaused: Bool = false

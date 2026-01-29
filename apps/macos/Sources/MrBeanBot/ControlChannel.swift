@@ -76,7 +76,7 @@ final class ControlChannel {
     private(set) var lastPingMs: Double?
     private(set) var authSourceLabel: String?
 
-    private let logger = Logger(subsystem: "bot.molt", category: "control")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "control")
 
     private var eventTask: Task<Void, Never>?
     private var recoveryTask: Task<Void, Never>?

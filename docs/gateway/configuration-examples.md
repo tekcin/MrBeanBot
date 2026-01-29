@@ -25,9 +25,9 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
 ```json5
 {
   identity: {
-    name: "Clawd",
+    name: "Mr. Bean",
     theme: "helpful assistant",
-    emoji: "🦞"
+    emoji: "🧸"
   },
   agent: {
     workspace: "~/mrbeanbot",
@@ -102,7 +102,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
   // Routing + queue
   routing: {
     groupChat: {
-      mentionPatterns: ["@clawd", "MrBeanBot"],
+      mentionPatterns: ["@mrbean", "MrBeanBot"],
       historyLimit: 50
     },
     queue: {
@@ -190,7 +190,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
       dm: { enabled: true, allowFrom: ["steipete"] },
       guilds: {
         "123456789012345678": {
-          slug: "friends-of-clawd",
+          slug: "friends-of-mrbean",
           requireMention: false,
           channels: {
             general: { allow: true },
@@ -210,7 +210,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
       dm: { enabled: true, allowFrom: ["U123"] },
       slashCommand: {
         enabled: true,
-        name: "clawd",
+        name: "mrbean",
         sessionPrefix: "slack:slash",
         ephemeral: true
       }
@@ -517,7 +517,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
     theme: "professional assistant"
   },
   agent: {
-    workspace: "~/work-clawd",
+    workspace: "~/work-mrbean",
     elevated: { enabled: false }
   },
   channels: {

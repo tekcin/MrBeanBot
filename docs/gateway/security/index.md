@@ -293,7 +293,7 @@ Assume “compromised” means: someone got into a room that can trigger the bot
 
 ### The `find ~` Incident 🦞
 
-On Day 1, a friendly tester asked Clawd to run `find ~` and share the output. Clawd happily dumped the entire home directory structure to a group chat.
+On Day 1, a friendly tester asked Mr. Bean to run `find ~` and share the output. Mr. Bean happily dumped the entire home directory structure to a group chat.
 
 **Lesson:** Even "innocent" requests can leak sensitive info. Directory structures reveal project names, tool configs, and system layout.
 
@@ -501,7 +501,7 @@ Details: [Logging](/gateway/logging)
     "list": [
       {
         "id": "main",
-        "groupChat": { "mentionPatterns": ["@clawd", "@mybot"] }
+        "groupChat": { "mentionPatterns": ["@mrbean", "@mybot"] }
       }
     ]
   }
@@ -572,7 +572,7 @@ Important: `tools.elevated` is the global baseline escape hatch that runs exec o
 Enabling browser control gives the model the ability to drive a real browser.
 If that browser profile already contains logged-in sessions, the model can
 access those accounts and data. Treat browser profiles as **sensitive state**:
-- Prefer a dedicated profile for the agent (the default `clawd` profile).
+- Prefer a dedicated profile for the agent (the default `mrbean` profile).
 - Avoid pointing the agent at your personal daily-driver profile.
 - Keep host browser control disabled for sandboxed agents unless you trust them.
 - Treat browser downloads as untrusted input; prefer an isolated downloads directory.
@@ -732,7 +732,7 @@ Commit the updated `.secrets.baseline` once it reflects the intended state.
 Owner (Peter)
   │ Full trust
   ▼
-AI (Clawd)
+AI (Mr. Bean)
   │ Trust but verify
   ▼
 Friends in allowlist
@@ -749,12 +749,10 @@ Mario asking for find ~
 
 Found a vulnerability in MrBeanBot? Please report responsibly:
 
-1. Email: security@clawd.bot
+1. Email: security@mrbean.bot
 2. Don't post publicly until fixed
 3. We'll credit you (unless you prefer anonymity)
 
 ---
 
-*"Security is a process, not a product. Also, don't trust lobsters with shell access."* — Someone wise, probably
-
-🦞🔐
+*"Security is a process, not a product. Also, don't trust teddy bears with shell access."* -- Someone wise, probably

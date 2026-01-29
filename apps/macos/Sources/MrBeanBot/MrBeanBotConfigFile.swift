@@ -2,7 +2,7 @@ import MrBeanBotProtocol
 import Foundation
 
 enum MrBeanBotConfigFile {
-    private static let logger = Logger(subsystem: "bot.molt", category: "config")
+    private static let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "config")
 
     static func url() -> URL {
         MrBeanBotPaths.configURL

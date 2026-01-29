@@ -6,16 +6,16 @@ import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
-  decorateClawdProfile,
+  decorateMrBeanBotProfile,
   ensureProfileCleanExit,
   findChromeExecutableMac,
   findChromeExecutableWindows,
   isChromeReachable,
   resolveBrowserExecutableForPlatform,
-  stopClawdChrome,
+  stopMrBeanBotChrome,
 } from "./chrome.js";
 import {
-  DEFAULT_CLAWD_BROWSER_COLOR,
+  DEFAULT_MRBEANBOT_BROWSER_COLOR,
   DEFAULT_MRBEANBOT_BROWSER_PROFILE_NAME,
 } from "./constants.js";
 
@@ -33,7 +33,7 @@ describe("browser chrome profile decoration", () => {
   it("writes expected name + signed ARGB seed to Chrome prefs", async () => {
     const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-chrome-test-"));
     try {
-      decorateClawdProfile(userDataDir, { color: DEFAULT_CLAWD_BROWSER_COLOR });
+      decorateMrBeanBotProfile(userDataDir, { color: DEFAULT_MRBEANBOT_BROWSER_COLOR });
 
       const expectedSignedArgb = ((0xff << 24) | 0xff4500) >> 0;
 
@@ -71,7 +71,7 @@ describe("browser chrome profile decoration", () => {
   it("best-effort writes name when color is invalid", async () => {
     const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-chrome-test-"));
     try {
-      decorateClawdProfile(userDataDir, { color: "lobster-orange" });
+      decorateMrBeanBotProfile(userDataDir, { color: "lobster-orange" });
       const localState = await readJson(path.join(userDataDir, "Local State"));
       const profile = localState.profile as Record<string, unknown>;
       const infoCache = profile.info_cache as Record<string, unknown>;
@@ -95,7 +95,7 @@ describe("browser chrome profile decoration", () => {
         "utf-8",
       );
 
-      decorateClawdProfile(userDataDir, { color: DEFAULT_CLAWD_BROWSER_COLOR });
+      decorateMrBeanBotProfile(userDataDir, { color: DEFAULT_MRBEANBOT_BROWSER_COLOR });
 
       const localState = await readJson(path.join(userDataDir, "Local State"));
       expect(typeof localState.profile).toBe("object");
@@ -122,8 +122,8 @@ describe("browser chrome profile decoration", () => {
   it("is idempotent when rerun on an existing profile", async () => {
     const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "MrBeanBot-chrome-test-"));
     try {
-      decorateClawdProfile(userDataDir, { color: DEFAULT_CLAWD_BROWSER_COLOR });
-      decorateClawdProfile(userDataDir, { color: DEFAULT_CLAWD_BROWSER_COLOR });
+      decorateMrBeanBotProfile(userDataDir, { color: DEFAULT_MRBEANBOT_BROWSER_COLOR });
+      decorateMrBeanBotProfile(userDataDir, { color: DEFAULT_MRBEANBOT_BROWSER_COLOR });
 
       const prefs = await readJson(path.join(userDataDir, "Default", "Preferences"));
       const profile = prefs.profile as Record<string, unknown>;
@@ -234,26 +234,26 @@ describe("browser chrome helpers", () => {
     await expect(isChromeReachable("http://127.0.0.1:12345", 50)).resolves.toBe(false);
   });
 
-  it("stopClawdChrome no-ops when process is already killed", async () => {
+  it("stopMrBeanBotChrome no-ops when process is already killed", async () => {
     const proc = { killed: true, exitCode: null, kill: vi.fn() };
-    await stopClawdChrome(
+    await stopMrBeanBotChrome(
       {
         proc,
         cdpPort: 12345,
-      } as unknown as Parameters<typeof stopClawdChrome>[0],
+      } as unknown as Parameters<typeof stopMrBeanBotChrome>[0],
       10,
     );
     expect(proc.kill).not.toHaveBeenCalled();
   });
 
-  it("stopClawdChrome sends SIGTERM and returns once CDP is down", async () => {
+  it("stopMrBeanBotChrome sends SIGTERM and returns once CDP is down", async () => {
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("down")));
     const proc = { killed: false, exitCode: null, kill: vi.fn() };
-    await stopClawdChrome(
+    await stopMrBeanBotChrome(
       {
         proc,
         cdpPort: 12345,
-      } as unknown as Parameters<typeof stopClawdChrome>[0],
+      } as unknown as Parameters<typeof stopMrBeanBotChrome>[0],
       10,
     );
     expect(proc.kill).toHaveBeenCalledWith("SIGTERM");

@@ -15,7 +15,7 @@ It answers you on the channels you already use (WhatsApp, Telegram, Slack, Disco
 
 If you want a personal, single-user assistant that feels local, fast, and always-on, this is it.
 
-[Website](https://github.com/tekcin/MrBeanBot) · [Docs](https://github.com/tekcin/MrBeanBot) · [Getting Started](https://github.com/tekcin/MrBeanBot/start/getting-started) · [Updating](https://github.com/tekcin/MrBeanBot/install/updating) · [Showcase](https://github.com/tekcin/MrBeanBot/start/showcase) · [FAQ](https://github.com/tekcin/MrBeanBot/start/faq) · [Wizard](https://github.com/tekcin/MrBeanBot/start/wizard) · [Nix](https://github.com/mrbeanbot/nix-MrBeanBot) · [Docker](https://github.com/tekcin/MrBeanBot/install/docker) · [Discord](https://discord.gg/clawd)
+[Website](https://github.com/tekcin/MrBeanBot) · [Docs](https://github.com/tekcin/MrBeanBot) · [Getting Started](https://github.com/tekcin/MrBeanBot/start/getting-started) · [Updating](https://github.com/tekcin/MrBeanBot/install/updating) · [Showcase](https://github.com/tekcin/MrBeanBot/start/showcase) · [FAQ](https://github.com/tekcin/MrBeanBot/start/faq) · [Wizard](https://github.com/tekcin/MrBeanBot/start/wizard) · [Nix](https://github.com/mrbeanbot/nix-MrBeanBot) · [Docker](https://github.com/tekcin/MrBeanBot/install/docker)
 
 Preferred setup: run the onboarding wizard (`mrbeanbot onboard`). It walks through gateway, workspace, channels, and skills. The CLI wizard is the recommended path and works on **macOS, Linux, and Windows (via WSL2; strongly recommended)**.
 Works with npm, pnpm, or bun.
@@ -451,13 +451,10 @@ Use these when you’re past the onboarding flow and want the deeper reference.
 
 - [docs.mrbeanbot.com/gmail-pubsub](https://github.com/tekcin/MrBeanBot/automation/gmail-pubsub)
 
-## Molty
+## Mr. Bean
 
-MrBeanBot was built for **Molty**, a space lobster AI assistant. 🦞
-by Peter Steinberger and the community.
+MrBeanBot is a personal AI assistant by Michael Thornton.
 
-- [clawd.me](https://clawd.me)
-- [soul.md](https://soul.md)
 - [steipete.me](https://steipete.me)
 - [@mrbeanbot](https://x.com/mrbeanbot)
 
@@ -469,7 +466,7 @@ AI/vibe-coded PRs welcome! 🤖
 Special thanks to [Mario Zechner](https://mariozechner.at/) for his support and for
 [pi-mono](https://github.com/badlogic/pi-mono).
 
-Thanks to all clawtributors:
+Thanks to all contributors:
 
 <p align="left">
   <a href="https://github.com/steipete"><img src="https://avatars.githubusercontent.com/u/58493?v=4&s=48" width="48" height="48" alt="steipete" title="steipete"/></a> <a href="https://github.com/plum-dawg"><img src="https://avatars.githubusercontent.com/u/5909950?v=4&s=48" width="48" height="48" alt="plum-dawg" title="plum-dawg"/></a> <a href="https://github.com/bohdanpodvirnyi"><img src="https://avatars.githubusercontent.com/u/31819391?v=4&s=48" width="48" height="48" alt="bohdanpodvirnyi" title="bohdanpodvirnyi"/></a> <a href="https://github.com/iHildy"><img src="https://avatars.githubusercontent.com/u/25069719?v=4&s=48" width="48" height="48" alt="iHildy" title="iHildy"/></a> <a href="https://github.com/jaydenfyi"><img src="https://avatars.githubusercontent.com/u/213395523?v=4&s=48" width="48" height="48" alt="jaydenfyi" title="jaydenfyi"/></a> <a href="https://github.com/joaohlisboa"><img src="https://avatars.githubusercontent.com/u/8200873?v=4&s=48" width="48" height="48" alt="joaohlisboa" title="joaohlisboa"/></a> <a href="https://github.com/mneves75"><img src="https://avatars.githubusercontent.com/u/2423436?v=4&s=48" width="48" height="48" alt="mneves75" title="mneves75"/></a> <a href="https://github.com/MatthieuBizien"><img src="https://avatars.githubusercontent.com/u/173090?v=4&s=48" width="48" height="48" alt="MatthieuBizien" title="MatthieuBizien"/></a> <a href="https://github.com/MaudeBot"><img src="https://avatars.githubusercontent.com/u/255777700?v=4&s=48" width="48" height="48" alt="MaudeBot" title="MaudeBot"/></a> <a href="https://github.com/Glucksberg"><img src="https://avatars.githubusercontent.com/u/80581902?v=4&s=48" width="48" height="48" alt="Glucksberg" title="Glucksberg"/></a>

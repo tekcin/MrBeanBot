@@ -90,8 +90,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - When working on a PR: add a changelog entry with the PR number and thank the contributor.
 - When working on an issue: reference the issue in the changelog entry.
 - When merging a PR: leave a PR comment that explains exactly what we did and include the SHA hashes.
-- When merging a PR from a new contributor: add their avatar to the README “Thanks to all clawtributors” thumbnail list.
-- After merging a PR: run `bun scripts/update-clawtributors.ts` if the contributor is missing, then commit the regenerated README.
+- When merging a PR from a new contributor: add their avatar to the README “Thanks to all contributors” thumbnail list.
+- After merging a PR: run `bun scripts/update-contributors.ts` if the contributor is missing, then commit the regenerated README.
 
 ## Shorthand Commands
 - `sync`: if working tree is dirty, commit all changes (pick a sensible Conventional Commit message), then `git pull --rebase`; if rebase conflicts and cannot resolve, stop; otherwise `git push`.
@@ -113,7 +113,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Agent-Specific Notes
 - Vocabulary: "makeup" = "mac app".
 - Never edit `node_modules` (global/Homebrew/npm/git installs too). Updates overwrite. Skill notes go in `tools.md` or `AGENTS.md`.
-- Signal: "update fly" => `fly ssh console -a flawd-bot -C "bash -lc 'cd /data/clawd/MrBeanBot && git pull --rebase origin main'"` then `fly machines restart e825232f34d058 -a flawd-bot`.
+- Signal: "update fly" => `fly ssh console -a flawd-bot -C "bash -lc 'cd /data/mrbeanbot/MrBeanBot && git pull --rebase origin main'"` then `fly machines restart e825232f34d058 -a flawd-bot`.
 - When working on a GitHub Issue or PR, print the full URL at the end of the task.
 - When answering questions, respond with high-confidence answers only: verify in code; do not guess.
 - Never update the Carbon dependency.

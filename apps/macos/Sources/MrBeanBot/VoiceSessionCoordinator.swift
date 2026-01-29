@@ -19,7 +19,7 @@ final class VoiceSessionCoordinator {
         var autoSendDelay: TimeInterval?
     }
 
-    private let logger = Logger(subsystem: "bot.molt", category: "voicewake.coordinator")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "voicewake.coordinator")
     private var session: Session?
 
     // MARK: - API

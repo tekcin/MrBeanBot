@@ -230,7 +230,7 @@ struct MrBeanBotChatComposer: View {
     private var editorOverlay: some View {
         ZStack(alignment: .topLeading) {
             if self.viewModel.input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                Text("Message Clawd…")
+                Text("Message Mr. Bean…")
                     .foregroundStyle(.tertiary)
                     .padding(.horizontal, 4)
                     .padding(.vertical, 4)

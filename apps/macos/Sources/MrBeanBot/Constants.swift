@@ -1,7 +1,7 @@
 import Foundation
 
-let launchdLabel = "bot.molt.mac"
-let gatewayLaunchdLabel = "bot.molt.gateway"
+let launchdLabel = "com.tekcin.mrbeanbot.mac"
+let gatewayLaunchdLabel = "com.tekcin.mrbeanbot.gateway"
 let onboardingVersionKey = "MrBeanBot.onboardingVersion"
 let currentOnboardingVersion = 7
 let pauseDefaultsKey = "MrBeanBot.pauseEnabled"
@@ -11,7 +11,7 @@ let swabbleTriggersKey = "MrBeanBot.swabbleTriggers"
 let voiceWakeTriggerChimeKey = "MrBeanBot.voiceWakeTriggerChime"
 let voiceWakeSendChimeKey = "MrBeanBot.voiceWakeSendChime"
 let showDockIconKey = "MrBeanBot.showDockIcon"
-let defaultVoiceWakeTriggers = ["clawd", "claude"]
+let defaultVoiceWakeTriggers = ["mr bean", "mrbeanbot", "bean"]
 let voiceWakeMaxWords = 32
 let voiceWakeMaxWordLength = 64
 let voiceWakeMicKey = "MrBeanBot.voiceWakeMicID"

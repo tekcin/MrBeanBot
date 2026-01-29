@@ -10,7 +10,7 @@ import OSLog
 final class DevicePairingApprovalPrompter {
     static let shared = DevicePairingApprovalPrompter()
 
-    private let logger = Logger(subsystem: "bot.molt", category: "device-pairing")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "device-pairing")
     private var task: Task<Void, Never>?
     private var isStopping = false
     private var isPresenting = false

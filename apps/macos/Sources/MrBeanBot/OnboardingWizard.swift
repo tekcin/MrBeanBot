@@ -5,7 +5,7 @@ import Observation
 import OSLog
 import SwiftUI
 
-private let onboardingWizardLogger = Logger(subsystem: "bot.molt", category: "onboarding.wizard")
+private let onboardingWizardLogger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "onboarding.wizard")
 
 // MARK: - Swift 6 AnyCodable Bridging Helpers
 

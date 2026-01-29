@@ -1,10 +1,12 @@
 import Foundation
 
 enum GatewaySettingsStore {
-    private static let gatewayService = "bot.molt.gateway"
+    private static let gatewayService = "com.tekcin.mrbeanbot.gateway"
+    private static let legacyGatewayService2 = "bot.molt.gateway"
     private static let legacyGatewayService = "com.MrBeanBot.gateway"
     private static let legacyBridgeService = "com.MrBeanBot.bridge"
-    private static let nodeService = "bot.molt.node"
+    private static let nodeService = "com.tekcin.mrbeanbot.node"
+    private static let legacyNodeService2 = "bot.molt.node"
     private static let legacyNodeService = "com.MrBeanBot.node"
 
     private static let instanceIdDefaultsKey = "node.instanceId"
@@ -42,6 +44,14 @@ enum GatewaySettingsStore {
             return value
         }
 
+        if let legacy2 = KeychainStore.loadString(service: self.legacyNodeService2, account: self.instanceIdAccount)?
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+            !legacy2.isEmpty
+        {
+            _ = KeychainStore.saveString(legacy2, service: self.nodeService, account: self.instanceIdAccount)
+            return legacy2
+        }
+
         if let legacy = KeychainStore.loadString(service: self.legacyNodeService, account: self.instanceIdAccount)?
             .trimmingCharacters(in: .whitespacesAndNewlines),
             !legacy.isEmpty
@@ -65,6 +75,19 @@ enum GatewaySettingsStore {
             !value.isEmpty
         {
             return value
+        }
+
+        if let legacy2 = KeychainStore.loadString(
+            service: self.legacyGatewayService2,
+            account: self.preferredGatewayStableIDAccount
+        )?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !legacy2.isEmpty
+        {
+            _ = KeychainStore.saveString(
+                legacy2,
+                service: self.gatewayService,
+                account: self.preferredGatewayStableIDAccount)
+            return legacy2
         }
 
         if let legacy = KeychainStore.loadString(
@@ -100,6 +123,19 @@ enum GatewaySettingsStore {
             return value
         }
 
+        if let legacy2 = KeychainStore.loadString(
+            service: self.legacyGatewayService2,
+            account: self.lastDiscoveredGatewayStableIDAccount
+        )?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !legacy2.isEmpty
+        {
+            _ = KeychainStore.saveString(
+                legacy2,
+                service: self.gatewayService,
+                account: self.lastDiscoveredGatewayStableIDAccount)
+            return legacy2
+        }
+
         if let legacy = KeychainStore.loadString(
             service: self.legacyGatewayService,
             account: self.lastDiscoveredGatewayStableIDAccount
@@ -128,6 +164,13 @@ enum GatewaySettingsStore {
         let token = KeychainStore.loadString(service: self.gatewayService, account: account)?
             .trimmingCharacters(in: .whitespacesAndNewlines)
         if token?.isEmpty == false { return token }
+
+        let legacy2Token = KeychainStore.loadString(service: self.legacyGatewayService2, account: account)?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        if let legacy2Token, !legacy2Token.isEmpty {
+            _ = KeychainStore.saveString(legacy2Token, service: self.gatewayService, account: account)
+            return legacy2Token
+        }
 
         let legacyAccount = self.legacyBridgeTokenAccount(instanceId: instanceId)
         let legacy = KeychainStore.loadString(service: self.legacyBridgeService, account: legacyAccount)?

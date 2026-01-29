@@ -2,7 +2,7 @@ import Foundation
 import OSLog
 
 enum NodeServiceManager {
-    private static let logger = Logger(subsystem: "bot.molt", category: "node.service")
+    private static let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "node.service")
 
     static func start() async -> String? {
         let result = await self.runServiceCommandResult(

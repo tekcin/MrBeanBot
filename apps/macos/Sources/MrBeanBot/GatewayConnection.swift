@@ -4,7 +4,7 @@ import MrBeanBotProtocol
 import Foundation
 import OSLog
 
-private let gatewayConnectionLogger = Logger(subsystem: "bot.molt", category: "gateway.connection")
+private let gatewayConnectionLogger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "gateway.connection")
 
 enum GatewayAgentChannel: String, Codable, CaseIterable, Sendable {
     case last

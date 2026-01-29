@@ -17,12 +17,17 @@ public struct GatewayTLSParams: Sendable {
 }
 
 public enum GatewayTLSStore {
-    private static let suiteName = "bot.molt.shared"
+    private static let suiteName = "com.tekcin.mrbeanbot.shared"
+    private static let legacySuiteName2 = "bot.molt.shared"
     private static let legacySuiteName = "com.MrBeanBot.shared"
     private static let keyPrefix = "gateway.tls."
 
     private static var defaults: UserDefaults {
         UserDefaults(suiteName: suiteName) ?? .standard
+    }
+
+    private static var legacyDefaults2: UserDefaults? {
+        UserDefaults(suiteName: legacySuiteName2)
     }
 
     private static var legacyDefaults: UserDefaults? {
@@ -33,6 +38,12 @@ public enum GatewayTLSStore {
         let key = self.keyPrefix + stableID
         let raw = self.defaults.string(forKey: key)?.trimmingCharacters(in: .whitespacesAndNewlines)
         if raw?.isEmpty == false { return raw }
+
+        let legacy2 = self.legacyDefaults2?.string(forKey: key)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if legacy2?.isEmpty == false {
+            self.defaults.set(legacy2, forKey: key)
+            return legacy2
+        }
 
         let legacy = self.legacyDefaults?.string(forKey: key)?.trimmingCharacters(in: .whitespacesAndNewlines)
         if legacy?.isEmpty == false {

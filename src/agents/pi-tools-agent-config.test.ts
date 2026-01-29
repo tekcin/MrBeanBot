@@ -15,7 +15,7 @@ describe("Agent-specific tool filtering", () => {
         list: [
           {
             id: "main",
-            workspace: "~/clawd",
+            workspace: "~/mrbeanbot",
           },
         ],
       },
@@ -44,7 +44,7 @@ describe("Agent-specific tool filtering", () => {
         list: [
           {
             id: "main",
-            workspace: "~/clawd",
+            workspace: "~/mrbeanbot",
             tools: {
               elevated: {
                 enabled: true,
@@ -105,7 +105,7 @@ describe("Agent-specific tool filtering", () => {
         list: [
           {
             id: "restricted",
-            workspace: "~/clawd-restricted",
+            workspace: "~/mrbeanbot-restricted",
             tools: {
               allow: ["read"], // Agent override: only read
               deny: ["exec", "write", "edit"],
@@ -189,12 +189,12 @@ describe("Agent-specific tool filtering", () => {
         list: [
           {
             id: "main",
-            workspace: "~/clawd",
+            workspace: "~/mrbeanbot",
             // No tools restriction - all tools available
           },
           {
             id: "family",
-            workspace: "~/clawd-family",
+            workspace: "~/mrbeanbot-family",
             tools: {
               allow: ["read"],
               deny: ["exec", "write", "edit", "process"],
@@ -399,7 +399,7 @@ describe("Agent-specific tool filtering", () => {
         list: [
           {
             id: "work",
-            workspace: "~/clawd-work",
+            workspace: "~/mrbeanbot-work",
             tools: {
               deny: ["exec", "process"], // Agent deny (override)
             },
@@ -435,7 +435,7 @@ describe("Agent-specific tool filtering", () => {
         list: [
           {
             id: "restricted",
-            workspace: "~/clawd-restricted",
+            workspace: "~/mrbeanbot-restricted",
             sandbox: {
               mode: "all",
               scope: "agent",

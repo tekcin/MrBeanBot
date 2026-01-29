@@ -146,7 +146,7 @@ export function renderApp(state: AppViewState) {
           </button>
           <div class="brand">
             <div class="brand-logo">
-              <img src="/assets/pixel-lobster.svg" alt="MrBeanBot" />
+              <img src="/assets/mrbeanbot-logo.svg" alt="MrBeanBot" />
             </div>
             <div class="brand-text">
               <div class="brand-title">MRBEANBOT</div>

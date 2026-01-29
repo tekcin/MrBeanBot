@@ -180,7 +180,7 @@ describe("resolveUserPath", () => {
   });
 
   it("expands ~/ to home dir", () => {
-    expect(resolveUserPath("~/clawd")).toBe(path.resolve(os.homedir(), "clawd"));
+    expect(resolveUserPath("~/mrbeanbot")).toBe(path.resolve(os.homedir(), "mrbeanbot"));
   });
 
   it("resolves relative paths", () => {

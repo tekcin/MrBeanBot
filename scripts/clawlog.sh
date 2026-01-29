@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Configuration
-SUBSYSTEM="bot.molt"
+SUBSYSTEM="com.tekcin.mrbeanbot"
 DEFAULT_LEVEL="info"
 
 # Colors for output
@@ -58,7 +58,7 @@ DESCRIPTION:
     Requires sudo access configured for /usr/bin/log command.
 
 LOG FLOW ARCHITECTURE:
-    MrBeanBot logs flow through the macOS unified log (subsystem: bot.molt).
+    MrBeanBot logs flow through the macOS unified log (subsystem: com.tekcin.mrbeanbot).
 
 LOG CATEGORIES (examples):
     • voicewake           - Voice wake detection/test harness

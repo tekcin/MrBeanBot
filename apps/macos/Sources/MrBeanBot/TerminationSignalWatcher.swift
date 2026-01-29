@@ -6,7 +6,7 @@ import OSLog
 final class TerminationSignalWatcher {
     static let shared = TerminationSignalWatcher()
 
-    private let logger = Logger(subsystem: "bot.molt", category: "lifecycle")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "lifecycle")
     private var sources: [DispatchSourceSignal] = []
     private var terminationRequested = false
 

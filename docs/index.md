@@ -3,12 +3,12 @@ summary: "Top-level overview of MrBeanBot, features, and purpose"
 read_when:
   - Introducing MrBeanBot to newcomers
 ---
-# MrBeanBot 🦞
+# MrBeanBot
 
-> *"EXFOLIATE! EXFOLIATE!"* — A space lobster, probably
+> Personal AI assistant — by Michael Thornton
 
 <p align="center">
-  <img src="whatsapp-clawd.jpg" alt="MrBeanBot" width="420" />
+  <img src="whatsapp-mrbeanbot.jpg" alt="MrBeanBot" width="420" />
 </p>
 
 <p align="center">
@@ -21,11 +21,10 @@ read_when:
   <a href="https://github.com/MrBeanBot/MrBeanBot">GitHub</a> ·
   <a href="https://github.com/MrBeanBot/MrBeanBot/releases">Releases</a> ·
   <a href="/">Docs</a> ·
-  <a href="/start/clawd">MrBeanBot assistant setup</a>
+  <a href="/start/assistant-setup">MrBeanBot assistant setup</a>
 </p>
 
 MrBeanBot bridges WhatsApp (via WhatsApp Web / Baileys), Telegram (Bot API / grammY), Discord (Bot API / channels.discord.js), and iMessage (imsg CLI) to coding agents like [Pi](https://github.com/badlogic/pi-mono). Plugins add Mattermost (Bot API + WebSocket) and more.
-MrBeanBot also powers [Clawd](https://clawd.me), the space‑lobster assistant.
 
 ## Start here
 
@@ -161,7 +160,7 @@ Example:
       groups: { "*": { requireMention: true } }
     }
   },
-  messages: { groupChat: { mentionPatterns: ["@clawd"] } }
+  messages: { groupChat: { mentionPatterns: ["@mrbean"] } }
 }
 ```
 
@@ -177,7 +176,7 @@ Example:
   - [Updating / rollback](/install/updating)
   - [Pairing (DM + nodes)](/start/pairing)
   - [Nix mode](/install/nix)
-  - [MrBeanBot assistant setup (Clawd)](/start/clawd)
+  - [MrBeanBot assistant setup](/start/assistant-setup)
   - [Skills](/tools/skills)
   - [Skills config](/tools/skills-config)
   - [Workspace templates](/reference/templates/AGENTS)
@@ -214,7 +213,7 @@ Example:
 
 ## The name
 
-**MrBeanBot = CLAW + TARDIS** — because every space lobster needs a time-and-space machine.
+**MrBeanBot** — personal AI assistant by Michael Thornton.
 
 ---
 
@@ -222,9 +221,9 @@ Example:
 
 ## Credits
 
-- **Peter Steinberger** ([@steipete](https://twitter.com/steipete)) — Creator, lobster whisperer
+- **Peter Steinberger** ([@steipete](https://twitter.com/steipete)) — Creator
 - **Mario Zechner** ([@badlogicc](https://twitter.com/badlogicgames)) — Pi creator, security pen-tester
-- **Clawd** — The space lobster who demanded a better name
+- **Community** — All the amazing contributors
 
 ## Core Contributors
 
@@ -233,7 +232,7 @@ Example:
 
 ## License
 
-MIT — Free as a lobster in the ocean 🦞
+MIT
 
 ---
 

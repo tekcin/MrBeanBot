@@ -120,9 +120,9 @@ describe("formatCliCommand", () => {
   });
 
   it("trims whitespace from profile", () => {
-    expect(formatCliCommand("MrBeanBot doctor --fix", { MRBEANBOT_PROFILE: "  jbclawd  " })).toBe(
-      "mrbeanbot --profile jbclawd doctor --fix",
-    );
+    expect(
+      formatCliCommand("MrBeanBot doctor --fix", { MRBEANBOT_PROFILE: "  jbmrbeanbot  " }),
+    ).toBe("mrbeanbot --profile jbmrbeanbot doctor --fix");
   });
 
   it("handles command with no args after MrBeanBot", () => {

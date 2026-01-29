@@ -9,7 +9,7 @@ import Security
 final class PeekabooBridgeHostCoordinator {
     static let shared = PeekabooBridgeHostCoordinator()
 
-    private let logger = Logger(subsystem: "bot.molt", category: "PeekabooBridge")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "PeekabooBridge")
 
     private var host: PeekabooBridgeHost?
     private var services: MrBeanBotPeekabooBridgeServices?
@@ -102,7 +102,7 @@ private final class MrBeanBotPeekabooBridgeServices: PeekabooBridgeServiceProvid
     let snapshots: any SnapshotManagerProtocol
 
     init() {
-        let logging = LoggingService(subsystem: "bot.molt.peekaboo")
+        let logging = LoggingService(subsystem: "com.tekcin.mrbeanbot.peekaboo")
         let feedbackClient: any AutomationFeedbackClient = NoopAutomationFeedbackClient()
 
         let snapshots = InMemorySnapshotManager(options: .init(

@@ -74,7 +74,7 @@ enum MrBeanBotLogging {
 
     static func parseLabel(_ label: String) -> (String, String) {
         guard let range = label.range(of: labelSeparator) else {
-            return ("bot.molt", label)
+            return ("com.tekcin.mrbeanbot", label)
         }
         let subsystem = String(label[..<range.lowerBound])
         let category = String(label[range.upperBound...])

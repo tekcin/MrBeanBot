@@ -62,7 +62,7 @@ describe("docker-setup.sh", () => {
       DOCKER_STUB_LOG: logPath,
       MRBEANBOT_GATEWAY_TOKEN: "test-token",
       MRBEANBOT_CONFIG_DIR: join(rootDir, "config"),
-      MRBEANBOT_WORKSPACE_DIR: join(rootDir, "clawd"),
+      MRBEANBOT_WORKSPACE_DIR: join(rootDir, "mrbeanbot"),
     };
     delete env.MRBEANBOT_DOCKER_APT_PACKAGES;
     delete env.MRBEANBOT_EXTRA_MOUNTS;
@@ -113,7 +113,7 @@ describe("docker-setup.sh", () => {
       MRBEANBOT_DOCKER_APT_PACKAGES: "ffmpeg build-essential",
       MRBEANBOT_GATEWAY_TOKEN: "test-token",
       MRBEANBOT_CONFIG_DIR: join(rootDir, "config"),
-      MRBEANBOT_WORKSPACE_DIR: join(rootDir, "clawd"),
+      MRBEANBOT_WORKSPACE_DIR: join(rootDir, "mrbeanbot"),
       MRBEANBOT_EXTRA_MOUNTS: "",
       MRBEANBOT_HOME_VOLUME: "",
     };

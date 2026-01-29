@@ -8,7 +8,7 @@ import SwiftUI
 final class VoiceWakeOverlayController {
     static let shared = VoiceWakeOverlayController()
 
-    let logger = Logger(subsystem: "bot.molt", category: "voicewake.overlay")
+    let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "voicewake.overlay")
     let enableUI: Bool
 
     /// Keep the voice wake overlay above any other MrBeanBot windows, but below the system’s pop-up menus.

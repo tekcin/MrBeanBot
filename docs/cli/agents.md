@@ -18,7 +18,7 @@ Related:
 MrBeanBot agents list
 MrBeanBot agents add work --workspace ~/mrbeanbot-work
 MrBeanBot agents set-identity --workspace ~/mrbeanbot --from-identity
-MrBeanBot agents set-identity --agent main --avatar avatars/clawd.png
+MrBeanBot agents set-identity --agent main --avatar avatars/mrbean.png
 MrBeanBot agents delete work
 ```
 
@@ -47,7 +47,7 @@ MrBeanBot agents set-identity --workspace ~/mrbeanbot --from-identity
 Override fields explicitly:
 
 ```bash
-MrBeanBot agents set-identity --agent main --name "Clawd" --emoji "🦞" --avatar avatars/clawd.png
+MrBeanBot agents set-identity --agent main --name "Mr. Bean" --emoji "🧸" --avatar avatars/mrbean.png
 ```
 
 Config sample:
@@ -59,10 +59,10 @@ Config sample:
       {
         id: "main",
         identity: {
-          name: "Clawd",
-          theme: "space lobster",
-          emoji: "🦞",
-          avatar: "avatars/clawd.png"
+          name: "Mr. Bean",
+          theme: "default",
+          emoji: "🧸",
+          avatar: "avatars/mrbean.png"
         }
       }
     ]

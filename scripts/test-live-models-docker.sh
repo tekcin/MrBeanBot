@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 IMAGE_NAME="${MRBEANBOT_IMAGE:-MrBeanBot:local}"
 CONFIG_DIR="${MRBEANBOT_CONFIG_DIR:-$HOME/.MrBeanBot}"
-WORKSPACE_DIR="${MRBEANBOT_WORKSPACE_DIR:-$HOME/clawd}"
+WORKSPACE_DIR="${MRBEANBOT_WORKSPACE_DIR:-$HOME/mrbeanbot}"
 PROFILE_FILE="${MRBEANBOT_PROFILE_FILE:-$HOME/.profile}"
 
 PROFILE_MOUNT=()
@@ -27,7 +27,7 @@ docker run --rm -t \
   -e MRBEANBOT_LIVE_MODEL_TIMEOUT_MS="${MRBEANBOT_LIVE_MODEL_TIMEOUT_MS:-}" \
   -e MRBEANBOT_LIVE_REQUIRE_PROFILE_KEYS="${MRBEANBOT_LIVE_REQUIRE_PROFILE_KEYS:-}" \
   -v "$CONFIG_DIR":/home/node/.MrBeanBot \
-  -v "$WORKSPACE_DIR":/home/node/clawd \
+  -v "$WORKSPACE_DIR":/home/node/mrbeanbot \
   "${PROFILE_MOUNT[@]}" \
   "$IMAGE_NAME" \
   -lc "set -euo pipefail; [ -f \"$HOME/.profile\" ] && source \"$HOME/.profile\" || true; cd /app && pnpm test:live"

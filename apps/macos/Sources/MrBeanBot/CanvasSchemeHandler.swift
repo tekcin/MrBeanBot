@@ -3,7 +3,7 @@ import Foundation
 import OSLog
 import WebKit
 
-private let canvasLogger = Logger(subsystem: "bot.molt", category: "Canvas")
+private let canvasLogger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "Canvas")
 
 final class CanvasSchemeHandler: NSObject, WKURLSchemeHandler {
     private let root: URL

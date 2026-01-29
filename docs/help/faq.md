@@ -29,7 +29,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [How do I install MrBeanBot on Linux?](#how-do-i-install-MrBeanBot-on-linux)
   - [How do I install MrBeanBot on a VPS?](#how-do-i-install-MrBeanBot-on-a-vps)
   - [Where are the cloud/VPS install guides?](#where-are-the-cloudvps-install-guides)
-  - [Can I ask Clawd to update itself?](#can-i-ask-clawd-to-update-itself)
+  - [Can I ask Mr. Bean to update itself?](#can-i-ask-mr-bean-to-update-itself)
   - [What does the onboarding wizard actually do?](#what-does-the-onboarding-wizard-actually-do)
   - [Do I need a Claude or OpenAI subscription to run this?](#do-i-need-a-claude-or-openai-subscription-to-run-this)
   - [Can I use Claude Max subscription without an API key](#can-i-use-claude-max-subscription-without-an-api-key)
@@ -137,7 +137,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [What model do you recommend?](#what-model-do-you-recommend)
   - [How do I switch models without wiping my config?](#how-do-i-switch-models-without-wiping-my-config)
   - [Can I use self-hosted models (llama.cpp, vLLM, Ollama)?](#can-i-use-selfhosted-models-llamacpp-vllm-ollama)
-  - [What do Clawd, Flawd, and Krill use for models?](#what-do-clawd-flawd-and-krill-use-for-models)
+  - [What do Mr. Bean, Flawd, and Krill use for models?](#what-do-mr-bean-flawd-and-krill-use-for-models)
   - [How do I switch models on the fly (without restarting)?](#how-do-i-switch-models-on-the-fly-without-restarting)
   - [Can I use GPT 5.2 for daily tasks and Codex 5.2 for coding](#can-i-use-gpt-52-for-daily-tasks-and-codex-52-for-coding)
   - [Why do I see “Model … is not allowed” and then no reply?](#why-do-i-see-model-is-not-allowed-and-then-no-reply)
@@ -581,7 +581,7 @@ Gateway in the cloud.
 Hub: [Platforms](/platforms). Remote access: [Gateway remote](/gateway/remote).
 Nodes: [Nodes](/nodes), [Nodes CLI](/cli/nodes).
 
-### Can I ask Clawd to update itself
+### Can I ask Mr. Bean to update itself
 
 Short answer: **possible, not recommended**. The update flow can restart the
 Gateway (which drops the active session), may need a clean git checkout, and
@@ -1906,9 +1906,9 @@ If you did overwrite config, restore from backup or re-run `MrBeanBot doctor` to
 
 Docs: [Models](/concepts/models), [Configure](/cli/configure), [Config](/cli/config), [Doctor](/gateway/doctor).
 
-### What do Clawd Flawd and Krill use for models
+### What do Mr. Bean Flawd and Krill use for models
 
-- **Clawd + Flawd:** Anthropic Opus (`anthropic/claude-opus-4-5`) - see [Anthropic](/providers/anthropic).
+- **Mr. Bean + Flawd:** Anthropic Opus (`anthropic/claude-opus-4-5`) - see [Anthropic](/providers/anthropic).
 - **Krill:** MiniMax M2.1 (`minimax/MiniMax-M2.1`) - see [MiniMax](/providers/minimax).
 
 ### How do I switch models on the fly without restarting
@@ -2723,4 +2723,4 @@ You can add options like `debounce:2s cap:25 drop:summarize` for followup modes.
 
 ---
 
-Still stuck? Ask in [Discord](https://discord.com/invite/clawd) or open a [GitHub discussion](https://github.com/MrBeanBot/MrBeanBot/discussions).
+Still stuck? Open a [GitHub discussion](https://github.com/MrBeanBot/MrBeanBot/discussions).

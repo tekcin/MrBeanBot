@@ -5,7 +5,7 @@ import OSLog
 actor RemoteTunnelManager {
     static let shared = RemoteTunnelManager()
 
-    private let logger = Logger(subsystem: "bot.molt", category: "remote-tunnel")
+    private let logger = Logger(subsystem: "com.tekcin.mrbeanbot", category: "remote-tunnel")
     private var controlTunnel: RemotePortTunnel?
     private var restartInFlight = false
     private var lastRestartAt: Date?

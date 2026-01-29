@@ -5,12 +5,17 @@ import UIKit
 #endif
 
 public enum InstanceIdentity {
-    private static let suiteName = "bot.molt.shared"
+    private static let suiteName = "com.tekcin.mrbeanbot.shared"
+    private static let legacySuiteName2 = "bot.molt.shared"
     private static let legacySuiteName = "com.MrBeanBot.shared"
     private static let instanceIdKey = "instanceId"
 
     private static var defaults: UserDefaults {
         UserDefaults(suiteName: suiteName) ?? .standard
+    }
+
+    private static var legacyDefaults2: UserDefaults? {
+        UserDefaults(suiteName: legacySuiteName2)
     }
 
     private static var legacyDefaults: UserDefaults? {
@@ -35,6 +40,14 @@ public enum InstanceIdentity {
             !existing.isEmpty
         {
             return existing
+        }
+
+        if let legacy2 = Self.legacyDefaults2?.string(forKey: instanceIdKey)?
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+            !legacy2.isEmpty
+        {
+            defaults.set(legacy2, forKey: instanceIdKey)
+            return legacy2
         }
 
         if let legacy = Self.legacyDefaults?.string(forKey: instanceIdKey)?

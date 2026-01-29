@@ -155,7 +155,10 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.mrbeanbot.com/cli/a
         `
 ${theme.heading("Examples:")}
 ${formatHelpExamples([
-  ['MrBeanBot agents set-identity --agent main --name "Clawd" --emoji "🦞"', "Set name + emoji."],
+  [
+    'MrBeanBot agents set-identity --agent main --name "MrBeanBot" --emoji "🦞"',
+    "Set name + emoji.",
+  ],
   ["MrBeanBot agents set-identity --agent main --avatar avatars/mrbeanbot.png", "Set avatar path."],
   [
     "MrBeanBot agents set-identity --workspace ~/mrbeanbot --from-identity",
