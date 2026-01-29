@@ -1,4 +1,4 @@
-import { execFileSync, execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -76,7 +76,6 @@ type ClaudeCliWriteOptions = ClaudeCliFileOptions & {
   writeFile?: (credentials: OAuthCredentials, options?: ClaudeCliFileOptions) => boolean;
 };
 
-type ExecSyncFn = typeof execSync;
 type ExecFileSyncFn = typeof execFileSync;
 
 function resolveClaudeCliCredentialsPath(homeDir?: string) {
