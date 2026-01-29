@@ -687,7 +687,7 @@ Monitor gateway logs to see hook execution:
 
 ```bash
 # macOS
-./scripts/clawlog.sh -f
+./scripts/mrbeanbot-log.sh -f
 
 # Other platforms
 tail -f ~/.MrBeanBot/gateway.log
@@ -806,7 +806,7 @@ Look for missing:
 
 3. Check gateway logs for errors:
    ```bash
-   ./scripts/clawlog.sh | grep hook
+   ./scripts/mrbeanbot-log.sh | grep hook
    ```
 
 ### Handler Errors

@@ -11,7 +11,7 @@ import Testing
             AppStateStore.shared.applyGlobalVoiceWakeTriggers(["before"])
         }
 
-        let payload = MrBeanBotProtocol.AnyCodable(["triggers": ["clawd", "computer"]])
+        let payload = MrBeanBotProtocol.AnyCodable(["triggers": ["mrbeanbot", "computer"]])
         let evt = EventFrame(
             type: "event",
             event: "voicewake.changed",
@@ -22,7 +22,7 @@ import Testing
         await VoiceWakeGlobalSettingsSync.shared.handle(push: .event(evt))
 
         let updated = await MainActor.run { AppStateStore.shared.swabbleTriggerWords }
-        #expect(updated == ["clawd", "computer"])
+        #expect(updated == ["mrbeanbot", "computer"])
 
         await MainActor.run {
             AppStateStore.shared.applyGlobalVoiceWakeTriggers(previous)

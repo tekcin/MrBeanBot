@@ -22,10 +22,10 @@ if ! docker compose version >/dev/null 2>&1; then
 fi
 
 mkdir -p "${MRBEANBOT_CONFIG_DIR:-$HOME/.MrBeanBot}"
-mkdir -p "${MRBEANBOT_WORKSPACE_DIR:-$HOME/clawd}"
+mkdir -p "${MRBEANBOT_WORKSPACE_DIR:-$HOME/mrbeanbot}"
 
 export MRBEANBOT_CONFIG_DIR="${MRBEANBOT_CONFIG_DIR:-$HOME/.MrBeanBot}"
-export MRBEANBOT_WORKSPACE_DIR="${MRBEANBOT_WORKSPACE_DIR:-$HOME/clawd}"
+export MRBEANBOT_WORKSPACE_DIR="${MRBEANBOT_WORKSPACE_DIR:-$HOME/mrbeanbot}"
 export MRBEANBOT_GATEWAY_PORT="${MRBEANBOT_GATEWAY_PORT:-18789}"
 export MRBEANBOT_BRIDGE_PORT="${MRBEANBOT_BRIDGE_PORT:-18790}"
 export MRBEANBOT_GATEWAY_BIND="${MRBEANBOT_GATEWAY_BIND:-lan}"
@@ -63,7 +63,7 @@ YAML
   if [[ -n "$home_volume" ]]; then
     printf '      - %s:/home/node\n' "$home_volume" >>"$EXTRA_COMPOSE_FILE"
     printf '      - %s:/home/node/.MrBeanBot\n' "$MRBEANBOT_CONFIG_DIR" >>"$EXTRA_COMPOSE_FILE"
-    printf '      - %s:/home/node/clawd\n' "$MRBEANBOT_WORKSPACE_DIR" >>"$EXTRA_COMPOSE_FILE"
+    printf '      - %s:/home/node/mrbeanbot\n' "$MRBEANBOT_WORKSPACE_DIR" >>"$EXTRA_COMPOSE_FILE"
   fi
 
   for mount in "${mounts[@]}"; do
@@ -78,7 +78,7 @@ YAML
   if [[ -n "$home_volume" ]]; then
     printf '      - %s:/home/node\n' "$home_volume" >>"$EXTRA_COMPOSE_FILE"
     printf '      - %s:/home/node/.MrBeanBot\n' "$MRBEANBOT_CONFIG_DIR" >>"$EXTRA_COMPOSE_FILE"
-    printf '      - %s:/home/node/clawd\n' "$MRBEANBOT_WORKSPACE_DIR" >>"$EXTRA_COMPOSE_FILE"
+    printf '      - %s:/home/node/mrbeanbot\n' "$MRBEANBOT_WORKSPACE_DIR" >>"$EXTRA_COMPOSE_FILE"
   fi
 
   for mount in "${mounts[@]}"; do

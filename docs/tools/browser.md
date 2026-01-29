@@ -2,7 +2,7 @@
 summary: "Integrated browser control service + action commands"
 read_when:
   - Adding agent-controlled browser automation
-  - Debugging why clawd is interfering with your own Chrome
+  - Debugging why mrbeanbot is interfering with your own Chrome
   - Implementing browser settings + lifecycle in the macOS app
 ---
 
@@ -14,17 +14,17 @@ control service inside the Gateway (loopback only).
 
 Beginner view:
 - Think of it as a **separate, agent-only browser**.
-- The `clawd` profile does **not** touch your personal browser profile.
+- The `mrbeanbot` profile does **not** touch your personal browser profile.
 - The agent can **open tabs, read pages, click, and type** in a safe lane.
 - The default `chrome` profile uses the **system default Chromium browser** via the
-  extension relay; switch to `clawd` for the isolated managed browser.
+  extension relay; switch to `mrbeanbot` for the isolated managed browser.
 
 ## What you get
 
-- A separate browser profile named **clawd** (orange accent by default).
+- A separate browser profile named **mrbeanbot** (orange accent by default).
 - Deterministic tab control (list/open/focus/close).
 - Agent actions (click/type/drag/select), snapshots, screenshots, PDFs.
-- Optional multi-profile support (`clawd`, `work`, `remote`, ...).
+- Optional multi-profile support (`mrbeanbot`, `work`, `remote`, ...).
 
 This browser is **not** your daily driver. It is a safe, isolated surface for
 agent automation and verification.
@@ -32,22 +32,22 @@ agent automation and verification.
 ## Quick start
 
 ```bash
-MrBeanBot browser --browser-profile clawd status
-MrBeanBot browser --browser-profile clawd start
-MrBeanBot browser --browser-profile clawd open https://example.com
-MrBeanBot browser --browser-profile clawd snapshot
+MrBeanBot browser --browser-profile mrbeanbot status
+MrBeanBot browser --browser-profile mrbeanbot start
+MrBeanBot browser --browser-profile mrbeanbot open https://example.com
+MrBeanBot browser --browser-profile mrbeanbot snapshot
 ```
 
 If you get “Browser disabled”, enable it in config (see below) and restart the
 Gateway.
 
-## Profiles: `clawd` vs `chrome`
+## Profiles: `mrbeanbot` vs `chrome`
 
-- `clawd`: managed, isolated browser (no extension required).
+- `mrbeanbot`: managed, isolated browser (no extension required).
 - `chrome`: extension relay to your **system browser** (requires the MrBeanBot
   extension to be attached to a tab).
 
-Set `browser.defaultProfile: "clawd"` if you want managed mode by default.
+Set `browser.defaultProfile: "mrbeanbot"` if you want managed mode by default.
 
 ## Configuration
 
@@ -67,7 +67,7 @@ Browser settings live in `~/.MrBeanBot/MrBeanBot.json`.
     attachOnly: false,
     executablePath: "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
     profiles: {
-      clawd: { cdpPort: 18800, color: "#FF4500" },
+      mrbeanbot: { cdpPort: 18800, color: "#FF4500" },
       work: { cdpPort: 18801, color: "#0066CC" },
       remote: { cdpUrl: "http://10.0.0.42:9222", color: "#00AA00" }
     }
@@ -85,9 +85,9 @@ Notes:
 - `remoteCdpHandshakeTimeoutMs` applies to remote CDP WebSocket reachability checks.
 - `attachOnly: true` means “never launch a local browser; only attach if it is already running.”
 - `color` + per-profile `color` tint the browser UI so you can see which profile is active.
-- Default profile is `chrome` (extension relay). Use `defaultProfile: "clawd"` for the managed browser.
+- Default profile is `chrome` (extension relay). Use `defaultProfile: "mrbeanbot"` for the managed browser.
 - Auto-detect order: system default browser if Chromium-based; otherwise Chrome → Brave → Edge → Chromium → Chrome Canary.
-- Local `clawd` profiles auto-assign `cdpPort`/`cdpUrl` — set those only for remote CDP.
+- Local `mrbeanbot` profiles auto-assign `cdpPort`/`cdpUrl` — set those only for remote CDP.
 
 ## Use Brave (or another Chromium-based browser)
 
@@ -199,7 +199,7 @@ MrBeanBot supports multiple named profiles (routing configs). Profiles can be:
 - **extension relay**: your existing Chrome tab(s) via the local relay + Chrome extension
 
 Defaults:
-- The `clawd` profile is auto-created if missing.
+- The `mrbeanbot` profile is auto-created if missing.
 - The `chrome` profile is built-in for the Chrome extension relay (points at `http://127.0.0.1:18792` by default).
 - Local CDP ports allocate from **18800–18899** by default.
 - Deleting a profile moves its local data directory to Trash.
@@ -208,7 +208,7 @@ All control endpoints accept `?profile=<name>`; the CLI uses `--browser-profile`
 
 ## Chrome extension relay (use your existing Chrome)
 
-MrBeanBot can also drive **your existing Chrome tabs** (no separate “clawd” Chrome instance) via a local CDP relay + a Chrome extension.
+MrBeanBot can also drive **your existing Chrome tabs** (no separate “mrbeanbot” Chrome instance) via a local CDP relay + a Chrome extension.
 
 Full guide: [Chrome extension](/tools/chrome-extension)
 
@@ -504,7 +504,7 @@ These are useful for “make the site behave like X” workflows:
 
 ## Security & privacy
 
-- The clawd browser profile may contain logged-in sessions; treat it as sensitive.
+- The mrbeanbot browser profile may contain logged-in sessions; treat it as sensitive.
 - `browser act kind=evaluate` / `MrBeanBot browser evaluate` and `wait --fn`
   execute arbitrary JavaScript in the page context. Prompt injection can steer
   this. Disable it with `browser.evaluateEnabled=false` if you do not need it.
@@ -527,7 +527,7 @@ How it maps:
 - `browser act` uses the snapshot `ref` IDs to click/type/drag/select.
 - `browser screenshot` captures pixels (full page or element).
 - `browser` accepts:
-  - `profile` to choose a named browser profile (clawd, chrome, or remote CDP).
+  - `profile` to choose a named browser profile (mrbeanbot, chrome, or remote CDP).
   - `target` (`sandbox` | `host` | `node`) to select where the browser lives.
   - In sandboxed sessions, `target: "host"` requires `agents.defaults.sandbox.browser.allowHostControl=true`.
   - If `target` is omitted: sandboxed sessions default to `sandbox`, non-sandbox sessions default to `host`.

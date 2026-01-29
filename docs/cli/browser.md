@@ -26,15 +26,15 @@ Related:
 
 ```bash
 MrBeanBot browser --browser-profile chrome tabs
-MrBeanBot browser --browser-profile clawd start
-MrBeanBot browser --browser-profile clawd open https://example.com
-MrBeanBot browser --browser-profile clawd snapshot
+MrBeanBot browser --browser-profile mrbeanbot start
+MrBeanBot browser --browser-profile mrbeanbot open https://example.com
+MrBeanBot browser --browser-profile mrbeanbot snapshot
 ```
 
 ## Profiles
 
 Profiles are named browser routing configs. In practice:
-- `clawd`: launches/attaches to a dedicated MrBeanBot-managed Chrome instance (isolated user data dir).
+- `mrbeanbot`: launches/attaches to a dedicated MrBeanBot-managed Chrome instance (isolated user data dir).
 - `chrome`: controls your existing Chrome tab(s) via the Chrome extension relay.
 
 ```bash

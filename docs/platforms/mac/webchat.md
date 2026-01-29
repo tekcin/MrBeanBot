@@ -20,7 +20,7 @@ agent (with a session switcher for other sessions).
   ```bash
   dist/MrBeanBot.app/Contents/MacOS/MrBeanBot --webchat
   ```
-- Logs: `./scripts/clawlog.sh` (subsystem `bot.molt`, category `WebChatSwiftUI`).
+- Logs: `./scripts/mrbeanbot-log.sh` (subsystem `com.tekcin.mrbeanbot`, category `WebChatSwiftUI`).
 
 ## How it’s wired
 
