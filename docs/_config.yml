@@ -23,7 +23,7 @@ nav:
   - title: "Home"
     url: "/"
   - title: "MrBeanBot Assistant"
-    url: "/start/clawd/"
+    url: "/start/assistant-setup/"
   - title: "Gateway"
     url: "/gateway/"
   - title: "Remote"
