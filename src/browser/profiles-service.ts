@@ -21,7 +21,7 @@ export type CreateProfileParams = {
   name: string;
   color?: string;
   cdpUrl?: string;
-  driver?: "clawd" | "extension";
+  driver?: "mrbeanbot" | "extension";
 };
 
 export type CreateProfileResult = {

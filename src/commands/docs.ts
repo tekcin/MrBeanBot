@@ -5,7 +5,7 @@ import { formatDocsLink } from "../terminal/links.js";
 import { isRich, theme } from "../terminal/theme.js";
 import { formatCliCommand } from "../cli/command-format.js";
 
-const SEARCH_TOOL = "https://docs.molt.bot/mcp.SearchMrBeanBot";
+const SEARCH_TOOL = "https://docs.mrbeanbot.com/mcp.SearchMrBeanBot";
 const SEARCH_TIMEOUT_MS = 30_000;
 const DEFAULT_SNIPPET_MAX = 220;
 
@@ -148,12 +148,12 @@ async function renderMarkdown(markdown: string, runtime: RuntimeEnv) {
 export async function docsSearchCommand(queryParts: string[], runtime: RuntimeEnv) {
   const query = queryParts.join(" ").trim();
   if (!query) {
-    const docs = formatDocsLink("/", "docs.molt.bot");
+    const docs = formatDocsLink("/", "docs.mrbeanbot.com");
     if (isRich()) {
       runtime.log(`${theme.muted("Docs:")} ${docs}`);
       runtime.log(`${theme.muted("Search:")} ${formatCliCommand('MrBeanBot docs "your query"')}`);
     } else {
-      runtime.log("Docs: https://docs.molt.bot/");
+      runtime.log("Docs: https://docs.mrbeanbot.com/");
       runtime.log(`Search: ${formatCliCommand('MrBeanBot docs "your query"')}`);
     }
     return;

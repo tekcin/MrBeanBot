@@ -54,7 +54,7 @@ function buildSlackManifest(botName: string) {
       },
       slash_commands: [
         {
-          command: "/clawd",
+          command: "/mrbeanbot",
           description: "Send a message to MrBeanBot",
           should_escape: false,
         },

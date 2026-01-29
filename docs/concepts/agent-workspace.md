@@ -21,15 +21,15 @@ inside a sandbox workspace under `~/.MrBeanBot/sandboxes`, not your host workspa
 
 ## Default location
 
-- Default: `~/clawd`
+- Default: `~/mrbeanbot`
 - If `MRBEANBOT_PROFILE` is set and not `"default"`, the default becomes
-  `~/clawd-<profile>`.
+  `~/mrbeanbot-<profile>`.
 - Override in `~/.MrBeanBot/MrBeanBot.json`:
 
 ```json5
 {
   agent: {
-    workspace: "~/clawd"
+    workspace: "~/mrbeanbot"
   }
 }
 ```
@@ -144,7 +144,7 @@ If git is installed, brand-new workspaces are initialized automatically. If this
 workspace is not already a repo, run:
 
 ```bash
-cd ~/clawd
+cd ~/mrbeanbot
 git init
 git add AGENTS.md SOUL.md TOOLS.md IDENTITY.md USER.md HEARTBEAT.md memory/
 git commit -m "Add agent workspace"
@@ -169,7 +169,7 @@ Option B: GitHub CLI (`gh`)
 
 ```bash
 gh auth login
-gh repo create clawd-workspace --private --source . --remote origin --push
+gh repo create mrbeanbot-workspace --private --source . --remote origin --push
 ```
 
 Option C: GitLab web UI
@@ -217,7 +217,7 @@ Suggested `.gitignore` starter:
 
 ## Moving the workspace to a new machine
 
-1. Clone the repo to the desired path (default `~/clawd`).
+1. Clone the repo to the desired path (default `~/mrbeanbot`).
 2. Set `agents.defaults.workspace` to that path in `~/.MrBeanBot/MrBeanBot.json`.
 3. Run `MrBeanBot setup --workspace <path>` to seed any missing files.
 4. If you need sessions, copy `~/.MrBeanBot/agents/<agentId>/sessions/` from the

@@ -19,7 +19,10 @@ import {
   isProfileDecorated,
 } from "./chrome.profile-decoration.js";
 import type { ResolvedBrowserConfig, ResolvedBrowserProfile } from "./config.js";
-import { DEFAULT_CLAWD_BROWSER_COLOR, DEFAULT_CLAWD_BROWSER_PROFILE_NAME } from "./constants.js";
+import {
+  DEFAULT_MRBEANBOT_BROWSER_COLOR,
+  DEFAULT_MRBEANBOT_BROWSER_PROFILE_NAME,
+} from "./constants.js";
 
 const log = createSubsystemLogger("browser").child("chrome");
 
@@ -57,7 +60,7 @@ function resolveBrowserExecutable(resolved: ResolvedBrowserConfig): BrowserExecu
   return resolveBrowserExecutableForPlatform(resolved, process.platform);
 }
 
-export function resolveClawdUserDataDir(profileName = DEFAULT_CLAWD_BROWSER_PROFILE_NAME) {
+export function resolveClawdUserDataDir(profileName = DEFAULT_MRBEANBOT_BROWSER_PROFILE_NAME) {
   return path.join(CONFIG_DIR, "browser", profileName, "user-data");
 }
 
@@ -172,7 +175,7 @@ export async function launchClawdChrome(
   const needsDecorate = !isProfileDecorated(
     userDataDir,
     profile.name,
-    (profile.color ?? DEFAULT_CLAWD_BROWSER_COLOR).toUpperCase(),
+    (profile.color ?? DEFAULT_MRBEANBOT_BROWSER_COLOR).toUpperCase(),
   );
 
   // First launch to create preference files if missing, then decorate and relaunch.
@@ -256,16 +259,16 @@ export async function launchClawdChrome(
         name: profile.name,
         color: profile.color,
       });
-      log.info(`🦞 clawd browser profile decorated (${profile.color})`);
+      log.info(`🦞 mrbeanbot browser profile decorated (${profile.color})`);
     } catch (err) {
-      log.warn(`clawd browser profile decoration failed: ${String(err)}`);
+      log.warn(`mrbeanbot browser profile decoration failed: ${String(err)}`);
     }
   }
 
   try {
     ensureProfileCleanExit(userDataDir);
   } catch (err) {
-    log.warn(`clawd browser clean-exit prefs failed: ${String(err)}`);
+    log.warn(`mrbeanbot browser clean-exit prefs failed: ${String(err)}`);
   }
 
   const proc = spawnOnce();
@@ -289,7 +292,7 @@ export async function launchClawdChrome(
 
   const pid = proc.pid ?? -1;
   log.info(
-    `🦞 clawd browser started (${exe.kind}) profile "${profile.name}" on 127.0.0.1:${profile.cdpPort} (pid ${pid})`,
+    `🦞 mrbeanbot browser started (${exe.kind}) profile "${profile.name}" on 127.0.0.1:${profile.cdpPort} (pid ${pid})`,
   );
 
   return {

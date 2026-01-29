@@ -1,14 +1,14 @@
 ---
 summary: "Research notes: offline memory system for Clawd workspaces (Markdown source-of-truth + derived index)"
 read_when:
-  - Designing workspace memory (~/clawd) beyond daily Markdown logs
+  - Designing workspace memory (~/mrbeanbot) beyond daily Markdown logs
   - Deciding: standalone CLI vs deep MrBeanBot integration
   - Adding offline recall + reflection (retain/recall/reflect)
 ---
 
 # Workspace Memory v2 (offline): research notes
 
-Target: Clawd-style workspace (`agents.defaults.workspace`, default `~/clawd`) where “memory” is stored as one Markdown file per day (`memory/YYYY-MM-DD.md`) plus a small set of stable files (e.g. `memory.md`, `SOUL.md`).
+Target: Clawd-style workspace (`agents.defaults.workspace`, default `~/mrbeanbot`) where “memory” is stored as one Markdown file per day (`memory/YYYY-MM-DD.md`) plus a small set of stable files (e.g. `memory.md`, `SOUL.md`).
 
 This doc proposes an **offline-first** memory architecture that keeps Markdown as the canonical, reviewable source of truth, but adds **structured recall** (search, entity summaries, confidence updates) via a derived index.
 
@@ -53,12 +53,12 @@ Two pieces to blend:
 
 ### Canonical store (git-friendly)
 
-Keep `~/clawd` as canonical human-readable memory.
+Keep `~/mrbeanbot` as canonical human-readable memory.
 
 Suggested workspace layout:
 
 ```
-~/clawd/
+~/mrbeanbot/
   memory.md                    # small: durable facts + preferences (core-ish)
   memory/
     YYYY-MM-DD.md              # daily log (append; narrative)
@@ -83,7 +83,7 @@ Notes:
 Add a derived index under the workspace (not necessarily git tracked):
 
 ```
-~/clawd/.memory/index.sqlite
+~/mrbeanbot/.memory/index.sqlite
 ```
 
 Back it with:
@@ -177,7 +177,7 @@ The memory tooling is intended to be a small CLI + library layer, but this is ex
 
 If “S-Collide” refers to **SuCo (Subspace Collision)**: it’s an ANN retrieval approach that targets strong recall/latency tradeoffs by using learned/structured collisions in subspaces (paper: arXiv 2411.14754, 2024).
 
-Pragmatic take for `~/clawd`:
+Pragmatic take for `~/mrbeanbot`:
 - **don’t start** with SuCo.
 - start with SQLite FTS + (optional) simple embeddings; you’ll get most UX wins immediately.
 - consider SuCo/HNSW/ScaNN-class solutions only once:

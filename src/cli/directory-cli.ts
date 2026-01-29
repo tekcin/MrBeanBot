@@ -39,7 +39,7 @@ export function registerDirectoryCli(program: Command) {
       () =>
         `\n${theme.muted("Docs:")} ${formatDocsLink(
           "/cli/directory",
-          "docs.molt.bot/cli/directory",
+          "docs.mrbeanbot.com/cli/directory",
         )}\n`,
     )
     .action(() => {

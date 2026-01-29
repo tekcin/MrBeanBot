@@ -65,7 +65,7 @@ curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 apt install -y nodejs
 
 # Install MrBeanBot
-curl -fsSL https://molt.bot/install.sh | bash
+curl -fsSL https://mrbeanbot.com/install.sh | bash
 
 # Verify
 MrBeanBot --version
@@ -181,11 +181,11 @@ htop
 
 All state lives in:
 - `~/.MrBeanBot/` — config, credentials, session data
-- `~/clawd/` — workspace (SOUL.md, memory, etc.)
+- `~/mrbeanbot/` — workspace (SOUL.md, memory, etc.)
 
 These survive reboots. Back them up periodically:
 ```bash
-tar -czvf MrBeanBot-backup.tar.gz ~/.MrBeanBot ~/clawd
+tar -czvf MrBeanBot-backup.tar.gz ~/.MrBeanBot ~/mrbeanbot
 ```
 
 ---

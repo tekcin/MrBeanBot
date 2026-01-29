@@ -41,4 +41,4 @@ MrBeanBot ollama setup
 
 This performs the same config write that `ollama launch mrbeanbot --config` would do.
 
-See the [Ollama provider docs](https://docs.molt.bot/providers/ollama) for full details.
+See the [Ollama provider docs](https://docs.mrbeanbot.com/providers/ollama) for full details.

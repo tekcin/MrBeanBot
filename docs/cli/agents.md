@@ -16,8 +16,8 @@ Related:
 
 ```bash
 MrBeanBot agents list
-MrBeanBot agents add work --workspace ~/clawd-work
-MrBeanBot agents set-identity --workspace ~/clawd --from-identity
+MrBeanBot agents add work --workspace ~/mrbeanbot-work
+MrBeanBot agents set-identity --workspace ~/mrbeanbot --from-identity
 MrBeanBot agents set-identity --agent main --avatar avatars/clawd.png
 MrBeanBot agents delete work
 ```
@@ -25,7 +25,7 @@ MrBeanBot agents delete work
 ## Identity files
 
 Each agent workspace can include an `IDENTITY.md` at the workspace root:
-- Example path: `~/clawd/IDENTITY.md`
+- Example path: `~/mrbeanbot/IDENTITY.md`
 - `set-identity --from-identity` reads from the workspace root (or an explicit `--identity-file`)
 
 Avatar paths resolve relative to the workspace root.
@@ -41,7 +41,7 @@ Avatar paths resolve relative to the workspace root.
 Load from `IDENTITY.md`:
 
 ```bash
-MrBeanBot agents set-identity --workspace ~/clawd --from-identity
+MrBeanBot agents set-identity --workspace ~/mrbeanbot --from-identity
 ```
 
 Override fields explicitly:

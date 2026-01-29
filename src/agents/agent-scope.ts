@@ -146,7 +146,7 @@ export function resolveAgentWorkspaceDir(cfg: MrBeanBotConfig, agentId: string) 
     if (fallback) return resolveUserPath(fallback);
     return DEFAULT_AGENT_WORKSPACE_DIR;
   }
-  return path.join(os.homedir(), `clawd-${id}`);
+  return path.join(os.homedir(), `mrbeanbot-${id}`);
 }
 
 export function resolveAgentDir(cfg: MrBeanBotConfig, agentId: string) {

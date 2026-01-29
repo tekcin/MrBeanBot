@@ -11,7 +11,7 @@ If you believe you've found a security issue in MrBeanBot, please report it priv
 
 For threat model + hardening guidance (including `MrBeanBot security audit --deep` and `--fix`), see:
 
-- `https://docs.molt.bot/gateway/security`
+- `https://docs.mrbeanbot.com/gateway/security`
 
 ### Web Interface Safety
 

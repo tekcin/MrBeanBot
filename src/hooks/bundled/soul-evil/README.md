@@ -2,7 +2,7 @@
 
 Small persona swap hook for MrBeanBot.
 
-Docs: https://docs.molt.bot/hooks/soul-evil
+Docs: https://docs.mrbeanbot.com/hooks/soul-evil
 
 ## Setup
 

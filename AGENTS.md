@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Docs: `docs/` (images, queue, Pi config). Built output lives in `dist/`.
 - Plugins/extensions: live under `extensions/*` (workspace packages). Keep plugin-only deps in the extension `package.json`; do not add them to the root `package.json` unless core uses them.
 - Plugins: install runs `npm install --omit=dev` in plugin dir; runtime deps must live in `dependencies`. Avoid `workspace:*` in `dependencies` (npm install breaks); put `MrBeanBot` in `devDependencies` or `peerDependencies` instead (runtime resolves `MrBeanBot/plugin-sdk` via jiti alias).
-- Installers served from `https://molt.bot/*`: live in the sibling repo `../molt.bot` (`public/install.sh`, `public/install-cli.sh`, `public/install.ps1`).
+- Installers served from `https://mrbeanbot.com/*`: live in the sibling repo `../mrbeanbot.com` (`public/install.sh`, `public/install-cli.sh`, `public/install.ps1`).
 - Messaging channels: always consider **all** built-in + extension channels when refactoring shared logic (routing, allowlists, pairing, command gating, onboarding, docs).
   - Core channel docs: `docs/channels/`
   - Core channel code: `src/telegram`, `src/discord`, `src/slack`, `src/signal`, `src/imessage`, `src/web` (WhatsApp web), `src/channels`, `src/routing`
@@ -20,13 +20,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - When adding channels/extensions/apps/docs, review `.github/labeler.yml` for label coverage.
 
 ## Docs Linking (Mintlify)
-- Docs are hosted on Mintlify (docs.molt.bot).
+- Docs are hosted on Mintlify (docs.mrbeanbot.com).
 - Internal doc links in `docs/**/*.md`: root-relative, no `.md`/`.mdx` (example: `[Config](/configuration)`).
 - Section cross-references: use anchors on root-relative paths (example: `[Hooks](/configuration#hooks)`).
 - Doc headings and anchors: avoid em dashes and apostrophes in headings because they break Mintlify anchor links.
-- When Peter asks for links, reply with full `https://docs.molt.bot/...` URLs (not root-relative).
-- When you touch docs, end the reply with the `https://docs.molt.bot/...` URLs you referenced.
-- README (GitHub): keep absolute docs URLs (`https://docs.molt.bot/...`) so links work on GitHub.
+- When Peter asks for links, reply with full `https://docs.mrbeanbot.com/...` URLs (not root-relative).
+- When you touch docs, end the reply with the `https://docs.mrbeanbot.com/...` URLs you referenced.
+- README (GitHub): keep absolute docs URLs (`https://docs.mrbeanbot.com/...`) so links work on GitHub.
 - Docs content must be generic: no personal device names/hostnames/paths; use placeholders like `user@gateway-host` and “gateway host”.
 
 ## exe.dev VM ops (general)

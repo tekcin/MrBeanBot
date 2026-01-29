@@ -47,13 +47,13 @@ For debugging “why is this blocked?”, see [Sandbox vs Tool Policy vs Elevate
         "id": "main",
         "default": true,
         "name": "Personal Assistant",
-        "workspace": "~/clawd",
+        "workspace": "~/mrbeanbot",
         "sandbox": { "mode": "off" }
       },
       {
         "id": "family",
         "name": "Family Bot",
-        "workspace": "~/clawd-family",
+        "workspace": "~/mrbeanbot-family",
         "sandbox": {
           "mode": "all",
           "scope": "agent"
@@ -95,12 +95,12 @@ For debugging “why is this blocked?”, see [Sandbox vs Tool Policy vs Elevate
     "list": [
       {
         "id": "personal",
-        "workspace": "~/clawd-personal",
+        "workspace": "~/mrbeanbot-personal",
         "sandbox": { "mode": "off" }
       },
       {
         "id": "work",
-        "workspace": "~/clawd-work",
+        "workspace": "~/mrbeanbot-work",
         "sandbox": {
           "mode": "all",
           "scope": "shared",
@@ -154,14 +154,14 @@ For debugging “why is this blocked?”, see [Sandbox vs Tool Policy vs Elevate
     "list": [
       {
         "id": "main",
-        "workspace": "~/clawd",
+        "workspace": "~/mrbeanbot",
         "sandbox": {
           "mode": "off"  // Override: main never sandboxed
         }
       },
       {
         "id": "public",
-        "workspace": "~/clawd-public",
+        "workspace": "~/mrbeanbot-public",
         "sandbox": {
           "mode": "all",  // Override: public always sandboxed
           "scope": "agent"
@@ -245,7 +245,7 @@ Mitigation patterns:
 {
   "agents": {
     "defaults": {
-      "workspace": "~/clawd",
+      "workspace": "~/mrbeanbot",
       "sandbox": {
         "mode": "non-main"
       }
@@ -270,7 +270,7 @@ Mitigation patterns:
       {
         "id": "main",
         "default": true,
-        "workspace": "~/clawd",
+        "workspace": "~/mrbeanbot",
         "sandbox": { "mode": "off" }
       }
     ]

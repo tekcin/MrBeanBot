@@ -7,7 +7,7 @@ read_when:
 
 MrBeanBot reads an optional **JSON5** config from `~/.MrBeanBot/MrBeanBot.json` (comments + trailing commas allowed).
 
-If the file is missing, MrBeanBot uses safe-ish defaults (embedded Pi agent + per-sender sessions + workspace `~/clawd`). You usually only need a config to:
+If the file is missing, MrBeanBot uses safe-ish defaults (embedded Pi agent + per-sender sessions + workspace `~/mrbeanbot`). You usually only need a config to:
 - restrict who can trigger the bot (`channels.whatsapp.allowFrom`, `channels.telegram.allowFrom`, etc.)
 - control group allowlists + mention behavior (`channels.whatsapp.groups`, `channels.telegram.groups`, `channels.discord.guilds`, `agents.list[].groupChat`)
 - customize message prefixes (`messages`)
@@ -61,7 +61,7 @@ Example (via `gateway call`):
 ```bash
 MrBeanBot gateway call config.get --params '{}' # capture payload.hash
 MrBeanBot gateway call config.apply --params '{
-  "raw": "{\\n  agents: { defaults: { workspace: \\"~/clawd\\" } }\\n}\\n",
+  "raw": "{\\n  agents: { defaults: { workspace: \\"~/mrbeanbot\\" } }\\n}\\n",
   "baseHash": "<hash-from-config.get>",
   "sessionKey": "agent:main:whatsapp:dm:+15555550123",
   "restartDelayMs": 1000
@@ -101,7 +101,7 @@ MrBeanBot gateway call config.patch --params '{
 
 ```json5
 {
-  agents: { defaults: { workspace: "~/clawd" } },
+  agents: { defaults: { workspace: "~/mrbeanbot" } },
   channels: { whatsapp: { allowFrom: ["+15555550123"] } }
 }
 ```
@@ -118,7 +118,7 @@ To prevent the bot from responding to WhatsApp @-mentions in groups (only respon
 ```json5
 {
   agents: {
-    defaults: { workspace: "~/clawd" },
+    defaults: { workspace: "~/mrbeanbot" },
     list: [
       {
         id: "main",
@@ -168,7 +168,7 @@ Split your config into multiple files using the `$include` directive. This is us
 {
   defaults: { sandbox: { mode: "all", scope: "session" } },
   list: [
-    { id: "main", workspace: "~/clawd" }
+    { id: "main", workspace: "~/mrbeanbot" }
   ]
 }
 ```
@@ -723,7 +723,7 @@ Inbound messages are routed to an agent via bindings.
   - `default`: optional; when multiple are set, the first wins and a warning is logged.
     If none are set, the **first entry** in the list is the default agent.
   - `name`: display name for the agent.
-  - `workspace`: default `~/clawd-<agentId>` (for `main`, falls back to `agents.defaults.workspace`).
+  - `workspace`: default `~/mrbeanbot-<agentId>` (for `main`, falls back to `agents.defaults.workspace`).
   - `agentDir`: default `~/.MrBeanBot/agents/<agentId>/agent`.
   - `model`: per-agent default model, overrides `agents.defaults.model` for that agent.
     - string form: `"provider/model"`, overrides only `agents.defaults.model.primary`
@@ -779,7 +779,7 @@ Full access (no sandbox):
     list: [
       {
         id: "personal",
-        workspace: "~/clawd-personal",
+        workspace: "~/mrbeanbot-personal",
         sandbox: { mode: "off" }
       }
     ]
@@ -794,7 +794,7 @@ Read-only tools + read-only workspace:
     list: [
       {
         id: "family",
-        workspace: "~/clawd-family",
+        workspace: "~/mrbeanbot-family",
         sandbox: {
           mode: "all",
           scope: "agent",
@@ -817,7 +817,7 @@ No filesystem access (messaging/session tools enabled):
     list: [
       {
         id: "public",
-        workspace: "~/clawd-public",
+        workspace: "~/mrbeanbot-public",
         sandbox: {
           mode: "all",
           scope: "agent",
@@ -839,8 +839,8 @@ Example: two WhatsApp accounts → two agents:
 {
   agents: {
     list: [
-      { id: "home", default: true, workspace: "~/clawd-home" },
-      { id: "work", workspace: "~/clawd-work" }
+      { id: "home", default: true, workspace: "~/mrbeanbot-home" },
+      { id: "work", workspace: "~/mrbeanbot-work" }
     ]
   },
   bindings: [
@@ -1083,7 +1083,7 @@ Multi-account support lives under `channels.discord.accounts` (see the multi-acc
         policy: "pairing",                    // pairing | allowlist | open | disabled
         allowFrom: ["1234567890", "steipete"], // optional DM allowlist ("open" requires ["*"])
         groupEnabled: false,                 // enable group DMs
-        groupChannels: ["clawd-dm"]          // optional group DM allowlist
+        groupChannels: ["mrbeanbot-dm"]          // optional group DM allowlist
       },
       guilds: {
         "123456789012345678": {               // guild id (preferred) or slug
@@ -1356,11 +1356,11 @@ exec ssh -T gateway-host imsg "$@"
 
 Sets the **single global workspace directory** used by the agent for file operations.
 
-Default: `~/clawd`.
+Default: `~/mrbeanbot`.
 
 ```json5
 {
-  agents: { defaults: { workspace: "~/clawd" } }
+  agents: { defaults: { workspace: "~/mrbeanbot" } }
 }
 ```
 
@@ -2757,7 +2757,7 @@ Example:
 }
 ```
 
-### `browser` (clawd-managed browser)
+### `browser` (mrbeanbot-managed browser)
 
 MrBeanBot can start a **dedicated, isolated** Chrome/Brave/Edge/Chromium instance for clawd and expose a small loopback control service.
 Profiles can point at a **remote** Chromium-based browser via `profiles.<name>.cdpUrl`. Remote
@@ -3096,7 +3096,7 @@ If you need the backend to receive the prefixed path, set
 
 The Gateway serves a directory of HTML/CSS/JS over HTTP so iOS/Android nodes can simply `canvas.navigate` to it.
 
-Default root: `~/clawd/canvas`  
+Default root: `~/mrbeanbot/canvas`  
 Default port: `18793` (chosen to avoid the clawd browser CDP port `18792`)  
 The server listens on the **gateway bind host** (LAN or Tailnet) so nodes can reach it.
 
@@ -3114,7 +3114,7 @@ Disable live reload (and file watching) if the directory is large or you hit `EM
 ```json5
 {
   canvasHost: {
-    root: "~/clawd/canvas",
+    root: "~/mrbeanbot/canvas",
     port: 18793,
     liveReload: true
   }

@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 IMAGE_NAME="${MRBEANBOT_INSTALL_E2E_IMAGE:-MrBeanBot-install-e2e:local}"
-INSTALL_URL="${MRBEANBOT_INSTALL_URL:-https://molt.bot/install.sh}"
+INSTALL_URL="${MRBEANBOT_INSTALL_URL:-https://mrbeanbot.com/install.sh}"
 
 OPENAI_API_KEY="${OPENAI_API_KEY:-}"
 ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}"

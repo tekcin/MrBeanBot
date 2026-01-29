@@ -54,7 +54,7 @@ After it finishes:
 
 It writes config/workspace on the host:
 - `~/.MrBeanBot/`
-- `~/clawd`
+- `~/mrbeanbot`
 
 Running on a VPS? See [Hetzner (Docker VPS)](/platforms/hetzner).
 

@@ -308,7 +308,7 @@ These run `pnpm test:live` inside the repo Docker image, mounting your local con
 Useful env vars:
 
 - `MRBEANBOT_CONFIG_DIR=...` (default: `~/.MrBeanBot`) mounted to `/home/node/.MrBeanBot`
-- `MRBEANBOT_WORKSPACE_DIR=...` (default: `~/clawd`) mounted to `/home/node/clawd`
+- `MRBEANBOT_WORKSPACE_DIR=...` (default: `~/mrbeanbot`) mounted to `/home/node/mrbeanbot`
 - `MRBEANBOT_PROFILE_FILE=...` (default: `~/.profile`) mounted to `/home/node/.profile` and sourced before running tests
 - `MRBEANBOT_LIVE_GATEWAY_MODELS=...` / `MRBEANBOT_LIVE_MODELS=...` to narrow the run
 - `MRBEANBOT_LIVE_REQUIRE_PROFILE_KEYS=1` to ensure creds come from the profile store (not env)

@@ -239,11 +239,11 @@ Details: [Nodes](https://github.com/tekcin/MrBeanBot/nodes) · [macOS app](https
 
 Details: [Session tools](https://github.com/tekcin/MrBeanBot/concepts/session-tool)
 
-## Skills registry (ClawdHub)
+## Skills registry (MrBeanBot Skills)
 
-ClawdHub is a minimal skill registry. With ClawdHub enabled, the agent can search for skills automatically and pull in new ones as needed.
+MrBeanBot Skills is a minimal skill registry. With the skills registry enabled, the agent can search for skills automatically and pull in new ones as needed.
 
-[ClawdHub](https://ClawdHub.com)
+[MrBeanBot Skills](https://mrbeanbot.com/skills)
 
 ## Chat commands
 
@@ -289,9 +289,9 @@ Runbook: [iOS connect](https://github.com/tekcin/MrBeanBot/platforms/ios).
 
 ## Agent workspace + skills
 
-- Workspace root: `~/clawd` (configurable via `agents.defaults.workspace`).
+- Workspace root: `~/mrbeanbot` (configurable via `agents.defaults.workspace`).
 - Injected prompt files: `AGENTS.md`, `SOUL.md`, `TOOLS.md`.
-- Skills: `~/clawd/skills/<skill>/SKILL.md`.
+- Skills: `~/mrbeanbot/skills/<skill>/SKILL.md`.
 
 ## Configuration
 
@@ -449,7 +449,7 @@ Use these when you’re past the onboarding flow and want the deeper reference.
 
 ## Email hooks (Gmail)
 
-- [docs.molt.bot/gmail-pubsub](https://github.com/tekcin/MrBeanBot/automation/gmail-pubsub)
+- [docs.mrbeanbot.com/gmail-pubsub](https://github.com/tekcin/MrBeanBot/automation/gmail-pubsub)
 
 ## Molty
 

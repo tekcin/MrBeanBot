@@ -16,14 +16,14 @@ detects existing installs, upgrades in place, and runs `MrBeanBot doctor` when
 needed.
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash
+curl -fsSL https://mrbeanbot.com/install.sh | bash
 ```
 
 Notes:
 - Add `--no-onboard` if you don’t want the onboarding wizard to run again.
 - For **source installs**, use:
   ```bash
-  curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git --no-onboard
+  curl -fsSL https://mrbeanbot.com/install.sh | bash -s -- --install-method git --no-onboard
   ```
   The installer will `git pull --rebase` **only** if the repo is clean.
 - For **global installs**, the script uses `npm install -g MrBeanBot@latest` under the hood.
@@ -36,7 +36,7 @@ Notes:
 - Snapshot your tailoring:
   - Config: `~/.MrBeanBot/MrBeanBot.json`
   - Credentials: `~/.MrBeanBot/credentials/`
-  - Workspace: `~/clawd`
+  - Workspace: `~/mrbeanbot`
 
 ## Update (global install)
 

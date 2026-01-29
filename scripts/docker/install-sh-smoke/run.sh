@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-INSTALL_URL="${MRBEANBOT_INSTALL_URL:-https://molt.bot/install.sh}"
+INSTALL_URL="${MRBEANBOT_INSTALL_URL:-https://mrbeanbot.com/install.sh}"
 SMOKE_PREVIOUS_VERSION="${MRBEANBOT_INSTALL_SMOKE_PREVIOUS:-}"
 SKIP_PREVIOUS="${MRBEANBOT_INSTALL_SMOKE_SKIP_PREVIOUS:-0}"
 DEFAULT_PACKAGE="MrBeanBot"

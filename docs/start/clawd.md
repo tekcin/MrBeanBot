@@ -93,7 +93,7 @@ When onboarding finishes, we auto-open the dashboard with your gateway token and
 
 Clawd reads operating instructions and “memory” from its workspace directory.
 
-By default, MrBeanBot uses `~/clawd` as the agent workspace, and will create it (plus starter `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`) automatically on setup/first agent run. `BOOTSTRAP.md` is only created when the workspace is brand new (it should not come back after you delete it).
+By default, MrBeanBot uses `~/mrbeanbot` as the agent workspace, and will create it (plus starter `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`) automatically on setup/first agent run. `BOOTSTRAP.md` is only created when the workspace is brand new (it should not come back after you delete it).
 
 Tip: treat this folder like Clawd’s “memory” and make it a git repo (ideally private) so your `AGENTS.md` + memory files are backed up. If git is installed, brand-new workspaces are auto-initialized.
 
@@ -109,7 +109,7 @@ Optional: choose a different workspace with `agents.defaults.workspace` (support
 ```json5
 {
   agent: {
-    workspace: "~/clawd"
+    workspace: "~/mrbeanbot"
   }
 }
 ```
@@ -138,7 +138,7 @@ Example:
   logging: { level: "info" },
   agent: {
     model: "anthropic/claude-opus-4-5",
-    workspace: "~/clawd",
+    workspace: "~/mrbeanbot",
     thinkingDefault: "high",
     timeoutSeconds: 1800,
     // Start with 0; enable later.

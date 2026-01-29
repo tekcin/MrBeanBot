@@ -8,8 +8,8 @@ Providers:
 - **Plivo** (Voice API + XML transfer + GetInput speech)
 - **Mock** (dev/no network)
 
-Docs: `https://docs.molt.bot/plugins/voice-call`
-Plugin system: `https://docs.molt.bot/plugin`
+Docs: `https://docs.mrbeanbot.com/plugins/voice-call`
+Plugin system: `https://docs.mrbeanbot.com/plugin`
 
 ## Install (local dev)
 

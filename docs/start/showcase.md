@@ -134,28 +134,28 @@ Full setup walkthrough (28m) by VelvetShark.
   <img src="/assets/showcase/papla-tts.jpg" alt="Telegram voice note output from TTS" />
 </Card>
 
-<Card title="CodexMonitor" icon="eye" href="https://clawdhub.com/odrobnik/codexmonitor">
+<Card title="CodexMonitor" icon="eye" href="https://mrbeanbot.com/skills/odrobnik/codexmonitor">
   **@odrobnik** • `devtools` `codex` `brew`
 
   Homebrew-installed helper to list/inspect/watch local OpenAI Codex sessions (CLI + VS Code).
 
-  <img src="/assets/showcase/codexmonitor.png" alt="CodexMonitor on ClawdHub" />
+  <img src="/assets/showcase/codexmonitor.png" alt="CodexMonitor on MrBeanBot Skills" />
 </Card>
 
-<Card title="Bambu 3D Printer Control" icon="print" href="https://clawdhub.com/tobiasbischoff/bambu-cli">
+<Card title="Bambu 3D Printer Control" icon="print" href="https://mrbeanbot.com/skills/tobiasbischoff/bambu-cli">
   **@tobiasbischoff** • `hardware` `3d-printing` `skill`
 
   Control and troubleshoot BambuLab printers: status, jobs, camera, AMS, calibration, and more.
 
-  <img src="/assets/showcase/bambu-cli.png" alt="Bambu CLI skill on ClawdHub" />
+  <img src="/assets/showcase/bambu-cli.png" alt="Bambu CLI skill on MrBeanBot Skills" />
 </Card>
 
-<Card title="Vienna Transport (Wiener Linien)" icon="train" href="https://clawdhub.com/hjanuschka/wienerlinien">
+<Card title="Vienna Transport (Wiener Linien)" icon="train" href="https://mrbeanbot.com/skills/hjanuschka/wienerlinien">
   **@hjanuschka** • `travel` `transport` `skill`
 
   Real-time departures, disruptions, elevator status, and routing for Vienna's public transport.
 
-  <img src="/assets/showcase/wienerlinien.png" alt="Wiener Linien skill on ClawdHub" />
+  <img src="/assets/showcase/wienerlinien.png" alt="Wiener Linien skill on MrBeanBot Skills" />
 </Card>
 
 <Card title="ParentPay School Meals" icon="utensils" href="#">
@@ -164,7 +164,7 @@ Full setup walkthrough (28m) by VelvetShark.
   Automated UK school meal booking via ParentPay. Uses mouse coordinates for reliable table cell clicking.
 </Card>
 
-<Card title="R2 Upload (Send Me My Files)" icon="cloud-arrow-up" href="https://clawdhub.com/skills/r2-upload">
+<Card title="R2 Upload (Send Me My Files)" icon="cloud-arrow-up" href="https://mrbeanbot.com/skills/skills/r2-upload">
   **@julianengel** • `files` `r2` `presigned-urls`
 
   Upload to Cloudflare R2/S3 and generate secure presigned download links. Perfect for remote MrBeanBot instances.
@@ -260,7 +260,7 @@ Full setup walkthrough (28m) by VelvetShark.
 <Card title="Jira Skill Builder" icon="diagram-project" href="https://x.com/jdrhyne/status/2008336434827002232">
   **@jdrhyne** • `automation` `jira` `skill` `devtools`
 
-  MrBeanBot connected to Jira, then generated a new skill on the fly (before it existed on ClawdHub).
+  MrBeanBot connected to Jira, then generated a new skill on the fly (before it existed on MrBeanBot Skills).
 </Card>
 
 <Card title="Todoist Skill via Telegram" icon="list-check" href="https://x.com/iamsubhrajyoti/status/2009949389884920153">
@@ -325,10 +325,10 @@ Full setup walkthrough (28m) by VelvetShark.
   Vapi voice assistant ↔ MrBeanBot HTTP bridge. Near real-time phone calls with your agent.
 </Card>
 
-<Card title="OpenRouter Transcription" icon="microphone" href="https://clawdhub.com/obviyus/openrouter-transcribe">
+<Card title="OpenRouter Transcription" icon="microphone" href="https://mrbeanbot.com/skills/obviyus/openrouter-transcribe">
   **@obviyus** • `transcription` `multilingual` `skill`
 
-  Multi-lingual audio transcription via OpenRouter (Gemini, etc). Available on ClawdHub.
+  Multi-lingual audio transcription via OpenRouter (Gemini, etc). Available on MrBeanBot Skills.
 </Card>
 
 </CardGroup>
@@ -343,8 +343,8 @@ Full setup walkthrough (28m) by VelvetShark.
   MrBeanBot gateway running on Home Assistant OS with SSH tunnel support and persistent state.
 </Card>
 
-<Card title="Home Assistant Skill" icon="toggle-on" href="https://clawdhub.com/skills/homeassistant">
-  **ClawdHub** • `homeassistant` `skill` `automation`
+<Card title="Home Assistant Skill" icon="toggle-on" href="https://mrbeanbot.com/skills/skills/homeassistant">
+  **MrBeanBot Skills** • `homeassistant` `skill` `automation`
   
   Control and automate Home Assistant devices via natural language.
 </Card>
@@ -355,8 +355,8 @@ Full setup walkthrough (28m) by VelvetShark.
   Batteries-included nixified MrBeanBot configuration for reproducible deployments.
 </Card>
 
-<Card title="CalDAV Calendar" icon="calendar" href="https://clawdhub.com/skills/caldav-calendar">
-  **ClawdHub** • `calendar` `caldav` `skill`
+<Card title="CalDAV Calendar" icon="calendar" href="https://mrbeanbot.com/skills/skills/caldav-calendar">
+  **MrBeanBot Skills** • `calendar` `caldav` `skill`
   
   Calendar skill using khal/vdirsyncer. Self-hosted calendar integration.
 </Card>

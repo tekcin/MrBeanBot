@@ -602,7 +602,7 @@ Common use cases:
     list: [
       {
         id: "personal",
-        workspace: "~/clawd-personal",
+        workspace: "~/mrbeanbot-personal",
         sandbox: { mode: "off" }
       }
     ]
@@ -618,7 +618,7 @@ Common use cases:
     list: [
       {
         id: "family",
-        workspace: "~/clawd-family",
+        workspace: "~/mrbeanbot-family",
         sandbox: {
           mode: "all",
           scope: "agent",
@@ -642,7 +642,7 @@ Common use cases:
     list: [
       {
         id: "public",
-        workspace: "~/clawd-public",
+        workspace: "~/mrbeanbot-public",
         sandbox: {
           mode: "all",
           scope: "agent",

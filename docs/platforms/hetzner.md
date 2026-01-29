@@ -20,7 +20,7 @@ Hetzner pricing changes; pick the smallest Debian/Ubuntu VPS and scale up if you
 - Rent a small Linux server (Hetzner VPS)
 - Install Docker (isolated app runtime)
 - Start the MrBeanBot Gateway in Docker
-- Persist `~/.MrBeanBot` + `~/clawd` on the host (survives restarts/rebuilds)
+- Persist `~/.MrBeanBot` + `~/mrbeanbot` on the host (survives restarts/rebuilds)
 - Access the Control UI from your laptop via an SSH tunnel
 
 The Gateway can be accessed via:
@@ -171,7 +171,7 @@ services:
       - PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     volumes:
       - ${MRBEANBOT_CONFIG_DIR}:/home/node/.MrBeanBot
-      - ${MRBEANBOT_WORKSPACE_DIR}:/home/node/clawd
+      - ${MRBEANBOT_WORKSPACE_DIR}:/home/node/mrbeanbot
     ports:
       # Recommended: keep the Gateway loopback-only on the VPS; access via SSH tunnel.
       # To expose it publicly, remove the `127.0.0.1:` prefix and firewall accordingly.
@@ -316,7 +316,7 @@ All long-lived state must survive restarts, rebuilds, and reboots.
 | Gateway config | `/home/node/.MrBeanBot/` | Host volume mount | Includes `MrBeanBot.json`, tokens |
 | Model auth profiles | `/home/node/.MrBeanBot/` | Host volume mount | OAuth tokens, API keys |
 | Skill configs | `/home/node/.MrBeanBot/skills/` | Host volume mount | Skill-level state |
-| Agent workspace | `/home/node/clawd/` | Host volume mount | Code and agent artifacts |
+| Agent workspace | `/home/node/mrbeanbot/` | Host volume mount | Code and agent artifacts |
 | WhatsApp session | `/home/node/.MrBeanBot/` | Host volume mount | Preserves QR login |
 | Gmail keyring | `/home/node/.MrBeanBot/` | Host volume + password | Requires `GOG_KEYRING_PASSWORD` |
 | External binaries | `/usr/local/bin/` | Docker image | Must be baked at build time |

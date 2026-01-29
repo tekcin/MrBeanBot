@@ -18,7 +18,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [It is stuck on "wake up my friend" / onboarding will not hatch. What now?](#it-is-stuck-on-wake-up-my-friend-onboarding-will-not-hatch-what-now)
   - [Can I migrate my setup to a new machine (Mac mini) without redoing onboarding?](#can-i-migrate-my-setup-to-a-new-machine-mac-mini-without-redoing-onboarding)
   - [Where do I see what’s new in the latest version?](#where-do-i-see-whats-new-in-the-latest-version)
-  - [I can't access docs.molt.bot (SSL error). What now?](#i-cant-access-docsMrBeanBot-ssl-error-what-now)
+  - [I can't access docs.mrbeanbot.com (SSL error). What now?](#i-cant-access-docsMrBeanBot-ssl-error-what-now)
   - [What’s the difference between stable and beta?](#whats-the-difference-between-stable-and-beta)
 - [How do I install the beta version, and what’s the difference between beta and dev?](#how-do-i-install-the-beta-version-and-whats-the-difference-between-beta-and-dev)
   - [How do I try the latest bits?](#how-do-i-try-the-latest-bits)
@@ -258,7 +258,7 @@ setup (PATH, services, permissions, auth files). Give them the **full source che
 the hackable (git) install:
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git
+curl -fsSL https://mrbeanbot.com/install.sh | bash -s -- --install-method git
 ```
 
 This installs MrBeanBot **from a git checkout**, so the agent can read the code + docs and
@@ -296,7 +296,7 @@ Install docs: [Install](/install), [Installer flags](/install/installer), [Updat
 The repo recommends running from source and using the onboarding wizard:
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash
+curl -fsSL https://mrbeanbot.com/install.sh | bash
 MrBeanBot onboard --install-daemon
 ```
 
@@ -391,7 +391,7 @@ state) as long as you copy **both** locations:
 
 1) Install MrBeanBot on the new machine.
 2) Copy `$MRBEANBOT_STATE_DIR` (default: `~/.MrBeanBot`) from the old machine.
-3) Copy your workspace (default: `~/clawd`).
+3) Copy your workspace (default: `~/mrbeanbot`).
 4) Run `MrBeanBot doctor` and restart the Gateway service.
 
 That preserves config, auth profiles, WhatsApp creds, sessions, and memory. If you’re in
@@ -416,8 +416,8 @@ section is the latest shipped version. Entries are grouped by **Highlights**, **
 
 ### I cant access docsMrBeanBot SSL error What now
 
-Some Comcast/Xfinity connections incorrectly block `docs.molt.bot` via Xfinity
-Advanced Security. Disable it or allowlist `docs.molt.bot`, then retry. More
+Some Comcast/Xfinity connections incorrectly block `docs.mrbeanbot.com` via Xfinity
+Advanced Security. Disable it or allowlist `docs.mrbeanbot.com`, then retry. More
 detail: [Troubleshooting](/help/troubleshooting#docsMrBeanBot-shows-an-ssl-error-comcastxfinity).
 Please help us unblock it by reporting here: https://spa.xfinity.com/check_url_status.
 
@@ -445,15 +445,15 @@ https://github.com/MrBeanBot/MrBeanBot/blob/main/CHANGELOG.md
 One‑liners (macOS/Linux):
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash -s -- --beta
+curl -fsSL --proto '=https' --tlsv1.2 https://mrbeanbot.com/install.sh | bash -s -- --beta
 ```
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash -s -- --install-method git
+curl -fsSL --proto '=https' --tlsv1.2 https://mrbeanbot.com/install.sh | bash -s -- --install-method git
 ```
 
 Windows installer (PowerShell):
-https://molt.bot/install.ps1
+https://mrbeanbot.com/install.ps1
 
 More detail: [Development channels](/install/development-channels) and [Installer flags](/install/installer).
 
@@ -478,7 +478,7 @@ This switches to the `main` branch and updates from source.
 
 2) **Hackable install (from the installer site):**
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git
+curl -fsSL https://mrbeanbot.com/install.sh | bash -s -- --install-method git
 ```
 That gives you a local repo you can edit, then update via git.
 
@@ -498,19 +498,19 @@ Docs: [Update](/cli/update), [Development channels](/install/development-channel
 Re-run the installer with **verbose output**:
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash -s -- --verbose
+curl -fsSL https://mrbeanbot.com/install.sh | bash -s -- --verbose
 ```
 
 Beta install with verbose:
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash -s -- --beta --verbose
+curl -fsSL https://mrbeanbot.com/install.sh | bash -s -- --beta --verbose
 ```
 
 For a hackable (git) install:
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git --verbose
+curl -fsSL https://mrbeanbot.com/install.sh | bash -s -- --install-method git --verbose
 ```
 
 More options: [Installer flags](/install/installer).
@@ -541,7 +541,7 @@ Use the **hackable (git) install** so you have the full source and docs locally,
 your bot (or Claude/Codex) *from that folder* so it can read the repo and answer precisely.
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git
+curl -fsSL https://mrbeanbot.com/install.sh | bash -s -- --install-method git
 ```
 
 More detail: [Install](/install) and [Installer flags](/install/installer).
@@ -797,7 +797,7 @@ Docs: [Getting started](/start/getting-started), [Updating](/install/updating).
 
 Yes. Install the other flavor, then run Doctor so the gateway service points at the new entrypoint.
 This **does not delete your data** - it only changes the MrBeanBot code install. Your state
-(`~/.MrBeanBot`) and workspace (`~/clawd`) stay untouched.
+(`~/.MrBeanBot`) and workspace (`~/mrbeanbot`) stay untouched.
 
 From npm → git:
 
@@ -946,7 +946,7 @@ Advantages:
 - **Always-on Gateway** (run on a VPS, interact from anywhere)
 - **Nodes** for local browser/screen/camera/exec
 
-Showcase: https://molt.bot/showcase
+Showcase: https://mrbeanbot.com/showcase
 
 ## Skills and automation
 
@@ -956,7 +956,7 @@ Use managed overrides instead of editing the repo copy. Put your changes in `~/.
 
 ### Can I load skills from a custom folder
 
-Yes. Add extra directories via `skills.load.extraDirs` in `~/.MrBeanBot/MrBeanBot.json` (lowest precedence). Default precedence remains: `<workspace>/skills` → `~/.MrBeanBot/skills` → bundled → `skills.load.extraDirs`. `clawdhub` installs into `./skills` by default, which MrBeanBot treats as `<workspace>/skills`.
+Yes. Add extra directories via `skills.load.extraDirs` in `~/.MrBeanBot/MrBeanBot.json` (lowest precedence). Default precedence remains: `<workspace>/skills` → `~/.MrBeanBot/skills` → bundled → `skills.load.extraDirs`. `mrbeanbot-skills` installs into `./skills` by default, which MrBeanBot treats as `<workspace>/skills`.
 
 ### How can I use different models for different tasks
 
@@ -1000,17 +1000,17 @@ Docs: [Cron jobs](/automation/cron-jobs), [Cron vs Heartbeat](/automation/cron-v
 
 ### How do I install skills on Linux
 
-Use **ClawdHub** (CLI) or drop skills into your workspace. The macOS Skills UI isn’t available on Linux.
-Browse skills at https://clawdhub.com.
+Use **MrBeanBot Skills** (CLI) or drop skills into your workspace. The macOS Skills UI isn't available on Linux.
+Browse skills at https://mrbeanbot.com/skills.
 
-Install the ClawdHub CLI (pick one package manager):
+Install the MrBeanBot Skills CLI (pick one package manager):
 
 ```bash
-npm i -g clawdhub
+npm i -g mrbeanbot-skills
 ```
 
 ```bash
-pnpm add -g clawdhub
+pnpm add -g mrbeanbot-skills
 ```
 
 ### Can MrBeanBot run tasks on a schedule or continuously in the background
@@ -1076,11 +1076,11 @@ targeting those APIs.
 Install skills:
 
 ```bash
-clawdhub install <skill-slug>
-clawdhub update --all
+mrbeanbot-skills install <skill-slug>
+mrbeanbot-skills update --all
 ```
 
-ClawdHub installs into `./skills` under your current directory (or falls back to your configured MrBeanBot workspace); MrBeanBot treats that as `<workspace>/skills` on the next session. For shared skills across agents, place them in `~/.MrBeanBot/skills/<name>/SKILL.md`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills) and [ClawdHub](/tools/clawdhub).
+MrBeanBot Skills installs into `./skills` under your current directory (or falls back to your configured MrBeanBot workspace); MrBeanBot treats that as `<workspace>/skills` on the next session. For shared skills across agents, place them in `~/.MrBeanBot/skills/<name>/SKILL.md`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills) and [MrBeanBot Skills](/tools/clawdhub).
 
 ### How do I install the Chrome extension for browser takeover
 
@@ -1202,7 +1202,7 @@ Everything lives under `$MRBEANBOT_STATE_DIR` (default: `~/.MrBeanBot`):
 
 Legacy single‑agent path: `~/.MrBeanBot/agent/*` (migrated by `MrBeanBot doctor`).
 
-Your **workspace** (AGENTS.md, memory files, skills, etc.) is separate and configured via `agents.defaults.workspace` (default: `~/clawd`).
+Your **workspace** (AGENTS.md, memory files, skills, etc.) is separate and configured via `agents.defaults.workspace` (default: `~/mrbeanbot`).
 
 ### Where should AGENTSmd SOULmd USERmd MEMORYmd live
 
@@ -1213,11 +1213,11 @@ These files live in the **agent workspace**, not `~/.MrBeanBot`.
 - **State dir (`~/.MrBeanBot`)**: config, credentials, auth profiles, sessions, logs,
   and shared skills (`~/.MrBeanBot/skills`).
 
-Default workspace is `~/clawd`, configurable via:
+Default workspace is `~/mrbeanbot`, configurable via:
 
 ```json5
 {
-  agents: { defaults: { workspace: "~/clawd" } }
+  agents: { defaults: { workspace: "~/mrbeanbot" } }
 }
 ```
 
@@ -1282,7 +1282,7 @@ MrBeanBot reads an optional **JSON5** config from `$MRBEANBOT_CONFIG_PATH` (defa
 $MRBEANBOT_CONFIG_PATH
 ```
 
-If the file is missing, it uses safe‑ish defaults (including a default workspace of `~/clawd`).
+If the file is missing, it uses safe‑ish defaults (including a default workspace of `~/mrbeanbot`).
 
 ### I set gatewaybind lan or tailnet and now nothing listens the UI says unauthorized
 
@@ -1530,7 +1530,7 @@ Docs: [Config](/cli/config), [Configure](/cli/configure), [Doctor](/gateway/doct
 
 ```json5
 {
-  agents: { defaults: { workspace: "~/clawd" } },
+  agents: { defaults: { workspace: "~/mrbeanbot" } },
   channels: { whatsapp: { allowFrom: ["+15555550123"] } }
 }
 ```

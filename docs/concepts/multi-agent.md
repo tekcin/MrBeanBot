@@ -41,7 +41,7 @@ reach other host locations unless sandboxing is enabled. See
 
 - Config: `~/.MrBeanBot/MrBeanBot.json` (or `MRBEANBOT_CONFIG_PATH`)
 - State dir: `~/.MrBeanBot` (or `MRBEANBOT_STATE_DIR`)
-- Workspace: `~/clawd` (or `~/clawd-<agentId>`)
+- Workspace: `~/mrbeanbot` (or `~/mrbeanbot-<agentId>`)
 - Agent dir: `~/.MrBeanBot/agents/<agentId>/agent` (or `agents.list[].agentDir`)
 - Sessions: `~/.MrBeanBot/agents/<agentId>/sessions`
 
@@ -51,7 +51,7 @@ If you do nothing, MrBeanBot runs a single agent:
 
 - `agentId` defaults to **`main`**.
 - Sessions are keyed as `agent:main:<mainKey>`.
-- Workspace defaults to `~/clawd` (or `~/clawd-<profile>` when `MRBEANBOT_PROFILE` is set).
+- Workspace defaults to `~/mrbeanbot` (or `~/mrbeanbot-<profile>` when `MRBEANBOT_PROFILE` is set).
 - State defaults to `~/.MrBeanBot/agents/main/agent`.
 
 ## Agent helper
@@ -92,8 +92,8 @@ Example:
 {
   agents: {
     list: [
-      { id: "alex", workspace: "~/clawd-alex" },
-      { id: "mia", workspace: "~/clawd-mia" }
+      { id: "alex", workspace: "~/mrbeanbot-alex" },
+      { id: "mia", workspace: "~/mrbeanbot-mia" }
     ]
   },
   bindings: [
@@ -149,13 +149,13 @@ multiple phone numbers without mixing sessions.
         id: "home",
         default: true,
         name: "Home",
-        workspace: "~/clawd-home",
+        workspace: "~/mrbeanbot-home",
         agentDir: "~/.MrBeanBot/agents/home/agent",
       },
       {
         id: "work",
         name: "Work",
-        workspace: "~/clawd-work",
+        workspace: "~/mrbeanbot-work",
         agentDir: "~/.MrBeanBot/agents/work/agent",
       },
     ],
@@ -213,13 +213,13 @@ Split by channel: route WhatsApp to a fast everyday agent and Telegram to an Opu
       {
         id: "chat",
         name: "Everyday",
-        workspace: "~/clawd-chat",
+        workspace: "~/mrbeanbot-chat",
         model: "anthropic/claude-sonnet-4-5"
       },
       {
         id: "opus",
         name: "Deep Work",
-        workspace: "~/clawd-opus",
+        workspace: "~/mrbeanbot-opus",
         model: "anthropic/claude-opus-4-5"
       }
     ]
@@ -243,8 +243,8 @@ Keep WhatsApp on the fast agent, but route one DM to Opus:
 {
   agents: {
     list: [
-      { id: "chat", name: "Everyday", workspace: "~/clawd-chat", model: "anthropic/claude-sonnet-4-5" },
-      { id: "opus", name: "Deep Work", workspace: "~/clawd-opus", model: "anthropic/claude-opus-4-5" }
+      { id: "chat", name: "Everyday", workspace: "~/mrbeanbot-chat", model: "anthropic/claude-sonnet-4-5" },
+      { id: "opus", name: "Deep Work", workspace: "~/mrbeanbot-opus", model: "anthropic/claude-opus-4-5" }
     ]
   },
   bindings: [
@@ -268,7 +268,7 @@ and a tighter tool policy:
       {
         id: "family",
         name: "Family",
-        workspace: "~/clawd-family",
+        workspace: "~/mrbeanbot-family",
         identity: { name: "Family Bot" },
         groupChat: {
           mentionPatterns: ["@family", "@familybot", "@Family Bot"]
@@ -312,7 +312,7 @@ Starting with v2026.1.6, each agent can have its own sandbox and tool restrictio
     list: [
       {
         id: "personal",
-        workspace: "~/clawd-personal",
+        workspace: "~/mrbeanbot-personal",
         sandbox: {
           mode: "off",  // No sandbox for personal agent
         },
@@ -320,7 +320,7 @@ Starting with v2026.1.6, each agent can have its own sandbox and tool restrictio
       },
       {
         id: "family",
-        workspace: "~/clawd-family",
+        workspace: "~/mrbeanbot-family",
         sandbox: {
           mode: "all",     // Always sandboxed
           scope: "agent",  // One container per agent

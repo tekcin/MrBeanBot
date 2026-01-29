@@ -11,7 +11,7 @@ This guide migrates a MrBeanBot Gateway from one machine to another **without re
 The migration is simple conceptually:
 
 - Copy the **state directory** (`$MRBEANBOT_STATE_DIR`, default: `~/.MrBeanBot/`) — this includes config, auth, sessions, and channel state.
-- Copy your **workspace** (`~/clawd/` by default) — this includes your agent files (memory, prompts, etc.).
+- Copy your **workspace** (`~/mrbeanbot/` by default) — this includes your agent files (memory, prompts, etc.).
 
 But there are common footguns around **profiles**, **permissions**, and **partial copies**.
 
@@ -40,7 +40,7 @@ Look for mentions of `MRBEANBOT_STATE_DIR` / profile in the output. If you run m
 
 Common defaults:
 
-- `~/clawd/` (recommended workspace)
+- `~/mrbeanbot/` (recommended workspace)
 - a custom folder you created
 
 Your workspace is where files like `MEMORY.md`, `USER.md`, and `memory/*.md` live.
@@ -80,7 +80,7 @@ MrBeanBot gateway stop
 cd ~
 tar -czf MrBeanBot-state.tgz .MrBeanBot
 
-tar -czf clawd-workspace.tgz clawd
+tar -czf mrbeanbot-workspace.tgz mrbeanbot
 ```
 
 If you have multiple profiles/state dirs (e.g. `~/.MrBeanBot-main`, `~/.MrBeanBot-work`), archive each.
@@ -98,7 +98,7 @@ At this stage, it’s OK if onboarding creates a fresh `~/.MrBeanBot/` — you w
 Copy **both**:
 
 - `$MRBEANBOT_STATE_DIR` (default `~/.MrBeanBot/`)
-- your workspace (default `~/clawd/`)
+- your workspace (default `~/mrbeanbot/`)
 
 Common approaches:
 

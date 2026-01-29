@@ -97,7 +97,7 @@ tailscale status
 ## 5) Install MrBeanBot
 
 ```bash
-curl -fsSL https://molt.bot/install.sh | bash
+curl -fsSL https://mrbeanbot.com/install.sh | bash
 source ~/.bashrc
 ```
 
@@ -273,11 +273,11 @@ Most npm packages work fine. For binaries, look for `linux-arm64` or `aarch64` r
 
 All state lives in:
 - `~/.MrBeanBot/` — config, credentials, session data
-- `~/clawd/` — workspace (SOUL.md, memory, artifacts)
+- `~/mrbeanbot/` — workspace (SOUL.md, memory, artifacts)
 
 Back up periodically:
 ```bash
-tar -czvf MrBeanBot-backup.tar.gz ~/.MrBeanBot ~/clawd
+tar -czvf MrBeanBot-backup.tar.gz ~/.MrBeanBot ~/mrbeanbot
 ```
 
 ---

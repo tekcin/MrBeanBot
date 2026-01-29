@@ -14,7 +14,7 @@ Examples below are aligned with the current config schema. For the exhaustive re
 ### Absolute minimum
 ```json5
 {
-  agent: { workspace: "~/clawd" },
+  agent: { workspace: "~/mrbeanbot" },
   channels: { whatsapp: { allowFrom: ["+15555550123"] } }
 }
 ```
@@ -30,7 +30,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
     emoji: "🦞"
   },
   agent: {
-    workspace: "~/clawd",
+    workspace: "~/mrbeanbot",
     model: { primary: "anthropic/claude-sonnet-4-5" }
   },
   channels: {
@@ -220,7 +220,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
   // Agent runtime
   agents: {
     defaults: {
-      workspace: "~/clawd",
+      workspace: "~/mrbeanbot",
       userTimezone: "America/Chicago",
       model: {
         primary: "anthropic/claude-sonnet-4-5",
@@ -425,7 +425,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
 ### Multi-platform setup
 ```json5
 {
-  agent: { workspace: "~/clawd" },
+  agent: { workspace: "~/mrbeanbot" },
   channels: {
     whatsapp: { allowFrom: ["+15555550123"] },
     telegram: {
@@ -462,7 +462,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
     }
   },
   agent: {
-    workspace: "~/clawd",
+    workspace: "~/mrbeanbot",
     model: {
       primary: "anthropic/claude-sonnet-4-5",
       fallbacks: ["anthropic/claude-opus-4-5"]
@@ -500,7 +500,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
     }
   },
   agent: {
-    workspace: "~/clawd",
+    workspace: "~/mrbeanbot",
     model: {
       primary: "anthropic/claude-opus-4-5",
       fallbacks: ["minimax/MiniMax-M2.1"]
@@ -537,7 +537,7 @@ Save to `~/.MrBeanBot/MrBeanBot.json` and you can DM the bot from that number.
 ```json5
 {
   agent: {
-    workspace: "~/clawd",
+    workspace: "~/mrbeanbot",
     model: { primary: "lmstudio/minimax-m2.1-gs32" }
   },
   models: {

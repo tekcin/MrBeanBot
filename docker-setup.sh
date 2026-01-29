@@ -191,7 +191,7 @@ echo "Telegram (bot token):"
 echo "  ${COMPOSE_HINT} run --rm MrBeanBot-cli providers add --provider telegram --token <token>"
 echo "Discord (bot token):"
 echo "  ${COMPOSE_HINT} run --rm MrBeanBot-cli providers add --provider discord --token <token>"
-echo "Docs: https://docs.molt.bot/providers"
+echo "Docs: https://docs.mrbeanbot.com/providers"
 
 echo ""
 echo "==> Starting gateway"

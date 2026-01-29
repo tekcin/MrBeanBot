@@ -68,7 +68,7 @@ ${formatHelpExamples([
   ],
 ])}
 
-${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.molt.bot/cli/agent")}`,
+${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.mrbeanbot.com/cli/agent")}`,
     )
     .action(async (opts) => {
       const verboseLevel = typeof opts.verbose === "string" ? opts.verbose.toLowerCase() : "";
@@ -86,7 +86,7 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.molt.bot/cli/agent"
     .addHelpText(
       "after",
       () =>
-        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/agents", "docs.molt.bot/cli/agents")}\n`,
+        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/agents", "docs.mrbeanbot.com/cli/agents")}\n`,
     );
 
   agents
@@ -156,10 +156,13 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.molt.bot/cli/agent"
 ${theme.heading("Examples:")}
 ${formatHelpExamples([
   ['MrBeanBot agents set-identity --agent main --name "Clawd" --emoji "🦞"', "Set name + emoji."],
-  ["MrBeanBot agents set-identity --agent main --avatar avatars/clawd.png", "Set avatar path."],
-  ["MrBeanBot agents set-identity --workspace ~/clawd --from-identity", "Load from IDENTITY.md."],
+  ["MrBeanBot agents set-identity --agent main --avatar avatars/mrbeanbot.png", "Set avatar path."],
   [
-    "MrBeanBot agents set-identity --identity-file ~/clawd/IDENTITY.md --agent main",
+    "MrBeanBot agents set-identity --workspace ~/mrbeanbot --from-identity",
+    "Load from IDENTITY.md.",
+  ],
+  [
+    "MrBeanBot agents set-identity --identity-file ~/mrbeanbot/IDENTITY.md --agent main",
     "Use a specific IDENTITY.md.",
   ],
 ])}

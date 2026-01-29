@@ -43,7 +43,7 @@ Then connect:
 ssh MrBeanBot.exe.xyz
 ```
 
-Tip: keep this VM **stateful**. MrBeanBot stores state under `~/.MrBeanBot/` and `~/clawd/`.
+Tip: keep this VM **stateful**. MrBeanBot stores state under `~/.MrBeanBot/` and `~/mrbeanbot/`.
 
 ## 2) Install prerequisites (on the VM)
 
@@ -93,7 +93,7 @@ MrBeanBot onboard --install-daemon
 ```
 
 It can set up:
-- `~/clawd` workspace bootstrap
+- `~/mrbeanbot` workspace bootstrap
 - `~/.MrBeanBot/MrBeanBot.json` config
 - model auth profiles
 - model provider config/login

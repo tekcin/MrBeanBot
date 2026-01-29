@@ -53,7 +53,7 @@ MrBeanBot browser --browser-profile work tabs
 
 ```bash
 MrBeanBot browser tabs
-MrBeanBot browser open https://docs.molt.bot
+MrBeanBot browser open https://docs.mrbeanbot.com
 MrBeanBot browser focus <targetId>
 MrBeanBot browser close <targetId>
 ```

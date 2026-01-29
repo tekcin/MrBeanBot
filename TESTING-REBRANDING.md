@@ -749,8 +749,8 @@ grep -i "🦞" README.md
 grep -i "molt.bot" README.md
 # Expected: No molt.bot URLs
 
-grep -i "clawdhub.com" README.md
-# Expected: No clawdhub.com URLs
+grep -i "mrbeanbot.com/skills" README.md
+# Expected: No mrbeanbot.com/skills URLs
 
 # Check author info
 grep -i "tekcin" README.md
@@ -765,7 +765,7 @@ grep -i "github.com/tekcin" README.md
 - ✅ Author: Michael Thornton
 - ✅ GitHub: https://github.com/tekcin/MrBeanBot
 - ✅ No lobster emoji or space lobster theme
-- ✅ No external URLs (molt.bot, clawdhub.com)
+- ✅ No external URLs (molt.bot, mrbeanbot.com/skills)
 
 ---
 
@@ -1141,7 +1141,7 @@ Quick reference checklist:
 - [ ] README has GitHub URL (github.com/tekcin/MrBeanBot)
 - [ ] No lobster emoji in README
 - [ ] No molt.bot URLs
-- [ ] No clawdhub.com URLs
+- [ ] No mrbeanbot.com/skills URLs
 - [ ] CHANGELOG has rebranding entry
 - [ ] package.json name: "mrbeanbot"
 - [ ] package.json has all three bin commands

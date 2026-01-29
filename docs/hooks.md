@@ -39,7 +39,7 @@ The hooks system allows you to:
 
 MrBeanBot ships with four bundled hooks that are automatically discovered:
 
-- **💾 session-memory**: Saves session context to your agent workspace (default `~/clawd/memory/`) when you issue `/new`
+- **💾 session-memory**: Saves session context to your agent workspace (default `~/mrbeanbot/memory/`) when you issue `/new`
 - **📝 command-logger**: Logs all command events to `~/.MrBeanBot/logs/commands.log`
 - **🚀 boot-md**: Runs `BOOT.md` when the gateway starts (requires internal hooks enabled)
 - **😈 soul-evil**: Swaps injected `SOUL.md` content with `SOUL_EVIL.md` during a purge window or by random chance
@@ -124,7 +124,7 @@ The `HOOK.md` file contains metadata in YAML frontmatter plus Markdown documenta
 ---
 name: my-hook
 description: "Short description of what this hook does"
-homepage: https://docs.molt.bot/hooks#my-hook
+homepage: https://docs.mrbeanbot.com/hooks#my-hook
 metadata: {"MrBeanBot":{"emoji":"🔗","events":["command:new"],"requires":{"bins":["node"]}}}
 ---
 
@@ -449,7 +449,7 @@ Saves session context to memory when you issue `/new`.
 
 **Requirements**: `workspace.dir` must be configured
 
-**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/clawd`)
+**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/mrbeanbot`)
 
 **What it does**:
 1. Uses the pre-reset session entry to locate the correct transcript

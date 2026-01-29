@@ -17,7 +17,7 @@ Related:
 
 ```bash
 MrBeanBot setup
-MrBeanBot setup --workspace ~/clawd
+MrBeanBot setup --workspace ~/mrbeanbot
 ```
 
 To run the wizard via setup:

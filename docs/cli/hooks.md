@@ -85,7 +85,7 @@ Details:
   Source: MrBeanBot-bundled
   Path: /path/to/MrBeanBot/hooks/bundled/session-memory/HOOK.md
   Handler: /path/to/MrBeanBot/hooks/bundled/session-memory/handler.ts
-  Homepage: https://docs.molt.bot/hooks#session-memory
+  Homepage: https://docs.mrbeanbot.com/hooks#session-memory
   Events: command:new
 
 Requirements:
@@ -232,7 +232,7 @@ Saves session context to memory when you issue `/new`.
 MrBeanBot hooks enable session-memory
 ```
 
-**Output:** `~/clawd/memory/YYYY-MM-DD-slug.md`
+**Output:** `~/mrbeanbot/memory/YYYY-MM-DD-slug.md`
 
 **See:** [session-memory documentation](/hooks#session-memory)
 

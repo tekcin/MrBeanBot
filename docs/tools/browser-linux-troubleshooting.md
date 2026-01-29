@@ -73,7 +73,7 @@ chromium-browser --headless --no-sandbox --disable-gpu \
 
 3. Optionally create a systemd user service to auto-start Chrome:
 ```ini
-# ~/.config/systemd/user/clawd-browser.service
+# ~/.config/systemd/user/mrbeanbot-browser.service
 [Unit]
 Description=Clawd Browser (Chrome CDP)
 After=network.target
@@ -87,7 +87,7 @@ RestartSec=5
 WantedBy=default.target
 ```
 
-Enable with: `systemctl --user enable --now clawd-browser.service`
+Enable with: `systemctl --user enable --now mrbeanbot-browser.service`
 
 ### Verifying the Browser Works
 
