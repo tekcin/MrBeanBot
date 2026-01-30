@@ -335,6 +335,9 @@ const waitForNodeStatus = async (inst: GatewayInstance, nodeId: string, timeoutM
     const list = (await runCliJson(
       ["nodes", "status", "--json", "--url", `ws://127.0.0.1:${inst.port}`],
       {
+        HOME: inst.homeDir,
+        MRBEANBOT_CONFIG_PATH: inst.configPath,
+        MRBEANBOT_STATE_DIR: inst.stateDir,
         MRBEANBOT_GATEWAY_TOKEN: inst.gatewayToken,
         MRBEANBOT_GATEWAY_PASSWORD: "",
       },
@@ -370,11 +373,17 @@ describe("gateway multi-instance e2e", () => {
 
       const [healthA, healthB] = (await Promise.all([
         runCliJson(["health", "--json", "--timeout", "10000"], {
+          HOME: gwA.homeDir,
+          MRBEANBOT_CONFIG_PATH: gwA.configPath,
+          MRBEANBOT_STATE_DIR: gwA.stateDir,
           MRBEANBOT_GATEWAY_PORT: String(gwA.port),
           MRBEANBOT_GATEWAY_TOKEN: gwA.gatewayToken,
           MRBEANBOT_GATEWAY_PASSWORD: "",
         }),
         runCliJson(["health", "--json", "--timeout", "10000"], {
+          HOME: gwB.homeDir,
+          MRBEANBOT_CONFIG_PATH: gwB.configPath,
+          MRBEANBOT_STATE_DIR: gwB.stateDir,
           MRBEANBOT_GATEWAY_PORT: String(gwB.port),
           MRBEANBOT_GATEWAY_TOKEN: gwB.gatewayToken,
           MRBEANBOT_GATEWAY_PASSWORD: "",

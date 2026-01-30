@@ -18,6 +18,7 @@ import {
   onceMessage,
   startGatewayServer,
   startServerWithClient,
+  testState,
 } from "./test-helpers.js";
 import { buildDeviceAuthPayload } from "./device-auth.js";
 
@@ -226,7 +227,7 @@ describe("gateway server health/presence", () => {
       role,
       scopes,
       signedAtMs,
-      token: null,
+      token: (testState.gatewayAuth as { token?: string })?.token ?? null,
     });
     const ws = await openClient({
       role,

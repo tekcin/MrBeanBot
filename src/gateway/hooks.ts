@@ -54,8 +54,8 @@ export function extractHookToken(req: IncomingMessage, url: URL): HookTokenResul
     if (token) return { token, fromQuery: false };
   }
   const headerToken =
-    typeof req.headers["x-MrBeanBot-token"] === "string"
-      ? req.headers["x-MrBeanBot-token"].trim()
+    typeof req.headers["x-mrbeanbot-token"] === "string"
+      ? req.headers["x-mrbeanbot-token"].trim()
       : "";
   if (headerToken) return { token: headerToken, fromQuery: false };
   const queryToken = url.searchParams.get("token");

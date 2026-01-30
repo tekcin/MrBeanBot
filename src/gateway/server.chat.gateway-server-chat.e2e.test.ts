@@ -6,6 +6,7 @@ import { WebSocket } from "ws";
 import { GATEWAY_CLIENT_MODES, GATEWAY_CLIENT_NAMES } from "../utils/message-channel.js";
 import { emitAgentEvent, registerAgentRunContext } from "../infra/agent-events.js";
 import {
+  agentCommand,
   connectOk,
   getReplyFromConfig,
   installGatewayTestHooks,
@@ -305,6 +306,8 @@ describe("gateway server chat", () => {
         },
       });
 
+      const replySpy = vi.mocked(getReplyFromConfig);
+      replySpy.mockResolvedValueOnce({ text: "Context list output" });
       const spy = vi.mocked(agentCommand);
       const callsBefore = spy.mock.calls.length;
       const eventPromise = onceMessage(

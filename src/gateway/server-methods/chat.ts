@@ -526,8 +526,10 @@ export const chatHandlers: GatewayRequestHandlers = {
                 sessionFile: latestEntry?.sessionFile,
                 createIfMissing: true,
               });
+              const isCommand =
+                typeof p.message === "string" && p.message.trimStart().startsWith("/");
               if (appended.ok) {
-                message = appended.message;
+                message = isCommand ? { ...appended.message, command: true } : appended.message;
               } else {
                 context.logGateway.warn(
                   `webchat transcript append failed: ${appended.error ?? "unknown error"}`,
@@ -539,6 +541,7 @@ export const chatHandlers: GatewayRequestHandlers = {
                   timestamp: now,
                   stopReason: "injected",
                   usage: { input: 0, output: 0, totalTokens: 0 },
+                  ...(isCommand ? { command: true } : {}),
                 };
               }
             }

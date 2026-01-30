@@ -23,6 +23,7 @@ import {
   onceMessage,
   rpcReq,
   startServerWithClient,
+  testState,
 } from "./test-helpers.js";
 
 installGatewayTestHooks({ scope: "suite" });
@@ -62,6 +63,7 @@ const connectNodeClient = async (params: {
   });
   const client = new GatewayClient({
     url: `ws://127.0.0.1:${params.port}`,
+    token: (testState.gatewayAuth as { token?: string })?.token,
     role: "node",
     clientName: GATEWAY_CLIENT_NAMES.NODE_HOST,
     clientVersion: "1.0.0",

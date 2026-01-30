@@ -177,7 +177,7 @@ describe("directive behavior", () => {
       const storePath = path.join(home, "sessions.json");
 
       const res = await getReplyFromConfig(
-        { Body: "/models minimax", From: "+1222", To: "+1222", CommandAuthorized: true },
+        { Body: "/model minimax", From: "+1222", To: "+1222", CommandAuthorized: true },
         {},
         {
           agents: {
