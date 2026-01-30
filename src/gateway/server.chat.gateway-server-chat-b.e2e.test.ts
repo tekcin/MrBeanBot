@@ -436,6 +436,24 @@ describe("gateway server chat", () => {
         expect(abortCompleteRes.payload?.aborted).toBe(false);
 
         await writeStore({ main: { sessionId: "sess-main", updatedAt: Date.now() } });
+        const final1P = onceMessage(
+          ws,
+          (o) =>
+            o.type === "event" &&
+            o.event === "chat" &&
+            o.payload?.state === "final" &&
+            o.payload?.runId === "idem-1",
+          8000,
+        );
+        const final2P = onceMessage(
+          ws,
+          (o) =>
+            o.type === "event" &&
+            o.event === "chat" &&
+            o.payload?.state === "final" &&
+            o.payload?.runId === "idem-2",
+          8000,
+        );
         const res1 = await rpcReq(ws, "chat.send", {
           sessionKey: "main",
           message: "first",
@@ -448,32 +466,12 @@ describe("gateway server chat", () => {
           idempotencyKey: "idem-2",
         });
         expect(res2.ok).toBe(true);
-        const final1P = onceMessage(
-          ws,
-          (o) => o.type === "event" && o.event === "chat" && o.payload?.state === "final",
-          8000,
-        );
-        emitAgentEvent({
-          runId: "idem-1",
-          stream: "lifecycle",
-          data: { phase: "end" },
-        });
         const final1 = await final1P;
         const run1 =
           final1.payload && typeof final1.payload === "object"
             ? (final1.payload as { runId?: string }).runId
             : undefined;
         expect(run1).toBe("idem-1");
-        const final2P = onceMessage(
-          ws,
-          (o) => o.type === "event" && o.event === "chat" && o.payload?.state === "final",
-          8000,
-        );
-        emitAgentEvent({
-          runId: "idem-2",
-          stream: "lifecycle",
-          data: { phase: "end" },
-        });
         const final2 = await final2P;
         const run2 =
           final2.payload && typeof final2.payload === "object"

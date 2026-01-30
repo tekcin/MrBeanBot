@@ -3,12 +3,10 @@ import os from "node:os";
 import path from "node:path";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test, vi } from "vitest";
 import { WebSocket } from "ws";
-import type { ChannelPlugin } from "../channels/plugins/types.js";
-import { emitAgentEvent, registerAgentRunContext } from "../infra/agent-events.js";
-import type { PluginRegistry } from "../plugins/registry.js";
-import { setActivePluginRegistry } from "../plugins/runtime.js";
-import { GATEWAY_CLIENT_MODES, GATEWAY_CLIENT_NAMES } from "../utils/message-channel.js";
-import { whatsappPlugin } from "../../extensions/whatsapp/src/channel.js";
+// IMPORTANT: test-helpers must be imported before any other source modules so that
+// vi.mock calls in test-helpers.mocks.ts register before transitive module loading
+// can cache the real config module (vitest forks pool does not retroactively replace
+// already-resolved ESM live bindings).
 import {
   agentCommand,
   connectOk,
@@ -21,6 +19,11 @@ import {
   testState,
   writeSessionStore,
 } from "./test-helpers.js";
+import type { ChannelPlugin } from "../channels/plugins/types.js";
+import { emitAgentEvent, registerAgentRunContext } from "../infra/agent-events.js";
+import type { PluginRegistry } from "../plugins/registry.js";
+import { setActivePluginRegistry } from "../plugins/runtime.js";
+import { GATEWAY_CLIENT_MODES, GATEWAY_CLIENT_NAMES } from "../utils/message-channel.js";
 
 installGatewayTestHooks({ scope: "suite" });
 
@@ -102,12 +105,46 @@ const createMSTeamsPlugin = (params?: { aliases?: string[] }): ChannelPlugin => 
   },
 });
 
+const createStubWhatsAppPlugin = (): ChannelPlugin => ({
+  id: "whatsapp",
+  meta: {
+    id: "whatsapp",
+    label: "WhatsApp",
+    selectionLabel: "WhatsApp",
+    docsPath: "/channels/whatsapp",
+    blurb: "test stub.",
+  },
+  capabilities: { chatTypes: ["direct"] },
+  config: {
+    listAccountIds: () => ["default"],
+    resolveAccount: () => ({}),
+    resolveAllowFrom: ({ cfg }) => {
+      const channels = cfg.channels as Record<string, unknown> | undefined;
+      const entry = channels?.whatsapp as Record<string, unknown> | undefined;
+      const allow = entry?.allowFrom;
+      return Array.isArray(allow) ? allow.map((value) => String(value)) : [];
+    },
+  },
+  outbound: {
+    deliveryMode: "direct",
+    resolveTarget: ({ to, allowFrom }) => {
+      const trimmed = to?.trim() ?? "";
+      if (trimmed) return { ok: true, to: trimmed };
+      const first = allowFrom?.[0];
+      if (first) return { ok: true, to: String(first) };
+      return { ok: false, error: new Error("missing target for whatsapp") };
+    },
+    sendText: async () => ({ channel: "whatsapp", messageId: "msg-test" }),
+    sendMedia: async () => ({ channel: "whatsapp", messageId: "msg-test" }),
+  },
+});
+
 const emptyRegistry = createRegistry([]);
 const defaultRegistry = createRegistry([
   {
     pluginId: "whatsapp",
     source: "test",
-    plugin: whatsappPlugin,
+    plugin: createStubWhatsAppPlugin(),
   },
 ]);
 
