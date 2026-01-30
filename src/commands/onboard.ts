@@ -78,4 +78,7 @@ export async function onboardCommand(opts: OnboardOptions, runtime: RuntimeEnv =
   await runInteractiveOnboarding(normalizedOpts, runtime);
 }
 
+/** Alias for `onboardCommand` – callable from `--config` flag shortcut. */
+export const runOnboard = onboardCommand;
+
 export type { OnboardOptions } from "./onboard-types.js";

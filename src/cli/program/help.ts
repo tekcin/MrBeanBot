@@ -42,7 +42,8 @@ export function configureProgramHelp(program: Command, ctx: ProgramContext) {
     .option(
       "--profile <name>",
       "Use a named profile (isolates MRBEANBOT_STATE_DIR/MRBEANBOT_CONFIG_PATH under ~/.mrbeanbot-<name>)",
-    );
+    )
+    .option("--config", "Launch the interactive setup wizard");
 
   program.option("--no-color", "Disable ANSI colors", false);
 
