@@ -4,7 +4,9 @@ import type { AuthConfig } from "./types.auth.js";
 import type { DiagnosticsConfig, LoggingConfig, SessionConfig, WebConfig } from "./types.base.js";
 import type { BrowserConfig } from "./types.browser.js";
 import type { ChannelsConfig } from "./types.channels.js";
+import type { CompactionConfig } from "./types.compaction.js";
 import type { CronConfig } from "./types.cron.js";
+import type { ExperimentalConfig } from "./types.experimental.js";
 import type {
   CanvasHostConfig,
   DiscoveryConfig,
@@ -12,6 +14,7 @@ import type {
   TalkConfig,
 } from "./types.gateway.js";
 import type { HooksConfig } from "./types.hooks.js";
+import type { McpConfig } from "./types.mcp.js";
 import type {
   AudioConfig,
   BroadcastConfig,
@@ -20,6 +23,7 @@ import type {
 } from "./types.messages.js";
 import type { ModelsConfig } from "./types.models.js";
 import type { NodeHostConfig } from "./types.node-host.js";
+import type { PermissionConfig } from "./types.permission.js";
 import type { PluginsConfig } from "./types.plugins.js";
 import type { SkillsConfig } from "./types.skills.js";
 import type { ToolsConfig } from "./types.tools.js";
@@ -95,6 +99,23 @@ export type MrBeanBotConfig = {
   canvasHost?: CanvasHostConfig;
   talk?: TalkConfig;
   gateway?: GatewayConfig;
+
+  // --- OpenCode-derived config sections ---
+
+  /** Permission rules for agent tool access (hierarchical allow/deny/ask). */
+  permission?: PermissionConfig;
+  /** MCP (Model Context Protocol) server definitions. */
+  mcp?: McpConfig;
+  /** Session compaction (history summarization) settings. */
+  compaction?: CompactionConfig;
+  /** Experimental feature flags. */
+  experimental?: ExperimentalConfig;
+  /** Extra system prompt instructions appended to all agents. */
+  instructions?: string[];
+  /** Default agent name to use when none is specified. */
+  defaultAgent?: string;
+  /** Session sharing mode: "auto" shares new sessions, "disabled" prevents sharing. */
+  share?: "auto" | "disabled";
 };
 
 export type ConfigValidationIssue = {

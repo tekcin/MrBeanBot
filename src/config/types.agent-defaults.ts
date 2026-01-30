@@ -235,6 +235,13 @@ export type AgentDefaultsConfig = {
     /** Auto-prune sandbox containers. */
     prune?: SandboxPruneSettings;
   };
+  /**
+   * Use the Vercel AI SDK for LLM streaming instead of the legacy Pi framework.
+   * When true, agent runs use `streamText()` from the Vercel AI SDK.
+   * When false or absent, the legacy Pi `streamSimple()` is used.
+   * This flag enables gradual migration to the new provider system.
+   */
+  useVercelSdk?: boolean;
 };
 
 export type AgentCompactionMode = "default" | "safeguard";

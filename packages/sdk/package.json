@@ -1,0 +1,14 @@
+{
+  "name": "@mrbeanbot/sdk",
+  "version": "0.1.0",
+  "description": "Client SDK for MrBeanBot API v2",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts"
+  },
+  "files": ["src"],
+  "license": "MIT",
+  "dependencies": {}
+}

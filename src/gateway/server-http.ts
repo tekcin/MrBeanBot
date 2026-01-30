@@ -31,6 +31,8 @@ import { handleOpenAiHttpRequest } from "./openai-http.js";
 import { handleOpenResponsesHttpRequest } from "./openresponses-http.js";
 import { isOriginAllowed } from "./origin-validation.js";
 import type { RateLimiter } from "./rate-limiter.js";
+import { handleHonoApiRequest } from "./server-hono-adapter.js";
+import { handleSseEventStream } from "./server-sse.js";
 import { handleToolsInvokeHttpRequest } from "./tools-invoke-http.js";
 
 type SubsystemLogger = ReturnType<typeof createSubsystemLogger>;
@@ -290,6 +292,9 @@ export function createGatewayHttpServer(opts: {
         )
           return;
       }
+      // OpenCode-style API v2 routes (SSE events + REST)
+      if (await handleSseEventStream(req, res)) return;
+      if (await handleHonoApiRequest(req, res)) return;
       if (canvasHost) {
         if (await handleA2uiHttpRequest(req, res)) return;
         if (await canvasHost.handleHttpRequest(req, res)) return;

@@ -1,7 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { CURRENT_SESSION_VERSION, SessionManager } from "@mariozechner/pi-coding-agent";
+import { SessionManager } from "@mariozechner/pi-coding-agent";
+
+/** Session transcript format version (previously imported from @mariozechner/pi-coding-agent). */
+const CURRENT_SESSION_VERSION = 3;
 
 import type { SessionEntry } from "./types.js";
 import { loadSessionStore, updateSessionStore } from "./store.js";

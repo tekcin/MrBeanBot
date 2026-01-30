@@ -20,6 +20,7 @@ import { CustomEditor } from "./components/custom-editor.js";
 import { GatewayChatClient } from "./gateway-chat.js";
 import { editorTheme, theme } from "./theme/theme.js";
 import { createCommandHandlers } from "./tui-command-handlers.js";
+import { startBusEventBridge } from "./bus-event-bridge.js";
 import { createEventHandlers } from "./tui-event-handlers.js";
 import { formatTokens } from "./tui-formatters.js";
 import { createLocalShellRunner } from "./tui-local-shell.js";
@@ -545,6 +546,7 @@ export async function runTui(opts: TuiOptions) {
       return;
     }
     if (now - lastCtrlCAt < 1000) {
+      stopBusBridge();
       client.stop();
       tui.stop();
       process.exit(0);
@@ -554,6 +556,7 @@ export async function runTui(opts: TuiOptions) {
     tui.requestRender();
   };
   editor.onCtrlD = () => {
+    stopBusBridge();
     client.stop();
     tui.stop();
     process.exit(0);
@@ -582,6 +585,15 @@ export async function runTui(opts: TuiOptions) {
     if (evt.event === "chat") handleChatEvent(evt.payload);
     if (evt.event === "agent") handleAgentEvent(evt.payload);
   };
+
+  // Start the Bus event bridge for in-process events (OpenCode-style sessions).
+  // This provides a parallel event path alongside the gateway WebSocket.
+  // Events from Bus and gateway can coexist — the event handlers deduplicate
+  // by runId via the finalizedRuns map.
+  const stopBusBridge = startBusEventBridge({
+    onChatEvent: handleChatEvent,
+    onAgentEvent: handleAgentEvent,
+  });
 
   client.onConnected = () => {
     isConnected = true;
